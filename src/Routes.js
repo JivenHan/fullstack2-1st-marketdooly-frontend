@@ -1,13 +1,24 @@
 import React from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import TopNav from './components/Nav/TopNav';
+import Footer from './components/Footer/Footer';
+import Detail from './pages/Detail/Detail';
+import Login from './pages/Login/Login';
+import Main from './pages/Main/Main';
+import SignUp from './pages/SignUp/SignUp';
 
 class Routes extends React.Component {
   render() {
     return (
       <Router>
+        <Route component={TopNav} />
         <Switch>
-          <Route exact path='/' />
+          <Route exact path='/' component={Main} />
+          <Route exact path='/login' component={Login} />
+          <Route exact path='/signup' component={SignUp} />
+          <Route exact path='/detail' component={Detail} />
         </Switch>
+        <Route component={Footer} />
       </Router>
     );
   }
