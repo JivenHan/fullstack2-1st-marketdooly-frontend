@@ -7,30 +7,32 @@ export default class MainBanner extends Component {
   constructor() {
     super();
     this.state = {
-      slideCount: 11,
+      slideCount: mainBannerData.length,
       currentSlide: 0,
       viewportWidth: 1050,
       autoSlide: true,
+      isPaused: false,
       autoSlideTiming: 4,
       visibleCtrl: false,
     };
     this.timer = null;
+    this.resize = null;
   }
 
   componentDidMount() {
-    window.addEventListener('resize', this.updateViewSize);
+    this.resize = window.addEventListener('resize', this.updateViewSize);
     if (this.state.autoSlide) this.autoSlide();
   }
 
   componentWillUnmount() {
     clearInterval(this.timer);
+    window.removeEventListener(this.resize);
   }
 
   autoSlide = () => {
-    this.timer = setInterval(
-      this.nextSlider,
-      this.state.autoSlideTiming * 1000
-    );
+    this.timer = setInterval(() => {
+      !this.state.isPaused && this.nextSlider();
+    }, this.state.autoSlideTiming * 1000);
   };
 
   updateViewSize = () => {
@@ -47,9 +49,11 @@ export default class MainBanner extends Component {
     });
   };
 
-  makeVisibleCtrl = () => {
+  makeVisibleCtrl = event => {
+    const value = event.type === 'mouseenter';
     this.setState({
-      visibleCtrl: !this.state.visibleCtrl,
+      visibleCtrl: value,
+      isPaused: value,
     });
   };
 
@@ -65,11 +69,10 @@ export default class MainBanner extends Component {
     }
   };
 
-  nextSlider = onClick => {
-    onClick && clearInterval(this.timer);
+  nextSlider = () => {
     const { currentSlide, slideCount } = this.state;
+    this.moveSlider('next');
     if (currentSlide < slideCount - 1) {
-      this.moveSlider('next');
     } else if (currentSlide === slideCount - 1) {
       this.setState(
         {
@@ -80,8 +83,7 @@ export default class MainBanner extends Component {
     }
   };
 
-  prevSlider = onClick => {
-    onClick && clearInterval(this.timer);
+  prevSlider = () => {
     const { currentSlide, slideCount } = this.state;
     if (currentSlide > 0) {
       this.moveSlider('prev');
@@ -99,8 +101,8 @@ export default class MainBanner extends Component {
     return (
       <div
         className='mainBannerWrapper'
-        onMouseOver={this.makeVisibleCtrl}
-        onMouseOut={this.makeVisibleCtrl}
+        onMouseEnter={this.makeVisibleCtrl}
+        onMouseLeave={this.makeVisibleCtrl}
       >
         <div className='mainBanner'>
           <ul
