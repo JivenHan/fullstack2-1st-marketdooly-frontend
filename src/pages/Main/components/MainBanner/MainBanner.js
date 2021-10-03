@@ -34,14 +34,9 @@ export default class MainBanner extends Component {
 
   updateViewSize = () => {
     const viewportWidth = window.innerWidth > 1050 ? window.innerWidth : 1050;
-    this.setState(
-      {
-        viewportWidth,
-      },
-      () => {
-        console.log(this.state.viewportWidth);
-      }
-    );
+    this.setState({
+      viewportWidth,
+    });
   };
 
   displaySlides = datas => {
@@ -51,34 +46,63 @@ export default class MainBanner extends Component {
     });
   };
 
+  moveSlider = direction => {
+    if (direction === 'next') {
+      this.setState({
+        currentSlide: this.state.currentSlide + 1,
+      });
+    } else if (direction === 'prev') {
+      this.setState({
+        currentSlide: this.state.currentSlide - 1,
+      });
+    }
+  };
+
   nextSlider = onClick => {
     onClick && clearInterval(this.timer);
-    this.setState({
-      currentSlide: this.state.currentSlide + 1,
-    });
+    const { currentSlide, slideCount } = this.state;
+    if (currentSlide < slideCount - 1) {
+      this.moveSlider('next');
+    } else if (currentSlide === slideCount - 1) {
+      this.setState(
+        {
+          currentSlide: 0,
+        },
+        () => this.nextSlider
+      );
+    }
   };
 
   prevSlider = onClick => {
     onClick && clearInterval(this.timer);
-    this.setState({
-      currentSlide: this.state.currentSlide - 1,
-    });
+    const { currentSlide, slideCount } = this.state;
+    if (currentSlide > 0) {
+      this.moveSlider('prev');
+    } else if (currentSlide <= 0) {
+      this.setState(
+        {
+          currentSlide: slideCount,
+        },
+        () => this.moveSlider('prev')
+      );
+    }
   };
 
   render() {
     return (
       <div className='mainBannerWrapper'>
-        <div
-          className='mainBanner'
-          style={{
-            width: `${this.state.slideCount * 100}%`,
-            transform: `translateX(-${
-              window.innerWidth * this.state.currentSlide
-            }px)`,
-            transition: `transform 0.5s ease-in-out`,
-          }}
-        >
-          <ul>{this.displaySlides(mainBannerData)}</ul>
+        <div className='mainBanner'>
+          <ul
+            style={{
+              width: `${this.state.slideCount * 100}%`,
+              transform: `translateX(-${
+                window.innerWidth * this.state.currentSlide
+              }px)`,
+              transition: `transform 0.5s ease-in-out`,
+            }}
+          >
+            {this.displaySlides(mainBannerData)}
+          </ul>
         </div>
         <div className='mainBannerCtrl'>
           <button onClick={this.prevSlider}>prev</button>
