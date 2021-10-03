@@ -7,26 +7,24 @@ export default class MainBanner extends Component {
   constructor() {
     super();
     this.state = {
-      slideCount: mainBannerData.length,
-      currentSlide: 0,
-      viewportWidth: 1050,
       autoSlide: true,
-      isPaused: false,
       autoSlideTiming: 4,
+      currentSlide: 0,
+      isPaused: false,
+      slideCount: mainBannerData.length,
+      sliderWidth: 1050,
       visibleCtrl: false,
     };
-    this.timer = null;
-    this.resize = null;
   }
 
   componentDidMount() {
-    this.resize = window.addEventListener('resize', this.updateViewSize);
-    if (this.state.autoSlide) this.autoSlide();
+    window.addEventListener('resize', this.updateViewSize);
+    this.state.autoSlide && this.autoSlide();
   }
 
   componentWillUnmount() {
-    clearInterval(this.timer);
-    window.removeEventListener(this.resize);
+    window.removeEventListener('resize', this.updateViewSize);
+    clearInterval(this.autoSlide);
   }
 
   autoSlide = () => {
@@ -36,20 +34,13 @@ export default class MainBanner extends Component {
   };
 
   updateViewSize = () => {
-    const viewportWidth = window.innerWidth > 1050 ? window.innerWidth : 1050;
+    const sliderWidth = window.innerWidth > 1050 ? window.innerWidth : 1050;
     this.setState({
-      viewportWidth,
+      sliderWidth,
     });
   };
 
-  displaySlides = datas => {
-    return datas.map(ele => {
-      const { id, imgUrl } = ele;
-      return <Slide key={id} id={id} imgUrl={imgUrl}></Slide>;
-    });
-  };
-
-  makeVisibleCtrl = event => {
+  toggleCtrlVisibility = event => {
     const value = event.type === 'mouseenter';
     this.setState({
       visibleCtrl: value,
@@ -71,9 +62,10 @@ export default class MainBanner extends Component {
 
   nextSlider = () => {
     const { currentSlide, slideCount } = this.state;
-    this.moveSlider('next');
     if (currentSlide < slideCount - 1) {
-    } else if (currentSlide === slideCount - 1) {
+      this.moveSlider('next');
+    }
+    if (currentSlide >= slideCount - 1) {
       this.setState(
         {
           currentSlide: 0,
@@ -87,7 +79,8 @@ export default class MainBanner extends Component {
     const { currentSlide, slideCount } = this.state;
     if (currentSlide > 0) {
       this.moveSlider('prev');
-    } else if (currentSlide <= 0) {
+    }
+    if (currentSlide <= 0) {
       this.setState(
         {
           currentSlide: slideCount,
@@ -97,12 +90,19 @@ export default class MainBanner extends Component {
     }
   };
 
+  renderSlides = datas => {
+    return datas.map(ele => {
+      const { id, imgUrl } = ele;
+      return <Slide key={id} id={id} imgUrl={imgUrl}></Slide>;
+    });
+  };
+
   render() {
     return (
       <div
         className='mainBannerWrapper'
-        onMouseEnter={this.makeVisibleCtrl}
-        onMouseLeave={this.makeVisibleCtrl}
+        onMouseEnter={this.toggleCtrlVisibility}
+        onMouseLeave={this.toggleCtrlVisibility}
       >
         <div className='mainBanner'>
           <ul
@@ -114,7 +114,7 @@ export default class MainBanner extends Component {
               transition: `transform 0.5s ease-in-out`,
             }}
           >
-            {this.displaySlides(mainBannerData)}
+            {this.renderSlides(mainBannerData)}
           </ul>
         </div>
         <div
