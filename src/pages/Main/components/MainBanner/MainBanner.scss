@@ -1,5 +1,6 @@
 .mainBannerWrapper {
   position: relative;
+  height: 370px;
   overflow: hidden;
   .mainBanner {
     ul {
@@ -13,9 +14,11 @@
     position: relative;
     margin: 0 auto;
     width: 1235px;
+    opacity: 1;
+    transition: opacity 0.2s;
     button {
       position: relative;
-      bottom: 195px;
+      bottom: 211px;
       height: 52px;
       width: 52px;
       border: none;
@@ -23,7 +26,6 @@
       font-size: 0;
       background-position: 50% 50%;
       background-size: 54px 54px;
-      opacity: 0.9;
       cursor: pointer;
       &:first-child {
         float: left;

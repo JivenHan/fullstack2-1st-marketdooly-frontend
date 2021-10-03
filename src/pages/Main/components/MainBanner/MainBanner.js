@@ -12,6 +12,7 @@ export default class MainBanner extends Component {
       viewportWidth: 1050,
       autoSlide: true,
       autoSlideTiming: 4,
+      visibleCtrl: false,
     };
     this.timer = null;
   }
@@ -43,6 +44,12 @@ export default class MainBanner extends Component {
     return datas.map(ele => {
       const { id, imgUrl } = ele;
       return <Slide key={id} id={id} imgUrl={imgUrl}></Slide>;
+    });
+  };
+
+  makeVisibleCtrl = () => {
+    this.setState({
+      visibleCtrl: !this.state.visibleCtrl,
     });
   };
 
@@ -90,7 +97,11 @@ export default class MainBanner extends Component {
 
   render() {
     return (
-      <div className='mainBannerWrapper'>
+      <div
+        className='mainBannerWrapper'
+        onMouseOver={this.makeVisibleCtrl}
+        onMouseOut={this.makeVisibleCtrl}
+      >
         <div className='mainBanner'>
           <ul
             style={{
@@ -104,7 +115,10 @@ export default class MainBanner extends Component {
             {this.displaySlides(mainBannerData)}
           </ul>
         </div>
-        <div className='mainBannerCtrl'>
+        <div
+          className='mainBannerCtrl'
+          style={{ opacity: `${this.state.visibleCtrl ? 1 : 0}` }}
+        >
           <button onClick={this.prevSlider}>prev</button>
           <button onClick={this.nextSlider}>next</button>
         </div>
