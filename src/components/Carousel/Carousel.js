@@ -8,10 +8,31 @@ export default class Carousel extends Component {
     super();
     this.state = {
       productsData,
-      currentSlide: 0,
-      maxSlide: Math.floor(productsData.length / 4),
+      currentPage: 1,
+      maxPage: Math.ceil(productsData.length / 4),
+      lastSlidingCorrection: (4 - (productsData.length % 4)) * 267,
+      totalSlide: productsData.length,
     };
   }
+
+  calcSlidingRange = () => {
+    const { currentPage, maxPage, lastSlidingCorrection } = this.state;
+    if (currentPage === maxPage)
+      return 1068 * (currentPage - 1) - lastSlidingCorrection;
+    return 1068 * (currentPage - 1);
+  };
+
+  prevSlide = () => {
+    this.setState({
+      currentPage: this.state.currentPage - 1,
+    });
+  };
+
+  nextSlide = () => {
+    this.setState({
+      currentPage: this.state.currentPage + 1,
+    });
+  };
 
   render() {
     return (
@@ -19,8 +40,7 @@ export default class Carousel extends Component {
         <div className='sliderWrap'>
           <ul
             style={{
-              width: `${productsData.length * 1050}px`,
-              transform: `translateX(-${1068 * this.state.currentSlide}px)`,
+              transform: `translateX(-${this.calcSlidingRange()}px)`,
             }}
           >
             {this.state.productsData.map(ele => {
@@ -50,25 +70,11 @@ export default class Carousel extends Component {
           </ul>
         </div>
         <div className='sliderCtrl'>
-          {this.state.currentSlide !== 0 && (
-            <button
-              className='prev'
-              onClick={() => {
-                this.setState({
-                  currentSlide: this.state.currentSlide - 1,
-                });
-              }}
-            ></button>
+          {this.state.currentPage !== 1 && (
+            <button className='prev' onClick={this.prevSlide}></button>
           )}
-          {this.state.currentSlide < this.state.maxSlide && (
-            <button
-              className='next'
-              onClick={() => {
-                this.setState({
-                  currentSlide: this.state.currentSlide + 1,
-                });
-              }}
-            ></button>
+          {this.state.currentPage < this.state.maxPage && (
+            <button className='next' onClick={this.nextSlide}></button>
           )}
         </div>
       </article>

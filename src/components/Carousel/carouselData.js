@@ -2,7 +2,7 @@ export const productsData = [
   {
     id: 1,
     imgUrl: 'https://img-cf.kurly.com/shop/data/goods/1621472478222l0.jpg',
-    name: '[썬키스트] 팬시 레몬 1개',
+    name: '[썬키스트] 팬시 레몬 1개 1',
     price: 891,
     discount: false,
     discountRate: 10,
@@ -12,7 +12,7 @@ export const productsData = [
   {
     id: 2,
     imgUrl: 'https://img-cf.kurly.com/shop/data/goods/1621472478222l0.jpg',
-    name: '[썬키스트] 팬시 레몬 1개',
+    name: '[썬키스트] 팬시 레몬 1개 2',
     price: 891,
     discount: true,
     discountRate: 10,
@@ -22,7 +22,7 @@ export const productsData = [
   {
     id: 3,
     imgUrl: 'https://img-cf.kurly.com/shop/data/goods/1621472478222l0.jpg',
-    name: '[썬키스트] 팬시 레몬 1개',
+    name: '[썬키스트] 팬시 레몬 1개 3',
     price: 891,
     discount: false,
     discountRate: 10,
@@ -32,7 +32,7 @@ export const productsData = [
   {
     id: 4,
     imgUrl: 'https://img-cf.kurly.com/shop/data/goods/1621472478222l0.jpg',
-    name: '[썬키스트] 팬시 레몬 1개',
+    name: '[썬키스트] 팬시 레몬 1개 4',
     price: 891,
     discount: true,
     discountRate: 10,
@@ -42,7 +42,7 @@ export const productsData = [
   {
     id: 5,
     imgUrl: 'https://img-cf.kurly.com/shop/data/goods/1621472478222l0.jpg',
-    name: '[썬키스트] 팬시 레몬 1개',
+    name: '[썬키스트] 팬시 레몬 1개 5',
     price: 891,
     discount: true,
     discountRate: 10,
@@ -52,7 +52,7 @@ export const productsData = [
   {
     id: 6,
     imgUrl: 'https://img-cf.kurly.com/shop/data/goods/1621472478222l0.jpg',
-    name: '[썬키스트] 팬시 레몬 1개',
+    name: '[썬키스트] 팬시 레몬 1개 6',
     price: 891,
     discount: true,
     discountRate: 10,
@@ -62,7 +62,7 @@ export const productsData = [
   {
     id: 7,
     imgUrl: 'https://img-cf.kurly.com/shop/data/goods/1621472478222l0.jpg',
-    name: '[썬키스트] 팬시 레몬 1개',
+    name: '[썬키스트] 팬시 레몬 1개 7',
     price: 891,
     discount: true,
     discountRate: 10,
@@ -72,7 +72,7 @@ export const productsData = [
   {
     id: 8,
     imgUrl: 'https://img-cf.kurly.com/shop/data/goods/1621472478222l0.jpg',
-    name: '[썬키스트] 팬시 레몬 1개',
+    name: '[썬키스트] 팬시 레몬 1개 8',
     price: 891,
     discount: true,
     discountRate: 10,
@@ -82,7 +82,7 @@ export const productsData = [
   {
     id: 9,
     imgUrl: 'https://img-cf.kurly.com/shop/data/goods/1621472478222l0.jpg',
-    name: '[썬키스트] 팬시 레몬 1개',
+    name: '[썬키스트] 팬시 레몬 1개 9',
     price: 891,
     discount: true,
     discountRate: 10,
@@ -92,7 +92,7 @@ export const productsData = [
   {
     id: 10,
     imgUrl: 'https://img-cf.kurly.com/shop/data/goods/1621472478222l0.jpg',
-    name: '[썬키스트] 팬시 레몬 1개',
+    name: '[썬키스트] 팬시 레몬 1개 10',
     price: 891,
     discount: true,
     discountRate: 10,
@@ -102,7 +102,7 @@ export const productsData = [
   {
     id: 11,
     imgUrl: 'https://img-cf.kurly.com/shop/data/goods/1621472478222l0.jpg',
-    name: '[썬키스트] 팬시 레몬 1개',
+    name: '[썬키스트] 팬시 레몬 1개 11',
     price: 891,
     discount: true,
     discountRate: 10,
