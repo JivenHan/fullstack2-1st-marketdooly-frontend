@@ -19,19 +19,15 @@ export default class MainBanner extends Component {
 
   componentDidMount() {
     window.addEventListener('resize', this.updateViewSize);
-    this.state.autoSlide && this.autoSlide();
+    this.timer = setInterval(() => {
+      !this.state.isPaused && this.nextSlider();
+    }, this.state.autoSlideTiming * 1000);
   }
 
   componentWillUnmount() {
     window.removeEventListener('resize', this.updateViewSize);
-    clearInterval(this.autoSlide);
+    clearInterval(this.timer);
   }
-
-  autoSlide = () => {
-    this.timer = setInterval(() => {
-      !this.state.isPaused && this.nextSlider();
-    }, this.state.autoSlideTiming * 1000);
-  };
 
   updateViewSize = () => {
     const sliderWidth = window.innerWidth > 1050 ? window.innerWidth : 1050;
