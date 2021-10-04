@@ -4,9 +4,10 @@ export const productsData = [
     imgUrl: 'https://img-cf.kurly.com/shop/data/goods/1621472478222l0.jpg',
     name: '[썬키스트] 팬시 레몬 1개',
     price: 891,
-    discount: true,
+    discount: false,
     discountRate: 10,
     cost: 990,
+    linkTo: '/',
   },
   {
     id: 2,
@@ -16,15 +17,17 @@ export const productsData = [
     discount: true,
     discountRate: 10,
     cost: 990,
+    linkTo: '/',
   },
   {
     id: 3,
     imgUrl: 'https://img-cf.kurly.com/shop/data/goods/1621472478222l0.jpg',
     name: '[썬키스트] 팬시 레몬 1개',
     price: 891,
-    discount: true,
+    discount: false,
     discountRate: 10,
     cost: 990,
+    linkTo: '/',
   },
   {
     id: 4,
@@ -34,6 +37,7 @@ export const productsData = [
     discount: true,
     discountRate: 10,
     cost: 990,
+    linkTo: '/',
   },
   {
     id: 5,
@@ -43,6 +47,7 @@ export const productsData = [
     discount: true,
     discountRate: 10,
     cost: 990,
+    linkTo: '/',
   },
   {
     id: 6,
@@ -52,6 +57,7 @@ export const productsData = [
     discount: true,
     discountRate: 10,
     cost: 990,
+    linkTo: '/',
   },
   {
     id: 7,
@@ -61,6 +67,7 @@ export const productsData = [
     discount: true,
     discountRate: 10,
     cost: 990,
+    linkTo: '/',
   },
   {
     id: 8,
@@ -70,6 +77,7 @@ export const productsData = [
     discount: true,
     discountRate: 10,
     cost: 990,
+    linkTo: '/',
   },
   {
     id: 9,
@@ -79,6 +87,7 @@ export const productsData = [
     discount: true,
     discountRate: 10,
     cost: 990,
+    linkTo: '/',
   },
   {
     id: 10,
@@ -88,6 +97,7 @@ export const productsData = [
     discount: true,
     discountRate: 10,
     cost: 990,
+    linkTo: '/',
   },
   {
     id: 11,
@@ -97,5 +107,6 @@ export const productsData = [
     discount: true,
     discountRate: 10,
     cost: 990,
+    linkTo: '/',
   },
 ];

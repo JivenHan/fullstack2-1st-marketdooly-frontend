@@ -6,10 +6,13 @@ import Carousel from '../../components/Carousel/Carousel';
 export default class Main extends Component {
   render() {
     return (
-      <div>
+      <main>
         <MainBanner />
+        <div className='titGoods'>
+          <h3 className='tit'>이 상품 어때요?</h3>
+        </div>
         <Carousel />
-      </div>
+      </main>
     );
   }
 }

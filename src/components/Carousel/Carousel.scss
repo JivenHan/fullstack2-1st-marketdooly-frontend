@@ -1,17 +1,22 @@
 .Carousel {
   width: 100%;
+
   .sliderWrap {
-    display: flex;
     margin: 0 auto;
     width: 1050px;
     overflow: hidden;
-    gap: 18px;
+
+    ul {
+      display: flex;
+      gap: 18px;
+      transition: transform 0.6s;
+    }
   }
 
   .sliderCtrl {
     position: relative;
     margin: 0 auto;
-    width: 1111px;
+    width: 1110px;
     background-color: red;
 
     button {
@@ -24,12 +29,12 @@
       background: transparent;
       cursor: pointer;
 
-      &:first-child {
+      &.prev {
         float: left;
         background-image: url('https://res.kurly.com/pc/service/main/1908/btn_prev_default.png?v=1');
       }
 
-      &:last-child {
+      &.next {
         float: right;
         background-image: url('https://res.kurly.com/pc/service/main/1908/btn_next_default.png?v=1');
       }
