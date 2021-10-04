@@ -2,6 +2,7 @@
   position: relative;
   height: 370px;
   overflow: hidden;
+
   .mainBanner {
     ul {
       display: flex;
@@ -10,12 +11,14 @@
       flex-wrap: nowrap;
     }
   }
+
   .mainBannerCtrl {
     position: relative;
     margin: 0 auto;
     width: 1235px;
     opacity: 1;
     transition: opacity 0.2s;
+
     button {
       position: relative;
       bottom: 211px;
@@ -27,10 +30,12 @@
       background-position: 50% 50%;
       background-size: 54px 54px;
       cursor: pointer;
+
       &:first-child {
         float: left;
         background-image: url('https://res.kurly.com/pc/service/main/1908/ico_prev1_x2.png');
       }
+
       &:last-child {
         float: right;
         background-image: url('https://res.kurly.com/pc/service/main/1908/ico_next1_x2.png');
