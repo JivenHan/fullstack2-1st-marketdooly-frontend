@@ -8,10 +8,12 @@ export default class Main extends Component {
     return (
       <main>
         <MainBanner />
-        <div className='titGoods'>
-          <h3 className='tit'>이 상품 어때요?</h3>
-        </div>
-        <Carousel />
+        <section className='productList'>
+          <div className='titGoods'>
+            <h3 className='tit'>이 상품 어때요?</h3>
+          </div>
+          <Carousel />
+        </section>
       </main>
     );
   }
