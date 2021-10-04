@@ -30,7 +30,8 @@ export default class MainBanner extends Component {
   }
 
   updateViewSize = () => {
-    const sliderWidth = window.innerWidth > 1050 ? window.innerWidth : 1050;
+    const sliderWidth =
+      document.body.clientWidth > 1050 ? document.body.clientWidth : 1050;
     this.setState({
       sliderWidth,
     });
@@ -105,7 +106,7 @@ export default class MainBanner extends Component {
             style={{
               width: `${this.state.slideCount * 100}%`,
               transform: `translateX(-${
-                window.innerWidth * this.state.currentSlide
+                document.body.clientWidth * this.state.currentSlide
               }px)`,
               transition: `transform 0.5s ease-in-out`,
             }}
