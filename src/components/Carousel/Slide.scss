@@ -1,0 +1,59 @@
+.Carousel {
+  .Slide {
+    height: 506px;
+    dl {
+      dt.productThumb {
+        height: 320px;
+        width: 249px;
+        overflow: hidden;
+
+        img {
+          width: 100%;
+        }
+      }
+
+      dd.productInfo {
+        width: 249px;
+
+        h3 {
+          margin-top: 12px;
+          max-height: 50px;
+          overflow: hidden;
+          text-overflow: ellipsis;
+
+          a {
+            color: #333333;
+            text-decoration: none;
+          }
+        }
+
+        span {
+          display: block;
+          max-height: 50px;
+          font-size: 16px;
+
+          &.price {
+            padding-top: 9px;
+            line-height: 20px;
+            font-weight: 700;
+          }
+
+          &.discount {
+            display: inline-block;
+            margin-right: 8px;
+            color: #fa622f;
+          }
+
+          &.cost {
+            display: block;
+            padding-top: 5px;
+            color: #999999;
+            line-height: 18px;
+            font-size: 14px;
+            text-decoration: line-through;
+          }
+        }
+      }
+    }
+  }
+}

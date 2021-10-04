@@ -1,0 +1,38 @@
+.Carousel {
+  width: 100%;
+  .sliderWrap {
+    display: flex;
+    margin: 0 auto;
+    width: 1050px;
+    overflow: hidden;
+    gap: 18px;
+  }
+
+  .sliderCtrl {
+    position: relative;
+    margin: 0 auto;
+    width: 1111px;
+    background-color: red;
+
+    button {
+      position: relative;
+      bottom: 370px;
+      height: 60px;
+      width: 60px;
+      border: none;
+      border-radius: 200px;
+      background: transparent;
+      cursor: pointer;
+
+      &:first-child {
+        float: left;
+        background-image: url('https://res.kurly.com/pc/service/main/1908/btn_prev_default.png?v=1');
+      }
+
+      &:last-child {
+        float: right;
+        background-image: url('https://res.kurly.com/pc/service/main/1908/btn_next_default.png?v=1');
+      }
+    }
+  }
+}
