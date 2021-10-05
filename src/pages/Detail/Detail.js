@@ -33,11 +33,11 @@ export default class Detail extends Component {
   };
 
   clickToDetailDesc = () => {
-    this.setState({ scrollY: window.pageYOffset });
+    window.scrollTo({ top: 900, behavior: 'smooth' });
   };
 
   clickToDetailInfo = () => {
-    this.setState({ scrollY: window.pageYOffset });
+    window.scrollTo({ top: 6000, behavior: 'smooth' });
   };
 
   componentDidMount() {
