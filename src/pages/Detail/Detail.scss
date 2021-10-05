@@ -1,0 +1,325 @@
+.board {
+  width: 1000px;
+}
+
+.boardAlign {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.tableTitle {
+  .titleAlign {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .title {
+    font-size: 15px;
+    font-weight: 800px;
+    padding-bottom: 5px;
+  }
+
+  .titleList {
+    font-size: 12px;
+    color: #666;
+  }
+
+  .listStyle {
+    list-style: disc;
+    margin-left: 15px;
+  }
+
+  .selectBox {
+    height: 30px;
+    margin-top: 20px;
+    margin-bottom: 10px;
+  }
+
+  .inquir {
+    text-decoration: underline;
+    color: #666666;
+  }
+}
+
+.table {
+  .titleStyle {
+    width: 100%;
+    border-top: 2px solid #263527;
+    border-bottom: 2px solid #263527;
+  }
+
+  .style {
+    width: 100%;
+  }
+
+  th {
+    padding-top: 25px;
+    padding-bottom: 23px;
+    font-size: 12px;
+    font-weight: 400;
+    color: #353535;
+  }
+
+  td {
+    text-align: center;
+    padding-top: 22px;
+    padding-bottom: 23px;
+    color: #353535;
+    font-size: 12px;
+    font-weight: 400px;
+    border-top: 1px solid #eee;
+  }
+
+  tr:hover {
+    background-color: #e9e9e9;
+  }
+
+  .tdDateTime {
+    color: #939393;
+    width: 100px;
+  }
+
+  .num {
+    width: 70px;
+  }
+
+  .reviewTitle {
+    width: auto;
+  }
+
+  .userClass {
+    width: 51px;
+  }
+
+  .writer {
+    width: 77px;
+  }
+
+  .writeDate {
+    width: 100px;
+  }
+
+  .selectNumber {
+    width: 40px;
+  }
+
+  .viewNumber {
+    width: 80px;
+  }
+}
+
+.button {
+  .style {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    width: 150px;
+    height: 30px;
+    color: #fff;
+    font-size: 13px;
+    border: 1px solid #263527;
+    border-radius: 5px;
+    background-color: #1e7700;
+  }
+
+  .style:hover {
+    background-color: #fff;
+    color: #1e7700;
+    cursor: pointer;
+  }
+
+  .align {
+    display: flex;
+    justify-content: right;
+  }
+}
+
+.commentPage {
+  .pageButn {
+    text-decoration: none;
+  }
+
+  .align {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .firstPageButn {
+    width: 34px;
+    height: 34px;
+    border: 1px solid #ddd;
+    vertical-align: top;
+    font-size: 12px;
+    color: #4c4c4c;
+    cursor: pointer;
+  }
+
+  .style {
+    width: 34px;
+    height: 34px;
+    border: 1px solid #ddd;
+    border-left: 0;
+    vertical-align: top;
+    font-size: 12px;
+    color: #4c4c4c;
+    cursor: pointer;
+  }
+}
+
+.commentBox {
+  .displayContent {
+    display: block;
+    width: 1000px;
+    padding-top: 20px;
+    padding-left: 10px;
+    border-top: 1px solid #eee;
+  }
+
+  .title {
+    margin-left: 20px;
+    font-weight: bold;
+    font-size: 13px;
+  }
+
+  .image {
+    margin-left: 20px;
+    padding-top: 30px;
+    padding-bottom: 5px;
+  }
+
+  .comment {
+    margin-left: 20px;
+    font-size: 13px;
+  }
+
+  .helpfulButnAlign {
+    display: flex;
+    justify-content: right;
+  }
+
+  .helpfulButnStyle {
+    border: 1px solid #1e7700;
+    border-radius: 5px;
+    color: #1e7700;
+    background-color: white;
+    padding: 5px;
+    margin: 5px;
+    cursor: pointer;
+  }
+}
+
+.qnaContentStyle {
+  padding: 20px;
+  font-size: 13px;
+}
+
+.qnaBoardAlign {
+  padding-top: 100px;
+  padding-bottom: 20px;
+}
+
+.inputCommentModal {
+  .align {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .popUp {
+    overflow: hidden;
+    width: 800px;
+    height: 700px;
+    position: fixed;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 100;
+    border: 3px solid #1e7700;
+    border-radius: 12px;
+    background-color: #fff;
+  }
+
+  .title {
+    width: 700px;
+    font-size: 24px;
+    font-weight: 700px;
+    padding-top: 25px;
+    padding-bottom: 25px;
+    padding-left: 10px;
+    margin-left: 20px;
+  }
+
+  .productNav {
+    width: 730px;
+    padding-top: 35px;
+    padding-bottom: 35px;
+    margin-left: 30px;
+    border-top: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+  }
+
+  .productImg {
+    width: 70px;
+    height: 70px;
+    padding-right: 20px;
+  }
+
+  .commentTitle {
+    display: flex;
+    align-items: center;
+    padding: 30px;
+  }
+
+  .commentTitleInput {
+    width: 650px;
+    height: 40px;
+    padding-left: 10px;
+    margin-left: 30px;
+    border: 1px solid #1e7700;
+    border-radius: 5px;
+    resize: none;
+  }
+
+  .commentContent {
+    display: flex;
+    align-items: center;
+    padding: 30px;
+  }
+
+  .commentContentInput {
+    width: 650px;
+    height: 250px;
+    padding-left: 10px;
+    margin-left: 30px;
+    border: 1px solid #1e7700;
+    border-radius: 5px;
+    resize: none;
+  }
+
+  .modalButnAlign {
+    display: flex;
+    justify-content: space-around;
+  }
+
+  .modalButn {
+    width: 100px;
+    padding: 15px;
+    border: 1px solid #1e7700;
+    border-radius: 10px;
+    cursor: pointer;
+    color: #fff;
+    background-color: #1e7700;
+  }
+
+  .modalButn:hover {
+    color: #1e7700;
+    background-color: #fff;
+  }
+}
+
+.contentHide {
+  display: none;
+}
