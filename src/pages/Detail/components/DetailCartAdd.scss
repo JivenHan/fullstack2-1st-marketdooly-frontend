@@ -1,4 +1,7 @@
+@import '../../../styles/variables';
+
 .detailMainContainer {
+  display: flex;
   margin: 0 auto;
   padding-bottom: 100px;
   width: 1050px;
@@ -7,6 +10,7 @@
 .productThumbImg {
   display: inline-block;
   width: 430px;
+  height: 560px;
 }
 
 .productDetailCartAdd {
@@ -38,6 +42,8 @@
 
   .productPrice {
     .dcPriceRow {
+      position: relative;
+
       .discount {
         display: block;
         margin: 10px 0;
@@ -61,7 +67,6 @@
         display: block;
         position: relative;
         margin: 10px 0;
-        clear: both;
 
         .originalPrice {
           color: #999999;
@@ -75,9 +80,38 @@
         }
       }
 
-      .layerHide {
-        display: block;
-        margin: 10px 0;
+      .layerOff {
+        display: none;
+      }
+
+      .dcInfoLayer {
+        position: absolute;
+        top: 65px;
+        left: 65px;
+        padding: 20px;
+        border: 1px solid #000;
+        border-radius: 3px;
+        width: 400px;
+        background: #fff;
+        z-index: 99;
+        .dcInfoLayerTitle {
+          display: block;
+          padding-bottom: 8px;
+        }
+
+        .dcInfoLayerDesc {
+          line-height: 20px;
+          font-weight: 300;
+        }
+
+        .layerBtn {
+          position: absolute;
+          top: 5px;
+          right: 5px;
+          border: none;
+          background: #fff;
+          font-size: 30px;
+        }
       }
     }
 
@@ -148,41 +182,42 @@
             width: 28px;
             height: 28px;
             border: 0;
-            font-size: 0;
             line-height: 0;
             text-indent: -9px;
           }
 
-          .btnUp {
+          .minusBtn {
             border-top: 1px solid #999999;
             border-left: 1px solid #999999;
             border-bottom: 1px solid #999999;
-            background: #fff
-              url(https://res.kurly.com/pc/ico/2010/ico_minus_on.svg) no-repeat
-              50% 50%;
+            background: url(https://res.kurly.com/pc/ico/2010/ico_minus_on.svg)
+              no-repeat 50% 50%;
             border-top-left-radius: 4px;
             border-bottom-left-radius: 4px;
           }
 
           .btnResult {
+            padding-left: 18px;
             border-top: 1px solid #999999;
             border-bottom: 1px solid #999999;
             background: #fff;
+            text-align: center;
+            font-size: 18px;
           }
 
-          .btnDown {
+          .plusBtn {
             border-top: 1px solid #999999;
             border-right: 1px solid #999999;
             border-bottom: 1px solid #999999;
-            background: #fff
-              url(https://res.kurly.com/pc/ico/2010/ico_plus_on.svg) no-repeat
-              50% 50%;
+            background: url(https://res.kurly.com/pc/ico/2010/ico_plus_on.svg)
+              no-repeat 50% 50%;
             border-top-right-radius: 4px;
             border-bottom-right-radius: 4px;
           }
         }
       }
     }
+
     .totalResult {
       float: right;
 
@@ -193,7 +228,7 @@
         text-align: right;
 
         .totalPriceTitle {
-          font-size: 14px;
+          font-size: 18px;
         }
 
         .totalPrice {
@@ -202,7 +237,7 @@
         }
 
         .totalPriceWon {
-          font-size: 20px;
+          font-size: 22px;
         }
       }
 
@@ -226,13 +261,13 @@
           border-radius: 8px;
           background-color: #ffbf00;
           color: #fff;
-          font-size: 12px;
+          font-size: 14px;
         }
 
-        .totalEarnPoint {
-          font-size: 14px;
+        .earnPointDesc {
+          font-size: 18px;
 
-          .totalEarnPointStr {
+          .earnPointDescStr {
             font-weight: 700;
           }
         }
@@ -256,7 +291,7 @@
       .cartAddBtn {
         border: 1px solid #dddddd;
         border-radius: 3px;
-        background-color: #156501;
+        background-color: $themeColorPrimary;
         width: 400px;
         height: 55px;
         color: #fff;

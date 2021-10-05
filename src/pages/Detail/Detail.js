@@ -16,8 +16,29 @@ export default class Detail extends Component {
       layerClass: 'layerHide',
       totalPrice: '',
       totalEarnPoint: '',
+      quantaty: 1,
     };
   }
+
+  qauntatyMinus = () => {
+    const { quantaty } = this.state;
+    if (quantaty > 1) {
+      this.setState({ quantaty: quantaty - 1 });
+    }
+  };
+
+  qauntatyPlus = () => {
+    const { quantaty } = this.state;
+    this.setState({ quantaty: quantaty + 1 });
+  };
+
+  clickToDetailDesc = () => {
+    this.setState({ scrollY: window.pageYOffset });
+  };
+
+  clickToDetailInfo = () => {
+    this.setState({ scrollY: window.pageYOffset });
+  };
 
   componentDidMount() {
     fetch('http://localhost:3000/productDatailData.json')
@@ -37,6 +58,10 @@ export default class Detail extends Component {
     const { detailDesc } = this.state;
     const { doolysTip } = this.state;
     const { detailInfo } = this.state;
+    const { quantaty } = this.state;
+    const totalPrice = quantaty * productDetail.salesPrice;
+    const totalEarnPoint = quantaty * productDetail.earnPoint;
+
     return (
       <article>
         <DetailCartAdd
@@ -44,7 +69,7 @@ export default class Detail extends Component {
           nameKor={productDetail.nameKor}
           shortDesc={productDetail.shortDesc}
           dcInfo='회원할인가'
-          dcPrice={productDetail.discountedPrice}
+          salesPrice={productDetail.salesPrice}
           dcPercent={productDetail.discountRate}
           originalPrice={productDetail.originalPrice}
           dcInfoLayerClass={this.state.layerClass}
@@ -56,10 +81,16 @@ export default class Detail extends Component {
           packageType={productDetail.packageType}
           packageMessage={productDetail.packageMessage}
           notification={productDetail.notification}
-          totalPrice={this.state.totalPrice}
-          totalEarnPoint={this.state.totalEarnPoint}
+          qauntatyMinus={this.qauntatyMinus}
+          quantaty={quantaty}
+          qauntatyPlus={this.qauntatyPlus}
+          totalPrice={totalPrice}
+          totalEarnPoint={totalEarnPoint}
         />
-        <DetailScrollBtn />
+        <DetailScrollBtn
+          clickToDetailDesc={this.clickToDetailDesc}
+          clickToDetailInfo={this.clickToDetailInfo}
+        />
         <DetailDesc
           detailDescTitle={detailDesc.detailDescTitle}
           detailDescName={detailDesc.detailDescName}

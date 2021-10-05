@@ -4,6 +4,18 @@ import React, { Component } from 'react';
 import './DetailCartAdd.scss';
 
 export default class DetailCartAdd extends Component {
+  constructor() {
+    super();
+    this.state = {
+      layerOn: false,
+    };
+  }
+
+  handleLayer = () => {
+    const { layerOn } = this.state;
+    this.setState({ layerOn: !layerOn });
+  };
+
   render() {
     return (
       <div className='detailMainContainer'>
@@ -22,7 +34,7 @@ export default class DetailCartAdd extends Component {
             <span className='dcPriceRow'>
               <span className='discount'>
                 <span className='dcPrice'>
-                  {this.props.dcPrice}
+                  {this.props.salesPrice}
                   <span className='dcWon'>원</span>
                 </span>
                 <span className='dcPercent'>
@@ -30,7 +42,7 @@ export default class DetailCartAdd extends Component {
                   <span className='dcPer'>%</span>
                 </span>
               </span>
-              <a className='originalPriceRow'>
+              <span className='originalPriceRow' onClick={this.handleLayer}>
                 <span className='originalPrice'>
                   {this.props.originalPrice}
                   <span className='won'>원</span>
@@ -40,12 +52,10 @@ export default class DetailCartAdd extends Component {
                   alt='물음표'
                   src='https://res.kurly.com/kurly/ico/2021/question_24_24_c999.svg'
                 />
-              </a>
-              <span className={this.props.dcInfoLayerClass}>
-                <span className='dcInfoLayer'>
-                  <strong className='dcInfoLayerTitle'>
-                    컬리판매가 기준 할인
-                  </strong>
+              </span>
+              <div className={this.state.layerOn ? 'dcInfoLayer' : 'layerOff'}>
+                <span className='dcInfoLayerTitle'>컬리판매가 기준 할인</span>
+                <span className='dcInfoLayerDesc'>
                   동일 품질 상품의 주요 온/오프라인 유통사 가격과 비교하여
                   컬리가 설정한 가격에서 할인된 가격입니다.
                   <br />
@@ -53,10 +63,14 @@ export default class DetailCartAdd extends Component {
                   다를 수 있습니다. 할인 혜택은 당사 사정에 따라 변경될 수
                   있습니다.
                 </span>
-                <button className='layerBtn' type='button'>
-                  X
+                <button
+                  className='layerBtn'
+                  type='button'
+                  onClick={this.handleLayer}
+                >
+                  ×
                 </button>
-              </span>
+              </div>
             </span>
             <span className='benefit'>
               <span className='benefitWelcome'>웰컴 5%</span>
@@ -110,17 +124,19 @@ export default class DetailCartAdd extends Component {
               <span className='cartAddQuantaty'>구매수량</span>
               <div className='cartAddQuantatyOption'>
                 <span className='cartAddQuantatyCount'>
-                  <button className='btns btnUp' type='button'>
-                    -
-                  </button>
-                  <input
-                    className='btns btnResult'
-                    type='number'
-                    readOnly='readonly'
+                  <button
+                    className='btns minusBtn'
+                    type='button'
+                    onClick={this.props.qauntatyMinus}
                   />
-                  <button className='btns btnDown' type='button'>
-                    +
+                  <button className='btns btnResult'>
+                    {this.props.quantaty}
                   </button>
+                  <button
+                    className='btns plusBtn'
+                    type='button'
+                    onClick={this.props.qauntatyPlus}
+                  />
                 </span>
               </div>
             </div>
@@ -128,15 +144,17 @@ export default class DetailCartAdd extends Component {
               <div className='priceResult'>
                 <strong className='totalPriceTitle'>총 상품금액 : </strong>
                 <span className='totalPriceIs'>
-                  <span className='totalPrice'>12345</span>
+                  <span className='totalPrice'>{this.props.totalPrice}</span>
                   <span className='totalPriceWon'> 원</span>
                 </span>
               </div>
               <div className='pointResult'>
                 <span className='earnPointIcon'>적립</span>
-                <span className='totalEarnPoint'>
+                <span className='earnPointDesc'>
                   구매 시{' '}
-                  <strong className='totalEarnPointStr'>1234원 적립</strong>
+                  <strong className='earnPointDesc'>
+                    {this.props.totalEarnPoint}원 적립
+                  </strong>
                 </span>
               </div>
             </div>
