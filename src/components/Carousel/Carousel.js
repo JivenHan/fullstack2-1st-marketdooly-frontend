@@ -1,17 +1,16 @@
 import React, { Component } from 'react';
-import { productsData } from './carouselData';
 import './Carousel.scss';
 import Slide from './Slide';
 
 export default class Carousel extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
-      productsData,
+      productsData: props.productsData,
       currentPage: 1,
-      maxPage: Math.ceil(productsData.length / 4),
-      lastSlidingCorrection: (4 - (productsData.length % 4)) * 267,
-      totalSlide: productsData.length,
+      maxPage: Math.ceil(props.productsData.length / 4),
+      lastSlidingCorrection: (4 - (props.productsData.length % 4)) * 267,
+      totalSlide: props.productsData.length,
     };
   }
 

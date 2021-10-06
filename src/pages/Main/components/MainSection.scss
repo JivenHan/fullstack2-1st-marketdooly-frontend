@@ -1,0 +1,51 @@
+section {
+  .titGoods {
+    padding: 79px 0 35px 0;
+    text-align: center;
+    .tit {
+      line-height: 32px;
+      color: #333333;
+      font-size: 28px;
+      font-weight: 500;
+      letter-spacing: -2px;
+    }
+  }
+
+  .category {
+    .categoryList {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin: 0 auto;
+      padding: 0 40px 40px 20px;
+      height: 200px;
+      width: 1050px;
+      gap: 10px;
+
+      li {
+        cursor: pointer;
+
+        .categoryTxt {
+          display: block;
+          padding: 10px 20px;
+          line-height: 18px;
+          border-radius: 100px;
+          color: #333333;
+          background-color: #f7f7f7;
+          font-size: 14px;
+          font-weight: 400;
+
+          &:hover {
+            color: #5f0080;
+            background-color: #f7f3f8;
+          }
+
+          &.selected {
+            color: #ffffff;
+            background-color: #5f0080;
+          }
+        }
+      }
+    }
+  }
+}
