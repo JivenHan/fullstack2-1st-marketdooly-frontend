@@ -27,29 +27,37 @@ export default class TopNav extends Component {
             <img className='cmgnbLogo' alt='kurlylogo' src='/logo.svg' />
           </div>
           <ul className='cmgnbUserContainer'>
-            <li className='cmgnbUserItem'>
+            <li className='cmgnbUserItem1Wrapper'>
               <a
+                className='cmgnbUserItem1'
                 href='https://www.kurly.com/shop/member/join.php'
                 target='_self'
               >
                 회원가입
               </a>
             </li>
-            <li className='cmgnbUserItem'>
+            <li className='cmgnbUserItem2Wrapper'>
               <a
+                className='cmgnbUserItem2'
                 href='https://www.kurly.com/shop/member/login.php'
                 target='_self'
               >
                 로그인
               </a>
             </li>
-            <li className='cmgnbUserItem'>
+            <li className='cmgnbUserItem3Wrapper'>
               <a
+                className='cmgnbUserItem3'
                 href='https://www.kurly.com/shop/board/list.php?id=notice'
                 target='_self'
               >
                 고객센터
               </a>
+              <img
+                className='toggleIcon'
+                alt='toggleIcon'
+                src='/toggleIcon.png'
+              />
             </li>
           </ul>
         </div>
