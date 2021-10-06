@@ -3,6 +3,7 @@ import DetailCartAdd from './components/DetailCartAdd';
 import DetailScrollBtn from './components/DetailScrollBtn';
 import DetailDesc from './components/DetailDesc';
 import DetailInfo from './components/DetailInfo';
+import DetailBottomLayer from './components/DetailBottomLayer';
 import './Detail.scss';
 
 export default class Detail extends Component {
@@ -33,7 +34,7 @@ export default class Detail extends Component {
   };
 
   clickToDetailDesc = () => {
-    window.scrollTo({ top: 900, behavior: 'smooth' });
+    window.scrollTo({ top: 970, behavior: 'smooth' });
   };
 
   clickToDetailInfo = () => {
@@ -118,6 +119,16 @@ export default class Detail extends Component {
           originCountry={detailInfo.originCountry}
           serviceCall={detailInfo.serviceCall}
           produceDate={detailInfo.produceDate}
+        />
+        <DetailBottomLayer
+          nameKor={productDetail.nameKor}
+          qauntatyMinus={this.qauntatyMinus}
+          quantaty={quantaty}
+          qauntatyPlus={this.qauntatyPlus}
+          originalPrice={productDetail.originalPrice}
+          salesPrice={productDetail.salesPrice}
+          totalPrice={totalPrice}
+          totalEarnPoint={totalEarnPoint}
         />
       </article>
     );

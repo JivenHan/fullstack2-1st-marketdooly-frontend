@@ -1,3 +1,5 @@
+@import '../../../styles/variables';
+
 .scrollBtns {
   position: sticky;
   top: 0;
@@ -13,5 +15,10 @@
     width: 262.5px;
     height: 65px;
     font-size: 22px;
+    cursor: pointer;
+  }
+
+  .clicked {
+    color: $themeColorPrimary;
   }
 }

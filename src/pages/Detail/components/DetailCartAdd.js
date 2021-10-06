@@ -123,7 +123,7 @@ export default class DetailCartAdd extends Component {
             <div className='cartAddOption'>
               <span className='cartAddQuantaty'>구매수량</span>
               <div className='cartAddQuantatyOption'>
-                <span className='cartAddQuantatyCount'>
+                <span className='cartAddQuantatySet'>
                   <button
                     className='btns minusBtn'
                     type='button'
