@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
+import SignUp from '../../pages/SignUp/SignUp'
 import './TopNav.scss';
 
 export default class TopNav extends Component {
@@ -15,39 +17,38 @@ export default class TopNav extends Component {
             <img className='closeIcon' alt='closeIcon' src='/closeIcon.png' />
           </div>
         </div>
-        <div className='cmgnbContainer'>
-          <div className='cmgnbDeliveryWrapper'>
+        <div className='headerContainer'>
+          <div className='headerDeliveryWrapper'>
             <img
-              className='cmgnbDeliveryImg'
+              className='headerDeliveryImg'
               alt='샛별 택배 배송안내'
-              src='/cmgnbDelivery.png'
+              src='/headerDelivery.png'
             />
           </div>
-          <div className='cmgnbLogoWrapper'>
-            <img className='cmgnbLogo' alt='kurlylogo' src='/logo.svg' />
+          <div className='headerLogoWrapper'>
+            <img className='headerLogo' alt='kurlylogo' src='/logo.svg' />
           </div>
-          <ul className='cmgnbUserContainer'>
-            <li className='cmgnbUserItem1Wrapper'>
-              <a
-                className='cmgnbUserItem1'
-                href='https://www.kurly.com/shop/member/join.php'
-                target='_self'
+          <ul className='headerUserContainer'>
+            <li className='headerUserItem1Wrapper'>
+              <Link 
+               className='headerUserItem1'
+               to='../../pages/SignUp/SignUp'
               >
                 회원가입
-              </a>
+              </Link>
             </li>
-            <li className='cmgnbUserItem2Wrapper'>
+            <li className='headerUserItem2Wrapper'>
               <a
-                className='cmgnbUserItem2'
+                className='headerUserItem2'
                 href='https://www.kurly.com/shop/member/login.php'
                 target='_self'
               >
                 로그인
               </a>
             </li>
-            <li className='cmgnbUserItem3Wrapper'>
+            <li className='headerUserItem3Wrapper'>
               <a
-                className='cmgnbUserItem3'
+                className='headerUserItem3'
                 href='https://www.kurly.com/shop/board/list.php?id=notice'
                 target='_self'
               >
@@ -60,7 +61,7 @@ export default class TopNav extends Component {
               />
             </li>
           </ul>
-        </div>
+        {/* </div> */}
         <ul className='lnbUserCsWrapperVisible'>
           <li className='lnbUserCsItem'>공지사항</li>
           <li className='lnbUserCsItem'>자주하는 질문</li>

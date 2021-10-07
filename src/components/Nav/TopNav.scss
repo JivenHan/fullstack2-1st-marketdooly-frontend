@@ -38,19 +38,19 @@
     }
   }
 
-  .cmgnbContainer {
+  .headerContainer {
     // position: relative;
     width: 100vw;
     display: flex;
 
-    .cmgnbDeliveryWrapper {
+    .headerDeliveryWrapper {
       margin-top: 0.5rem;
       img {
         height: 1.5rem;
       }
     }
 
-    .cmgnbLogoWrapper {
+    .headerLogoWrapper {
       // position: absolute;
       // top: 50%;
       // left: 50%;
@@ -58,14 +58,14 @@
       width: 8rem; //꼭있어야
       margin: 0 auto;
 
-      .cmgnbLogo {
+      .headerLogo {
         color: green;
         margin: 2rem;
         height: 6rem;
       }
     }
 
-    .cmgnbUserContainer {
+    .headerUserContainer {
       display: flex;
       flex-wrap: wrap;
       height: 2rem;
@@ -78,11 +78,11 @@
           text-decoration: none;
           color: #333333;
         }
-        .cmgnbUserItem1 {
+        .headerUserItem1 {
           color: $themeColorPrimary;
         }
       }
-      li.cmgnbUserItem3Wrapper {
+      li.headerUserItem3Wrapper {
         border: 0;
         .toggleIcon {
           position: relative;
