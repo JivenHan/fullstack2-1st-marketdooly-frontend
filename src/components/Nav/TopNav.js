@@ -60,6 +60,37 @@ export default class TopNav extends Component {
             <li className='lnbUserCsItem'>에코포장 피드백</li>
           </ul>
         </div>
+
+        <div className='cmgnbContainer'>
+          <div className='categoriesMenuContainer'>
+            <img
+              className='menuHamburgerIcon'
+              alt='menuHamburgerIcon'
+              src='/menuHamburgerIcon.png'
+            />
+            <p>전체 카테고리</p>
+          </div>
+          <ul className='listMenuContainer'>
+            <li>신상품</li>
+            <li>베스트</li>
+            <li>알뜰쇼핑</li>
+            <li>특가/혜택</li>
+          </ul>
+          <div className='otherMenuContainer'>
+            <input
+              className='gnbSearchInput'
+              type='text'
+              label='검색어'
+              placeholder='검색어를 입력해주세요.'
+            />
+            <button className='gnbSetLocationButton' type='button'>
+              <img alt='배송지 설정하기' src='locationIcon.png' />
+            </button>
+            <Link className='gnbGoToCart' to='../../pages/Login/Login'>
+              <img alt='장바구니' src='cartIcon.png' />
+            </Link>
+          </div>
+        </div>
       </div>
 
       // 로그인 전, 광고배너 삭제 후
