@@ -1,11 +1,19 @@
 import React, { Component } from 'react';
 import MainBanner from './components/MainBanner/MainBanner';
 import Section from './components/Section';
+import SpecialPrice from './components/SpecialPrice';
 import { categories } from './categoriyData';
 import { Link } from 'react-router-dom';
 import './Main.scss';
 
 export default class Main extends Component {
+  constructor() {
+    super();
+    this.state = {
+      data: null,
+    };
+  }
+
   render() {
     return (
       <main>
@@ -15,10 +23,10 @@ export default class Main extends Component {
           title='이 상품 어때요?'
           sectionName='이 상품 어때요?'
         />
-        <Section
-          dataLink={'data/MDsPick/category1MDList.json'}
+        <SpecialPrice
+          dataLink='data/specialPrice.json'
           title='특가/혜택 >'
-          sectionName='특가/혜택 >'
+          sectionName='specialOffer'
         />
         <Section
           dataLink={'data/MDsPick/category1MDList.json'}
