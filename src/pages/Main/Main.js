@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import MainBanner from './components/MainBanner/MainBanner';
 import Section from './components/Section';
 import SpecialPrice from './components/SpecialPrice';
+import Banner from './Banner';
 import { categories } from './categoriyData';
-import { Link } from 'react-router-dom';
 import './Main.scss';
 
 export default class Main extends Component {
@@ -30,17 +30,24 @@ export default class Main extends Component {
         />
         <Section
           dataLink={'data/MDsPick/category1MDList.json'}
-          title='놓치면 후회할 가격 >'
-          sectionName='놓치면 후회할 가격 >'
+          title='이 상품 어때요?'
+          sectionName='이 상품 어때요?'
         />
-        <div className='barBanner'>
-          <Link to='/'>메인 배너 1</Link>
-        </div>
+        <Banner
+          url='/'
+          imgUrl='https://img-cf.kurly.com/shop/data/main/5/pc_img_1633488525.jpg'
+          bannerName='간편식 20% 할인'
+        />
         <Section
           categories={categories}
           dataLink={'data/MDsPick/category1MDList.json'}
           title='MD의 추천'
           sectionName='MD의 추천'
+        />
+        <Banner
+          url='/'
+          imgUrl='https://img-cf.kurly.com/shop/data/main/5/pc_img_1632901578.jpg'
+          bannerName='무제한 적립금 이벤트'
         />
         <Section
           dataLink={'data/MDsPick/category1MDList.json'}
@@ -50,12 +57,18 @@ export default class Main extends Component {
         <Section
           dataLink={'data/MDsPick/category1MDList.json'}
           title='똑똑한 요리 비법, 주방가전 특가 >'
-          sectionName='똑똑한 요리 비법, 주방가전 특가 >'
+          sectionName='specialOffer'
         />
         <Section
           dataLink={'data/MDsPick/category1MDList.json'}
           title='마감세일 >'
           sectionName='마감세일 >'
+        />
+        <Section
+          dataLink={'data/MDsPick/category1MDList.json'}
+          title='365일 최저가 도전 >'
+          titDesc='최저가 도전, 365일 언제나 알뜰하게'
+          sectionName='specialOffer'
         />
         <Section
           dataLink={'data/MDsPick/category1MDList.json'}

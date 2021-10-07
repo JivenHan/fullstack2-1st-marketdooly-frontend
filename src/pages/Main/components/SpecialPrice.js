@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import OfferCard from './OfferCard';
 import './SpecialPrice.scss';
 
 export default class specialPrice extends Component {
@@ -25,38 +26,6 @@ export default class specialPrice extends Component {
       );
   };
 
-  toggleBouncingImg = event => {
-    const value = event.type === 'mouseenter';
-    this.setState({
-      isHoverOnImg: value,
-    });
-  };
-
-  renderComponents = data => {
-    const { id, header, imgUrl, description } = data;
-    return (
-      <li className='card' key={id}>
-        <dl>
-          <dt
-            className={this.state.isHoverOnImg ? 'bounce' : ''}
-            onMouseEnter={this.toggleBouncingImg}
-            onMouseLeave={this.toggleBouncingImg}
-          >
-            <Link to='/'>
-              <img src={imgUrl} alt={header} />
-            </Link>
-          </dt>
-          <dd>
-            <h3 className='header'>
-              <Link to='/'>{header}</Link>
-            </h3>
-            <p className='desc'>{description}</p>
-          </dd>
-        </dl>
-      </li>
-    );
-  };
-
   render() {
     return (
       <section className={this.props.sectionName}>
@@ -67,7 +36,11 @@ export default class specialPrice extends Component {
             </span>
           </h3>
         </div>
-        <ul>{this.state.data.map(this.renderComponents)}</ul>
+        <ul>
+          {this.state.data.map(data => {
+            return <OfferCard key={data.id} data={data} />;
+          })}
+        </ul>
       </section>
     );
   }

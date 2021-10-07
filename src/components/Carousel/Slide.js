@@ -19,8 +19,16 @@ export default class Slide extends Component {
   };
 
   render() {
-    const { linkTo, imgUrl, name, price, discount, discountRate, cost } =
-      this.props.data;
+    const {
+      linkTo,
+      imgUrl,
+      name,
+      price,
+      discount,
+      discountRate,
+      cost,
+      specialFeature,
+    } = this.props.data;
     return (
       <li className='Slide'>
         <dl>
@@ -31,6 +39,11 @@ export default class Slide extends Component {
             onMouseEnter={this.toggleBouncingImg}
             onMouseLeave={this.toggleBouncingImg}
           >
+            {specialFeature && (
+              <span className='specialFeatureTag'>
+                <strong>{specialFeature}</strong>
+              </span>
+            )}
             <Link to={linkTo}>
               <img src={imgUrl} alt={name} />
             </Link>

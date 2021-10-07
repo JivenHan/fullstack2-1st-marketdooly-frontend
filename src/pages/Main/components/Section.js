@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import Carousel from '../../../components/Carousel/Carousel';
 import './Section.scss';
 
@@ -99,6 +100,20 @@ export default class Section extends Component {
         </div>
         {this.props.categories && this.displayCategories()}
         <Carousel data={this.state.data} />
+        {this.props.categories && (
+          <div className='viewAllCategory'>
+            <button>
+              <Link to='/'>
+                <span>
+                  {`${
+                    this.props.categories[this.state.selectedCategory]
+                      .categoryName
+                  } 전체보기 >`}
+                </span>
+              </Link>
+            </button>
+          </div>
+        )}
       </section>
     );
   }

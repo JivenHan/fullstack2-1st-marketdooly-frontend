@@ -68,4 +68,30 @@ section {
       }
     }
   }
+
+  .viewAllCategory {
+    position: relative;
+
+    button {
+      display: block;
+      position: absolute;
+      left: 50%;
+      top: -63px;
+      border: 1px solid #e3e3e3;
+      background: none;
+      transform: translateX(-50%);
+
+      a {
+        display: inline-block;
+        height: 56px;
+        width: 516px;
+        line-height: 56px;
+        text-decoration: none;
+
+        span {
+          font-size: 16px;
+        }
+      }
+    }
+  }
 }

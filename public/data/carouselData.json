@@ -12,13 +12,12 @@
   {
     "id": 2,
     "imgUrl": "https://img-cf.kurly.com/shop/data/goods/1470136351528l0.jpg",
-    "name": "오크라라 200g",
+    "name": "오크라 200g",
     "price": 5990,
     "discount": false,
     "discountRate": 10,
     "cost": 6600,
-    "linkTo": "/",
-    "specialFeature": "+20%쿠폰"
+    "linkTo": "/"
   },
   {
     "id": 3,
@@ -28,8 +27,7 @@
     "discount": true,
     "discountRate": 20,
     "cost": 3000,
-    "linkTo": "/",
-    "specialFeature": "+15%쿠폰"
+    "linkTo": "/"
   },
   {
     "id": 4,
