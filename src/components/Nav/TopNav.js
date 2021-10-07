@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import SignUp from '../../pages/SignUp/SignUp'
 import './TopNav.scss';
 
 export default class TopNav extends Component {
@@ -30,10 +29,7 @@ export default class TopNav extends Component {
           </div>
           <ul className='headerUserContainer'>
             <li className='headerUserItem1Wrapper'>
-              <Link 
-               className='headerUserItem1'
-               to='../../pages/SignUp/SignUp'
-              >
+              <Link className='headerUserItem1' to='../../pages/SignUp/SignUp'>
                 회원가입
               </Link>
             </li>
@@ -61,7 +57,7 @@ export default class TopNav extends Component {
               />
             </li>
           </ul>
-        {/* </div> */}
+        </div>
         <ul className='lnbUserCsWrapperVisible'>
           <li className='lnbUserCsItem'>공지사항</li>
           <li className='lnbUserCsItem'>자주하는 질문</li>

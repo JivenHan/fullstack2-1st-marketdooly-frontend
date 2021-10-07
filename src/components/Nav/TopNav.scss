@@ -40,8 +40,9 @@
 
   .headerContainer {
     // position: relative;
-    width: 100vw;
+    width: 1050px;
     display: flex;
+    margin: 0 auto;
 
     .headerDeliveryWrapper {
       margin-top: 0.5rem;
@@ -103,12 +104,13 @@
     position: relative;
     top: -8.1rem;
     left: -0.8rem;
-
     border: 1px solid #cccccc;
     margin-left: auto;
     padding-top: 0.3rem;
     height: 8.8rem;
     width: 6.5rem;
+    background-color: white;
+
     .lnbUserCsItem {
       margin: 0.5rem;
       padding-left: 0.1rem;
