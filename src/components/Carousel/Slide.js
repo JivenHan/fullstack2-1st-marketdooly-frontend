@@ -3,9 +3,10 @@ import { Link } from 'react-router-dom';
 import './Slide.scss';
 
 export default class Slide extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
+      data: props.data,
       isHoverOnImg: false,
     };
   }
@@ -18,6 +19,8 @@ export default class Slide extends Component {
   };
 
   render() {
+    const { linkTo, imgUrl, name, price, discount, discountRate, cost } =
+      this.props.data;
     return (
       <li className='Slide'>
         <dl>
@@ -28,25 +31,21 @@ export default class Slide extends Component {
             onMouseEnter={this.toggleBouncingImg}
             onMouseLeave={this.toggleBouncingImg}
           >
-            <Link to={this.props.linkTo}>
-              <img src={this.props.imgUrl} alt={this.props.name} />
+            <Link to={linkTo}>
+              <img src={imgUrl} alt={name} />
             </Link>
           </dt>
           <dd className='productInfo'>
             <h4 className='name'>
-              <Link to={this.props.linkTo}>{this.props.name}</Link>
+              <Link to={linkTo}>{name}</Link>
             </h4>
             <span className='price'>
-              {this.props.discount && (
-                <span className='discount'>
-                  {this.props.discountRate + '%'}
-                </span>
+              {discount && (
+                <span className='discount'>{discountRate + '%'}</span>
               )}
-              {this.props.price + '원'}
+              {price + '원'}
             </span>
-            {this.props.discount && (
-              <span className='cost'>{this.props.cost + '원'}</span>
-            )}
+            {discount && <span className='cost'>{cost + '원'}</span>}
           </dd>
         </dl>
       </li>
