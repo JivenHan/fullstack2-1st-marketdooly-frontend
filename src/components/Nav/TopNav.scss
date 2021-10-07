@@ -85,6 +85,8 @@
       }
       li.headerUserItem3Wrapper {
         border: 0;
+        cursor: pointer;
+
         .toggleIcon {
           position: relative;
           left: 5px;
@@ -97,6 +99,11 @@
     margin: 0 auto;
     height: 0px;
     width: 1050px;
+
+    .hidden {
+      display: none;
+    }
+
     .lnbUserCsWrapperHidden {
       display: none;
       background-color: blue;
@@ -130,22 +137,66 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+
     .categoriesMenuContainer {
-      // margin: 0.1rem;
       display: flex;
+      position: relative;
       align-items: center;
+
       .menuHamburgerIcon {
         height: 1rem;
       }
+
       p {
         margin: 1rem;
+      }
+
+      .dropDownLNB {
+        display: block;
+        position: absolute;
+        top: 48px;
+        border: 1px solid #f7f7f7;
+        z-index: 400;
+        transition: all 0.3s;
+
+        &.hidden {
+          display: none;
+        }
+
+        .parentCategories {
+          li {
+            padding-left: 50px;
+            height: 39px;
+            width: 204px;
+            line-height: 39px;
+            background-color: #ffffff;
+            background-position: 14px 8px;
+            background-size: 24px 24px;
+            background-repeat: no-repeat;
+
+            &:hover {
+              background-color: #f7f7f7;
+            }
+
+            &:hover a {
+              color: #5f0080;
+            }
+
+            a {
+              color: #4c4c4c;
+              font-size: 14px;
+              text-decoration: none;
+            }
+          }
+        }
       }
     }
 
     .listMenuContainer {
       display: flex;
+
       li {
-        margin: 2rem;
+        margin: 0.5rem;
       }
     }
 

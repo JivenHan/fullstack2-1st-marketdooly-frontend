@@ -3,19 +3,91 @@ import { Link } from 'react-router-dom';
 import './TopNav.scss';
 
 export default class TopNav extends Component {
+  constructor() {
+    super();
+    this.state = {
+      categoryData: [],
+      isPopupClosed: false,
+      isUserCsVisible: false,
+      isCategoriesVisible: false,
+    };
+  }
+
+  componentDidMount() {
+    try {
+      fetch('http://localhost:3000/data/categoryData.json')
+        .then(res => res.json())
+        .then(categoryData =>
+          this.setState({
+            categoryData,
+          })
+        );
+    } catch (err) {
+      console.error(err);
+    }
+  }
+
+  renderingCategories = () => {
+    return (
+      <div
+        className={`dropDownLNB ${
+          !this.state.isCategoriesVisible ? 'hidden' : ''
+        }`}
+      >
+        <ul className='parentCategories'>
+          {this.state.categoryData.map(category => {
+            return (
+              <li style={{ backgroundImage: `url(${category.iconUrl})` }}>
+                <Link to='/'>
+                  <h3 className='categoryName'>{category.parentCategories}</h3>
+                </Link>
+              </li>
+            );
+          })}
+        </ul>
+      </div>
+    );
+  };
+
+  closePopup = () => {
+    this.setState({
+      isPopupClosed: !this.state.isPopupClosed,
+    });
+  };
+
+  toggleLNBVisibility = event => {
+    const value = event.type === 'mouseover';
+    this.setState({
+      isCategoriesVisible: value,
+    });
+  };
+
+  toggleCSVisibility = event => {
+    const value = event.type === 'mouseover';
+    this.setState({
+      isUserCsVisible: value,
+    });
+  };
+
   render() {
     return (
-      // 로그인 전, 광고배너 삭제 전
       <div className='TopNav'>
-        <div className='topAdBannerBg'>
-          <div className='topAdBannerContent'>
-            <p>
-              지금 가입하고 인기상품 <span>100원</span>에 받아가세요!
-              <img className='nextIcon' alt='nextIcon' src='/nextIcon.png' />
-            </p>
-            <img className='closeIcon' alt='closeIcon' src='/closeIcon.png' />
+        {!this.state.isPopupClosed && (
+          <div className='topAdBannerBg'>
+            <div className='topAdBannerContent'>
+              <p>
+                지금 가입하고 인기상품 <span>100원</span>에 받아가세요!
+                <img className='nextIcon' alt='nextIcon' src='/nextIcon.png' />
+              </p>
+              <img
+                onClick={this.closePopup}
+                className='closeIcon'
+                alt='closeIcon'
+                src='/closeIcon.png'
+              />
+            </div>
           </div>
-        </div>
+        )}
         <div className='headerContainer'>
           <div className='headerDeliveryWrapper'>
             <img
@@ -38,8 +110,12 @@ export default class TopNav extends Component {
                 로그인
               </Link>
             </li>
-            <li className='headerUserItem3Wrapper'>
-              <Link className='headerUserItem3' to='../../pages/Login/Login'>
+            <li
+              className='headerUserItem3Wrapper'
+              onMouseOver={this.toggleCSVisibility}
+              onMouseOut={this.toggleCSVisibility}
+            >
+              <Link className='headerUserItem2' to='../../pages/Login/Login'>
                 고객센터
               </Link>
               <img
@@ -51,7 +127,11 @@ export default class TopNav extends Component {
           </ul>
         </div>
         <div className='lnbUserCsContainer'>
-          <ul className='lnbUserCsWrapperVisible'>
+          <ul
+            className={`lnbUserCsWrapperVisible ${
+              !this.state.isUserCsVisible ? 'hidden' : ''
+            }`}
+          >
             <li className='lnbUserCsItem'>공지사항</li>
             <li className='lnbUserCsItem'>자주하는 질문</li>
             <li className='lnbUserCsItem'>1:1 문의</li>
@@ -62,13 +142,18 @@ export default class TopNav extends Component {
         </div>
 
         <div className='cmgnbContainer'>
-          <div className='categoriesMenuContainer'>
+          <div
+            className='categoriesMenuContainer'
+            onMouseOver={this.toggleLNBVisibility}
+            onMouseLeave={this.toggleLNBVisibility}
+          >
             <img
               className='menuHamburgerIcon'
               alt='menuHamburgerIcon'
               src='/menuHamburgerIcon.png'
             />
             <p>전체 카테고리</p>
+            {this.renderingCategories()}
           </div>
           <ul className='listMenuContainer'>
             <li>신상품</li>
@@ -92,8 +177,6 @@ export default class TopNav extends Component {
           </div>
         </div>
       </div>
-
-      // 로그인 전, 광고배너 삭제 후
     );
   }
 }
