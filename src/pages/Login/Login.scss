@@ -8,7 +8,7 @@
     padding-top: 90px;
 
     * {
-      font-family: noto sans;
+      font-family: noto sans, malgun gothic;
       color: #333;
     }
 
@@ -62,14 +62,14 @@
       border-radius: 3px;
       font-size: 16px;
 
-      &.btnLogin.act {
+      &.btnLogin.valid {
         margin-bottom: 10px;
         border: 1px solid #5f0080;
         background-color: #5f0080;
         color: #fff;
       }
 
-      &.btnLogin.deact {
+      &.btnLogin.invalid {
         margin-bottom: 10px;
         border: 1px solid #5f0080;
         background-color: #fff;
