@@ -30,22 +30,22 @@ export default class FindId extends Component {
         <div className='findIdContainer'>
           <h3>아이디 찾기</h3>
           <form id='userInfoForm' action='./findId' method='POST'>
-            <strong>이름</strong>
+            <label>이름</label>
             <input
               type='text'
               name='userName'
               placeholder='고객님의 이름을 입력해주세요'
               onChange={handleInput}
               required
-            ></input>
-            <strong>이메일</strong>
+            />
+            <label>이메일</label>
             <input
               type='text'
               name='userEmail'
               placeholder='가입 시 등록하신 이메일 주소를 입력해주세요'
               onChange={handleInput}
               required
-            ></input>
+            />
           </form>
           <button
             className={isValidInput ? 'btnLogin valid' : 'btnLogin invalid'}
