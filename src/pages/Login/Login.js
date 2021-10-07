@@ -22,27 +22,29 @@ export default class Login extends Component {
     const { handleInput } = this;
     const { userId, userPassword } = this.state;
 
-    const isValidId = userId.length >= 6; // 상세 로직은 추후에 반영
-    const isValidPw = userPassword.length >= 10; // 상세 로직은 추후에 반영
-    const isLoginPossible = isValidId && isValidPw;
+    const isValidId = userId.length > 0; // 상세 로직은 추후에 반영
+    const isValidPw = userPassword.length > 0; // 상세 로직은 추후에 반영
+    const isValidInput = isValidId && isValidPw;
 
     return (
       <div className='Login'>
         <div className='loginContainer'>
           <h3>로그인</h3>
-          <form id='loginForm' action='./login' method='POST'>
+          <form id='userInfoForm' action='./login' method='POST'>
             <input
               type='text'
               name='userId'
               placeholder='아이디를 입력해주세요'
               onChange={handleInput}
-            ></input>
+              required
+            />
             <input
               type='password'
               name='userPassword'
               placeholder='비밀번호를 입력해주세요'
               onChange={handleInput}
-            ></input>
+              required
+            />
           </form>
           <div className='aaa'>
             <div className='securityLogin'>
@@ -56,9 +58,8 @@ export default class Login extends Component {
             </div>
           </div>
           <button
-            className={isLoginPossible ? 'btnLogin act' : 'btnLogin deact'}
-            form='loginForm'
-            disabled={!isLoginPossible}
+            className={isValidInput ? 'btnLogin valid' : 'btnLogin invalid'}
+            form='userInfoForm'
           >
             로그인
           </button>
