@@ -34,22 +34,14 @@ export default class TopNav extends Component {
               </Link>
             </li>
             <li className='headerUserItem2Wrapper'>
-              <a
-                className='headerUserItem2'
-                href='https://www.kurly.com/shop/member/login.php'
-                target='_self'
-              >
+              <Link className='headerUserItem2' to='../../pages/Login/Login'>
                 로그인
-              </a>
+              </Link>
             </li>
             <li className='headerUserItem3Wrapper'>
-              <a
-                className='headerUserItem3'
-                href='https://www.kurly.com/shop/board/list.php?id=notice'
-                target='_self'
-              >
+              <Link className='headerUserItem3' to='../../pages/Login/Login'>
                 고객센터
-              </a>
+              </Link>
               <img
                 className='toggleIcon'
                 alt='toggleIcon'
@@ -58,14 +50,16 @@ export default class TopNav extends Component {
             </li>
           </ul>
         </div>
-        <ul className='lnbUserCsWrapperVisible'>
-          <li className='lnbUserCsItem'>공지사항</li>
-          <li className='lnbUserCsItem'>자주하는 질문</li>
-          <li className='lnbUserCsItem'>1:1 문의</li>
-          <li className='lnbUserCsItem'>대량주문 문의</li>
-          <li className='lnbUserCsItem'>상품 제안</li>
-          <li className='lnbUserCsItem'>에코포장 피드백</li>
-        </ul>
+        <div className='lnbUserCsContainer'>
+          <ul className='lnbUserCsWrapperVisible'>
+            <li className='lnbUserCsItem'>공지사항</li>
+            <li className='lnbUserCsItem'>자주하는 질문</li>
+            <li className='lnbUserCsItem'>1:1 문의</li>
+            <li className='lnbUserCsItem'>대량주문 문의</li>
+            <li className='lnbUserCsItem'>상품 제안</li>
+            <li className='lnbUserCsItem'>에코포장 피드백</li>
+          </ul>
+        </div>
       </div>
 
       // 로그인 전, 광고배너 삭제 후

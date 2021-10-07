@@ -93,29 +93,33 @@
       }
     }
   }
+  .lnbUserCsContainer {
+    margin: 0 auto;
+    width: 1050px;
+    .lnbUserCsWrapperHidden {
+      display: none;
+      background-color: blue;
+    }
 
-  .lnbUserCsWrapperHidden {
-    display: none;
-    background-color: blue;
-  }
+    .lnbUserCsWrapperVisible {
+      // position: absolute;
+      position: relative;
+      top: -8.1rem;
+      left: -0.8rem;
+      border: 1px solid #cccccc;
+      // margin:
+      margin-left: auto;
+      padding-top: 0.1rem;
+      height: 8.8rem;
+      width: 6.7rem;
+      background-color: white;
 
-  .lnbUserCsWrapperVisible {
-    // position: absolute;
-    position: relative;
-    top: -8.1rem;
-    left: -0.8rem;
-    border: 1px solid #cccccc;
-    margin-left: auto;
-    padding-top: 0.3rem;
-    height: 8.8rem;
-    width: 6.5rem;
-    background-color: white;
-
-    .lnbUserCsItem {
-      margin: 0.5rem;
-      padding-left: 0.1rem;
-      font-size: 0.8rem;
-      color: #333333;
+      .lnbUserCsItem {
+        margin: 0.5rem;
+        padding-left: 0.1rem;
+        font-size: 0.8rem;
+        color: #333333;
+      }
     }
   }
 }
