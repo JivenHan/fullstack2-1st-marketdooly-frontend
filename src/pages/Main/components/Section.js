@@ -13,12 +13,13 @@ export default class Section extends Component {
     };
   }
 
-  componentDidMount = async () => {
+  componentDidMount = () => {
     if (this.props.categories) {
-      await this.getCategories();
+      this.getCategories();
       this.reRenderingMDPick(this.state.selectedCategory);
+    } else {
+      this.getDisplayData();
     }
-    this.getDisplayData();
   };
 
   getDisplayData = () => {
@@ -67,7 +68,7 @@ export default class Section extends Component {
     return (
       <div className='category'>
         <ul className='categoryList'>
-          {this.props.categories.map(ele => {
+          {this.state.categoryData?.map(ele => {
             const { id, categoryName } = ele;
             return (
               <li key={id}>
@@ -89,7 +90,7 @@ export default class Section extends Component {
 
   render() {
     return (
-      <section className={this.props.sectionName}>
+      <section className={`Section ${this.props.sectionName}`}>
         <div className='titGoods'>
           <h3 className='tit'>
             <span className='titTitle'>{this.props.title}</span>
@@ -106,8 +107,8 @@ export default class Section extends Component {
               <Link to='/'>
                 <span>
                   {`${
-                    this.props.categories[this.state.selectedCategory]
-                      .categoryName
+                    this.state.categoryData[this.state.selectedCategory]
+                      ?.categoryName
                   } 전체보기 >`}
                 </span>
               </Link>

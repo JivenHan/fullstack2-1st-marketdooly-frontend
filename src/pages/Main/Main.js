@@ -3,7 +3,6 @@ import MainBanner from './components/MainBanner/MainBanner';
 import Section from './components/Section';
 import SpecialPrice from './components/SpecialPrice';
 import Banner from './Banner';
-import { categories } from './categoriyData';
 import './Main.scss';
 
 export default class Main extends Component {
@@ -39,7 +38,7 @@ export default class Main extends Component {
           bannerName='간편식 20% 할인'
         />
         <Section
-          categories={categories}
+          categories={true}
           dataLink={'data/MDsPick/category1MDList.json'}
           title='MD의 추천'
           sectionName='MD의 추천'

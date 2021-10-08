@@ -28,7 +28,7 @@ export default class specialPrice extends Component {
 
   render() {
     return (
-      <section className={this.props.sectionName}>
+      <section className={`Section ${this.props.sectionName}`}>
         <div className='titGoods'>
           <h3 className='tit'>
             <span className='titTitle'>

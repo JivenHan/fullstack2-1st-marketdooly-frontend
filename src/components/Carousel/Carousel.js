@@ -18,19 +18,22 @@ export default class Carousel extends Component {
   }
 
   updateSlider = () => {
+    const { data } = this.props;
     this.setState({
       currentPage: 1,
-      maxPage: Math.ceil(this.props.data.length / 4),
-      lastSlidingCorrection: (4 - (this.props.data.length % 4)) * 267,
-      totalSlide: this.props.data.length,
+      maxPage: Math.ceil(data.length / 4),
+      lastSlidingCorrection: (4 - (data.length % 4)) * 267,
+      totalSlide: data.length,
     });
   };
 
   calcSlidingRange = () => {
     const { currentPage, maxPage, lastSlidingCorrection } = this.state;
-    if (currentPage === maxPage)
+    if (currentPage === maxPage) {
       return 1068 * (currentPage - 1) - lastSlidingCorrection;
-    return 1068 * (currentPage - 1);
+    } else {
+      return 1068 * (currentPage - 1);
+    }
   };
 
   prevSlide = () => {

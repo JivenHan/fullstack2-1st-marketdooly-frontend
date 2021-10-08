@@ -6,15 +6,14 @@ export default class OfferCard extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      data: this.props.data,
+      data: props.data,
       isHoverOnImg: false,
     };
   }
 
   toggleBouncingImg = event => {
-    const value = event.type === 'mouseenter';
     this.setState({
-      isHoverOnImg: value,
+      isHoverOnImg: event.type === 'mouseenter',
     });
   };
 
