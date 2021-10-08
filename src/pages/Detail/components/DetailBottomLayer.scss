@@ -1,9 +1,5 @@
 @import '../../../styles/variables';
 
-.layerHide {
-  display: none;
-}
-
 .detailBottomLayer {
   position: sticky;
   bottom: 0px;
@@ -27,13 +23,14 @@
     background-color: $themeColorPrimary;
     color: #fff;
     font-size: 15px;
+    cursor: pointer;
   }
 
   .layerDown {
     display: none;
   }
 
-  .botLayerSetQuantaty {
+  .botLayerSetQuantity {
     display: inline-block;
     margin-top: 20px;
     border-radius: 2px;
@@ -48,7 +45,7 @@
       font-size: 16px;
     }
 
-    .botLayeQuantatySet {
+    .botLayeQuantitySet {
       display: inline-block;
       margin-left: 420px;
 

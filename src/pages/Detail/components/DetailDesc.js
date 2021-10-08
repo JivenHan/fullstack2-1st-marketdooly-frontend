@@ -4,7 +4,7 @@ import './DetailDesc.scss';
 export default class DetailDesc extends Component {
   render() {
     return (
-      <div className='detailDescContainer'>
+      <div className='detailDescContainer' ref={this.props.descRef}>
         <img
           className='detailDescImg'
           alt='디테일 메인 이미지'

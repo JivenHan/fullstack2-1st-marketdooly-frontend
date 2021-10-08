@@ -1,24 +1,18 @@
 @import '../../../styles/variables';
 
-.scrollBtns {
-  position: sticky;
-  top: 0;
-  margin: 0 auto;
-  width: 1050px;
+.scrollBtn {
+  display: inline-block;
+  border: 1px solid #eeeeee;
+  outline: 0;
+  width: 262.5px;
+  height: 65px;
+  background-color: #fafafa;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.clicked {
+  color: $themeColorPrimary;
+  border-bottom: none;
   background-color: #fff;
-  z-index: 10;
-
-  .scrollBtn {
-    border: 1px solid #eeeeee;
-    outline: 0;
-    background-color: #fafafa;
-    width: 262.5px;
-    height: 65px;
-    font-size: 22px;
-    cursor: pointer;
-  }
-
-  .clicked {
-    color: $themeColorPrimary;
-  }
 }

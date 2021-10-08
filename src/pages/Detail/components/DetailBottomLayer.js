@@ -15,56 +15,58 @@ export default class DetailBottomLayer extends Component {
   };
 
   render() {
-    const { isLayerClicked, isBottomLayerUp } = this.state;
+    const { isLayerClicked } = this.state;
+    const {
+      nameKor,
+      qauntityMinus,
+      quantity,
+      qauntityPlus,
+      originalPrice,
+      salesPrice,
+      totalPrice,
+      totalEarnPoint,
+    } = this.props;
 
     return (
-      <div
-        className={'detailBottomLayer' + (isBottomLayerUp ? 'layerHide' : '')}
-      >
+      <div className={'detailBottomLayer'}>
         <button className='botLayerPopBtn' onClick={this.handleLayer}>
-          상품 선택 {isLayerClicked ? '∨' : '∧'}
+          상품 선택 {isLayerClicked ? ' ∨' : ' ∧'}
         </button>
         <div
           className={'botLayerContens ' + (isLayerClicked ? '' : 'layerDown')}
         >
-          <div className='botLayerSetQuantaty'>
-            <div className='botLayerProductName'>{this.props.nameKor}</div>
-            <div className='botLayeQuantatySet'>
+          <div className='botLayerSetQuantity'>
+            <div className='botLayerProductName'>{nameKor}</div>
+            <div className='botLayeQuantitySet'>
               <div className='botLayerBtns'>
                 <button
                   className='botBtn botLayerMinusBtn'
                   type='button'
-                  onClick={this.props.qauntatyMinus}
+                  onClick={qauntityMinus}
                 />
-                <button className='botBtn botLayerBtnResult'>
-                  {this.props.quantaty}
-                </button>
+                <button className='botBtn botLayerBtnResult'>{quantity}</button>
                 <button
                   className='botBtn botLayerPlusBtn'
                   type='button'
-                  onClick={this.props.qauntatyPlus}
+                  onClick={qauntityPlus}
                 />
               </div>
               <span className='botLayerBtnOriginalPrice'>
-                {this.props.originalPrice} 원
+                {originalPrice} 원
               </span>
-              <span className='botLayerBtnSalesPrice'>
-                {this.props.salesPrice} 원
-              </span>
+              <span className='botLayerBtnSalesPrice'>{salesPrice} 원</span>
             </div>
           </div>
           <div className='botLayerPriceResult'>
             <span className='botLayerTotalPriceIs'>총 상품금액 : </span>
-            <span className='botLayerTotalPrice'>{this.props.totalPrice}</span>
+            <span className='botLayerTotalPrice'>{totalPrice}</span>
             <span className='botLayerTotalPriceWon'> 원</span>
           </div>
           <div className='botLayerPointResult'>
             <span className='earnPointIcon'>적립</span>
             <span className='earnPointDesc'>
               구매 시{' '}
-              <strong className='earnPointDesc'>
-                {this.props.totalEarnPoint}원 적립
-              </strong>
+              <strong className='earnPointDesc'>{totalEarnPoint}원 적립</strong>
             </span>
           </div>
           <div className='botLayerCartBtns'>
