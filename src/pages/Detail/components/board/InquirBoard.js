@@ -1,10 +1,33 @@
 import React, { Component } from 'react';
 
 class InquirBoard extends Component {
+  constructor() {
+    super();
+    this.state = {
+      qnaBox: false,
+      qnaCommentModal: false,
+      displayContent: false,
+    };
+  }
+
+  isValidQnaBox = () => {
+    const { qnaBox } = this.state;
+    this.setState({
+      qnaBox: !qnaBox,
+    });
+  };
+
+  isValidInputInquirPopup = () => {
+    const { qnaCommentModal } = this.state;
+    this.setState({
+      qnaCommentModal: !qnaCommentModal,
+    });
+  };
+
   render() {
     const { qnaBox, qnaCommentModal } = this.props;
     return (
-      <>
+      <div class='boardAlign'>
         <div class='board'>
           <form className='tableTitle'>
             <div class='titleAlign'>
@@ -104,7 +127,7 @@ class InquirBoard extends Component {
             </div>
           </form>
         </div>
-      </>
+      </div>
     );
   }
 }
