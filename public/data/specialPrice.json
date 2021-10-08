@@ -1,0 +1,20 @@
+[
+  {
+    "id": 1,
+    "header": "도드람한돈 최대 14% 할인",
+    "imgUrl": "https://img-cf.kurly.com/shop/data/main/3/pc_img_1633566361.jpg",
+    "description": "건강하고 안전한 우리 한돈"
+  },
+  {
+    "id": 2,
+    "header": "Kurly's 간편식 최대 20% 할인",
+    "imgUrl": "https://img-cf.kurly.com/shop/data/main/3/pc_img_1633567053.jpg",
+    "description": "컬리답게 만든"
+  },
+  {
+    "id": 3,
+    "header": "벤앤제리스 파인트 증정 EVENT",
+    "imgUrl": "https://img-cf.kurly.com/shop/data/main/3/pc_img_1633567057.jpg",
+    "description": "컬리 BEST 아이스크림 구매 시"
+  }
+]
