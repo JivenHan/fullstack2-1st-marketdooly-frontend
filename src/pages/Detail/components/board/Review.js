@@ -17,32 +17,32 @@ class Review extends Component {
     } = this.props;
 
     return (
-      <div>
-        <table class='style'>
-          <tr onClick={() => this.props.clickReviewHandler(id)}>
-            <td class='num'>{id}</td>
-            <td class='reviewTitle'>{reviewTitle}</td>
-            <td class='userClass'>{userGrade}</td>
-            <td class='writer'>{userName}</td>
-            <td class='tdDateTime'>{dateTime}</td>
-            <td class='selectNumber'>{likeCount}</td>
-            <td class='viewNumber'>{viewCount}</td>
-          </tr>
+      <div className='Review'>
+        <table className='style'>
+          <tbody>
+            <tr onClick={() => this.props.clickReviewHandler(id)}>
+              <td className='num'>{id}</td>
+              <td className='reviewTitle'>{reviewTitle}</td>
+              <td className='userClass'>{userGrade}</td>
+              <td className='writer'>{userName}</td>
+              <td className='tdDateTime'>{dateTime}</td>
+              <td className='selectNumber'>{likeCount}</td>
+              <td className='viewNumber'>{viewCount}</td>
+            </tr>
+          </tbody>
         </table>
-        <div className='commentBox'>
-          <div className={isOpenReviewBox ? 'displayContent' : 'contentHide'}>
-            <div>
-              <h2 class='title'>
-                [{productCategory}]{productName}
-              </h2>
-            </div>
-            <div class='image'>
-              <img src='/' alt='err' />
-            </div>
-            <div class='comment'>{reviewText}</div>
-            <div class='helpfulButnAlign'>
-              <button class='helpfulButnStyle'>도움이 돼요</button>
-            </div>
+        <div className={isOpenReviewBox ? 'displayContent' : 'contentHide'}>
+          <div>
+            <h2 className='reviewTitle'>
+              [{productCategory}]{productName}
+            </h2>
+          </div>
+          <div className='reviewImage'>
+            <img src='/' alt='err' />
+          </div>
+          <div className='reviewComment'>{reviewText}</div>
+          <div className='helpfulButnAlign'>
+            <button className='helpfulButnStyle'>도움이 돼요</button>
           </div>
         </div>
       </div>
