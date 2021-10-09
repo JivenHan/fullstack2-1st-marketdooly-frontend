@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import InquirBoard from './components/board/InquirBoard';
+import ReviewBoard from './components/board/ReviewBoard';
 import DetailCartAdd from './components/DetailCartAdd';
 import DetailScrollBtn from './components/DetailScrollBtn';
 import DetailDesc from './components/DetailDesc';
@@ -144,6 +146,10 @@ export default class Detail extends Component {
           <div className='inquiryLocation' ref={this.inquiryRef}>
             <span>문의 들어갈 자리</span>
           </div>
+        </div>
+        <div>
+          <ReviewBoard />
+          <InquirBoard />
         </div>
         {isBottomLayerUp && (
           <DetailBottomLayer
