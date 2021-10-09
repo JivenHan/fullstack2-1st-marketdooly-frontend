@@ -1,11 +1,10 @@
 @import '../../styles/variables';
 
 .TopNav {
-  // position: relative;
-
+  font-size: 16px;
   .topAdBannerBg {
     width: 100%;
-    height: 55px;
+    height: 42px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -18,28 +17,28 @@
       p {
         margin: 0 auto;
         color: white;
-        font-style: 1rem;
+        font-size: 0.7rem;
         font-weight: normal;
         letter-spacing: -0.03rem;
         span {
           font-weight: bolder;
         }
         .nextIcon {
-          margin-left: 1rem;
+          margin-left: 0.7rem;
           position: relative;
           top: 0.1rem;
-          height: 1rem;
+          height: 0.7rem;
         }
       }
       .closeIcon {
         height: 1rem;
         margin-left: 0;
+        margin-right: 5px;
       }
     }
   }
 
   .headerContainer {
-    // position: relative;
     width: 1050px;
     display: flex;
     margin: 0 auto;
@@ -47,33 +46,35 @@
     .headerDeliveryWrapper {
       margin-top: 0.5rem;
       img {
-        height: 1.5rem;
+        height: 1.2rem;
       }
     }
 
     .headerLogoWrapper {
-      // position: absolute;
-      // top: 50%;
-      // left: 50%;
-      display: block; //꼭있어야
-      width: 8rem; //꼭있어야
+      display: block;
+      width: 8rem;
       margin: 0 auto;
 
       .headerLogo {
-        color: green;
-        margin: 2rem;
-        height: 6rem;
+        position: relative;
+        top: 10px;
+        margin: 0.5rem 2rem;
+        height: 4rem;
+      }
+
+      svg:hover {
+        fill: red;
       }
     }
 
     .headerUserContainer {
       display: flex;
       flex-wrap: wrap;
-      height: 2rem;
+      height: 1rem;
       li {
-        font-size: 0.8rem;
-        margin: 0.8rem 0.4rem;
-        padding-right: 0.8rem;
+        font-size: 0.6rem;
+        margin: 0.6rem 0.35rem;
+        padding-right: 0.7rem;
         border-right: 1px solid #cccccc;
         a {
           text-decoration: none;
@@ -90,7 +91,7 @@
         .toggleIcon {
           position: relative;
           left: 5px;
-          height: 0.5rem;
+          height: 0.4rem;
         }
       }
     }
@@ -110,22 +111,20 @@
     }
 
     .lnbUserCsWrapperVisible {
-      // position: absolute;
       position: relative;
-      top: -8.1rem;
+      top: -3.5rem;
       left: -0.8rem;
       border: 1px solid #cccccc;
-      // margin:
       margin-left: auto;
       padding-top: 0.1rem;
       height: 8.8rem;
-      width: 6.7rem;
+      width: 5.6rem;
       background-color: white;
 
       .lnbUserCsItem {
         margin: 0.5rem;
         padding-left: 0.1rem;
-        font-size: 0.8rem;
+        font-size: 0.6rem;
         color: #333333;
       }
     }
@@ -144,7 +143,7 @@
       align-items: center;
 
       .menuHamburgerIcon {
-        height: 1rem;
+        height: 0.7rem;
       }
 
       p {
@@ -196,7 +195,7 @@
       display: flex;
 
       li {
-        margin: 0.5rem;
+        margin: 1rem 1.5rem;
       }
     }
 
@@ -211,9 +210,9 @@
         padding-right: 5rem;
         height: 2rem;
 
-        font-size: 0.8rem;
+        font-size: 0.6rem;
         background-color: #f4f8f4;
-        background-image: url(searchIcon.jpeg); //public에서 상대경로로 안되길래
+        background-image: url(searchIcon.jpeg);
         background-size: 1.8rem;
         background-repeat: no-repeat;
         background-position: 12rem center;
@@ -224,16 +223,13 @@
 
       .gnbSetLocationButton {
         border: 0;
+        margin-left: 0.6rem;
         display: inline-block;
-        // height: 1rem;
-        // width: 1rem;
         background-color: white;
-        img {
-          height: 2rem;
-        }
       }
 
       .gnbGoToCart {
+        margin-left: 0.6rem;
         img {
           height: 1.35rem;
         }

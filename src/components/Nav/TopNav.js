@@ -1,5 +1,9 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import CartIconSvg from './components/CartIconSvg';
+import LocationIconSvg from './components/LocationIconSvg';
+// import TopAdBanner from './components/TopAdBanner';
+// import Header from './components/Header';
 import './TopNav.scss';
 
 export default class TopNav extends Component {
@@ -7,15 +11,15 @@ export default class TopNav extends Component {
     super();
     this.state = {
       categoryData: [],
-      isPopupClosed: false,
-      isUserCsVisible: false,
+      isTopAdBannerClosed: false,
+      isHeaderToggleIconHovered: false,
       isCategoriesVisible: false,
     };
   }
 
   componentDidMount() {
     try {
-      fetch('http://localhost:3000/data/categoryData.json')
+      fetch('data/categoryData.json')
         .then(res => res.json())
         .then(categoryData =>
           this.setState({
@@ -49,23 +53,22 @@ export default class TopNav extends Component {
     );
   };
 
-  closePopup = () => {
-    this.setState({
-      isPopupClosed: !this.state.isPopupClosed,
-    });
+  closeTopAdBanner = () => {
+    this.setState({ isTopAdBannerClosed: true });
+  };
+
+  showHiddenlnbUserCs = () => {
+    this.setState({ isHeaderToggleIconHovered: true });
+  };
+
+  hideHiddenlnbUserCs = () => {
+    this.setState({ isHeaderToggleIconHovered: false });
   };
 
   toggleLNBVisibility = event => {
     const value = event.type === 'mouseover';
     this.setState({
       isCategoriesVisible: value,
-    });
-  };
-
-  toggleCSVisibility = event => {
-    const value = event.type === 'mouseover';
-    this.setState({
-      isUserCsVisible: value,
     });
   };
 
@@ -80,7 +83,7 @@ export default class TopNav extends Component {
                 <img className='nextIcon' alt='nextIcon' src='/nextIcon.png' />
               </p>
               <img
-                onClick={this.closePopup}
+                onClick={this.closeTopAdBanner}
                 className='closeIcon'
                 alt='closeIcon'
                 src='/closeIcon.png'
@@ -112,8 +115,8 @@ export default class TopNav extends Component {
             </li>
             <li
               className='headerUserItem3Wrapper'
-              onMouseOver={this.toggleCSVisibility}
-              onMouseOut={this.toggleCSVisibility}
+              onMouseOver={this.showHiddenlnbUserCs}
+              onMouseOut={this.hideHiddenlnbUserCs}
             >
               <Link className='headerUserItem2' to='../../pages/Login/Login'>
                 고객센터
@@ -126,20 +129,22 @@ export default class TopNav extends Component {
             </li>
           </ul>
         </div>
-        <div className='lnbUserCsContainer'>
-          <ul
-            className={`lnbUserCsWrapperVisible ${
-              !this.state.isUserCsVisible ? 'hidden' : ''
-            }`}
-          >
-            <li className='lnbUserCsItem'>공지사항</li>
-            <li className='lnbUserCsItem'>자주하는 질문</li>
-            <li className='lnbUserCsItem'>1:1 문의</li>
-            <li className='lnbUserCsItem'>대량주문 문의</li>
-            <li className='lnbUserCsItem'>상품 제안</li>
-            <li className='lnbUserCsItem'>에코포장 피드백</li>
-          </ul>
-        </div>
+        {this.state.isHeaderToggleIconHovered && (
+          <div className='lnbUserCsContainer'>
+            <ul
+              className={`lnbUserCsWrapperVisible ${
+                !this.state.isHeaderToggleIconHovered ? 'hidden' : ''
+              }`}
+            >
+              <li className='lnbUserCsItem'>공지사항</li>
+              <li className='lnbUserCsItem'>자주하는 질문</li>
+              <li className='lnbUserCsItem'>1:1 문의</li>
+              <li className='lnbUserCsItem'>대량주문 문의</li>
+              <li className='lnbUserCsItem'>상품 제안</li>
+              <li className='lnbUserCsItem'>에코포장 피드백</li>
+            </ul>
+          </div>
+        )}
 
         <div className='cmgnbContainer'>
           <div
@@ -169,10 +174,10 @@ export default class TopNav extends Component {
               placeholder='검색어를 입력해주세요.'
             />
             <button className='gnbSetLocationButton' type='button'>
-              <img alt='배송지 설정하기' src='locationIcon.png' />
+              <LocationIconSvg strokeColor={'#333'} />
             </button>
             <Link className='gnbGoToCart' to='../../pages/Login/Login'>
-              <img alt='장바구니' src='cartIcon.png' />
+              <CartIconSvg strokeColor={'#333'} />
             </Link>
           </div>
         </div>
