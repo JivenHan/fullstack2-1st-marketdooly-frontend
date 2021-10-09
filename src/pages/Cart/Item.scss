@@ -1,0 +1,90 @@
+@mixin initBtn {
+  display: block;
+  margin: 0;
+  padding: 0;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.Item {
+  display: flex;
+  align-items: center;
+  padding: 20px 0;
+  border-bottom: 1px solid #f4f4f4;
+
+  .itemThumb {
+    margin: 0 20px 0 30px;
+    height: 78px;
+    width: 60px;
+
+    a {
+      display: block;
+
+      img {
+        width: 100%;
+      }
+    }
+  }
+
+  .itemName {
+    display: flex;
+    margin-right: 14px;
+    padding: 35px 0;
+    justify-content: left;
+    align-items: center;
+    height: 91px;
+    width: 327px;
+  }
+
+  .quantityStepper {
+    display: flex;
+    margin-right: 20px;
+    border: 1px solid #e1e1e1;
+    border-radius: 4px;
+
+    button {
+      @include initBtn();
+      width: 30px;
+      height: 30px;
+      background-position: center;
+      font-size: 0;
+
+      &.decrease {
+        background-image: url('https://res.kurly.com/pc/service/common/2009/ico_minus_on.svg');
+
+        &.limit {
+          opacity: 0.3;
+        }
+      }
+
+      &.increase {
+        background-image: url('https://res.kurly.com/mobile/service/cart/2010/ico_plus_on.svg');
+      }
+    }
+
+    .quantity {
+      display: block;
+      width: 26px;
+      line-height: 28px;
+      text-align: center;
+    }
+  }
+
+  .itemPrice {
+    margin-right: 15px;
+    height: 24px;
+    width: 116px;
+    line-height: 23px;
+    text-align: right;
+  }
+
+  .deleteItem {
+    @include initBtn();
+    height: 30px;
+    width: 30px;
+    background-image: url('https://res.kurly.com/pc/service/cart/2007/ico_delete.svg');
+    background-position: center;
+    font-size: 0;
+  }
+}
