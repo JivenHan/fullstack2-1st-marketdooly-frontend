@@ -1,0 +1,46 @@
+@import '../../../styles/variables';
+
+.AlertPopup {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  width: 500px;
+  // height: 300px;
+  margin-top: -180px;
+  margin-left: -220px;
+  background-color: #fff;
+  z-index: 9999;
+
+  main {
+    padding: 0 25px;
+
+    header {
+      padding: 25px 0 20px 0;
+      border-bottom: 1px solid #b2b2b2;
+      color: #{$primary};
+    }
+
+    section {
+      margin: 40px 0;
+      color: #4c4c4c;
+      font-size: 14px;
+      text-align: center;
+    }
+  }
+
+  footer {
+    background-color: #f5f5f5;
+    text-align: center;
+
+    .btnConfirm {
+      width: 150px;
+      height: 45px;
+      margin: 25px 0;
+      border: 1px solid #{$primary};
+      color: #fff;
+      background-color: #{$primary};
+      font-size: 15px;
+      letter-spacing: 2px;
+    }
+  }
+}
