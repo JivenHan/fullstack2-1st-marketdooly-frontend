@@ -75,7 +75,7 @@ export default class TopNav extends Component {
   render() {
     return (
       <div className='TopNav'>
-        {!this.state.isPopupClosed && (
+        {!this.state.isTopAdBannerClosed && (
           <div className='topAdBannerBg'>
             <div className='topAdBannerContent'>
               <p>
