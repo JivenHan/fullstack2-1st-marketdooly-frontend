@@ -1,0 +1,239 @@
+@import '../../styles/variables';
+
+.TopNav {
+  font-size: 16px;
+  .topAdBannerBg {
+    width: 100%;
+    height: 42px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: $themeColorPrimary;
+
+    .topAdBannerContent {
+      width: 100vw;
+      display: flex;
+      flex: none;
+      p {
+        margin: 0 auto;
+        color: white;
+        font-size: 0.7rem;
+        font-weight: normal;
+        letter-spacing: -0.03rem;
+        span {
+          font-weight: bolder;
+        }
+        .nextIcon {
+          margin-left: 0.7rem;
+          position: relative;
+          top: 0.1rem;
+          height: 0.7rem;
+        }
+      }
+      .closeIcon {
+        height: 1rem;
+        margin-left: 0;
+        margin-right: 5px;
+      }
+    }
+  }
+
+  .headerContainer {
+    width: 1050px;
+    display: flex;
+    margin: 0 auto;
+
+    .headerDeliveryWrapper {
+      margin-top: 0.5rem;
+      img {
+        height: 1.2rem;
+      }
+    }
+
+    .headerLogoWrapper {
+      display: block;
+      width: 8rem;
+      margin: 0 auto;
+
+      .headerLogo {
+        position: relative;
+        top: 10px;
+        margin: 0.5rem 2rem;
+        height: 4rem;
+      }
+
+      svg:hover {
+        fill: red;
+      }
+    }
+
+    .headerUserContainer {
+      display: flex;
+      flex-wrap: wrap;
+      height: 1rem;
+      li {
+        font-size: 0.6rem;
+        margin: 0.6rem 0.35rem;
+        padding-right: 0.7rem;
+        border-right: 1px solid #cccccc;
+        a {
+          text-decoration: none;
+          color: #333333;
+        }
+        .headerUserItem1 {
+          color: $themeColorPrimary;
+        }
+      }
+      li.headerUserItem3Wrapper {
+        border: 0;
+        cursor: pointer;
+
+        .toggleIcon {
+          position: relative;
+          left: 5px;
+          height: 0.4rem;
+        }
+      }
+    }
+  }
+  .lnbUserCsContainer {
+    margin: 0 auto;
+    height: 0px;
+    width: 1050px;
+
+    .hidden {
+      display: none;
+    }
+
+    .lnbUserCsWrapperHidden {
+      display: none;
+      background-color: blue;
+    }
+
+    .lnbUserCsWrapperVisible {
+      position: relative;
+      top: -3.5rem;
+      left: -0.8rem;
+      border: 1px solid #cccccc;
+      margin-left: auto;
+      padding-top: 0.1rem;
+      height: 8.8rem;
+      width: 5.6rem;
+      background-color: white;
+
+      .lnbUserCsItem {
+        margin: 0.5rem;
+        padding-left: 0.1rem;
+        font-size: 0.6rem;
+        color: #333333;
+      }
+    }
+  }
+
+  .cmgnbContainer {
+    margin: 0 auto;
+    width: 1050px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .categoriesMenuContainer {
+      display: flex;
+      position: relative;
+      align-items: center;
+
+      .menuHamburgerIcon {
+        height: 0.7rem;
+      }
+
+      p {
+        margin: 1rem;
+      }
+
+      .dropDownLNB {
+        display: block;
+        position: absolute;
+        top: 48px;
+        border: 1px solid #f7f7f7;
+        z-index: 400;
+        transition: all 0.3s;
+
+        &.hidden {
+          display: none;
+        }
+
+        .parentCategories {
+          li {
+            padding-left: 50px;
+            height: 39px;
+            width: 204px;
+            line-height: 39px;
+            background-color: #ffffff;
+            background-position: 14px 8px;
+            background-size: 24px 24px;
+            background-repeat: no-repeat;
+
+            &:hover {
+              background-color: #f7f7f7;
+            }
+
+            &:hover a {
+              color: #5f0080;
+            }
+
+            a {
+              color: #4c4c4c;
+              font-size: 14px;
+              text-decoration: none;
+            }
+          }
+        }
+      }
+    }
+
+    .listMenuContainer {
+      display: flex;
+
+      li {
+        margin: 1rem 1.5rem;
+      }
+    }
+
+    .otherMenuContainer {
+      display: flex;
+      align-items: center;
+
+      .gnbSearchInput {
+        padding: 0.8rem;
+        border: 0;
+        border-radius: 1rem;
+        padding-right: 5rem;
+        height: 2rem;
+
+        font-size: 0.6rem;
+        background-color: #f4f8f4;
+        background-image: url(searchIcon.jpeg);
+        background-size: 1.8rem;
+        background-repeat: no-repeat;
+        background-position: 12rem center;
+      }
+      .gnbSearchInput::placeholder {
+        color: #cbcbcb;
+      }
+
+      .gnbSetLocationButton {
+        border: 0;
+        margin-left: 0.6rem;
+        display: inline-block;
+        background-color: white;
+      }
+
+      .gnbGoToCart {
+        margin-left: 0.6rem;
+        img {
+          height: 1.35rem;
+        }
+      }
+    }
+  }
+}

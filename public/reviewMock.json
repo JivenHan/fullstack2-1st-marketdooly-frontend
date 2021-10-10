@@ -1,0 +1,148 @@
+{
+  "REVIEW_DATA": [
+    {
+      "id": 1,
+      "productCategory": "스낵",
+      "productName": "초코파이",
+      "reviewTitle": "에잇 이거 맛이 왜이래!",
+      "reviewText": "가나다라마바사",
+      "userGrade": "green",
+      "userName": "고길동",
+      "dateTime": "2021-09-28",
+      "likeCount": 15,
+      "viewCount": 99
+    },
+    {
+      "id": 2,
+      "productCategory": "스낵",
+      "productName": "초코파이",
+      "reviewTitle": "오 완전 맛있는데",
+      "reviewText": "가나다라마바사2",
+      "userGrade": "yellowGreen",
+      "userName": "둘리",
+      "dateTime": "2021-09-29",
+      "likeCount": 17,
+      "viewCount": 129
+    },
+    {
+      "id": 3,
+      "productCategory": "스낵",
+      "productName": "초코파이",
+      "reviewTitle": "좀 더 맛있는걸 내놔",
+      "reviewText": "가나다라마바사3",
+      "userGrade": "green",
+      "userName": "또치",
+      "dateTime": "2021-09-18",
+      "likeCount": 11,
+      "viewCount": 23
+    },
+    {
+      "id": 4,
+      "productCategory": "스낵",
+      "productName": "초코파이",
+      "reviewTitle": "깐따삐아!",
+      "reviewText": "가나다라마바사4",
+      "userGrade": "yellow",
+      "userName": "도우너",
+      "dateTime": "2021-09-30",
+      "likeCount": 151,
+      "viewCount": 915
+    },
+    {
+      "id": 5,
+      "productCategory": "스낵",
+      "productName": "초코파이",
+      "reviewTitle": "이거 탄 맛이 나는걸",
+      "reviewText": "가나다라마바사5",
+      "userGrade": "green",
+      "userName": "마이콜",
+      "dateTime": "2021-09-29",
+      "likeCount": 2,
+      "viewCount": 13
+    },
+    {
+      "id": 6,
+      "productCategory": "스낵",
+      "productName": "초코파이",
+      "reviewTitle": "이렇게 맛있는 음식이.....",
+      "reviewText": "가나다라마바사6",
+      "userGrade": "green",
+      "userName": "꼴뚜기왕자",
+      "dateTime": "2021-09-30",
+      "likeCount": 1,
+      "viewCount": 1
+    },
+    {
+      "id": 7,
+      "productCategory": "스낵",
+      "productName": "초코파이",
+      "reviewTitle": "어멋 이건 당장 사야해",
+      "reviewText": "가나다라마바사7",
+      "userGrade": "green",
+      "userName": "둘리엄마",
+      "dateTime": "2021-09-30",
+      "likeCount": 151,
+      "viewCount": 994
+    },
+    {
+      "id": 8,
+      "productCategory": "스낵",
+      "productName": "초코파이",
+      "reviewTitle": "옴뇸뇸 옴뇸뇸",
+      "reviewText": "가나다라마바사8",
+      "userGrade": "green",
+      "userName": "희동이",
+      "dateTime": "2021-09-14",
+      "likeCount": 151,
+      "viewCount": 92
+    },
+    {
+      "id": 9,
+      "productCategory": "스낵",
+      "productName": "초코파이",
+      "reviewTitle": "역시 믿고 주문",
+      "reviewText": "가나다라마바사9",
+      "userGrade": "yellowgreen",
+      "userName": "둘리",
+      "dateTime": "2021-09-28",
+      "likeCount": 15,
+      "viewCount": 99
+    },
+    {
+      "id": 10,
+      "productCategory": "스낵",
+      "productName": "초코파이",
+      "reviewTitle": "배가고프다..",
+      "reviewText": "가나다라마바사10",
+      "userGrade": "green",
+      "userName": "홍길동",
+      "dateTime": "2021-09-14",
+      "likeCount": 151,
+      "viewCount": 99
+    },
+    {
+      "id": 11,
+      "productCategory": "스낵",
+      "productName": "초코파이",
+      "reviewTitle": "오오! 이게 무슨 맛이람",
+      "reviewText": "가나다라마바사11",
+      "userGrade": "green",
+      "userName": "또치",
+      "dateTime": "2021-09-13",
+      "likeCount": 15,
+      "viewCount": 991
+    },
+    {
+      "id": 12,
+      "productCategory": "스낵",
+      "productName": "초코파이",
+      "reviewTitle": "맛남",
+      "reviewText": "가나다라마바사12",
+      "userGrade": "green",
+      "userName": "헤골",
+      "dateTime": "2021-09-27",
+      "likeCount": 15,
+      "viewCount": 1
+    }
+  ]
+}
