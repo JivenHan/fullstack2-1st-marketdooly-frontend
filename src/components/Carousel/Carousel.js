@@ -1,24 +1,39 @@
 import React, { Component } from 'react';
-import './Carousel.scss';
 import Slide from './Slide';
+import './Carousel.scss';
 
 export default class Carousel extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      productsData: props.productsData,
       currentPage: 1,
-      maxPage: Math.ceil(props.productsData.length / 4),
-      lastSlidingCorrection: (4 - (props.productsData.length % 4)) * 267,
-      totalSlide: props.productsData.length,
+      maxPage: 0,
+      lastSlidingCorrection: 0,
+      totalSlide: 0,
     };
   }
 
+  componentDidUpdate(prevProps) {
+    if (this.props.data !== prevProps.data) this.updateSlider();
+  }
+
+  updateSlider = () => {
+    const { data } = this.props;
+    this.setState({
+      currentPage: 1,
+      maxPage: Math.ceil(data.length / 4),
+      lastSlidingCorrection: (4 - (data.length % 4)) * 267,
+      totalSlide: data.length,
+    });
+  };
+
   calcSlidingRange = () => {
     const { currentPage, maxPage, lastSlidingCorrection } = this.state;
-    if (currentPage === maxPage)
+    if (currentPage === maxPage) {
       return 1068 * (currentPage - 1) - lastSlidingCorrection;
-    return 1068 * (currentPage - 1);
+    } else {
+      return 1068 * (currentPage - 1);
+    }
   };
 
   prevSlide = () => {
@@ -34,6 +49,7 @@ export default class Carousel extends Component {
   };
 
   render() {
+    const { currentPage, maxPage } = this.state;
     return (
       <article className='Carousel'>
         <div className='sliderWrap'>
@@ -42,37 +58,16 @@ export default class Carousel extends Component {
               transform: `translateX(-${this.calcSlidingRange()}px)`,
             }}
           >
-            {this.state.productsData.map(ele => {
-              const {
-                id,
-                linkTo,
-                imgUrl,
-                name,
-                price,
-                discount,
-                discountRate,
-                cost,
-              } = ele;
-              return (
-                <Slide
-                  key={id}
-                  imgUrl={imgUrl}
-                  linkTo={linkTo}
-                  name={name}
-                  price={price}
-                  discount={discount}
-                  discountRate={discountRate}
-                  cost={cost}
-                />
-              );
+            {this.props.data.map(ele => {
+              return <Slide key={ele.id} data={ele} />;
             })}
           </ul>
         </div>
         <div className='sliderCtrl'>
-          {this.state.currentPage !== 1 && (
+          {currentPage !== 1 && (
             <button className='prev' onClick={this.prevSlide}></button>
           )}
-          {this.state.currentPage < this.state.maxPage && (
+          {currentPage < maxPage && (
             <button className='next' onClick={this.nextSlide}></button>
           )}
         </div>

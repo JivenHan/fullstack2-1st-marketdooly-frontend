@@ -1,17 +1,15 @@
 import React, { Component } from 'react';
 import MainBanner from './components/MainBanner/MainBanner';
-import MainSection from './components/MainSection';
-import { categories } from './categoriyData';
-import { productsData } from '../../components/Carousel/carouselData';
-import { Link } from 'react-router-dom';
+import Section from './components/Section';
+import SpecialPrice from './components/SpecialPrice';
+import Banner from './Banner';
 import './Main.scss';
 
 export default class Main extends Component {
   constructor() {
     super();
     this.state = {
-      categories,
-      selectedCategory: 0,
+      data: null,
     };
   }
 
@@ -19,48 +17,62 @@ export default class Main extends Component {
     return (
       <main>
         <MainBanner />
-        <MainSection
-          productsData={productsData}
+        <Section
+          dataLink={'data/MDsPick/category1MDList.json'}
           title='이 상품 어때요?'
           sectionName='이 상품 어때요?'
         />
-        <MainSection
-          productsData={productsData}
+        <SpecialPrice
+          dataLink='data/specialPrice.json'
           title='특가/혜택 >'
-          sectionName='특가/혜택 >'
+          sectionName='specialOffer'
         />
-        <MainSection
-          productsData={productsData}
-          title='놓치면 후회할 가격 >'
-          sectionName='놓치면 후회할 가격 >'
+        <Section
+          dataLink={'data/MDsPick/category1MDList.json'}
+          title='이 상품 어때요?'
+          sectionName='이 상품 어때요?'
         />
-        <div className='barBanner'>
-          <Link to='/'>메인 배너 1</Link>
-        </div>
-        <MainSection
-          categories={this.state.categories}
-          productsData={productsData}
+        <Banner
+          url='/'
+          imgUrl='https://img-cf.kurly.com/shop/data/main/5/pc_img_1633488525.jpg'
+          bannerName='간편식 20% 할인'
+        />
+        <Section
+          categories={true}
+          dataLink={'data/MDsPick/category1MDList.json'}
           title='MD의 추천'
           sectionName='MD의 추천'
         />
-        <MainSection
-          productsData={productsData}
+        <Banner
+          url='/'
+          imgUrl='https://img-cf.kurly.com/shop/data/main/5/pc_img_1632901578.jpg'
+          bannerName='무제한 적립금 이벤트'
+        />
+        <Section
+          dataLink={'data/MDsPick/category1MDList.json'}
           title='지금 가장 핫한 상품 >'
           sectionName='지금 가장 핫한 상품 >'
         />
-        <MainSection
-          productsData={productsData}
+        <Section
+          dataLink={'data/MDsPick/category1MDList.json'}
           title='똑똑한 요리 비법, 주방가전 특가 >'
-          sectionName='똑똑한 요리 비법, 주방가전 특가 >'
+          sectionName='specialOffer'
         />
-        <MainSection
-          productsData={productsData}
+        <Section
+          dataLink={'data/MDsPick/category1MDList.json'}
           title='마감세일 >'
           sectionName='마감세일 >'
         />
-        <MainSection
-          productsData={productsData}
+        <Section
+          dataLink={'data/MDsPick/category1MDList.json'}
+          title='365일 최저가 도전 >'
+          titDesc='최저가 도전, 365일 언제나 알뜰하게'
+          sectionName='specialOffer'
+        />
+        <Section
+          dataLink={'data/MDsPick/category1MDList.json'}
           title='대용량 상품 >'
+          titDesc='팬트리 가득 든든하게, 부담 없는 대용량 묶음 상품'
           sectionName='대용량 상품 >'
         />
       </main>

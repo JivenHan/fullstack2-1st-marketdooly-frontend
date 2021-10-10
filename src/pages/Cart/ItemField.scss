@@ -1,0 +1,44 @@
+@mixin initBtn {
+  display: block;
+  margin: 0;
+  padding: 0;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.ItemField {
+  .storeType {
+    .listHeader {
+      display: flex;
+      justify-content: space-between;
+      padding: 20px 0 20px 40px;
+      border-top: 1px solid #333;
+
+      h3 {
+        position: relative;
+        font-size: 18px;
+
+        .fieldIcon {
+          position: absolute;
+          top: -5px;
+          left: -40px;
+          width: 30px;
+          height: 30px;
+          background-repeat: no-repeat;
+          content: '';
+        }
+      }
+
+      .toggleListSpread {
+        height: 24px;
+        width: 24px;
+        border: none;
+        background: none;
+        background-image: url('https://res.kurly.com/pc/service/cart/2007/ico_dropup.svg');
+        transform: rotate(180deg);
+        cursor: pointer;
+      }
+    }
+  }
+}
