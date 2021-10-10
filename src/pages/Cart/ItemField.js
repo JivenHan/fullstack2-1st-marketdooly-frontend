@@ -57,6 +57,7 @@ export default class ItemField extends Component {
                 thumbUrl={thumbUrl}
                 checkingItems={this.props.checkingItems}
                 checkedItems={boolean}
+                deleteOneItem={this.props.deleteOneItem}
               />
             );
           })}

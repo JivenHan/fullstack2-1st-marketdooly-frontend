@@ -31,7 +31,12 @@ export default class Item extends Component {
           }).format(price * quantity)}
           원
         </div>
-        <button className='deleteItem'>X</button>
+        <div
+          className='deleteItem'
+          onClick={this.props.deleteOneItem.bind(this, productId)}
+        >
+          X
+        </div>
       </li>
     );
   }

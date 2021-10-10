@@ -8,11 +8,8 @@ export default class Cart extends Component {
     super();
     this.state = {
       cartData: [],
-      refreg: [],
-      frozen: [],
-      roomTemp: [],
-      subTotal: 0,
       checkedItems: [],
+      subTotal: 0,
       selectAll: true,
     };
   }
@@ -24,10 +21,10 @@ export default class Cart extends Component {
         .then(cartData =>
           this.setState({
             cartData,
-            refreg: cartData.filter(item => item.storageTemp === 1),
-            frozen: cartData.filter(item => item.storageTemp === 2),
-            roomTemp: cartData.filter(item => item.storageTemp === 3),
-            subTotal: cartData.reduce((acc, cur) => acc + cur.price, 0),
+            subTotal: cartData.reduce(
+              (acc, cur) => acc + cur.price * cur.quantity,
+              0
+            ),
             checkedItems: cartData,
           })
         );
@@ -35,6 +32,18 @@ export default class Cart extends Component {
       throw err;
     }
   }
+
+  checkSelectedItems = () => {
+    if (this.state.cartData.length === this.state.checkedItems.length) {
+      this.setState({
+        selectAll: true,
+      });
+    } else {
+      this.setState({
+        selectAll: false,
+      });
+    }
+  };
 
   checkingAllItems = () => {
     if (this.state.selectAll) {
@@ -64,7 +73,10 @@ export default class Cart extends Component {
             ele => ele.id !== id
           ),
         },
-        this.recalculateSubTotal
+        () => {
+          this.recalculateSubTotal();
+          this.checkSelectedItems();
+        }
       );
     } else {
       this.setState(
@@ -74,7 +86,10 @@ export default class Cart extends Component {
             ...this.state.cartData.filter(ele => ele.id === id),
           ],
         },
-        this.recalculateSubTotal
+        () => {
+          this.recalculateSubTotal();
+          this.checkSelectedItems();
+        }
       );
     }
   };
@@ -85,10 +100,41 @@ export default class Cart extends Component {
     }
     this.setState({
       subTotal: [...this.state.checkedItems].reduce(
-        (acc, cur) => acc + cur.price,
+        (acc, cur) => acc + cur.price * cur.quantity,
         0
       ),
     });
+  };
+
+  deleteSelectedItems = () => {
+    const deleteConsent = window.confirm('삭제하시겠습니까?');
+    if (!deleteConsent) return;
+    const selected = [...this.state.checkedItems].map(ele => ele.id);
+    const origin = [...this.state.cartData];
+    this.setState(
+      {
+        cartData: origin.filter(ele => !selected.includes(ele.id)),
+        checkedItems: [],
+      },
+      this.recalculateSubTotal
+    );
+  };
+
+  deleteOneItem = itemId => {
+    const deleteConsent = window.confirm('삭제하시겠습니까?');
+    if (!deleteConsent) return;
+    const [item] = [...this.state.checkedItems].filter(
+      ele => ele.id === itemId
+    );
+    this.setState(
+      {
+        checkedItems: [...this.state.checkedItems].filter(
+          ele => ele.id !== item.id
+        ),
+        cartData: [...this.state.cartData].filter(ele => ele.id !== item.id),
+      },
+      this.recalculateSubTotal
+    );
   };
 
   render() {
@@ -116,34 +162,54 @@ export default class Cart extends Component {
                       전체선택 ({this.state.checkedItems.length}/
                       {this.state.cartData.length})
                     </span>
-                    <button className='checkControl deleteChecked'>
+                    <div
+                      className='checkControl deleteChecked'
+                      onClick={this.deleteSelectedItems}
+                    >
                       선택삭제
-                    </button>
+                    </div>
                   </div>
                 </div>
-                {this.state.refreg.length ? (
+                {this.state.cartData.filter(item => item.storageTemp === 1)
+                  .length ? (
                   <ItemField
                     type={0}
-                    data={this.state.refreg}
+                    data={this.state.cartData.filter(
+                      item => item.storageTemp === 1
+                    )}
                     checkingItems={this.checkingItems}
                     checkedItems={this.state.checkedItems}
+                    deleteOneItem={this.deleteOneItem}
                   />
                 ) : null}
-                {this.state.frozen.length ? (
+                {this.state.cartData.filter(item => item.storageTemp === 2)
+                  .length ? (
                   <ItemField
                     type={1}
-                    data={this.state.frozen}
+                    data={this.state.cartData.filter(
+                      item => item.storageTemp === 2
+                    )}
                     checkingItems={this.checkingItems}
                     checkedItems={this.state.checkedItems}
+                    deleteOneItem={this.deleteOneItem}
                   />
                 ) : null}
-                {this.state.roomTemp.length ? (
+                {this.state.cartData.filter(item => item.storageTemp === 3)
+                  .length ? (
                   <ItemField
                     type={2}
-                    data={this.state.roomTemp}
+                    data={this.state.cartData.filter(
+                      item => item.storageTemp === 3
+                    )}
                     checkingItems={this.checkingItems}
                     checkedItems={this.state.checkedItems}
+                    deleteOneItem={this.deleteOneItem}
                   />
+                ) : null}
+                {!this.state.cartData.length ? (
+                  <div className='emptyField'>
+                    <p>장바구니에 담긴 상품이 없습니다</p>
+                  </div>
                 ) : null}
                 <div className='innerSelect'>
                   <div className='check'>
@@ -158,9 +224,12 @@ export default class Cart extends Component {
                       전체선택 ({this.state.checkedItems.length}/
                       {this.state.cartData.length})
                     </span>
-                    <button className='checkControl deleteChecked'>
+                    <div
+                      className='checkControl deleteChecked'
+                      onClick={this.deleteSelectedItems}
+                    >
                       선택삭제
-                    </button>
+                    </div>
                   </div>
                 </div>
               </div>

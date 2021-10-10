@@ -32,6 +32,7 @@
 
     .cartWrapper {
       margin: 0 auto;
+      min-height: 603px;
       width: 1050px;
 
       form {
@@ -64,6 +65,7 @@
                 padding: 0 0 0 20px;
                 position: relative;
                 height: 60px;
+                line-height: 60px;
                 border: none;
                 color: #4c4c4c;
                 background: none;
@@ -80,6 +82,18 @@
                   background-color: #dddddd;
                 }
               }
+            }
+          }
+
+          .emptyField {
+            padding: 115px 0 116px 0;
+            border-top: 1px solid #333;
+            text-align: center;
+
+            p {
+              color: #333333;
+              font-size: 16px;
+              font-weight: 500;
             }
           }
         }
