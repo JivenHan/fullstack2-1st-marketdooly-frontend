@@ -39,9 +39,12 @@ export default class TopNav extends Component {
         }`}
       >
         <ul className='parentCategories'>
-          {this.state.categoryData.map(category => {
+          {this.state.categoryData.map((category, i) => {
             return (
-              <li style={{ backgroundImage: `url(${category.iconUrl})` }}>
+              <li
+                key={i}
+                style={{ backgroundImage: `url(${category.iconUrl})` }}
+              >
                 <Link to='/'>
                   <h3 className='categoryName'>{category.parentCategories}</h3>
                 </Link>

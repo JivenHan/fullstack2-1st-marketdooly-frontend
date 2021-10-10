@@ -79,22 +79,22 @@ export default class Footer extends Component {
             <div className='companyInfo'>
               <ul className='companyLinks'>
                 <li>
-                  <Link>컬리소개</Link>
+                  <Link to='/'>컬리소개</Link>
                 </li>
                 <li>
-                  <Link>컬리소개영상</Link>
+                  <Link to='/'>컬리소개영상</Link>
                 </li>
                 <li>
-                  <Link>인재채용</Link>
+                  <Link to='/'>인재채용</Link>
                 </li>
                 <li>
-                  <Link>이용약관</Link>
+                  <Link to='/'>이용약관</Link>
                 </li>
                 <li>
-                  <Link>개인정보처리방침</Link>
+                  <Link to='/'>개인정보처리방침</Link>
                 </li>
                 <li>
-                  <Link>이용안내</Link>
+                  <Link to='/'>이용안내</Link>
                 </li>
               </ul>
               <div className='companyCredits'>
