@@ -5,10 +5,10 @@
   "nameEng": "eco friendly carrot",
   "shortDesc": "껍질째 먹을 수 있는 친환경 흙당근 (500g 내외)",
   "thumbImgUrl": "https://img-cf.kurly.com/shop/data/goods/1609141186826l0.jpg",
-  "originalPrice": "2690",
-  "discountRate": "8",
-  "salesPrice": "2474",
-  "earnPoint": "124",
+  "originalPrice": 2690,
+  "discountRate": 8,
+  "salesPrice": 2474,
+  "earnPoint": 124,
   "saleUnit": "1봉지",
   "weightOrCapacity": "500g(2~4개입)",
   "deliveryCategory": "샛별배송/택배배송",
@@ -22,22 +22,9 @@
     "detailDescName": "친환경 당근",
     "detailDescArticle": "선명한 색감으로 식탁에 산뜻한 분위기를 더해주는 채소, 아름다운 빛깔뿐만 아니라 풍부한 영양소까지 자랑하는 '당근'입니다. 비타민 A전구체인 베타카로틴을 다량 함유하고 있어 예로부터 웰빙 식재료로 사랑받고 있지요. 컬리는 이 좋은 당근을 깐깐하게 엄선했답니다. 농약없이 건강하게 재배한 친환경 당근이지요. 별도의 세척 및 손질 과정 없이 수확한 상태 그대로 신선하게 전해드릴게요. 곱게 갈아서 영양 주스로, 장에 찍어 먹는 아삭아삭한 반찬으로 다양하게 활용해 보세요."
   },
-  "doolysTip": {
-    "tipOneTitle": "개수와 중량을 확인하세요",
-    "tipOneDesc": "· 별도로 세척 및 손질하지 않은 당근 2~4개를 담아 보내드려요. 신선식품 특성상 제품마다 원물 개수가 조금씩 다를 수 있으나 전체 중량은 500g 내외로 동일합니다.",
-    "tipOneImg": "https://img-cf.kurly.com/shop/data/goodsview/20201228/gv20000147000_1.jpg",
-    "tipTwoTitle": "모양과 크기가 일정하지 않아요",
-    "tipTwoDesc": "· 당근 원물 특성상 형태 및 길이, 두께가 고르지 않을 수 있어요. 제품 신선도와 품질에는 이상이 없다는 점 알려드립니다.",
-    "tipTwoImg": "https://img-cf.kurly.com/shop/data/goodsview/20201228/gv40000147002_1.jpg",
-    "tipThreeTitle": "안심하고 섭취하세요",
-    "tipThreeDesc": "· 별도의 세척 및 손질 과정을 거치지 않으므로, 원물 표면에 흙이나 이물질이 많이 묻어있을 수 있어요. 수령 후에는 깨끗이 세척하여 사용하세요. \n· 원물 표면이 반질반질하지 않고, 음푹 파여있거나 상처가 있을 수 있어요. 재배 과정에서 생기는 자연스러운 현상이며, 제품의 맛과 품질에는 이상이 없으니 참고하세요.",
-    "tipFourTitle": "이렇게 손질하세요",
-    "tipFourDesc": "1. 당근 표면에 묻어있는 흙이나 이물질을 물로 깨끗이 세척하세요. \n2. 당근 껍질 부분을 칼이나 필러로 제거하세요. \n3. 껍질을 벗긴 당근을 용도에 맞게 채 썰거나 깍둑썰기 하세요. \nTip. 컬리의 친환경 당근은 무농약으로 키워져, 껌질째 드셔도 안전하고 맛있어요.",
-    "tipFiveTitle": "이렇게 보관하세요",
-    "tipFiveDesc": "· 세척하지 않은 당근은 신문지로 감싸 서늘한 실내나 베란다에 보관하세요. \n· 이미 세척한 당근은 소분한 뒤, 비닐팩에 담아 냉장 보관하세요."
-  },
-  "productDetailInfo": {
-    "productDetailInfoImg": "https://img-cf.kurly.com/shop/data/goodsview/20201228/gv10000146998_1.jpg",
+  "additionalInfo": "/image/carrotAddInfo.png",
+  "detailInfo": {
+    "detailInfoImg": "https://img-cf.kurly.com/shop/data/goodsview/20201228/gv10000146998_1.jpg",
     "productName": "친환경 당근",
     "certification": "무농약 인증",
     "packagingUnit": "500g (2~4개입)",
@@ -47,5 +34,6 @@
     "originCountry": "국내산",
     "serviceCall": "마켓컬리 고객행복센터 (1644-1107)",
     "produceDate": "농산물이므로 별도의 유통기한은 없으나 가급적 빨리 드시길 바랍니다."
-  }
+  },
+  "customerCenter": "/image.customerCenter.png"
 }

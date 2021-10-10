@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
-import DetailCartAdd from './components/DetailCartAdd';
-import DetailScrollBtn from './components/DetailScrollBtn';
-import DetailDesc from './components/DetailDesc';
-import DetailInfo from './components/DetailInfo';
-import DetailBottomLayer from './components/DetailBottomLayer';
+import CartAdd from './components/CartAdd';
+import ScrollBtn from './components/ScrollBtn';
+import Desc from './components/Desc';
+import AdditionalInfo from './components/AdditionalInfo';
+import DetaiInfo from './components/DetaiInfo';
+import CustomerCenter from './components/CustomerCenter';
+import BottomLayer from './components/BottomLayer';
 import './Detail.scss';
 
 export default class Detail extends Component {
@@ -17,7 +19,7 @@ export default class Detail extends Component {
     this.state = {
       productDetail: {},
       detailDesc: {},
-      doolysTip: {},
+      checkPoint: {},
       detailInfo: {},
       layerClass: 'layerHide',
       totalPrice: '',
@@ -61,27 +63,39 @@ export default class Detail extends Component {
     scrollBtns.forEach(el => {
       if (el.isClicked === true) {
         if (el.btnId === 1) {
-          window.scrollTo(0, this.descRef.current.offsetTop);
+          window.scrollTo({
+            top: this.descRef.current.offsetTop,
+            behavior: 'smooth',
+          });
         } else if (el.btnId === 2) {
-          window.scrollTo(0, this.infoRef.current.offsetTop);
+          window.scrollTo({
+            top: this.infoRef.current.offsetTop,
+            behavior: 'smooth',
+          });
         } else if (el.btnId === 3) {
-          window.scrollTo(0, this.reviewRef.current.offsetTop);
+          window.scrollTo({
+            top: this.reviewRef.current.offsetTop,
+            behavior: 'smooth',
+          });
         } else {
-          window.scrollTo(0, this.inquiryRef.current.offsetTop);
+          window.scrollTo({
+            top: this.inquiryRef.current.offsetTop,
+            behavior: 'smooth',
+          });
         }
       }
     });
   };
 
   componentDidMount() {
-    fetch('/data/detail/vegetable/ecoFriendly/carrot.json')
+    fetch('/data/detail/vegetable/ecoFriendly/springonion.json')
       .then(res => res.json())
       .then(data => {
         this.setState({
           productDetail: data,
           detailDesc: data.detailDesc,
-          doolysTip: data.doolysTip,
-          detailInfo: data.productDetailInfo,
+          checkPoint: data.checkPoint,
+          detailInfo: data.detailInfo,
         });
       });
 
@@ -99,7 +113,6 @@ export default class Detail extends Component {
     const {
       productDetail,
       detailDesc,
-      doolysTip,
       detailInfo,
       quantity,
       isBottomLayerUp,
@@ -109,7 +122,7 @@ export default class Detail extends Component {
     const totalEarnPoint = quantity * productDetail.earnPoint;
 
     const scrollBtnsList = scrollBtns.map(ele => (
-      <DetailScrollBtn
+      <ScrollBtn
         btnId={ele.btnId}
         btnName={ele.btnName}
         isClicked={ele.isClicked}
@@ -125,7 +138,7 @@ export default class Detail extends Component {
             alt='productThumbImg'
             src={productDetail.thumbImgUrl}
           />
-          <DetailCartAdd
+          <CartAdd
             observerRef={this.observerRef}
             {...productDetail}
             dcInfoLayerClass={this.state.layerClass}
@@ -136,23 +149,27 @@ export default class Detail extends Component {
             totalEarnPoint={totalEarnPoint}
           />
           <div className='scrollBtns'>{scrollBtnsList}</div>
-          <DetailDesc descRef={this.descRef} {...detailDesc} {...doolysTip} />
-          <DetailInfo infoRef={this.infoRef} {...detailInfo} />
+          <Desc descRef={this.descRef} {...productDetail} {...detailDesc} />
+          <AdditionalInfo additionalInfo={productDetail.additionalInfo} />
+          <DetaiInfo infoRef={this.infoRef} {...detailInfo} />
+          <CustomerCenter />
+
           <div className='reviewLocation' ref={this.reviewRef}>
-            <span>리뷰 들어갈 자리</span>
+            <span>후기 들어갈 자리</span>
           </div>
           <div className='inquiryLocation' ref={this.inquiryRef}>
             <span>문의 들어갈 자리</span>
           </div>
         </div>
         {isBottomLayerUp && (
-          <DetailBottomLayer
+          <BottomLayer
             {...productDetail}
             isBottomLayerUp={isBottomLayerUp}
             qauntityMinus={this.qauntityMinus}
             quantity={quantity}
             qauntityPlus={this.qauntityPlus}
             totalPrice={totalPrice}
+            totalEarnPoint={totalEarnPoint}
           />
         )}
       </article>
