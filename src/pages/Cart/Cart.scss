@@ -101,6 +101,7 @@
           background-image: url('https://res.kurly.com/mobile/service/common/2006/ico_checkbox.svg');
           background-size: cover;
           background-position: center;
+          cursor: pointer;
 
           &.checked {
             background-image: url('https://res.kurly.com/mobile/service/common/2006/ico_checkbox_checked.svg');

@@ -59,7 +59,9 @@ export default class CartResult extends Component {
           </div>
         </div>
         <div className='submitContainer'>
-          <button className='submit'>배송지를 입력해주세요</button>
+          <button className='submit active' disabled={true}>
+            배송지를 입력해주세요
+          </button>
         </div>
         <ul className='paymentNotice'>
           <li>

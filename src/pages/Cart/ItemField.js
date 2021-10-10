@@ -44,13 +44,19 @@ export default class ItemField extends Component {
           </li>
           {this.props.data.map(data => {
             const { id, name, price, quantity, thumbUrl } = data;
+            const [boolean] = [...this.props.checkedItems].filter(
+              ele => ele.id === id
+            );
             return (
               <Item
                 key={id}
+                productId={id}
                 name={name}
                 price={price}
                 quantity={quantity}
                 thumbUrl={thumbUrl}
+                checkingItems={this.props.checkingItems}
+                checkedItems={boolean}
               />
             );
           })}

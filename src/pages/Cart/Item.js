@@ -4,11 +4,14 @@ import './Item.scss';
 
 export default class Item extends Component {
   render() {
-    const { name, price, quantity, thumbUrl } = this.props;
+    const { productId, name, price, quantity, thumbUrl } = this.props;
     return (
       <li className='Item'>
         <input className='checkControl' type='checkbox' />
-        <span className='checkSign checked'></span>
+        <span
+          className={`checkSign ${this.props.checkedItems ? 'checked' : ''}`}
+          onClick={this.props.checkingItems.bind(this, productId)}
+        ></span>
         <picture className='itemThumb'>
           <Link to='/'>
             <img src={thumbUrl} alt={name} />
