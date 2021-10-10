@@ -1,0 +1,124 @@
+.detailDescContainer {
+  margin: 50px auto 0;
+  width: 1050px;
+
+  .detailDescImg {
+    width: 1050px;
+  }
+
+  .detailDescMain {
+    display: block;
+    margin-top: 60px;
+
+    .detailDescTitle {
+      display: block;
+      margin-bottom: 15px;
+      text-align: center;
+      color: #666666;
+      font-size: 32px;
+    }
+
+    .detailDescName {
+      display: block;
+      padding-bottom: 30px;
+      border-bottom: 1px solid #666666;
+      text-align: center;
+      color: #666666;
+      font-size: 50px;
+    }
+
+    .detailDescArticle {
+      display: block;
+      margin-bottom: 100px;
+      padding-top: 30px;
+      color: #666666;
+      line-height: 40px;
+      font-size: 26px;
+      font-weight: 300;
+    }
+  }
+
+  .doolysCheckPoint {
+    .checkPointTitle {
+      display: block;
+      margin-bottom: 50px;
+      color: #666666;
+      text-align: center;
+      font-size: 70px;
+      font-weight: 700;
+    }
+
+    .checkPointTitle::before {
+      display: inline-block;
+      margin: 0 20px 25px 0;
+      width: 190px;
+      height: 1px;
+      background: #666666;
+      content: '';
+    }
+
+    .checkPointTitle::after {
+      display: inline-block;
+      margin: 0 0 25px 20px;
+      width: 190px;
+      height: 1px;
+      background: #666666;
+      content: '';
+    }
+
+    .checkPointImg {
+      padding-bottom: 100px;
+    }
+  }
+
+  .chechCertification {
+    padding-bottom: 200px;
+    text-align: center;
+
+    .certificationImg {
+      width: 950px;
+    }
+  }
+
+  .doolysTip {
+    position: relative;
+    padding: 80px 80px 30px 80px;
+    border: 1px solid #999999;
+    width: 1050px;
+
+    .doolysTipTitle {
+      display: block;
+      position: absolute;
+      top: -25px;
+      left: 30;
+      padding: 0 10px;
+      z-index: 1;
+      width: 270px;
+      background-color: #fff;
+      color: #666666;
+      font-size: 50px;
+      font-weight: 900;
+    }
+
+    .tipTitle {
+      display: block;
+      margin-bottom: 20px;
+      line-height: 50px;
+      font-size: 35px;
+    }
+
+    .tipDesc {
+      display: block;
+      margin-bottom: 50px;
+      white-space: pre-wrap;
+      line-height: 35px;
+      font-size: 20px;
+      font-weight: 300;
+    }
+
+    .tipImg {
+      margin-bottom: 100px;
+      width: 880px;
+    }
+  }
+}

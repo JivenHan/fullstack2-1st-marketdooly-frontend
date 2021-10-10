@@ -3,6 +3,8 @@
     height: 506px;
 
     dl {
+      position: relative;
+
       dt.productThumb {
         height: 320px;
         width: 249px;
@@ -15,6 +17,19 @@
 
         &.bounce img {
           transform: scale(1.03);
+        }
+
+        .specialFeatureTag {
+          display: block;
+          position: absolute;
+          height: 32px;
+          width: 79px;
+          line-height: 32px;
+          color: #ffffff;
+          background-color: #c080fc;
+          font-size: 14px;
+          text-align: center;
+          z-index: 100;
         }
       }
 
