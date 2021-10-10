@@ -27,7 +27,7 @@ export default class ItemField extends Component {
   render() {
     return (
       <div className='ItemField'>
-        <ul className='storeType refrigerateds'>
+        <ul className='storeType'>
           <li className='listHeader'>
             <h3 className='storeTypeTitle'>
               <span
@@ -42,12 +42,19 @@ export default class ItemField extends Component {
             </h3>
             <button className='toggleListSpread' />
           </li>
-          <Item />
-          <Item />
-          <Item />
+          {this.props.data.map(data => {
+            const { id, name, price, quantity, thumbUrl } = data;
+            return (
+              <Item
+                key={id}
+                name={name}
+                price={price}
+                quantity={quantity}
+                thumbUrl={thumbUrl}
+              />
+            );
+          })}
         </ul>
-        <ul className='storeType frozens'></ul>
-        <ul className='storeType roomtemps'></ul>
       </div>
     );
   }

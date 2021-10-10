@@ -4,6 +4,40 @@ import CartResult from './CartResult';
 import './Cart.scss';
 
 export default class Cart extends Component {
+  constructor() {
+    super();
+    this.state = {
+      cartData: [],
+      refreg: [],
+      frozen: [],
+      roomTemp: [],
+      subTotal: 0,
+    };
+  }
+
+  componentDidMount() {
+    try {
+      fetch('/data/cart.json')
+        .then(res => res.json())
+        .then(cartData =>
+          this.setState(
+            {
+              cartData,
+              refreg: cartData.filter(item => item.storageTemp === 1),
+              frozen: cartData.filter(item => item.storageTemp === 2),
+              roomTemp: cartData.filter(item => item.storageTemp === 3),
+              subTotal: cartData.reduce((acc, cur) => acc + cur.price, 0),
+            },
+            () => {
+              console.log(this.state);
+            }
+          )
+        );
+    } catch (err) {
+      console.error(err);
+    }
+  }
+
   render() {
     return (
       <section className='Cart'>
@@ -12,7 +46,7 @@ export default class Cart extends Component {
             <h2 className='title'>장바구니</h2>
           </div>
         </div>
-        <div className='cartContainer'>
+        <div className='cartContainer' ref={ref => (this.cartResult = ref)}>
           <div className='cartWrapper'>
             <form>
               <div className='cartList'>
@@ -21,22 +55,28 @@ export default class Cart extends Component {
                     <input className='checkControl' type='checkbox' />
                     <span className='checkSign checked'></span>
                     <span className='checkControl checkAll'>
-                      전체선택 (0/0)
+                      전체선택 (0/{this.state.cartData.length})
                     </span>
                     <button className='checkControl deleteChecked'>
                       선택삭제
                     </button>
                   </div>
                 </div>
-                <ItemField type={0} />
-                <ItemField type={1} />
-                <ItemField type={2} />
+                {this.state.refreg.length && (
+                  <ItemField type={0} data={this.state.refreg} />
+                )}
+                {this.state.frozen.length && (
+                  <ItemField type={1} data={this.state.frozen} />
+                )}
+                {this.state.roomTemp.length && (
+                  <ItemField type={2} data={this.state.roomTemp} />
+                )}
                 <div className='innerSelect'>
                   <label className='check'>
                     <input className='checkControl' type='checkbox' />
                     <span className='checkSign checked'></span>
                     <span className='checkControl checkAll'>
-                      전체선택 (0/0)
+                      전체선택 (0/{this.state.cartData.length})
                     </span>
                     <button className='checkControl deleteChecked'>
                       선택삭제
@@ -44,7 +84,7 @@ export default class Cart extends Component {
                   </label>
                 </div>
               </div>
-              <CartResult />
+              <CartResult subTotal={this.state.subTotal} />
             </form>
           </div>
         </div>

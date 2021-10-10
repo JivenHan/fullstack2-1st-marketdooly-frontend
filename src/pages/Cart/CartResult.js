@@ -22,7 +22,12 @@ export default class CartResult extends Component {
           <dl className='priceAmount'>
             <dt>상품금액</dt>
             <dd>
-              <span className='priceInt'>120,440</span>원
+              <span className='priceInt'>
+                {new Intl.NumberFormat('en-IN', {
+                  maximumSignificantDigits: 3,
+                }).format(this.props.subTotal)}
+              </span>
+              원
             </dd>
           </dl>
           <dl className='discountAmount'>
@@ -40,7 +45,12 @@ export default class CartResult extends Component {
           <dl className='finalAmount'>
             <dt>결제예정금액</dt>
             <dd>
-              <span className='priceInt'>120,440</span>원
+              <span className='priceInt'>
+                {new Intl.NumberFormat('en-IN', {
+                  maximumSignificantDigits: 3,
+                }).format(this.props.subTotal)}
+              </span>
+              원
             </dd>
           </dl>
           <div className='rewardNotice'>
