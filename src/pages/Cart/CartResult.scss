@@ -30,7 +30,8 @@
         font-weight: 500;
       }
     }
-    .noAddress {
+
+    .address {
       padding-top: 12px;
 
       p {
@@ -42,6 +43,13 @@
         i {
           color: #5f0080;
         }
+      }
+
+      .deliveryType {
+        display: block;
+        padding-top: 10px;
+        color: #666666;
+        font-size: 14px;
       }
 
       .searchAddress {
@@ -114,6 +122,11 @@
       color: #ffffff;
       background-color: #dddddd;
       font-size: 16px;
+
+      &.active {
+        color: #ffffff;
+        background-color: #5f0080;
+      }
     }
   }
 

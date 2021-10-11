@@ -21,15 +21,24 @@ export default class Item extends Component {
           <h3 className='cartItemName'>{name}</h3>
         </div>
         <div className='quantityStepper'>
-          <button className='decrease limit'>-</button>
+          <button
+            className='decrease'
+            data-id={productId}
+            onClick={this.props.decreaseQuantity}
+          >
+            -
+          </button>
           <strong className='quantity'>{quantity}</strong>
-          <button className='increase'>+</button>
+          <button
+            className='increase'
+            data-id={productId}
+            onClick={this.props.increaseQuantity}
+          >
+            +
+          </button>
         </div>
         <div className='itemPrice'>
-          {new Intl.NumberFormat('en-IN', {
-            maximumSignificantDigits: 3,
-          }).format(price * quantity)}
-          원
+          {new Intl.NumberFormat('ko-KR').format(price * quantity)}원
         </div>
         <div
           className='deleteItem'

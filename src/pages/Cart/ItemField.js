@@ -21,27 +21,38 @@ export default class ItemField extends Component {
             'https://res.kurly.com/pc/service/cart/2009/ico_room_v2.svg?v=1',
         },
       ],
+      isFieldOpened: true,
     };
   }
+
+  toggleListVisibility = event => {
+    event.preventDefault();
+    this.setState({
+      isFieldOpened: !this.state.isFieldOpened,
+    });
+  };
 
   render() {
     return (
       <div className='ItemField'>
-        <ul className='storeType'>
-          <li className='listHeader'>
-            <h3 className='storeTypeTitle'>
-              <span
-                className='fieldIcon'
-                style={{
-                  backgroundImage: `url(${
-                    this.state.fieldType[this.props.type].iconUrl
-                  })`,
-                }}
-              ></span>
-              {this.state.fieldType[this.props.type].name}
-            </h3>
-            <button className='toggleListSpread' />
-          </li>
+        <div className='listHeader'>
+          <h3 className='storeTypeTitle'>
+            <span
+              className='fieldIcon'
+              style={{
+                backgroundImage: `url(${
+                  this.state.fieldType[this.props.type].iconUrl
+                })`,
+              }}
+            ></span>
+            {this.state.fieldType[this.props.type].name}
+          </h3>
+          <button
+            className='toggleListSpread'
+            onClick={this.toggleListVisibility}
+          />
+        </div>
+        <ul className={`storeType ${this.state.isFieldOpened ? '' : 'hidden'}`}>
           {this.props.data.map(data => {
             const { id, name, price, quantity, thumbUrl } = data;
             const [boolean] = [...this.props.checkedItems].filter(
@@ -58,6 +69,8 @@ export default class ItemField extends Component {
                 checkingItems={this.props.checkingItems}
                 checkedItems={boolean}
                 deleteOneItem={this.props.deleteOneItem}
+                decreaseQuantity={this.props.decreaseQuantity}
+                increaseQuantity={this.props.increaseQuantity}
               />
             );
           })}

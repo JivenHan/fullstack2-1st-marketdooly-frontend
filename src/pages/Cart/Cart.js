@@ -33,6 +33,15 @@ export default class Cart extends Component {
     }
   }
 
+  requestOrderItems = event => {
+    event.preventDefault();
+    fetch('http://localhost:8000/cart', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(this.state.checkedItems),
+    });
+  };
+
   checkSelectedItems = () => {
     if (this.state.cartData.length === this.state.checkedItems.length) {
       this.setState({
@@ -107,7 +116,7 @@ export default class Cart extends Component {
   };
 
   deleteSelectedItems = () => {
-    const deleteConsent = window.confirm('삭제하시겠습니까?');
+    const deleteConsent = window.confirm('선택한 상품을 삭제하시겠습니까?');
     if (!deleteConsent) return;
     const selected = [...this.state.checkedItems].map(ele => ele.id);
     const origin = [...this.state.cartData];
@@ -123,18 +132,56 @@ export default class Cart extends Component {
   deleteOneItem = itemId => {
     const deleteConsent = window.confirm('삭제하시겠습니까?');
     if (!deleteConsent) return;
-    const [item] = [...this.state.checkedItems].filter(
-      ele => ele.id === itemId
-    );
+    if ([...this.state.checkedItems].find(ele => ele.id === itemId)) {
+      this.setState(
+        {
+          checkedItems: [...this.state.checkedItems].filter(
+            ele => ele.id !== itemId
+          ),
+          cartData: [...this.state.cartData].filter(ele => ele.id !== itemId),
+        },
+        this.recalculateSubTotal
+      );
+    } else {
+      this.setState(
+        {
+          cartData: [...this.state.cartData].filter(ele => ele.id !== itemId),
+        },
+        this.recalculateSubTotal
+      );
+    }
+  };
+
+  manipulateQuantities = (currentTarget, factor) => {
     this.setState(
-      {
-        checkedItems: [...this.state.checkedItems].filter(
-          ele => ele.id !== item.id
+      prevState => ({
+        cartData: prevState.cartData.map(el =>
+          el.id === currentTarget
+            ? { ...el, quantity: el.quantity + factor }
+            : el
         ),
-        cartData: [...this.state.cartData].filter(ele => ele.id !== item.id),
-      },
+        checkedItems: prevState.checkedItems.map(el =>
+          el.id === currentTarget
+            ? { ...el, quantity: el.quantity + factor }
+            : el
+        ),
+      }),
       this.recalculateSubTotal
     );
+  };
+
+  increaseQuantity = event => {
+    event.preventDefault();
+    const currentTarget = event.target.dataset.id * 1;
+    this.manipulateQuantities(currentTarget, 1);
+  };
+
+  decreaseQuantity = event => {
+    event.preventDefault();
+    const currentTarget = event.target.dataset.id * 1;
+    const currentQuantity = event.target.parentNode.children[1].textContent * 1;
+    if (currentQuantity <= 1) return;
+    this.manipulateQuantities(currentTarget, -1);
   };
 
   render() {
@@ -180,6 +227,8 @@ export default class Cart extends Component {
                     checkingItems={this.checkingItems}
                     checkedItems={this.state.checkedItems}
                     deleteOneItem={this.deleteOneItem}
+                    decreaseQuantity={this.decreaseQuantity}
+                    increaseQuantity={this.increaseQuantity}
                   />
                 ) : null}
                 {this.state.cartData.filter(item => item.storageTemp === 2)
@@ -192,6 +241,8 @@ export default class Cart extends Component {
                     checkingItems={this.checkingItems}
                     checkedItems={this.state.checkedItems}
                     deleteOneItem={this.deleteOneItem}
+                    decreaseQuantity={this.decreaseQuantity}
+                    increaseQuantity={this.increaseQuantity}
                   />
                 ) : null}
                 {this.state.cartData.filter(item => item.storageTemp === 3)
@@ -204,6 +255,8 @@ export default class Cart extends Component {
                     checkingItems={this.checkingItems}
                     checkedItems={this.state.checkedItems}
                     deleteOneItem={this.deleteOneItem}
+                    decreaseQuantity={this.decreaseQuantity}
+                    increaseQuantity={this.increaseQuantity}
                   />
                 ) : null}
                 {!this.state.cartData.length ? (
@@ -233,7 +286,11 @@ export default class Cart extends Component {
                   </div>
                 </div>
               </div>
-              <CartResult subTotal={this.state.subTotal} />
+              <CartResult
+                subTotal={this.state.subTotal}
+                data={this.state.checkedItems.length}
+                requestOrderItems={this.requestOrderItems}
+              />
             </form>
           </div>
         </div>
