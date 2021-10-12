@@ -33,7 +33,7 @@ export default class Section extends Component {
   };
 
   getCategories = () => {
-    fetch(`http://localhost:3000/data/categoryData.json`)
+    fetch(`http://localhost:3000/data/categoryCarouselData.json`)
       .then(res => res.json())
       .then(categoryData =>
         this.setState({

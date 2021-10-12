@@ -132,7 +132,7 @@ export default class Footer extends Component {
               <p className='copyright'>© KURLY CORP. ALL RIGHTS RESERVED</p>
               <ul className='snsLinks'>
                 <li>
-                  <a href='#'>
+                  <a href='/'>
                     <img
                       src='https://res.kurly.com/pc/ico/1810/ico_instagram.png'
                       alt='인스타그램 바로가기'
@@ -140,7 +140,7 @@ export default class Footer extends Component {
                   </a>
                 </li>
                 <li>
-                  <a href='#'>
+                  <a href='/'>
                     <img
                       src='https://res.kurly.com/pc/ico/1810/ico_fb.png'
                       alt='페이스북 바로가기'
@@ -148,7 +148,7 @@ export default class Footer extends Component {
                   </a>
                 </li>
                 <li>
-                  <a href='#'>
+                  <a href='/'>
                     <img
                       src='https://res.kurly.com/pc/ico/1810/ico_blog.png'
                       alt='네이버 블로그 바로가기'
@@ -156,7 +156,7 @@ export default class Footer extends Component {
                   </a>
                 </li>
                 <li>
-                  <a href='#'>
+                  <a href='/'>
                     <img
                       src='https://res.kurly.com/pc/ico/1810/ico_naverpost.png'
                       alt='네이버 매거진 바로가기'
@@ -164,7 +164,7 @@ export default class Footer extends Component {
                   </a>
                 </li>
                 <li>
-                  <a href='#'>
+                  <a href='/'>
                     <img
                       src='https://res.kurly.com/pc/ico/1810/ico_youtube.png'
                       alt='유튜브 바로가기'

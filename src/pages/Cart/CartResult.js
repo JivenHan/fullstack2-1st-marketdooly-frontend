@@ -24,7 +24,10 @@ export default class CartResult extends Component {
           });
         });
     } catch (err) {
-      console.error(err);
+      this.setState({
+        userAddress: [],
+        error: err.message,
+      });
     }
   };
 
