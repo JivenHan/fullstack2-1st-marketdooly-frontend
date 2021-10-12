@@ -122,7 +122,6 @@ export default class Detail extends Component {
     const totalEarnPoint = quantity * productDetail.earnPoint;
 
     const scrollBtnsList = scrollBtns.map(ele => (
-
       <ScrollBtn
         btnId={ele.btnId}
         btnName={ele.btnName}
