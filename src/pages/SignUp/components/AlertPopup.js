@@ -5,7 +5,7 @@ export default class AlertPopup extends Component {
   render() {
     return (
       <div className='AlertPopup'>
-        <main className='container'>
+        <main>
           <header>알림메시지</header>
           <section className='message'>{this.props.alertMessage}</section>
         </main>
