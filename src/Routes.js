@@ -6,6 +6,7 @@ import Detail from './pages/Detail/Detail';
 import Login from './pages/Login/Login';
 import Main from './pages/Main/Main';
 import SignUp from './pages/SignUp/SignUp';
+import Cart from './pages/Cart/Cart';
 import FindAccount from './pages/FindAccount/FindAccount';
 import FindPw from './pages/FindPw/FindPw';
 
@@ -19,6 +20,7 @@ class Routes extends React.Component {
           <Route exact path='/login' component={Login} />
           <Route exact path='/signup' component={SignUp} />
           <Route exact path='/detail' component={Detail} />
+          <Route exact path='/cart' component={Cart}></Route>
           <Route exact path='/findaccount' component={FindAccount} />
           <Route exact path='/findpw' component={FindPw} />
         </Switch>

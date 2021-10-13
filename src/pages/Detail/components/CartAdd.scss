@@ -1,0 +1,290 @@
+@import '../../../styles/variables';
+
+.productDetailCartAdd {
+  display: inline-block;
+  margin-left: 60px;
+  margin-bottom: 100px;
+  width: 560px;
+
+  .productName {
+    margin-bottom: 30px;
+
+    .nameKor {
+      margin: 10px 0;
+      display: block;
+      font-size: 25px;
+    }
+
+    .shortDesc {
+      display: block;
+      color: #999999;
+      font-size: 18px;
+    }
+  }
+
+  .productDcInfo {
+    margin: 10px 0;
+    font-size: 18px;
+  }
+
+  .productPrice {
+    .dcPriceRow {
+      position: relative;
+
+      .discount {
+        display: block;
+        margin: 10px 0;
+
+        .dcPrice {
+          font-size: 35px;
+
+          .dcWon {
+            font-size: 22px;
+          }
+        }
+
+        .discountRate {
+          margin-left: 10px;
+          color: #fa622f;
+          font-size: 35px;
+        }
+      }
+
+      .originalPriceRow {
+        display: inline-block;
+        position: relative;
+        margin: 15px 0;
+
+        .originalPrice {
+          color: #999999;
+          font-size: 18px;
+          text-decoration: line-through;
+        }
+
+        .dcInfoIcon {
+          position: absolute;
+          bottom: -5px;
+        }
+      }
+
+      .dcInfoLayer {
+        position: absolute;
+        top: 82px;
+        left: 62px;
+        padding: 20px;
+        border: 1px solid #000;
+        border-radius: 3px;
+        width: 400px;
+        background: #fff;
+        z-index: 10;
+
+        .dcInfoLayerTitle {
+          display: block;
+          padding-bottom: 8px;
+        }
+
+        .dcInfoLayerDesc {
+          line-height: 20px;
+          font-weight: 300;
+        }
+
+        .layerBtn {
+          position: absolute;
+          top: 5px;
+          right: 5px;
+          border: none;
+          background: #fff;
+          font-size: 30px;
+        }
+      }
+    }
+
+    .benefit {
+      display: block;
+      margin-bottom: 30px;
+      font-size: 18px;
+
+      .benefitWelcome {
+        margin-right: 10px;
+        padding-right: 10px;
+        color: #999999;
+        border-right: 1px solid #999999;
+      }
+    }
+  }
+
+  .productInfo {
+    display: inline-block;
+
+    .productInfoListFirst {
+      padding-top: 20px;
+      border-top: 1px solid #f4f4f4;
+
+      .productInfoListTitleFirst {
+        float: left;
+        width: 140px;
+        color: #666666;
+      }
+    }
+    .productInfoList {
+      overflow: hidden;
+      padding: 20px 0;
+      border-bottom: 1px solid #f4f4f4;
+
+      .productInfoListTitle {
+        float: left;
+        width: 140px;
+        color: #666666;
+      }
+
+      .productInfoListDesc {
+        overflow: hidden;
+        line-height: 20px;
+        word-break: break-all;
+        white-space: pre-wrap;
+      }
+    }
+  }
+
+  .cartAdd {
+    .cartAddOption {
+      padding-top: 20px;
+      padding-bottom: 50px;
+      border-bottom: 1px solid #f4f4f4;
+
+      .cartAddQuantity {
+        float: left;
+        width: 140px;
+        color: #999999;
+      }
+
+      .cartAddQuantityOption {
+        .cartAddQuantitySet {
+          .btns {
+            overflow: hidden;
+            float: left;
+            width: 28px;
+            height: 28px;
+            border: 0;
+            line-height: 0;
+            text-indent: -9px;
+          }
+
+          .minusBtn {
+            border-top: 1px solid #999999;
+            border-left: 1px solid #999999;
+            border-bottom: 1px solid #999999;
+            background: url(https://res.kurly.com/pc/ico/2010/ico_minus_on.svg)
+              no-repeat 50% 50%;
+            border-top-left-radius: 4px;
+            border-bottom-left-radius: 4px;
+            cursor: pointer;
+          }
+
+          .btnResult {
+            padding-left: 13px;
+            border-top: 1px solid #999999;
+            border-bottom: 1px solid #999999;
+            background: #fff;
+            text-align: center;
+            font-size: 18px;
+          }
+
+          .plusBtn {
+            border-top: 1px solid #999999;
+            border-right: 1px solid #999999;
+            border-bottom: 1px solid #999999;
+            background: url(https://res.kurly.com/pc/ico/2010/ico_plus_on.svg)
+              no-repeat 50% 50%;
+            border-top-right-radius: 4px;
+            border-bottom-right-radius: 4px;
+            cursor: pointer;
+          }
+        }
+      }
+    }
+
+    .totalResult {
+      float: right;
+
+      .priceResult {
+        display: block;
+        padding-top: 40px;
+        width: 560px;
+        text-align: right;
+
+        .totalPriceTitle {
+          font-size: 18px;
+        }
+
+        .totalPrice {
+          font-size: 32px;
+          font-weight: 800;
+        }
+
+        .totalPriceWon {
+          font-size: 22px;
+        }
+      }
+
+      .pointResult {
+        display: block;
+        padding: 10px 0;
+        width: 560px;
+        line-height: 20px;
+        text-align: right;
+
+        .earnPointIcon {
+          display: inline-block;
+          margin-right: 5px;
+          padding-top: 2px;
+          box-sizing: border-box;
+          width: 40px;
+          height: 20px;
+          line-height: 18px;
+          text-align: center;
+          vertical-align: center;
+          border-radius: 8px;
+          background-color: #ffbf00;
+          color: #fff;
+          font-size: 14px;
+        }
+
+        .earnPointDesc {
+          font-size: 18px;
+
+          .earnPointDescStr {
+            font-weight: 700;
+          }
+        }
+      }
+    }
+    .cartAddBtns {
+      display: block;
+      width: 560px;
+
+      .restockAlarmBtn {
+        margin-right: 20px;
+        border: 1px solid #dddddd;
+        border-radius: 3px;
+        background-color: #fff;
+        width: 140px;
+        height: 55px;
+        color: #dddddd;
+        font-size: 18px;
+        cursor: pointer;
+      }
+
+      .cartAddBtn {
+        border: 1px solid #dddddd;
+        border-radius: 3px;
+        background-color: $themeColorPrimary;
+        width: 400px;
+        height: 55px;
+        color: #fff;
+        font-size: 18px;
+        cursor: pointer;
+      }
+    }
+  }
+}
