@@ -1,4 +1,4 @@
-$primary: #5f0080;
+@import '../../styles/variables';
 
 .SignUp {
   margin-bottom: 120px;
@@ -79,7 +79,7 @@ $primary: #5f0080;
         }
       }
 
-      .btnIdDup,
+      .btnAccountDup,
       .btnEmailDup {
         width: 120px;
         height: 44px;

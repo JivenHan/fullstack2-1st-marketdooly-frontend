@@ -2,8 +2,6 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import CartIconSvg from './components/CartIconSvg';
 import LocationIconSvg from './components/LocationIconSvg';
-// import TopAdBanner from './components/TopAdBanner';
-// import Header from './components/Header';
 import './TopNav.scss';
 
 export default class TopNav extends Component {
@@ -18,17 +16,13 @@ export default class TopNav extends Component {
   }
 
   componentDidMount() {
-    try {
-      fetch('data/categoryData.json')
-        .then(res => res.json())
-        .then(categoryData =>
-          this.setState({
-            categoryData,
-          })
-        );
-    } catch (err) {
-      console.error(err);
-    }
+    fetch('data/categoryData.json')
+      .then(res => res.json())
+      .then(categoryData =>
+        this.setState({
+          categoryData,
+        })
+      );
   }
 
   renderingCategories = () => {
