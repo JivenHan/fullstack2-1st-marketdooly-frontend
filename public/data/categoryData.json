@@ -1,0 +1,97 @@
+[
+  {
+    "id": 1,
+    "parentCategories": "채소",
+    "iconUrl": "https://img-cf.kurly.com/shop/data/category/icon_veggies_active_pc@2x.1586324570.png"
+  },
+  {
+    "id": 2,
+    "parentCategories": "과일·견과·쌀",
+    "iconUrl": "https://img-cf.kurly.com/shop/data/category/icon_fruit_active_pc@2x.1568684150.png"
+  },
+  {
+    "id": 3,
+    "parentCategories": "수산·해산·건어물",
+    "iconUrl": "https://img-cf.kurly.com/shop/data/category/icon_seafood_inactive_pc@2x.1568684352.png"
+  },
+  {
+    "id": 4,
+    "parentCategories": "정육·계란",
+    "iconUrl": "https://img-cf.kurly.com/shop/data/category/icon_meat_active_pc@2x.1568684452.png"
+  },
+  {
+    "id": 5,
+    "parentCategories": "국·반찬·메인요리",
+    "iconUrl": "https://img-cf.kurly.com/shop/data/category/icon_side_active_pc@2x.1572243579.png"
+  },
+  {
+    "id": 6,
+    "parentCategories": "샐러드·간편식",
+    "iconUrl": "https://img-cf.kurly.com/shop/data/category/icon_convenient_active_pc@2x.1572243543.png"
+  },
+  {
+    "id": 7,
+    "parentCategories": "면·양념·오일",
+    "iconUrl": "https://img-cf.kurly.com/shop/data/category/icon_sauce_active_pc@2x.1572243594.png"
+  },
+  {
+    "id": 8,
+    "parentCategories": "생수·음료·우유·커피",
+    "iconUrl": "https://img-cf.kurly.com/shop/data/category/icon_snacks_active_pc@2x.1572243616.png"
+  },
+  {
+    "id": 9,
+    "parentCategories": "간식·과자·떡",
+    "iconUrl": "https://img-cf.kurly.com/shop/data/category/icon_cookie_active_pc.1610074008.png"
+  },
+  {
+    "id": 10,
+    "parentCategories": "베이커리·치즈·델리",
+    "iconUrl": "https://img-cf.kurly.com/shop/data/category/icon_deli_active_pc@2x.1568687352.png"
+  },
+  {
+    "id": 11,
+    "parentCategories": "건강식품",
+    "iconUrl": "https://img-cf.kurly.com/shop/data/category/icon_health_active_pc@2x.1574645923.png"
+  },
+  {
+    "id": 12,
+    "parentCategories": "생활용품·리빙·캠핑",
+    "iconUrl": "https://img-cf.kurly.com/shop/data/category/icon_living_active_pc@2x.1588814090.png"
+  },
+  {
+    "id": 13,
+    "parentCategories": "스킨케어·메이크업",
+    "iconUrl": "https://img-cf.kurly.com/shop/data/category/icon_beauty_active_pc.1618488987.png"
+  },
+  {
+    "id": 14,
+    "parentCategories": "헤어·바디·구강",
+    "iconUrl": "https://img-cf.kurly.com/shop/data/category/icon_beauty_active_pc.1618488987.png"
+  },
+  {
+    "id": 15,
+    "parentCategories": "주방용품",
+    "iconUrl": "https://img-cf.kurly.com/shop/data/category/icon_kitchen_active_pc@2x.1574646458.png"
+  },
+  {
+    "id": 16,
+    "parentCategories": "가전제품",
+    "iconUrl": "https://img-cf.kurly.com/shop/data/category/icon_electronic__active_pc@2x.1574417978.png"
+  },
+  {
+    "id": 17,
+    "parentCategories": "베이비·키즈",
+    "iconUrl": "https://img-cf.kurly.com/shop/data/category/icon_kids_active_pc@2x.1568687537.png"
+  },
+  {
+    "id": 18,
+    "parentCategories": "반려동물",
+    "iconUrl": "https://img-cf.kurly.com/shop/data/category/icon_pet_active_pc@2x.1587442294.png"
+  },
+  {
+    "id": 19,
+    "parentCategories": "컬리의 추천",
+    "iconUrl": "https://res.kurly.com/pc/service/common/1908/ico_recommend_on_v2.png"
+  }
+]
