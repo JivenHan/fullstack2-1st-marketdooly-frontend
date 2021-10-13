@@ -34,9 +34,9 @@ export default class FindPw extends Component {
     const { name, account, email } = this.state;
 
     const isValidName = name.length > 0; // 상세 로직은 추후에 반영
-    const isValidId = account.length > 0; // 상세 로직은 추후에 반영
+    const isValidAccount = account.length > 0; // 상세 로직은 추후에 반영
     const isValidEmail = email.length > 0; // 상세 로직은 추후에 반영
-    const isValidInput = isValidName && isValidId && isValidEmail;
+    const isValidInput = isValidName && isValidAccount && isValidEmail;
 
     return (
       <div className='FindPw'>
