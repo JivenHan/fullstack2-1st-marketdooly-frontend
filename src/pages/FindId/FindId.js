@@ -48,6 +48,7 @@ export default class FindId extends Component {
             />
           </form>
           <button
+            type='button'
             className={isValidInput ? 'btnLogin valid' : 'btnLogin invalid'}
             form='userInfoForm'
           >

@@ -58,12 +58,14 @@ export default class Login extends Component {
             </div>
           </div>
           <button
+            type='button'
             className={isValidInput ? 'btnLogin valid' : 'btnLogin invalid'}
             form='userInfoForm'
           >
             로그인
           </button>
           <button
+            type='button'
             className='btnSignUp'
             onClick={() => this.props.history.push('./signup')}
           >
