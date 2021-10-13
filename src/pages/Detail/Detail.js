@@ -2,8 +2,7 @@ import React, { Component } from 'react';
 import CartAdd from './components/CartAdd';
 import ScrollBtn from './components/ScrollBtn';
 import Desc from './components/Desc';
-import AdditionalInfo from './components/AdditionalInfo';
-import DetaiInfo from './components/DetaiInfo';
+import Label from './components/Label';
 import CustomerCenter from './components/CustomerCenter';
 import BottomLayer from './components/BottomLayer';
 import './Detail.scss';
@@ -13,7 +12,7 @@ export default class Detail extends Component {
     super();
     this.observerRef = React.createRef();
     this.descRef = React.createRef();
-    this.infoRef = React.createRef();
+    this.labelRef = React.createRef();
     this.reviewRef = React.createRef();
     this.inquiryRef = React.createRef();
     this.state = {
@@ -69,7 +68,7 @@ export default class Detail extends Component {
           });
         } else if (el.btnId === 2) {
           window.scrollTo({
-            top: this.infoRef.current.offsetTop,
+            top: this.labelRef.current.offsetTop,
             behavior: 'smooth',
           });
         } else if (el.btnId === 3) {
@@ -88,14 +87,11 @@ export default class Detail extends Component {
   };
 
   componentDidMount() {
-    fetch('/data/detail/vegetable/ecoFriendly/springonion.json')
+    fetch('/data/detail/vegetable/ecoFriendly/carrot.json')
       .then(res => res.json())
       .then(data => {
         this.setState({
           productDetail: data,
-          detailDesc: data.detailDesc,
-          checkPoint: data.checkPoint,
-          detailInfo: data.detailInfo,
         });
       });
 
@@ -110,14 +106,7 @@ export default class Detail extends Component {
   }
 
   render() {
-    const {
-      productDetail,
-      detailDesc,
-      detailInfo,
-      quantity,
-      isBottomLayerUp,
-      scrollBtns,
-    } = this.state;
+    const { productDetail, quantity, isBottomLayerUp, scrollBtns } = this.state;
     const totalPrice = quantity * productDetail.salesPrice;
     const totalEarnPoint = quantity * productDetail.earnPoint;
 
@@ -138,6 +127,7 @@ export default class Detail extends Component {
             alt='productThumbImg'
             src={productDetail.thumbImgUrl}
           />
+
           <CartAdd
             observerRef={this.observerRef}
             {...productDetail}
@@ -148,11 +138,17 @@ export default class Detail extends Component {
             totalPrice={totalPrice}
             totalEarnPoint={totalEarnPoint}
           />
+
           <div className='scrollBtns'>{scrollBtnsList}</div>
-          <Desc descRef={this.descRef} {...productDetail} {...detailDesc} />
-          <AdditionalInfo additionalInfo={productDetail.additionalInfo} />
-          <DetaiInfo infoRef={this.infoRef} {...detailInfo} />
-          <CustomerCenter />
+
+          <Desc descRef={this.descRef} descImg='/image/carrotDescription.png' />
+
+          <Label
+            labelRef={this.labelRef}
+            labelImg='/image/carrotLabeling.png'
+          />
+
+          <CustomerCenter template='/image/template.png' />
 
           <div className='reviewLocation' ref={this.reviewRef}>
             <span>후기 들어갈 자리</span>
@@ -161,6 +157,7 @@ export default class Detail extends Component {
             <span>문의 들어갈 자리</span>
           </div>
         </div>
+
         {isBottomLayerUp && (
           <BottomLayer
             {...productDetail}
