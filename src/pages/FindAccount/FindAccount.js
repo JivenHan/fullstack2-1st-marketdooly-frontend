@@ -1,12 +1,12 @@
 import { Component } from 'react';
-import './FindId.scss';
+import './FindAccount.scss';
 
-export default class FindId extends Component {
+export default class FindAccount extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      userName: '',
-      userEmail: '',
+      name: '',
+      email: '',
     };
   }
 
@@ -17,23 +17,34 @@ export default class FindId extends Component {
     });
   };
 
-  render() {
-    const { handleInput } = this;
-    const { userName, userEmail } = this.state;
+  findAccount = () => {
+    const url = 'http://localhost:8000/users/account';
+    fetch(url, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(this.state),
+    })
+      .then(res => res.json())
+      .then(console.log);
+  };
 
-    const isValidName = userName.length > 0; // 상세 로직은 추후에 반영
-    const isValidEmail = userEmail.length > 0; // 상세 로직은 추후에 반영
+  render() {
+    const { handleInput, findAccount } = this;
+    const { name, email } = this.state;
+
+    const isValidName = name.length > 0; // 상세 로직은 추후에 반영
+    const isValidEmail = email.length > 0; // 상세 로직은 추후에 반영
     const isValidInput = isValidName && isValidEmail;
 
     return (
-      <div className='FindId'>
-        <div className='findIdContainer'>
+      <div className='FindAccount'>
+        <div className='findAccountContainer'>
           <h3>아이디 찾기</h3>
-          <form id='userInfoForm' action='./findId' method='POST'>
+          <form id='userInfoForm' action='./findAccount' method='POST'>
             <label>이름</label>
             <input
               type='text'
-              name='userName'
+              name='name'
               placeholder='고객님의 이름을 입력해주세요'
               onChange={handleInput}
               required
@@ -41,7 +52,7 @@ export default class FindId extends Component {
             <label>이메일</label>
             <input
               type='text'
-              name='userEmail'
+              name='email'
               placeholder='가입 시 등록하신 이메일 주소를 입력해주세요'
               onChange={handleInput}
               required
@@ -50,7 +61,7 @@ export default class FindId extends Component {
           <button
             type='button'
             className={isValidInput ? 'btnLogin valid' : 'btnLogin invalid'}
-            form='userInfoForm'
+            onClick={findAccount}
           >
             확인
           </button>
