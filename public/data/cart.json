@@ -1,0 +1,82 @@
+[
+  {
+    "id": 1,
+    "name": "[KF365] 애호박 1개",
+    "price": 950,
+    "storageTemp": 1,
+    "quantity": 4,
+    "thumbUrl": "https://img-cf.kurly.com/shop/data/goods/1631668505211i0.jpg"
+  },
+  {
+    "id": 2,
+    "name": "[연세우유 x 마켓컬리] 전용목장우유",
+    "price": 1850,
+    "storageTemp": 1,
+    "quantity": 3,
+    "thumbUrl": "https://img-cf.kurly.com/shop/data/goods/1610086510346i0.jpg"
+  },
+  {
+    "id": 3,
+    "name": "[스윗밸런스] 쉬림프 에그 샐러드",
+    "price": 4900,
+    "storageTemp": 1,
+    "quantity": 2,
+    "thumbUrl": "https://img-cf.kurly.com/shop/data/goods/1611300007786i0.jpg"
+  },
+  {
+    "id": 4,
+    "name": "[스윗밸런스] 허니리코타치즈 샐러드",
+    "price": 4900,
+    "storageTemp": 1,
+    "quantity": 1,
+    "thumbUrl": "https://img-cf.kurly.com/shop/data/goods/1611300007786i0.jpg"
+  },
+  {
+    "id": 5,
+    "name": "[굽네] 닭가슴살 갈비맛 만두",
+    "price": 2300,
+    "storageTemp": 2,
+    "quantity": 3,
+    "thumbUrl": "https://img-cf.kurly.com/shop/data/goods/162570599235i0.jpg"
+  },
+  {
+    "id": 6,
+    "name": "[탄단지] 곤드레나물밥&돈육숯불구이",
+    "price": 4200,
+    "storageTemp": 2,
+    "quantity": 4,
+    "thumbUrl": "https://img-cf.kurly.com/shop/data/goods/162570599235i0.jpg"
+  },
+  {
+    "id": 7,
+    "name": "[탄단지] 연근우엉밥&춘천닭갈비",
+    "price": 4200,
+    "storageTemp": 2,
+    "quantity": 2,
+    "thumbUrl": "https://img-cf.kurly.com/shop/data/goods/1604989502988i0.jpg"
+  },
+  {
+    "id": 8,
+    "name": "[아크네스] 퍼펙트 솔루션 바디워시 500ML",
+    "price": 10400,
+    "storageTemp": 3,
+    "quantity": 1,
+    "thumbUrl": "https://img-cf.kurly.com/shop/data/goods/1633591726630i0.jpg"
+  },
+  {
+    "id": 9,
+    "name": "[아크네스] 더마 릴리프 모이스처 폼클렌저 200ML",
+    "price": 12000,
+    "storageTemp": 3,
+    "quantity": 1,
+    "thumbUrl": "https://img-cf.kurly.com/shop/data/goods/1633587951882i0.jpg"
+  },
+  {
+    "id": 10,
+    "name": "[홈앤하우스] 프리미엄 논슬립 원목 정장집게걸이 6P",
+    "price": 18900,
+    "storageTemp": 3,
+    "quantity": 1,
+    "thumbUrl": "https://img-cf.kurly.com/shop/data/goods/1633609599468i0.jpg"
+  }
+]

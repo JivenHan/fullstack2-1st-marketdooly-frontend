@@ -1,23 +1,24 @@
 import React, { Component } from 'react';
 import Slide from './Slide';
-import { mainBannerData } from './MainBannerData';
 import './MainBanner.scss';
 
 export default class MainBanner extends Component {
   constructor() {
     super();
     this.state = {
+      data: [],
       autoSlide: true,
       autoSlideTiming: 4,
       currentSlide: 0,
       isPaused: false,
-      slideCount: mainBannerData.length,
+      slideCount: 0,
       sliderWidth: 1050,
       visibleCtrl: false,
     };
   }
 
   componentDidMount() {
+    this.requestData();
     window.addEventListener('resize', this.updateViewSize);
     this.timer = setInterval(() => {
       !this.state.isPaused && this.nextSlider();
@@ -28,6 +29,17 @@ export default class MainBanner extends Component {
     window.removeEventListener('resize', this.updateViewSize);
     clearInterval(this.timer);
   }
+
+  requestData = () => {
+    fetch('/data/MainBannerData.json')
+      .then(res => res.json())
+      .then(data =>
+        this.setState({
+          data,
+          slideCount: data.length,
+        })
+      );
+  };
 
   updateViewSize = () => {
     const sliderWidth =
@@ -111,7 +123,7 @@ export default class MainBanner extends Component {
               transition: `transform 0.5s ease-in-out`,
             }}
           >
-            {this.renderSlides(mainBannerData)}
+            {this.renderSlides(this.state.data)}
           </ul>
         </div>
         <div
