@@ -21,7 +21,7 @@ export default class CustomerCenter extends Component {
         <img
           className='customerCenterImg'
           alt='customerCenterImg'
-          src='/image/customerCenter.png'
+          src={this.props.template}
         />
         <div className='exchangeAndRefundBtnBox'>
           <span className='exchangeAndRefundBtnTitle'>교환 및 환불 안내</span>
