@@ -105,6 +105,11 @@ export default class Detail extends Component {
     observer.observe(this.observerRef.current);
   }
 
+  addToCart = () => {
+    fetch('/cart {method: POST}')
+    .then(res => )
+  }
+
   render() {
     const { productDetail, quantity, isBottomLayerUp, scrollBtns } = this.state;
     const totalPrice = quantity * productDetail.salesPrice;
@@ -137,6 +142,7 @@ export default class Detail extends Component {
             qauntityPlus={this.qauntityPlus}
             totalPrice={totalPrice}
             totalEarnPoint={totalEarnPoint}
+            addToCart{this.addToCart}
           />
 
           <div className='scrollBtns'>{scrollBtnsList}</div>

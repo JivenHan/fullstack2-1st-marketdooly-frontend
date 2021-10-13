@@ -180,7 +180,11 @@ export default class CartAdd extends Component {
             <button className='restockAlarmBtn' type='button'>
               재입고 알림
             </button>
-            <button className='cartAddBtn' type='button'>
+            <button
+              className='cartAddBtn'
+              type='button'
+              onclick={this.props.addToCart}
+            >
               장바구니 담기
             </button>
           </div>
