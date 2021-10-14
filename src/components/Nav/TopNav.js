@@ -8,68 +8,60 @@ export default class TopNav extends Component {
   constructor() {
     super();
     this.state = {
+      categoryIconData: [],
       categoryData: [],
       isTopAdBannerClosed: false,
-      isHeaderToggleIconHovered: false,
+      isLnbUserCsVisible: false,
       isCategoriesVisible: false,
     };
   }
 
   componentDidMount() {
-    fetch('data/categoryData.json')
+    fetch('data/categoryIconData.json')
       .then(res => res.json())
-      .then(categoryData =>
+      .then(res => {
+        console.log(res);
         this.setState({
-          categoryData,
-        })
-      );
+          categoryIconData: res,
+        });
+      })
+      .catch(err => console.log(err));
+    fetch('http://localhost:8000/main/category')
+      .then(res => res.json())
+      .then(res => {
+        console.log(res);
+        this.setState({
+          categoryData: res,
+        });
+      });
   }
-
-  renderingCategories = () => {
-    return (
-      <div
-        className={`dropDownLNB ${
-          !this.state.isCategoriesVisible ? 'hidden' : ''
-        }`}
-      >
-        <ul className='parentCategories'>
-          {this.state.categoryData.map((category, i) => {
-            return (
-              <li
-                key={i}
-                style={{ backgroundImage: `url(${category.iconUrl})` }}
-              >
-                <Link to='/'>
-                  <h3 className='categoryName'>{category.parentCategories}</h3>
-                </Link>
-              </li>
-            );
-          })}
-        </ul>
-      </div>
-    );
-  };
 
   closeTopAdBanner = () => {
     this.setState({ isTopAdBannerClosed: true });
   };
 
   showHiddenlnbUserCs = () => {
-    this.setState({ isHeaderToggleIconHovered: true });
+    this.setState({ isLnbUserCsVisible: true });
   };
 
   hideHiddenlnbUserCs = () => {
-    this.setState({ isHeaderToggleIconHovered: false });
+    this.setState({ isLnbUserCsVisible: false });
   };
 
-  toggleLNBVisibility = event => {
-    const value = event.type === 'mouseover';
+  showCategories = () => {
     this.setState({
-      isCategoriesVisible: value,
+      isCategoriesVisible: true,
+    });
+  };
+
+  hideCategories = () => {
+    this.setState({
+      isCategoriesVisible: false,
     });
   };
 
   render() {
+    console.log(this.state.categoryData);
     return (
       <div className='TopNav'>
         {!this.state.isTopAdBannerClosed && (
@@ -97,16 +89,20 @@ export default class TopNav extends Component {
             />
           </div>
           <div className='headerLogoWrapper'>
-            <img className='headerLogo' alt='kurlylogo' src='/logo.svg' />
+            <img
+              className='headerLogo'
+              alt='kurlylogo'
+              src='https://i.imgur.com/eY0hAoz.png'
+            />
           </div>
           <ul className='headerUserContainer'>
             <li className='headerUserItem1Wrapper'>
-              <Link className='headerUserItem1' to='../../pages/SignUp/SignUp'>
+              <Link className='headerUserItem1' to='/signup'>
                 회원가입
               </Link>
             </li>
             <li className='headerUserItem2Wrapper'>
-              <Link className='headerUserItem2' to='../../pages/Login/Login'>
+              <Link className='headerUserItem2' to='/login'>
                 로그인
               </Link>
             </li>
@@ -115,7 +111,7 @@ export default class TopNav extends Component {
               onMouseOver={this.showHiddenlnbUserCs}
               onMouseOut={this.hideHiddenlnbUserCs}
             >
-              <Link className='headerUserItem2' to='../../pages/Login/Login'>
+              <Link className='headerUserItem2' to='/login'>
                 고객센터
               </Link>
               <img
@@ -126,11 +122,11 @@ export default class TopNav extends Component {
             </li>
           </ul>
         </div>
-        {this.state.isHeaderToggleIconHovered && (
+        {this.state.isLnbUserCsVisible && (
           <div className='lnbUserCsContainer'>
             <ul
               className={`lnbUserCsWrapperVisible ${
-                !this.state.isHeaderToggleIconHovered ? 'hidden' : ''
+                !this.state.isLnbUserCsVisible ? 'hidden' : ''
               }`}
             >
               <li className='lnbUserCsItem'>공지사항</li>
@@ -146,8 +142,8 @@ export default class TopNav extends Component {
         <div className='cmgnbContainer'>
           <div
             className='categoriesMenuContainer'
-            onMouseOver={this.toggleLNBVisibility}
-            onMouseLeave={this.toggleLNBVisibility}
+            onMouseOver={this.showCategories}
+            onMouseLeave={this.hideCategories}
           >
             <img
               className='menuHamburgerIcon'
@@ -155,7 +151,46 @@ export default class TopNav extends Component {
               src='/menuHamburgerIcon.png'
             />
             <p>전체 카테고리</p>
-            {this.renderingCategories()}
+            <div
+              className={`dropDownCategories ${
+                !this.state.isCategoriesVisible ? 'hidden' : ''
+              }`}
+            >
+              <ul className='parentCategoriesContainer'>
+                {this.state.categoryIconData.map(categoryIconData => {
+                  return (
+                    <li
+                      className='parentCategoryBg'
+                      style={{
+                        backgroundImage: `url(${categoryIconData.iconUrl})`,
+                      }}
+                    ></li>
+                  );
+                })}
+                {this.state.categoryData.map(categoryDatum => {
+                  return (
+                    <div className='parentCategoryNameLinkWrapper'>
+                      <Link className='parentCategoryNameLink' to='/'>
+                        <h3 className='parentCategoryName'>
+                          {categoryDatum.categoryName}
+                        </h3>
+                      </Link>
+                    </div>
+                  );
+                })}
+                {/* {this.state.categoryData.map(categoryDatum => {
+                  return (
+                    <div className='parentCategoryNameLinkWrapper'>
+                      <Link className='parentCategoryNameLink' to='/'>
+                        <h3 className='parentCategoryName'>
+                          {categoryDatum.categoryName}
+                        </h3>
+                      </Link>
+                    </div>
+                  );
+                })} */}
+              </ul>
+            </div>
           </div>
           <ul className='listMenuContainer'>
             <li>신상품</li>

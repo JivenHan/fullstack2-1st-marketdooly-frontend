@@ -61,10 +61,6 @@
         margin: 0.5rem 2rem;
         height: 4rem;
       }
-
-      svg:hover {
-        fill: red;
-      }
     }
 
     .headerUserContainer {
@@ -150,7 +146,7 @@
         margin: 1rem;
       }
 
-      .dropDownLNB {
+      .dropDownCategories {
         display: block;
         position: absolute;
         top: 48px;
@@ -162,8 +158,9 @@
           display: none;
         }
 
-        .parentCategories {
-          li {
+        .parentCategoriesContainer {
+          position: absolute;
+          .parentCategoryBg {
             padding-left: 50px;
             height: 39px;
             width: 204px;
@@ -176,15 +173,21 @@
             &:hover {
               background-color: #f7f7f7;
             }
+          }
+          .parentCategoryNameLinkWrapper {
+            padding-top: 13px;
+            padding-left: 50px;
+            height: 39px;
 
-            &:hover a {
-              color: #5f0080;
-            }
-
-            a {
+            .parentCategoryNameLink {
+              position: relative;
+              top: -741px;
               color: #4c4c4c;
               font-size: 14px;
               text-decoration: none;
+            }
+            .parentCategoryNameLink:hover {
+              color: #5f0080;
             }
           }
         }
