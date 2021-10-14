@@ -191,6 +191,38 @@
             }
           }
         }
+
+        .subCategoriesContainer {
+          position: absolute;
+          .subCategoryBg {
+            position: relative;
+            left: 204px;
+            padding-left: 50px;
+            height: 741px;
+            width: 204px;
+            line-height: 39px;
+            background-color: #f7f7f7;
+            &.hidden {
+              display: none;
+            }
+          }
+          .subCategoryNameLinkWrapper {
+            padding-top: 13px;
+            padding-left: 50px;
+            height: 39px;
+
+            .subCategoryNameLink {
+              position: relative;
+              // top: -741px;
+              color: #4c4c4c;
+              font-size: 14px;
+              text-decoration: none;
+            }
+            .subCategoryNameLink:hover {
+              color: #5f0080;
+            }
+          }
+        }
       }
     }
 

@@ -11,9 +11,11 @@ export default class TopNav extends Component {
       categoryIconData: [],
       categoryData: [],
       categoriesArray: [],
+      subCategoriesArray: [],
       isTopAdBannerClosed: false,
       isLnbUserCsVisible: false,
       isCategoriesVisible: false,
+      isSubCategoriesVisible: false,
     };
   }
 
@@ -34,7 +36,7 @@ export default class TopNav extends Component {
           categoriesArray: [res[0].categoryName],
         });
       })
-      .then(res => {
+      .then(() => {
         let redundantCategoriesArray = [];
         this.state.categoryData.map(x => {
           redundantCategoriesArray.push(x.categoryName);
@@ -44,6 +46,12 @@ export default class TopNav extends Component {
         });
         this.setState({
           categoriesArray: categoriesArray,
+        });
+      })
+      .then(() => {
+        let subCategoriesArray = [1, 23, 41];
+        this.setState({
+          subCategoriesArray: subCategoriesArray,
         });
       });
   }
@@ -69,6 +77,18 @@ export default class TopNav extends Component {
   hideCategories = () => {
     this.setState({
       isCategoriesVisible: false,
+    });
+  };
+
+  showSubCategories = () => {
+    this.setState({
+      isSubCategoriesVisible: true,
+    });
+  };
+
+  hideSubCategories = () => {
+    this.setState({
+      isSubCategoriesVisible: false,
     });
   };
 
@@ -159,7 +179,7 @@ export default class TopNav extends Component {
           <div
             className='categoriesMenuContainer'
             onMouseOver={this.showCategories}
-            onMouseLeave={this.hideCategories}
+            onMouseOut={this.hideCategories}
           >
             <img
               className='menuHamburgerIcon'
@@ -178,6 +198,8 @@ export default class TopNav extends Component {
                     return (
                       <li
                         className='parentCategoryBg'
+                        onMouseOver={this.showSubCategories}
+                        onMouseOut={this.hideSubCategories}
                         style={{
                           backgroundImage: `url(${categoryIconData.iconUrl})`,
                         }}
@@ -196,17 +218,25 @@ export default class TopNav extends Component {
                       </div>
                     );
                   })}
-                {/* {this.state.categoryData.map(categoryDatum => {
-                  return (
-                    <div className='parentCategoryNameLinkWrapper'>
-                      <Link className='parentCategoryNameLink' to='/'>
-                        <h3 className='parentCategoryName'>
-                          {categoryDatum.categoryName}
+              </ul>
+              <ul className='subCategoriesContainer'>
+                <li
+                  className={
+                    this.state.isSubCategoriesVisible
+                      ? 'subCategoryBg'
+                      : 'subCategoryBg hidden'
+                  }
+                ></li>
+                {this.state.subCategoriesArray !== [] &&
+                  this.state.subCategoriesArray.map(subCategoryDatum => {
+                    return (
+                      <div className='subCategoryNameLinkWrapper'>
+                        <h3 className='subCategoryNameeeeeeeeee'>
+                          {subCategoryDatum} heelllo
                         </h3>
-                      </Link>
-                    </div>
-                  );
-                })} */}
+                      </div>
+                    );
+                  })}
               </ul>
             </div>
           </div>
