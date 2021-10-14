@@ -7,6 +7,8 @@ export default class FindAccount extends Component {
     this.state = {
       name: '',
       email: '',
+      findResult: '',
+      account: '',
     };
   }
 
@@ -25,12 +27,17 @@ export default class FindAccount extends Component {
       body: JSON.stringify(this.state),
     })
       .then(res => res.json())
-      .then(console.log);
+      .then(res => {
+        this.setState({
+          findResult: res.status,
+          account: res.message[0].account,
+        });
+      });
   };
 
   render() {
     const { handleInput, findAccount } = this;
-    const { name, email } = this.state;
+    const { name, email, findResult, account } = this.state;
 
     const isValidName = name.length > 0; // 상세 로직은 추후에 반영
     const isValidEmail = email.length > 0; // 상세 로직은 추후에 반영
@@ -40,31 +47,67 @@ export default class FindAccount extends Component {
       <div className='FindAccount'>
         <div className='findAccountContainer'>
           <h3>아이디 찾기</h3>
-          <form id='userInfoForm' action='./findAccount' method='POST'>
-            <label>이름</label>
-            <input
-              type='text'
-              name='name'
-              placeholder='고객님의 이름을 입력해주세요'
-              onChange={handleInput}
-              required
-            />
-            <label>이메일</label>
-            <input
-              type='text'
-              name='email'
-              placeholder='가입 시 등록하신 이메일 주소를 입력해주세요'
-              onChange={handleInput}
-              required
-            />
-          </form>
-          <button
-            type='button'
-            className={isValidInput ? 'btnLogin valid' : 'btnLogin invalid'}
-            onClick={findAccount}
-          >
-            확인
-          </button>
+          {findResult === '' && (
+            <div className='beforeFind'>
+              <form>
+                <label>이름</label>
+                <input
+                  type='text'
+                  name='name'
+                  placeholder='고객님의 이름을 입력해주세요'
+                  onChange={handleInput}
+                  required
+                />
+                <label>이메일</label>
+                <input
+                  type='text'
+                  name='email'
+                  placeholder='가입 시 등록하신 이메일 주소를 입력해주세요'
+                  onChange={handleInput}
+                  required
+                />
+              </form>
+              <button
+                type='button'
+                className={isValidInput ? 'btnLogin valid' : 'btnLogin invalid'}
+                onClick={findAccount}
+              >
+                확인
+              </button>
+            </div>
+          )}
+          {findResult === 'fail' && (
+            <div className='afterFind'>
+              <img src='/image/findaccount.png' alt='' />
+              <p>
+                고객님께서 입력하신 정보가
+                <br />
+                정확한지 확인 후 다시 시도해주세요
+              </p>
+              <button
+                type='button'
+                onClick={() => this.setState({ findResult: '' })}
+              >
+                아이디 다시 찾기
+              </button>
+            </div>
+          )}
+          {findResult === 'success' && (
+            <div className='afterFind'>
+              <img src='/image/findaccount.png' alt='' />
+              <p>
+                고객님의 아이디는
+                <br />
+                {account} 입니다.
+              </p>
+              <button
+                type='button'
+                onClick={() => this.props.history.push('/login')}
+              >
+                로그인 하기
+              </button>
+            </div>
+          )}
         </div>
       </div>
     );
