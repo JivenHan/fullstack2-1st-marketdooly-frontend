@@ -8,6 +8,8 @@ export default class FindPw extends Component {
       name: '',
       account: '',
       email: '',
+      findResult: '',
+      tempPassword: '',
     };
   }
 
@@ -26,12 +28,17 @@ export default class FindPw extends Component {
       body: JSON.stringify(this.state),
     })
       .then(res => res.json())
-      .then(console.log);
+      .then(res => {
+        this.setState({
+          findResult: res.status,
+          tempPassword: res.tempPW,
+        });
+      });
   };
 
   render() {
     const { handleInput, findPw } = this;
-    const { name, account, email } = this.state;
+    const { name, account, email, findResult, tempPassword } = this.state;
 
     const isValidName = name.length > 0; // 상세 로직은 추후에 반영
     const isValidAccount = account.length > 0; // 상세 로직은 추후에 반영
@@ -42,39 +49,75 @@ export default class FindPw extends Component {
       <div className='FindPw'>
         <div className='findPwContainer'>
           <h3>비밀번호 찾기</h3>
-          <form>
-            <label>이름</label>
-            <input
-              type='text'
-              name='name'
-              placeholder='고객님의 이름을 입력해주세요'
-              onChange={handleInput}
-              required
-            />
-            <label>아이디</label>
-            <input
-              type='text'
-              name='account'
-              placeholder='가입 시 등록하신 아이디를 입력해주세요'
-              onChange={handleInput}
-              required
-            />
-            <label>이메일</label>
-            <input
-              type='email'
-              name='email'
-              placeholder='가입 시 등록하신 이메일 주소를 입력해주세요'
-              onChange={handleInput}
-              required
-            />
-          </form>
-          <button
-            type='button'
-            className={isValidInput ? 'btnFind valid' : 'btnFind invalid'}
-            onClick={findPw}
-          >
-            찾기
-          </button>
+          {findResult === '' && (
+            <div className='beforeFind'>
+              <form>
+                <label>이름</label>
+                <input
+                  type='text'
+                  name='name'
+                  placeholder='고객님의 이름을 입력해주세요'
+                  onChange={handleInput}
+                  required
+                />
+                <label>아이디</label>
+                <input
+                  type='text'
+                  name='account'
+                  placeholder='가입 시 등록하신 아이디를 입력해주세요'
+                  onChange={handleInput}
+                  required
+                />
+                <label>이메일</label>
+                <input
+                  type='email'
+                  name='email'
+                  placeholder='가입 시 등록하신 이메일 주소를 입력해주세요'
+                  onChange={handleInput}
+                  required
+                />
+              </form>
+              <button
+                type='button'
+                className={isValidInput ? 'btnFind valid' : 'btnFind invalid'}
+                onClick={findPw}
+              >
+                찾기
+              </button>
+            </div>
+          )}
+          {findResult === 'fail' && (
+            <div className='afterFind'>
+              <img src='/image/findaccount.png' alt='' />
+              <p>
+                고객님께서 입력하신 정보가
+                <br />
+                정확한지 확인 후 다시 시도해주세요
+              </p>
+              <button
+                type='button'
+                onClick={() => this.setState({ findResult: '' })}
+              >
+                비밀번호 다시 찾기
+              </button>
+            </div>
+          )}
+          {findResult === 'success' && (
+            <div className='afterFind'>
+              <img src='/image/findaccount.png' alt='' />
+              <p>
+                임시 비밀번호는
+                <br />
+                {tempPassword} 입니다.
+              </p>
+              <button
+                type='button'
+                onClick={() => this.props.history.push('/login')}
+              >
+                로그인 하기
+              </button>
+            </div>
+          )}
         </div>
       </div>
     );
