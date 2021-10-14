@@ -21,45 +21,73 @@
       font-weight: 800;
     }
 
-    form {
-      margin-bottom: 30px;
+    .beforeFind {
+      form {
+        margin-bottom: 30px;
 
-      > input {
-        width: 100%;
-        height: 54px;
-        padding: 0 19px;
-        border: 1px solid #ccc;
-        border-radius: 3px;
-        font-size: 14px;
+        > input {
+          width: 100%;
+          height: 54px;
+          padding: 0 19px;
+          border: 1px solid #ccc;
+          border-radius: 3px;
+          font-size: 14px;
+        }
+
+        > label {
+          display: block;
+          padding: 11px 0 7px;
+          font-size: 12px;
+          font-weight: 700;
+          line-height: 18px;
+        }
       }
 
-      > label {
-        display: block;
-        padding: 11px 0 7px;
-        font-size: 12px;
-        font-weight: 700;
-        line-height: 18px;
+      > button {
+        width: 100%;
+        height: 54px;
+        border-radius: 3px;
+        font-size: 16px;
+
+        &.btnFind.valid {
+          margin-bottom: 10px;
+          border: 1px solid $themeColorPrimary;
+          background-color: $themeColorPrimary;
+          color: #fff;
+        }
+
+        &.btnFind.invalid {
+          margin-bottom: 10px;
+          border: 1px solid $themeColorPrimary;
+          background-color: #fff;
+          color: $themeColorPrimary;
+        }
       }
     }
 
-    > button {
+    .afterFind {
       width: 100%;
-      height: 54px;
-      border-radius: 3px;
-      font-size: 16px;
+      text-align: center;
 
-      &.btnFind.valid {
-        margin-bottom: 10px;
-        border: 1px solid $themeColorPrimary;
-        background-color: $themeColorPrimary;
-        color: #fff;
+      img {
+        margin-bottom: 5px;
       }
 
-      &.btnFind.invalid {
-        margin-bottom: 10px;
-        border: 1px solid $themeColorPrimary;
-        background-color: #fff;
-        color: $themeColorPrimary;
+      p {
+        margin-bottom: 20px;
+        font-size: 20px;
+        font-weight: 500;
+        line-height: 30px;
+      }
+
+      button {
+        width: 80%;
+        height: 54px;
+        border: none;
+        border-radius: 3px;
+        color: #fff;
+        background-color: $themeColorPrimary;
+        font-size: 16px;
       }
     }
   }
