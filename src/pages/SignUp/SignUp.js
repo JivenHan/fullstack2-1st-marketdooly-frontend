@@ -43,7 +43,6 @@ export default class SignUp extends Component {
       yyyy: '',
       mm: '',
       dd: '',
-
       isAccountDupChecked: false,
       isEmailDupChecked: false,
       isAgreeAllChecked: false,
@@ -74,27 +73,51 @@ export default class SignUp extends Component {
 
   checkAccountDup = () => {
     if (this.checkInputValidation('account')) {
-      const url = 'http://localhost:8000/';
+      const url = 'http://localhost:8000/users/duplicate/account';
       fetch(url, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ account: this.state.account }),
       })
         .then(res => res.json())
-        .then(console.log);
+        .then(res => {
+          if (res.status === 'fail') {
+            this.setState({
+              alertPopupMessage: `이미 사용 중인 아이디 입니다.`,
+              isAlertPopupOpened: true,
+            });
+          } else if (res.status === 'success') {
+            this.setState({
+              alertPopupMessage: `사용 가능한 아이디 입니다.`,
+              isAlertPopupOpened: true,
+            });
+          }
+        });
     }
   };
 
   checkEmailDup = () => {
     if (this.checkInputValidation('email')) {
-      const url = 'http://localhost:8000/';
+      const url = 'http://localhost:8000/users/duplicate/email';
       fetch(url, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email: this.state.email }),
       })
         .then(res => res.json())
-        .then(console.log);
+        .then(res => {
+          if (res.status === 'fail') {
+            this.setState({
+              alertPopupMessage: `이미 사용 중인 이메일 입니다.`,
+              isAlertPopupOpened: true,
+            });
+          } else if (res.status === 'success') {
+            this.setState({
+              alertPopupMessage: `사용 가능한 이메일 입니다.`,
+              isAlertPopupOpened: true,
+            });
+          }
+        });
     }
   };
 
