@@ -87,12 +87,23 @@ export default class Detail extends Component {
   };
 
   componentDidMount() {
-    fetch('/data/detail/vegetable/ecoFriendly/carrot.json')
-      .then(res => res.json())
+    fetch('http://localhost:8000/products', {
+      method: 'GET',
+    })
+      .then(res => {
+        if (!res.ok) {
+          const msg = res.json();
+          throw new Error(msg);
+        }
+        return res.json();
+      })
       .then(data => {
         this.setState({
-          productDetail: data,
+          productDetail: data[0],
         });
+      })
+      .catch(err => {
+        console.log(err);
       });
 
     const observer = new IntersectionObserver(([{ isIntersecting }]) => {
@@ -106,17 +117,25 @@ export default class Detail extends Component {
   }
 
   addToCart = () => {
-    fetch('/cart {method: POST}')
-    .then(res => )
-  }
+    fetch('http://localhost:8000/cart', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        user_id: 1,
+        product_id: this.state.productDetail.id,
+        quantity: this.state.quantity,
+      }),
+    }).then(res => res.json());
+  };
 
   render() {
     const { productDetail, quantity, isBottomLayerUp, scrollBtns } = this.state;
-    const totalPrice = quantity * productDetail.salesPrice;
-    const totalEarnPoint = quantity * productDetail.earnPoint;
+    const totalPrice = quantity * productDetail.sales_price;
+    const totalEarnPoint = quantity * productDetail.earn_points;
 
-    const scrollBtnsList = scrollBtns.map(ele => (
+    const scrollBtnsList = scrollBtns.map((ele, idx) => (
       <ScrollBtn
+        key={idx}
         btnId={ele.btnId}
         btnName={ele.btnName}
         isClicked={ele.isClicked}
@@ -130,7 +149,7 @@ export default class Detail extends Component {
           <img
             className='productThumbImg'
             alt='productThumbImg'
-            src={productDetail.thumbImgUrl}
+            src={productDetail.product_image}
           />
 
           <CartAdd
@@ -142,19 +161,22 @@ export default class Detail extends Component {
             qauntityPlus={this.qauntityPlus}
             totalPrice={totalPrice}
             totalEarnPoint={totalEarnPoint}
-            addToCart{this.addToCart}
+            addToCart={this.addToCart}
           />
 
           <div className='scrollBtns'>{scrollBtnsList}</div>
 
-          <Desc descRef={this.descRef} descImg='/image/carrotDescription.png' />
+          <Desc
+            descRef={this.descRef}
+            descImg={productDetail.description_image}
+          />
 
           <Label
             labelRef={this.labelRef}
-            labelImg='/image/carrotLabeling.png'
+            labelImg={productDetail.labeling_image}
           />
 
-          <CustomerCenter template='/image/template.png' />
+          <CustomerCenter template={productDetail.template_image} />
 
           <div className='reviewLocation' ref={this.reviewRef}>
             <span>후기 들어갈 자리</span>
@@ -173,6 +195,7 @@ export default class Detail extends Component {
             qauntityPlus={this.qauntityPlus}
             totalPrice={totalPrice}
             totalEarnPoint={totalEarnPoint}
+            addToCart={this.addToCart}
           />
         )}
       </article>
