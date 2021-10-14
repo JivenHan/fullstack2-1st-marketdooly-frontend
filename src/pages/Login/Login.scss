@@ -1,3 +1,5 @@
+@import '../../styles/variables';
+
 .Login {
   min-width: 1050px;
   padding-bottom: 120px;
@@ -64,22 +66,22 @@
 
       &.btnLogin.valid {
         margin-bottom: 10px;
-        border: 1px solid #5f0080;
-        background-color: #5f0080;
+        border: 1px solid $themeColorPrimary;
+        background-color: $themeColorPrimary;
         color: #fff;
       }
 
       &.btnLogin.invalid {
         margin-bottom: 10px;
-        border: 1px solid #5f0080;
+        border: 1px solid $themeColorPrimary;
         background-color: #fff;
-        color: #5f0080;
+        color: $themeColorPrimary;
       }
 
       &.btnSignUp {
-        border: 1px solid #5f0080;
+        border: 1px solid $themeColorPrimary;
         background-color: #fff;
-        color: #5f0080;
+        color: $themeColorPrimary;
       }
     }
   }
