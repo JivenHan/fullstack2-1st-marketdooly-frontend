@@ -10,35 +10,80 @@ export default class Cart extends Component {
       cartData: [],
       checkedItems: [],
       subTotal: 0,
+      totalDiscount: 0,
+      totalEarnPoints: 0,
       selectAll: true,
+      userAddress: '',
+      topCoords: 60,
     };
+    this.window = null;
   }
 
-  componentDidMount() {
-    try {
-      fetch('/data/cart.json')
-        .then(res => res.json())
-        .then(cartData =>
-          this.setState({
-            cartData,
-            subTotal: cartData.reduce(
-              (acc, cur) => acc + cur.price * cur.quantity,
-              0
-            ),
-            checkedItems: cartData,
-          })
-        );
-    } catch (err) {
-      throw err;
+  autoScrolling = () => {
+    const [coords] = this.cartContainer.getClientRects();
+    if (coords.top <= -60 && coords.bottom >= 714) {
+      this.setState({
+        topCoords: Math.abs(coords.top),
+      });
+    } else if (coords.top > -60) {
+      this.setState({
+        topCoords: 60,
+      });
+    } else {
+      this.setState({
+        topCoords: coords.height - 714,
+      });
     }
+  };
+
+  componentDidMount() {
+    window.addEventListener('scroll', this.autoScrolling);
+    fetch('http://localhost:8000/cart', {
+      credentials: 'include',
+    })
+      .then(async res => {
+        if (!res.ok) {
+          const message = await res.json();
+          throw new Error(`Something Went Wrong: ${message}`);
+        }
+        return res.json();
+      })
+      .then(cartData => {
+        const address =
+          typeof cartData[0] === 'string' ? cartData.splice(0, 1) : null;
+        this.setState({
+          userAddress: address,
+          cartData,
+          subTotal: cartData.reduce(
+            (acc, cur) => acc + cur.sales_price * cur.quantity,
+            0
+          ),
+          checkedItems: cartData,
+          totalDiscount: this.getTotalDiscount(cartData),
+          totalEarnPoints: this.getTotalEarnPoints(cartData),
+        });
+      })
+      .catch(err => {
+        console.error(err);
+        this.setState({
+          cartData: [],
+        });
+      });
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('scroll', this.autoScrolling);
   }
 
   requestOrderItems = event => {
     event.preventDefault();
-    fetch('http://localhost:8000/cart', {
+    const [cart_id] = [...this.state.checkedItems].map(ele => ele.id);
+    fetch('http://localhost:8000/order', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(this.state.checkedItems),
+      body: JSON.stringify({
+        cart_id,
+      }),
     });
   };
 
@@ -109,13 +154,27 @@ export default class Cart extends Component {
     }
     this.setState({
       subTotal: [...this.state.checkedItems].reduce(
-        (acc, cur) => acc + cur.price * cur.quantity,
+        (acc, cur) => acc + cur.sales_price * cur.quantity,
         0
       ),
+      totalDiscount: this.getTotalDiscount([...this.state.checkedItems]),
+      totalEarnPoints: this.getTotalEarnPoints([...this.state.checkedItems]),
     });
   };
 
-  deleteSelectedItems = () => {
+  getTotalDiscount = arr => {
+    return [...arr]
+      .map(ele => (ele.original_price - ele.sales_price) * ele.quantity)
+      .reduce((acc, cur) => acc + cur, 0);
+  };
+
+  getTotalEarnPoints = arr => {
+    return [...arr]
+      .map(ele => ele.earn_points * ele.quantity)
+      .reduce((acc, cur) => acc + cur, 0);
+  };
+
+  deleteSelectedItems = async () => {
     const deleteConsent = window.confirm('선택한 상품을 삭제하시겠습니까?');
     if (!deleteConsent) return;
     const selected = [...this.state.checkedItems].map(ele => ele.id);
@@ -127,9 +186,10 @@ export default class Cart extends Component {
       },
       this.recalculateSubTotal
     );
+    await this.requestDeleteItems(selected);
   };
 
-  deleteOneItem = itemId => {
+  deleteOneItem = async itemId => {
     const deleteConsent = window.confirm('삭제하시겠습니까?');
     if (!deleteConsent) return;
     if ([...this.state.checkedItems].find(ele => ele.id === itemId)) {
@@ -150,9 +210,30 @@ export default class Cart extends Component {
         this.recalculateSubTotal
       );
     }
+    await this.requestDeleteItem(itemId);
   };
 
-  manipulateQuantities = (currentTarget, factor) => {
+  requestDeleteItem = cart_id => {
+    fetch('http://localhost:8000/cart', {
+      method: 'DELETE',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        cart_id,
+      }),
+    }).catch(console.error);
+  };
+
+  requestDeleteItems = deleteList => {
+    fetch('http://localhost:8000/cart/several', {
+      method: 'DELETE',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        deleteList,
+      }),
+    }).catch(console.error);
+  };
+
+  manipulateQuantities = async (currentTarget, factor) => {
     this.setState(
       prevState => ({
         cartData: prevState.cartData.map(el =>
@@ -166,8 +247,25 @@ export default class Cart extends Component {
             : el
         ),
       }),
-      this.recalculateSubTotal
+      async () => {
+        const [target] = [...this.state.cartData].filter(
+          ele => ele.id === currentTarget
+        );
+        await this.requestChangingQuantity(currentTarget, target.quantity);
+        this.recalculateSubTotal();
+      }
     );
+  };
+
+  requestChangingQuantity = (id, finalQuantity) => {
+    fetch('http://localhost:8000/cart', {
+      method: 'PATCH',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        cart_id: id,
+        quantity: finalQuantity,
+      }),
+    }).catch(console.error);
   };
 
   increaseQuantity = event => {
@@ -192,7 +290,7 @@ export default class Cart extends Component {
             <h2 className='title'>장바구니</h2>
           </div>
         </div>
-        <div className='cartContainer' ref={ref => (this.cartResult = ref)}>
+        <div className='cartContainer' ref={ref => (this.cartContainer = ref)}>
           <div className='cartWrapper'>
             <form>
               <div className='cartList'>
@@ -217,12 +315,13 @@ export default class Cart extends Component {
                     </div>
                   </div>
                 </div>
-                {this.state.cartData.filter(item => item.storageTemp === 1)
-                  .length ? (
+                {this.state.cartData.filter(
+                  item => item.storage_temperature === 1
+                ).length ? (
                   <ItemField
                     type={0}
                     data={this.state.cartData.filter(
-                      item => item.storageTemp === 1
+                      item => item.storage_temperature === 1
                     )}
                     checkingItems={this.checkingItems}
                     checkedItems={this.state.checkedItems}
@@ -231,12 +330,13 @@ export default class Cart extends Component {
                     increaseQuantity={this.increaseQuantity}
                   />
                 ) : null}
-                {this.state.cartData.filter(item => item.storageTemp === 2)
-                  .length ? (
+                {this.state.cartData.filter(
+                  item => item.storage_temperature === 2
+                ).length ? (
                   <ItemField
                     type={1}
                     data={this.state.cartData.filter(
-                      item => item.storageTemp === 2
+                      item => item.storage_temperature === 2
                     )}
                     checkingItems={this.checkingItems}
                     checkedItems={this.state.checkedItems}
@@ -245,12 +345,16 @@ export default class Cart extends Component {
                     increaseQuantity={this.increaseQuantity}
                   />
                 ) : null}
-                {this.state.cartData.filter(item => item.storageTemp === 3)
-                  .length ? (
+                {this.state.cartData.filter(
+                  item => item.storage_temperature === 3
+                ).length ? (
                   <ItemField
                     type={2}
                     data={this.state.cartData.filter(
-                      item => item.storageTemp === 3
+                      item => item.storage_temperature === 3
+                    )}
+                    discounted={[...this.state.cartData].map(
+                      ele => ele.original_price - ele.sales_price
                     )}
                     checkingItems={this.checkingItems}
                     checkedItems={this.state.checkedItems}
@@ -287,9 +391,14 @@ export default class Cart extends Component {
                 </div>
               </div>
               <CartResult
+                ref={ref => (this.cartResult = ref)}
                 subTotal={this.state.subTotal}
                 data={this.state.checkedItems.length}
+                totalDiscount={this.state.totalDiscount}
+                totalEarnPoints={this.state.totalEarnPoints}
                 requestOrderItems={this.requestOrderItems}
+                userAddress={this.state.userAddress}
+                top={this.state.topCoords}
               />
             </form>
           </div>

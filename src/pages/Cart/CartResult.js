@@ -2,50 +2,19 @@ import { Component } from 'react';
 import './CartResult.scss';
 
 export default class CartResult extends Component {
-  constructor() {
-    super();
-    this.state = {
-      userAddress: [],
-    };
-  }
-
-  componentDidMount() {
-    this.requestUserAddress();
-  }
-
-  requestUserAddress = () => {
-    try {
-      fetch('/data/userAddress.json')
-        .then(res => res.json())
-        .then(data => {
-          const userData = data;
-          this.setState({
-            userAddress: userData,
-          });
-        });
-    } catch (err) {
-      this.setState({
-        userAddress: [],
-        error: err.message,
-      });
-    }
-  };
-
   render() {
     return (
-      <div className='CartResult'>
+      <div className='CartResult' style={{ top: `${this.props.top}px` }}>
         <div className='destinationContainer'>
           <div className='destinationTitle'>
             <h3>배송지</h3>
           </div>
-          {this.state.userAddress.length ? (
+          {this.props.userAddress ? (
             <div className='address'>
               <p className='userAddress'>
-                {this.state.userAddress[0]?.address}
+                {this.props.userAddress ? this.props.userAddress : ''}
               </p>
-              <span className='deliveryType'>
-                {this.state.userAddress[0]?.deliveryType}
-              </span>
+              <span className='deliveryType'>택배배송</span>
               <button
                 onClick={e => e.preventDefault()}
                 className='searchAddress'
@@ -82,7 +51,12 @@ export default class CartResult extends Component {
           <dl className='discountAmount'>
             <dt>상품할인금액</dt>
             <dd>
-              <span className='priceInt'>0</span>원
+              <span className='priceInt'>
+                {new Intl.NumberFormat('ko-KR').format(
+                  this.props.totalDiscount
+                )}
+              </span>
+              원
             </dd>
           </dl>
           <dl className='deliveryFee'>
@@ -101,8 +75,12 @@ export default class CartResult extends Component {
             </dd>
           </dl>
           <div className='rewardNotice'>
-            <span className='rewardBadge'>적립</span>로그인 후 회원등급에 따라
-            적립
+            <span className='rewardBadge'>적립</span>
+            {this.props.userAddress
+              ? `구매시 ${new Intl.NumberFormat('ko-KR').format(
+                  this.props.totalEarnPoints
+                )}원 적립`
+              : `로그인 후 회원등급에 따라 적립`}
           </div>
         </div>
         <div className='submitContainer'>
@@ -114,6 +92,9 @@ export default class CartResult extends Component {
           </button>
         </div>
         <ul className='paymentNotice'>
+          {this.props.userAddress ? (
+            <li>쿠폰/적립금은 주문서에서 사용 가능합니다</li>
+          ) : null}
           <li>
             '입금확인'상태일 때는 주문 내역 상세에서 직접 주문취소가 가능합니다.
           </li>

@@ -83,6 +83,15 @@ export default class Login extends Component {
         body: JSON.stringify(this.state),
       })
         .then(res => res.json())
+        .then(async res => {
+          const deleteCookie = name => {
+            document.cookie =
+              name + '=; expires=Thu, 01 Jan 1999 00:00:10 GMT;';
+          };
+          deleteCookie('jwt');
+          document.cookie = 'jwt=' + res.token;
+          return res;
+        })
         .then(res => {
           if (res.token) {
             this.props.history.push('/');

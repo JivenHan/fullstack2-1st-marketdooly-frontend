@@ -1,3 +1,5 @@
+@import '../../styles/_variables.scss';
+
 @mixin initBtn {
   display: block;
   margin: 0;
@@ -41,7 +43,7 @@
         font-weight: 500;
 
         i {
-          color: #5f0080;
+          color: $themeColorPrimary;
         }
       }
 
@@ -57,8 +59,8 @@
         margin-top: 17px;
         height: 36px;
         width: 244px;
-        color: #5f0080;
-        border: 1px solid #5f0080;
+        color: $themeColorPrimary;
+        border: 1px solid $themeColorPrimary;
         border-radius: 4px;
       }
     }
@@ -125,7 +127,7 @@
 
       &.active {
         color: #ffffff;
-        background-color: #5f0080;
+        background-color: $themeColorPrimary;
       }
     }
   }
