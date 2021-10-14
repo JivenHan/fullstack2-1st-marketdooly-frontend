@@ -16,7 +16,7 @@
     header {
       padding: 25px 0 20px 0;
       border-bottom: 1px solid #b2b2b2;
-      color: #{$primary};
+      color: $themeColorPrimary;
     }
 
     section {
@@ -35,9 +35,9 @@
       width: 150px;
       height: 45px;
       margin: 25px 0;
-      border: 1px solid #{$primary};
+      border: 1px solid $themeColorPrimary;
       color: #fff;
-      background-color: #{$primary};
+      background-color: $themeColorPrimary;
       font-size: 15px;
       letter-spacing: 2px;
     }

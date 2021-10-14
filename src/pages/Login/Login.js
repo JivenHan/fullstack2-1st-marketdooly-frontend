@@ -26,7 +26,14 @@ export default class Login extends Component {
       body: JSON.stringify(this.state),
     })
       .then(res => res.json())
-      .then(console.log);
+      .then(res => {
+        if (res.token) {
+          console.log(res.token);
+          this.props.history.push('/');
+        } else {
+          console.log('token error');
+        }
+      });
   };
 
   render() {

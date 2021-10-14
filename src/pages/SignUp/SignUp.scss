@@ -84,11 +84,11 @@
         width: 120px;
         height: 44px;
         margin-left: 7px;
-        border: 1px solid #{$primary};
+        border: 1px solid $themeColorPrimary;
         border-radius: 3px;
         font-size: 14px;
         font-weight: 700;
-        color: #{$primary};
+        color: $themeColorPrimary;
         line-height: 40px;
         text-align: center;
         background-color: #fff;
@@ -199,7 +199,7 @@
           float: right;
           border: none;
           font-size: 14px;
-          color: #{$primary};
+          color: $themeColorPrimary;
           line-height: 23px;
           background-color: #fff;
           cursor: pointer;
@@ -224,7 +224,7 @@
           margin: 10px 0 0 68px;
           padding-left: 20px;
           font-size: 13px;
-          color: #{$primary};
+          color: $themeColorPrimary;
           line-height: 20px;
           background: url(https://res.kurly.com/pc/service/common/2006/ico_sub_dot.svg)
             no-repeat;
@@ -245,7 +245,7 @@
       font-weight: 500;
       color: #fff;
       letter-spacing: 1px;
-      background-color: #{$primary};
+      background-color: $themeColorPrimary;
     }
   } // signUpContainer
 
