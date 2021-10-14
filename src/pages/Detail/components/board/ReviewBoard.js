@@ -1,25 +1,51 @@
 import React, { Component } from 'react';
 import Review from './Review';
-import './ReviewBoard.scss';
+import './Board.scss';
 
-class reviewBoard extends Component {
-  constructor() {
-    super();
+class ReviewBoard extends Component {
+  constructor(props) {
+    super(props);
     this.state = {
+      productId: props.productId,
       reviewCommentModal: false,
+      totalReviewCount: 0,
+      pageNumArray: [],
       reviewData: [],
     };
   }
 
   componentDidMount() {
-    fetch('http://localhost:3000/reviewMock.json')
+    const { productId } = this.state;
+    const url = `http://localhost:8000/products/reviews/count?productId=${productId}`;
+    fetch(url, {})
       .then(res => res.json())
       .then(data => {
-        this.setState({
-          reviewData: data.REVIEW_DATA,
-        });
+        console.log(data.totalCount);
+        const pageNum = parseInt(data.totalCount / 10 + 1);
+        this.setState(
+          {
+            totalReviewCount: data.totalCount,
+            pageNumArray: new Array(pageNum).fill(0),
+          },
+          this.getReviesByPageId(0)
+        );
       });
   }
+
+  getReviesByPageId = idx => {
+    const { productId } = this.state;
+    const offset = idx * 10;
+    const limit = 10;
+    const url = `http://localhost:8000/products/reviews/?productId=${productId}&offset=${offset}&limit=${limit}`;
+    fetch(url, {})
+      .then(res => res.json())
+      .then(data => {
+        console.log(data);
+        this.setState({
+          reviewData: data || [],
+        });
+      });
+  };
 
   isValidInputReviewPopup = () => {
     const { reviewCommentModal } = this.state;
@@ -49,9 +75,11 @@ class reviewBoard extends Component {
   };
 
   render() {
-    const { reviewCommentModal, reviewData } = this.state;
+    const { getReviesByPageId } = this;
+    const { reviewRef } = this.props;
+    const { reviewCommentModal, pageNumArray, reviewData } = this.state;
     return (
-      <div className='Board'>
+      <div className='Board' ref={reviewRef}>
         <div className='boardAlign'>
           <div className='board'>
             <div className='titleAlign'>
@@ -109,22 +137,25 @@ class reviewBoard extends Component {
             </div>
             <div className='commentAlign commentPageButn'>
               <span className='firstPageButn commentAlign'>〈〈</span>
-              <span className='commentStyle commentAlign'>〈</span>
-              <span className='commentStyle commentAlign'>1</span>
-              <span className='commentStyle commentAlign'>2</span>
-              <span className='commentStyle commentAlign'>〉</span>
-              <span className='commentStyle commentAlign'>〉〉</span>
+              <span className='comment commentAlign'>〈</span>
+              {pageNumArray.map((el, idx) => {
+                return (
+                  <span
+                    className='comment commentAlign'
+                    onClick={() => getReviesByPageId(idx)}
+                  >
+                    {idx + 1}
+                  </span>
+                );
+              })}
+              <span className='comment commentAlign'>〉</span>
+              <span className='comment commentAlign'>〉〉</span>
             </div>
-            <div className={reviewCommentModal ? '' : 'contentHide'}>
+            {reviewCommentModal && (
               <div className='modalAlign'>
                 <div className='modalPopUp'>
                   <div className='modalTitle'>상품 후기작성</div>
-                  <div className='modalProductNav'>
-                    <span className='modalProductImg' img='/'>
-                      (상품 사진)
-                    </span>
-                    (카테고리, 상품명)
-                  </div>
+                  {/* <div className='modalProductNav'></div> */}
                   <div className='commentTitle'>
                     <span>제목</span>
                     <textarea
@@ -152,7 +183,7 @@ class reviewBoard extends Component {
                   </div>
                 </div>
               </div>
-            </div>
+            )}
           </div>
         </div>
       </div>
@@ -160,4 +191,4 @@ class reviewBoard extends Component {
   }
 }
 
-export default reviewBoard;
+export default ReviewBoard;

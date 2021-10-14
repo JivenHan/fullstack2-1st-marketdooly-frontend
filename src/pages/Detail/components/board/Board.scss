@@ -1,14 +1,7 @@
 .Board {
   .displayContent {
-    display: block;
-    width: 1000px;
-    padding-top: 20px;
-    padding-left: 10px;
+    padding: 30px 20px 20px 40px;
     border-top: 1px solid #eee;
-  }
-
-  .contentHide {
-    display: none;
   }
 
   .boardAlign {
@@ -16,8 +9,8 @@
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    margin-top: 200px;
     margin-bottom: 100px;
+    padding-top: 150px;
 
     .board {
       width: 1000px;
@@ -73,7 +66,7 @@
             padding-top: 22px;
             padding-bottom: 23px;
             color: #353535;
-            font-size: 12px;
+            font-size: 13px;
             font-weight: 400px;
             border-top: 1px solid #eee;
           }
@@ -89,10 +82,6 @@
 
           .num {
             width: 70px;
-          }
-
-          .reviewTitle {
-            width: auto;
           }
 
           .userClass {
@@ -116,11 +105,7 @@
           }
         }
         .Review {
-          .reviewTitle {
-            margin-left: 20px;
-            font-weight: bold;
-            font-size: 13px;
-          }
+          font-size: 14px;
 
           .reviewImage {
             margin-left: 20px;
@@ -128,8 +113,7 @@
             padding-bottom: 5px;
           }
 
-          .reviewComment {
-            margin-left: 20px;
+          .reviewText {
             font-size: 13px;
           }
 
@@ -190,7 +174,7 @@
           cursor: pointer;
         }
 
-        .commentStyle {
+        .comment {
           width: 34px;
           height: 34px;
           border: 1px solid #ddd;
@@ -207,27 +191,22 @@
         align-items: center;
 
         .modalPopUp {
-          overflow: hidden;
           width: 800px;
-          height: 700px;
-          position: absolute;
           position: fixed;
           top: 50%;
           left: 50%;
-          transform: translate(-50%, -50%);
-          z-index: 100;
           border: 3px solid #1e7700;
           border-radius: 12px;
           background-color: #fff;
+          transform: translate(-50%, -50%);
+          overflow: hidden;
+          z-index: 100;
 
           .modalTitle {
             width: 700px;
+            padding: 25px 0 25px 30px;
             font-size: 24px;
             font-weight: 700px;
-            padding-top: 25px;
-            padding-bottom: 25px;
-            padding-left: 10px;
-            margin-left: 20px;
           }
 
           .modalProductNav {
@@ -256,13 +235,14 @@
               margin-left: 30px;
               border: 1px solid #1e7700;
               border-radius: 5px;
+              line-height: 30px;
               resize: none;
             }
           }
           .commentContent {
             display: flex;
             align-items: center;
-            padding: 30px;
+            padding: 0 30px 20px 30px;
 
             .commentContentInput {
               width: 650px;
@@ -276,21 +256,23 @@
           }
           .modalButnAlign {
             display: flex;
-            justify-content: space-around;
+            justify-content: right;
+            padding: 0 35px 30px 0;
 
             .modalButn {
               width: 100px;
+              margin-right: 20px;
               padding: 15px;
               border: 1px solid #1e7700;
               border-radius: 10px;
               cursor: pointer;
               color: #fff;
               background-color: #1e7700;
-            }
 
-            .modalButn:hover {
-              color: #1e7700;
-              background-color: #fff;
+              &:hover {
+                color: #1e7700;
+                background-color: #fff;
+              }
             }
           }
         }

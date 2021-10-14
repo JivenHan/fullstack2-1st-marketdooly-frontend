@@ -3,6 +3,7 @@ import CartAdd from './components/CartAdd';
 import ScrollBtn from './components/ScrollBtn';
 import Desc from './components/Desc';
 import Label from './components/Label';
+import ReviewBoard from './components/board/ReviewBoard';
 import CustomerCenter from './components/CustomerCenter';
 import BottomLayer from './components/BottomLayer';
 import './Detail.scss';
@@ -16,6 +17,7 @@ export default class Detail extends Component {
     this.reviewRef = React.createRef();
     this.inquiryRef = React.createRef();
     this.state = {
+      productId: '7',
       productDetail: {},
       detailDesc: {},
       checkPoint: {},
@@ -99,7 +101,7 @@ export default class Detail extends Component {
       })
       .then(data => {
         this.setState({
-          productDetail: data[0],
+          productDetail: data[0] || {},
         });
       })
       .catch(err => {
@@ -129,7 +131,8 @@ export default class Detail extends Component {
   };
 
   render() {
-    const { productDetail, quantity, isBottomLayerUp, scrollBtns } = this.state;
+    const { productId, productDetail, quantity, isBottomLayerUp, scrollBtns } =
+      this.state;
     const totalPrice = quantity * productDetail.sales_price;
     const totalEarnPoint = quantity * productDetail.earn_points;
 
@@ -178,12 +181,11 @@ export default class Detail extends Component {
 
           <CustomerCenter template={productDetail.template_image} />
 
-          <div className='reviewLocation' ref={this.reviewRef}>
-            <span>후기 들어갈 자리</span>
-          </div>
-          <div className='inquiryLocation' ref={this.inquiryRef}>
+          <ReviewBoard productId={productId} reviewRef={this.reviewRef} />
+
+          {/* <div className='inquiryLocation' ref={this.inquiryRef}>
             <span>문의 들어갈 자리</span>
-          </div>
+          </div> */}
         </div>
 
         {isBottomLayerUp && (

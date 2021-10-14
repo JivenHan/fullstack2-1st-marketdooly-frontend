@@ -4,15 +4,16 @@ class Review extends Component {
   render() {
     const {
       id,
-      reviewTitle,
+      title,
       userGrade,
       userName,
-      dateTime,
+      createdAt,
       likeCount,
       viewCount,
-      productCategory,
-      productName,
-      reviewText,
+      // categoryName,
+      // categorySubName,
+      // productName,
+      text,
       isOpenReviewBox,
     } = this.props;
 
@@ -22,29 +23,23 @@ class Review extends Component {
           <tbody>
             <tr onClick={() => this.props.clickReviewHandler(id)}>
               <td className='num'>{id}</td>
-              <td className='reviewTitle'>{reviewTitle}</td>
+              <td className='reviewTitle'>{title}</td>
               <td className='userClass'>{userGrade}</td>
               <td className='writer'>{userName}</td>
-              <td className='tdDateTime'>{dateTime}</td>
+              <td className='tdDateTime'>{createdAt.substring(0, 10)}</td>
               <td className='selectNumber'>{likeCount}</td>
               <td className='viewNumber'>{viewCount}</td>
             </tr>
           </tbody>
         </table>
-        <div className={isOpenReviewBox ? 'displayContent' : 'contentHide'}>
-          <div>
-            <h2 className='reviewTitle'>
-              [{productCategory}]{productName}
-            </h2>
+        {isOpenReviewBox && (
+          <div className='displayContent'>
+            <p className='reviewText'>{text}</p>
+            <div className='helpfulButnAlign'>
+              <button className='helpfulButnStyle'>도움이 돼요</button>
+            </div>
           </div>
-          <div className='reviewImage'>
-            <img src='/' alt='err' />
-          </div>
-          <div className='reviewComment'>{reviewText}</div>
-          <div className='helpfulButnAlign'>
-            <button className='helpfulButnStyle'>도움이 돼요</button>
-          </div>
-        </div>
+        )}
       </div>
     );
   }
