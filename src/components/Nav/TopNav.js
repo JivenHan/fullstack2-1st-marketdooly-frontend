@@ -10,6 +10,7 @@ export default class TopNav extends Component {
     this.state = {
       categoryIconData: [],
       categoryData: [],
+      categoriesArray: [],
       isTopAdBannerClosed: false,
       isLnbUserCsVisible: false,
       isCategoriesVisible: false,
@@ -20,7 +21,6 @@ export default class TopNav extends Component {
     fetch('data/categoryIconData.json')
       .then(res => res.json())
       .then(res => {
-        console.log(res);
         this.setState({
           categoryIconData: res,
         });
@@ -29,9 +29,21 @@ export default class TopNav extends Component {
     fetch('http://localhost:8000/main/category')
       .then(res => res.json())
       .then(res => {
-        console.log(res);
         this.setState({
           categoryData: res,
+          categoriesArray: [res[0].categoryName],
+        });
+      })
+      .then(res => {
+        let redundantCategoriesArray = [];
+        this.state.categoryData.map(x => {
+          redundantCategoriesArray.push(x.categoryName);
+        });
+        let categoriesArray = redundantCategoriesArray.filter((el, idx) => {
+          return redundantCategoriesArray.indexOf(el) === idx;
+        });
+        this.setState({
+          categoriesArray: categoriesArray,
         });
       });
   }
@@ -61,7 +73,11 @@ export default class TopNav extends Component {
   };
 
   render() {
+    console.log('this.state.categoryData>>>>>>>>>>>>>>>>>>>>>>');
     console.log(this.state.categoryData);
+    console.log('this.state.categoriesArray>>>>>>>>>>>>>>>>>>>>>>');
+    console.log(this.state.categoriesArray);
+
     return (
       <div className='TopNav'>
         {!this.state.isTopAdBannerClosed && (
@@ -157,27 +173,29 @@ export default class TopNav extends Component {
               }`}
             >
               <ul className='parentCategoriesContainer'>
-                {this.state.categoryIconData.map(categoryIconData => {
-                  return (
-                    <li
-                      className='parentCategoryBg'
-                      style={{
-                        backgroundImage: `url(${categoryIconData.iconUrl})`,
-                      }}
-                    ></li>
-                  );
-                })}
-                {this.state.categoryData.map(categoryDatum => {
-                  return (
-                    <div className='parentCategoryNameLinkWrapper'>
-                      <Link className='parentCategoryNameLink' to='/'>
-                        <h3 className='parentCategoryName'>
-                          {categoryDatum.categoryName}
-                        </h3>
-                      </Link>
-                    </div>
-                  );
-                })}
+                {this.state.categoryIconData !== [] &&
+                  this.state.categoryIconData.map(categoryIconData => {
+                    return (
+                      <li
+                        className='parentCategoryBg'
+                        style={{
+                          backgroundImage: `url(${categoryIconData.iconUrl})`,
+                        }}
+                      ></li>
+                    );
+                  })}
+                {this.state.categoriesArray !== [] &&
+                  this.state.categoriesArray.map(categoryDatum => {
+                    return (
+                      <div className='parentCategoryNameLinkWrapper'>
+                        <Link className='parentCategoryNameLink' to='/'>
+                          <h3 className='parentCategoryName'>
+                            {categoryDatum}
+                          </h3>
+                        </Link>
+                      </div>
+                    );
+                  })}
                 {/* {this.state.categoryData.map(categoryDatum => {
                   return (
                     <div className='parentCategoryNameLinkWrapper'>
