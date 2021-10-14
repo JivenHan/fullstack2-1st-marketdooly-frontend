@@ -1,13 +1,22 @@
 import { Component } from 'react';
 import { Link } from 'react-router-dom';
+import AlertPopup from '../SignUp/components/AlertPopup';
+import StringUtil from '../../utils/StringUtil';
 import './Login.scss';
 
 export default class Login extends Component {
+  requiredInputMap = {
+    account: '아이디',
+    password: '비밀번호',
+  };
+
   constructor(props) {
     super(props);
     this.state = {
       account: '',
       password: '',
+      alertPopupMessage: '',
+      isAlertPopupOpened: '',
     };
   }
 
@@ -18,27 +27,79 @@ export default class Login extends Component {
     });
   };
 
-  login = () => {
-    const url = 'http://localhost:8000/users/login';
-    fetch(url, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(this.state),
-    })
-      .then(res => res.json())
-      .then(res => {
-        if (res.token) {
-          console.log(res.token);
-          this.props.history.push('/');
-        } else {
-          console.log('token error');
+  checkInputValidation = key => {
+    const { requiredInputMap } = this;
+    const { account, password } = this.state;
+
+    let alertPopupMessage = '';
+    let isAlertPopupOpened = false;
+
+    // 필수 입력 유효성 검증
+    if (Object.keys(requiredInputMap).includes(key)) {
+      if (StringUtil.isNull(this.state[key])) {
+        alertPopupMessage = `${requiredInputMap[key]}을(를) 입력해주세요`;
+        isAlertPopupOpened = true;
+      } else {
+        let regExp = '';
+        switch (key) {
+          case 'account':
+            regExp = /^[0-9]*[a-z]+[0-9]*$/g;
+            isAlertPopupOpened = account.length < 6 || !regExp.test(account);
+            break;
+          case 'password':
+            isAlertPopupOpened = password.length < 10;
+            break;
+          default:
+            break;
         }
-      });
+        alertPopupMessage = `${requiredInputMap[key]} 형식을 확인해주세요`;
+      }
+    }
+
+    this.setState({ alertPopupMessage, isAlertPopupOpened });
+    return !isAlertPopupOpened;
+  };
+
+  clickPopupConfirmBtn = () => {
+    this.setState({ isAlertPopupOpened: false });
+  };
+
+  login = () => {
+    const keyList = ['account', 'password'];
+
+    let isInputValid = true;
+    for (const key of keyList) {
+      if (!this.checkInputValidation(key)) {
+        isInputValid = false;
+        break;
+      }
+    }
+
+    if (isInputValid) {
+      const url = 'http://localhost:8000/users/login';
+      fetch(url, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(this.state),
+      })
+        .then(res => res.json())
+        .then(res => {
+          if (res.token) {
+            this.props.history.push('/');
+          } else {
+            this.setState({
+              alertPopupMessage: '회원 정보가 일치하지 않습니다',
+              isAlertPopupOpened: true,
+            });
+          }
+        });
+    }
   };
 
   render() {
-    const { handleInput, login } = this;
-    const { account, password } = this.state;
+    const { handleInput, clickPopupConfirmBtn, login } = this;
+    const { account, password, alertPopupMessage, isAlertPopupOpened } =
+      this.state;
 
     const isValidAccount = account.length > 0; // 상세 로직은 추후에 반영
     const isValidPw = password.length > 0; // 상세 로직은 추후에 반영
@@ -89,6 +150,15 @@ export default class Login extends Component {
           >
             회원가입
           </button>
+        </div>
+        <div className='popupContainer'>
+          {isAlertPopupOpened && <div className='dim'></div>}
+          {isAlertPopupOpened && (
+            <AlertPopup
+              alertMessage={alertPopupMessage}
+              clickConfirmBtn={clickPopupConfirmBtn}
+            />
+          )}
         </div>
       </div>
     );
