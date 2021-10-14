@@ -21,19 +21,19 @@ export default class CartAdd extends Component {
     const { layerOn } = this.state;
     const {
       observerRef,
-      nameKor,
-      shortDesc,
-      salesPrice,
-      discountRate,
-      originalPrice,
-      earnPoint,
-      saleUnit,
-      weightOrCapacity,
-      deliveryCategory,
-      originCountry,
-      packageType,
-      packageMessage,
-      notification,
+      name,
+      summary,
+      sales_price,
+      discount_rate,
+      original_price,
+      earn_point,
+      sales_unit,
+      weight_or_capacity,
+      delivery_type,
+      origin_country,
+      packaging,
+      package_message,
+      notice,
       qauntityMinus,
       quantity,
       qauntityPlus,
@@ -44,30 +44,30 @@ export default class CartAdd extends Component {
     return (
       <div className='productDetailCartAdd' ref={observerRef}>
         <p className='productName'>
-          <strong className='nameKor'>{nameKor}</strong>
-          <span className='shortDesc'>{shortDesc}</span>
+          <strong className='nameKor'>{name}</strong>
+          <span className='shortDesc'>{summary}</span>
         </p>
-        {discountRate !== 0 ? <p className='productDcInfo'>회원할인가</p> : ''}
+        {discount_rate !== 0 ? <p className='productDcInfo'>회원할인가</p> : ''}
         <p className='productPrice'>
           <span className='dcPriceRow'>
             <span className='discount'>
               <span className='dcPrice'>
-                {addComma(salesPrice)}
+                {addComma(sales_price)}
                 <span className='dcWon'>원</span>
               </span>
-              {discountRate !== 0 ? (
+              {discount_rate !== 0 ? (
                 <span className='discountRate'>
-                  {discountRate}
-                  {discountRate && <span className='dcPer'>%</span>}
+                  {discount_rate}
+                  {discount_rate && <span className='dcPer'>%</span>}
                 </span>
               ) : (
                 ''
               )}
             </span>
-            {discountRate !== 0 ? (
+            {discount_rate !== 0 ? (
               <span className='originalPriceRow' onClick={this.handleLayer}>
                 <span className='originalPrice'>
-                  {addComma(originalPrice)}
+                  {addComma(original_price)}
                   <span className='won'>원</span>
                 </span>
                 <img
@@ -104,39 +104,39 @@ export default class CartAdd extends Component {
             <span className='benefitWelcome'>웰컴 5%</span>
             <span className='earnPoint'>
               개당
-              <strong className=''> {addComma(earnPoint)}원 적립</strong>
+              <strong className=''> {addComma(earn_point)}원 적립</strong>
             </span>
           </span>
         </p>
         <div className='productInfo'>
           <dl className='productInfoListFirst'>
             <dt className='productInfoListTitleFirst'>판매단위</dt>
-            <dd className='productInfoListDescFirst'>{saleUnit}</dd>
+            <dd className='productInfoListDescFirst'>{sales_unit}</dd>
           </dl>
           <dl className='productInfoList'>
             <dt className='productInfoListTitle'>중량/용량</dt>
-            <dd className='productInfoListDesc'>{weightOrCapacity}</dd>
+            <dd className='productInfoListDesc'>{weight_or_capacity}</dd>
           </dl>
           <dl className='productInfoList'>
             <dt className='productInfoListTitle'>배송구분</dt>
-            <dd className='productInfoListDesc'>{deliveryCategory}</dd>
+            <dd className='productInfoListDesc'>{delivery_type}</dd>
           </dl>
           <dl className='productInfoList'>
             <dt className='productInfoListTitle'>원산지</dt>
-            <dd className='productInfoListDesc'>{originCountry}</dd>
+            <dd className='productInfoListDesc'>{origin_country}</dd>
           </dl>
           <dl className='productInfoList'>
             <dt className='productInfoListTitle'>포장타입</dt>
             <dd className='productInfoListDesc'>
-              {packageType}
+              {packaging}
               <strong className='productInfoListDescStr'>
-                {packageMessage}
+                {package_message}
               </strong>
             </dd>
           </dl>
           <dl className='productInfoList'>
             <dt className='productInfoListTitle'>안내사항</dt>
-            <dd className='productInfoListDesc'>{notification}</dd>
+            <dd className='productInfoListDesc'>{notice}</dd>
           </dl>
         </div>
         <div className='cartAdd'>
@@ -180,7 +180,11 @@ export default class CartAdd extends Component {
             <button className='restockAlarmBtn' type='button'>
               재입고 알림
             </button>
-            <button className='cartAddBtn' type='button'>
+            <button
+              className='cartAddBtn'
+              type='button'
+              onClick={this.props.addToCart}
+            >
               장바구니 담기
             </button>
           </div>

@@ -15,26 +15,5 @@
   "originCountry": "국내",
   "packageType": "냉장/종이포장",
   "packageMessage": "택배배송은 에코포장이 스티로폼으로 대체됩니다.",
-  "notification": "- 식품 특성상 중량은 5% 내외의 차이가 발생할 수 있습니다. \n- 해당 상품은 여러 협력업체에서 납품하고 있는 상품으로 수령 시, 상이한 협력업체의 상품을 받아보실 수 있습니다.",
-  "detailDesc": {
-    "detailDescImg": "https://img-cf.kurly.com/shop/data/goodsview/20201228/gv20000146996_1.jpg",
-    "detailDescTitle": "베타카로틴이 풍부한 주황빛 채소",
-    "detailDescName": "친환경 당근",
-    "detailDescArticle": "선명한 색감으로 식탁에 산뜻한 분위기를 더해주는 채소, 아름다운 빛깔뿐만 아니라 풍부한 영양소까지 자랑하는 '당근'입니다. 비타민 A전구체인 베타카로틴을 다량 함유하고 있어 예로부터 웰빙 식재료로 사랑받고 있지요. 컬리는 이 좋은 당근을 깐깐하게 엄선했답니다. 농약없이 건강하게 재배한 친환경 당근이지요. 별도의 세척 및 손질 과정 없이 수확한 상태 그대로 신선하게 전해드릴게요. 곱게 갈아서 영양 주스로, 장에 찍어 먹는 아삭아삭한 반찬으로 다양하게 활용해 보세요."
-  },
-  "additionalInfo": "/image/carrotAddInfo.png",
-  "detailInfo": {
-    "detailInfoImg": "https://img-cf.kurly.com/shop/data/goodsview/20201228/gv10000146998_1.jpg",
-
-    "productName": "친환경 당근",
-    "certification": "무농약 인증",
-    "packagingUnit": "500g (2~4개입)",
-    "matterNote": "유전자변형 농산물 미포함",
-    "producer": "제품 별도 표기 라벨 참조",
-    "howToStore": "그늘지고 서늘한 곳에 흙이 묻어있는 채로 신문지에 싸서 보관하세요.",
-    "originCountry": "국내산",
-    "serviceCall": "마켓컬리 고객행복센터 (1644-1107)",
-    "produceDate": "농산물이므로 별도의 유통기한은 없으나 가급적 빨리 드시길 바랍니다."
-  },
-  "customerCenter": "/image.customerCenter.png"
+  "notification": "- 식품 특성상 중량은 5% 내외의 차이가 발생할 수 있습니다. \n- 해당 상품은 여러 협력업체에서 납품하고 있는 상품으로 수령 시, 상이한 협력업체의 상품을 받아보실 수 있습니다."
 }
