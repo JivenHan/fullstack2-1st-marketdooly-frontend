@@ -16,7 +16,7 @@ export default class Login extends Component {
       account: '',
       password: '',
       alertPopupMessage: '',
-      isAlertPopupOpened: '',
+      isAlertPopupOpened: false,
     };
   }
 
@@ -43,7 +43,7 @@ export default class Login extends Component {
         let regExp = '';
         switch (key) {
           case 'account':
-            regExp = /^[0-9]*[a-z]+[0-9]*$/g;
+            regExp = /^[a-z0-9]*[a-z]+[a-z0-9]*$/g;
             isAlertPopupOpened = account.length < 6 || !regExp.test(account);
             break;
           case 'password':

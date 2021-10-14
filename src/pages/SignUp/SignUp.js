@@ -151,7 +151,7 @@ export default class SignUp extends Component {
         let regExp = '';
         switch (key) {
           case 'account':
-            regExp = /^[0-9]*[a-z]+[0-9]*$/g;
+            regExp = /^[a-z0-9]*[a-z]+[a-z0-9]*$/g;
             isAlertPopupOpened = account.length < 6 || !regExp.test(account);
             break;
           case 'password':
@@ -161,7 +161,7 @@ export default class SignUp extends Component {
             isAlertPopupOpened = password !== passwordConfirm;
             break;
           case 'email':
-            regExp = /^[a-z0-9]+@[a-z0-9.]+$/gi;
+            regExp = /^[a-z0-9]+@[a-z0-9]+.[a-z0-9]+$/gi;
             isAlertPopupOpened = !regExp.test(email);
             break;
           case 'phoneNumber':
