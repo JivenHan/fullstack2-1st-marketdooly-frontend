@@ -51,16 +51,16 @@
 
         &.btnFind.valid {
           margin-bottom: 10px;
-          border: 1px solid #5f0080;
-          background-color: #5f0080;
+          border: 1px solid $themeColorPrimary;
+          background-color: $themeColorPrimary;
           color: #fff;
         }
 
         &.btnFind.invalid {
           margin-bottom: 10px;
-          border: 1px solid #5f0080;
+          border: 1px solid $themeColorPrimary;
           background-color: #fff;
-          color: #5f0080;
+          color: $themeColorPrimary;
         }
       }
     }
