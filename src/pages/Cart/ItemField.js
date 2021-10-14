@@ -54,7 +54,14 @@ export default class ItemField extends Component {
         </div>
         <ul className={`storeType ${this.state.isFieldOpened ? '' : 'hidden'}`}>
           {this.props.data.map(data => {
-            const { id, name, price, quantity, thumbUrl } = data;
+            const {
+              id,
+              name,
+              sales_price,
+              quantity,
+              thumbnail_image,
+              original_price,
+            } = data;
             const [boolean] = [...this.props.checkedItems].filter(
               ele => ele.id === id
             );
@@ -63,14 +70,15 @@ export default class ItemField extends Component {
                 key={id}
                 productId={id}
                 name={name}
-                price={price}
+                sales_price={sales_price}
                 quantity={quantity}
-                thumbUrl={thumbUrl}
+                thumbnail_image={thumbnail_image}
                 checkingItems={this.props.checkingItems}
                 checkedItems={boolean}
                 deleteOneItem={this.props.deleteOneItem}
                 decreaseQuantity={this.props.decreaseQuantity}
                 increaseQuantity={this.props.increaseQuantity}
+                original_price={original_price}
               />
             );
           })}

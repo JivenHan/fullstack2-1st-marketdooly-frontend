@@ -11,7 +11,7 @@ export default class TopNav extends Component {
       categoryIconData: [],
       categoryData: [],
       categoriesArray: [],
-      subCategoriesArray: [],
+      entireSubCategoriesArray: [],
       isTopAdBannerClosed: false,
       isLnbUserCsVisible: false,
       isCategoriesVisible: false,
@@ -49,12 +49,24 @@ export default class TopNav extends Component {
         });
       })
       .then(() => {
-        let subCategoriesArray = [1, 23, 41];
+        //subCategories 분리
+        console.log('@@@@@@@@@@@@');
+        console.log(this.state.entireSubCategoriesArray);
+
+        let entireSubCategoriesArray = [1, 23, 41];
         this.setState({
-          subCategoriesArray: subCategoriesArray,
+          entireSubCategoriesArray: entireSubCategoriesArray,
         });
       });
   }
+
+  logout = () => {
+    const deleteCookie = name => {
+      document.cookie = name + '=; expires=Thu, 01 Jan 1999 00:00:10 GMT;';
+    };
+    deleteCookie('jwt');
+    this.props.history.push('/');
+  };
 
   closeTopAdBanner = () => {
     this.setState({ isTopAdBannerClosed: true });
@@ -97,6 +109,8 @@ export default class TopNav extends Component {
     console.log(this.state.categoryData);
     console.log('this.state.categoriesArray>>>>>>>>>>>>>>>>>>>>>>');
     console.log(this.state.categoriesArray);
+    console.log('this.state.entireSubCategoriesArray>>>>>>>>>>>>>>>>>>>>>>');
+    console.log(this.state.entireSubCategoriesArray);
 
     return (
       <div className='TopNav'>
@@ -147,9 +161,9 @@ export default class TopNav extends Component {
               onMouseOver={this.showHiddenlnbUserCs}
               onMouseOut={this.hideHiddenlnbUserCs}
             >
-              <Link className='headerUserItem2' to='/login'>
+              <span className='headerUserItem3' onClick={this.logout}>
                 고객센터
-              </Link>
+              </span>
               <img
                 className='toggleIcon'
                 alt='toggleIcon'
@@ -194,9 +208,10 @@ export default class TopNav extends Component {
             >
               <ul className='parentCategoriesContainer'>
                 {this.state.categoryIconData !== [] &&
-                  this.state.categoryIconData.map(categoryIconData => {
+                  this.state.categoryIconData.map((categoryIconData, i) => {
                     return (
                       <li
+                        key={i}
                         className='parentCategoryBg'
                         onMouseOver={this.showSubCategories}
                         onMouseOut={this.hideSubCategories}
@@ -227,8 +242,8 @@ export default class TopNav extends Component {
                       : 'subCategoryBg hidden'
                   }
                 ></li>
-                {this.state.subCategoriesArray !== [] &&
-                  this.state.subCategoriesArray.map(subCategoryDatum => {
+                {this.state.entireSubCategoriesArray !== [] &&
+                  this.state.entireSubCategoriesArray.map(subCategoryDatum => {
                     return (
                       <div className='subCategoryNameLinkWrapper'>
                         <h3 className='subCategoryNameeeeeeeeee'>
@@ -256,7 +271,7 @@ export default class TopNav extends Component {
             <button className='gnbSetLocationButton' type='button'>
               <LocationIconSvg strokeColor={'#333'} />
             </button>
-            <Link className='gnbGoToCart' to='../../pages/Login/Login'>
+            <Link className='gnbGoToCart' to='/cart'>
               <CartIconSvg strokeColor={'#333'} />
             </Link>
           </div>

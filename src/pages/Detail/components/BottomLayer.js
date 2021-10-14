@@ -18,12 +18,12 @@ export default class BottomLayer extends Component {
   render() {
     const { isLayerClicked } = this.state;
     const {
-      nameKor,
+      name,
       qauntityMinus,
       quantity,
       qauntityPlus,
-      originalPrice,
-      salesPrice,
+      original_price,
+      sales_price,
       totalPrice,
       totalEarnPoint,
     } = this.props;
@@ -37,7 +37,7 @@ export default class BottomLayer extends Component {
           className={'botLayerContens ' + (isLayerClicked ? '' : 'layerDown')}
         >
           <div className='botLayerSetQuantity'>
-            <div className='botLayerProductName'>{nameKor}</div>
+            <div className='botLayerProductName'>{name}</div>
             <div className='botLayeQuantitySet'>
               <div className='botLayerBtns'>
                 <button
@@ -54,13 +54,13 @@ export default class BottomLayer extends Component {
               </div>
               {this.props.discountRate !== 0 ? (
                 <span className='botLayerBtnOriginalPrice'>
-                  {addComma(originalPrice)} 원
+                  {addComma(original_price)} 원
                 </span>
               ) : (
                 ''
               )}
               <span className='botLayerBtnSalesPrice'>
-                {addComma(salesPrice)} 원
+                {addComma(sales_price)} 원
               </span>
             </div>
           </div>
@@ -80,7 +80,12 @@ export default class BottomLayer extends Component {
           </div>
           <div className='botLayerCartBtns'>
             <button className='botLayerRestockAlarmBtn'>재입고 알림</button>
-            <button className='botLayerCartAddBtn'>장바구니 담기</button>
+            <button
+              className='botLayerCartAddBtn'
+              onClick={this.props.addToCart}
+            >
+              장바구니 담기
+            </button>
           </div>
         </div>
       </div>

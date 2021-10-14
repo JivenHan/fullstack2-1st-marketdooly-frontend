@@ -174,22 +174,22 @@
               background-color: #f7f7f7;
             }
           }
-          .parentCategoryNameLinkWrapper {
-            padding-top: 13px;
-            padding-left: 50px;
-            height: 39px;
+          // .parentCategoryNameLinkWrapper {
+          //   padding-top: 13px;
+          //   padding-left: 50px;
+          //   height: 39px;
 
-            .parentCategoryNameLink {
-              position: relative;
-              top: -741px;
-              color: #4c4c4c;
-              font-size: 14px;
-              text-decoration: none;
-            }
-            .parentCategoryNameLink:hover {
-              color: #5f0080;
-            }
+          .parentCategoryNameLink {
+            position: relative;
+            top: -741px;
+            color: #4c4c4c;
+            font-size: 14px;
+            text-decoration: none;
           }
+          .parentCategoryNameLink:hover {
+            color: #5f0080;
+          }
+          // }
         }
 
         .subCategoriesContainer {
