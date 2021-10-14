@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import './Board.scss';
 
 class InquirBoard extends Component {
   constructor() {
