@@ -174,27 +174,28 @@
               background-color: #f7f7f7;
             }
           }
-          // .parentCategoryNameLinkWrapper {
-          //   padding-top: 13px;
-          //   padding-left: 50px;
-          //   height: 39px;
+          .parentCategoryNameLinkWrapper {
+            padding-top: 13px;
+            padding-left: 50px;
+            height: 39px;
 
-          .parentCategoryNameLink {
-            position: relative;
-            top: -741px;
-            color: #4c4c4c;
-            font-size: 14px;
-            text-decoration: none;
+            .parentCategoryNameLink {
+              position: relative;
+              top: -741px;
+              color: #4c4c4c;
+              font-size: 14px;
+              text-decoration: none;
+            }
+            .parentCategoryNameLink:hover {
+              color: #5f0080;
+            }
           }
-          .parentCategoryNameLink:hover {
-            color: #5f0080;
-          }
-          // }
         }
 
         .subCategoriesContainer {
           position: absolute;
           .subCategoryBg {
+            z-index: -1;
             position: relative;
             left: 204px;
             padding-left: 50px;
@@ -202,25 +203,62 @@
             width: 204px;
             line-height: 39px;
             background-color: #f7f7f7;
-            &.hidden {
-              display: none;
-            }
           }
-          .subCategoryNameLinkWrapper {
-            padding-top: 13px;
-            padding-left: 50px;
-            height: 39px;
-
-            .subCategoryNameLink {
+          // .subCategoryNameLinkWrapper {
+          //   padding-top: 13px;
+          //   padding-left: 50px;
+          //   height: 39px;
+          .subCategoriesForCategory {
+            position: relative;
+            top: -741px;
+            .subCategoryBgCover {
+              z-index: 0;
               position: relative;
-              // top: -741px;
+              left: 204px;
+              padding-left: 50px;
+              height: 39px;
+              width: 204px;
+              line-height: 39px;
+              background-color: #f7f7f7;
+            }
+            .subCategoryNameLinkCover {
+              z-index: 1;
+              position: relative;
+              // top: -39px;
+              // left: 204px;
+              // margin-left: 204px;
               color: #4c4c4c;
               font-size: 14px;
               text-decoration: none;
+              &:nth-child(3) {
+                z-index: 2;
+                position: relative;
+                // top: -39px;
+                // left: 204px;
+                color: red;
+                font-size: 14px;
+                text-decoration: none;
+              }
+              .subCategoryNameCover:hover {
+                color: #5f0080;
+              }
             }
-            .subCategoryNameLink:hover {
-              color: #5f0080;
-            }
+          }
+          .subCategoriesForCategory:nth-child(4) {
+            // display: none;
+            position: relative;
+            top: -39px;
+            background-color: green;
+          }
+          .subCategoriesForCategory:nth-child(2) {
+            // display: none;
+            position: relative;
+            top: -39px;
+            background-color: purple;
+          }
+          // }
+          &.hidden {
+            display: none;
           }
         }
       }

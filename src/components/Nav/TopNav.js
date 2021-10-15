@@ -50,10 +50,22 @@ export default class TopNav extends Component {
       })
       .then(() => {
         //subCategories 분리
-        console.log('@@@@@@@@@@@@');
-        console.log(this.state.entireSubCategoriesArray);
-
-        let entireSubCategoriesArray = [1, 23, 41];
+        let entireSubCategoriesArray = [[], [], [], [], [], []];
+        this.state.categoryData.forEach(el => {
+          if (el.categoryName === '채소') {
+            entireSubCategoriesArray[0].push(el.subCategoryName);
+          } else if (el.categoryName === '과일·견과·쌀') {
+            entireSubCategoriesArray[1].push(el.subCategoryName);
+          } else if (el.categoryName === '수산·해산·건어물') {
+            entireSubCategoriesArray[2].push(el.subCategoryName);
+          } else if (el.categoryName === '정육·계란') {
+            entireSubCategoriesArray[3].push(el.subCategoryName);
+          } else if (el.categoryName === '국·반찬·메인요리') {
+            entireSubCategoriesArray[4].push(el.subCategoryName);
+          } else if (el.categoryName === '샐러드·간편식') {
+            entireSubCategoriesArray[5].push(el.subCategoryName);
+          }
+        });
         this.setState({
           entireSubCategoriesArray: entireSubCategoriesArray,
         });
@@ -234,24 +246,68 @@ export default class TopNav extends Component {
                     );
                   })}
               </ul>
-              <ul className='subCategoriesContainer'>
-                <li
-                  className={
-                    this.state.isSubCategoriesVisible
-                      ? 'subCategoryBg'
-                      : 'subCategoryBg hidden'
-                  }
-                ></li>
-                {this.state.entireSubCategoriesArray !== [] &&
-                  this.state.entireSubCategoriesArray.map(subCategoryDatum => {
+              {/* 밑바탕 자식카테고리 - hover 인식하는 곳*/}
+              <ul
+                className={
+                  this.state.isSubCategoriesVisible
+                    ? 'subCategoriesContainer'
+                    : 'subCategoriesContainer hidden'
+                }
+              >
+                {/* 밑바탕 자식카테고리 - 뒷배경 */}
+                <div className='subCategoryBg'></div>
+                {/* 덮는 부모카테고리 */}
+                {this.state.categoriesArray !== [] &&
+                  this.state.categoriesArray.map((categoryDatum, i) => {
+                    // <각 Category html>
                     return (
-                      <div className='subCategoryNameLinkWrapper'>
-                        <h3 className='subCategoryNameeeeeeeeee'>
-                          {subCategoryDatum} heelllo
-                        </h3>
+                      <div>
+                        <li
+                          key={i}
+                          className='parentCategoryBgCover'
+                          onMouseOver={this.showSubCategories}
+                          onMouseOut={this.hideSubCategories}
+                        ></li>
+                        <div className='parentCategoryNameLinkWrapperCover'>
+                          <Link className='parentCategoryNameLinkCover' to='/'>
+                            <h3 className='parentCategoryNameCover'>
+                              {this.state.te}
+                            </h3>
+                          </Link>
+                        </div>
                       </div>
                     );
                   })}
+                {/* 덮는 자식카테고리 */}
+                {this.state.entireSubCategoriesArray !== [] &&
+                  //subCategoriesForCategory 하나 = subCategoryBg 하나
+                  //subCategoryBg 맵돌리기 //hidden은 container에
+                  this.state.entireSubCategoriesArray.map(
+                    subCategoriesForCategory => {
+                      // <각 subCategory html>
+                      return (
+                        <div>
+                          <div className='subCategoriesForCategory'>
+                            {subCategoriesForCategory.map(eachSubCategory => {
+                              return (
+                                <div>
+                                  <div className='subCategoryBgCover'></div>
+                                  <Link
+                                    className='subCategoryNameLinkCover'
+                                    to='/'
+                                  >
+                                    <h3 className='subCategoryNameCover'>
+                                      {eachSubCategory}
+                                    </h3>
+                                  </Link>
+                                </div>
+                              );
+                            })}
+                          </div>
+                        </div>
+                      );
+                    }
+                  )}
               </ul>
             </div>
           </div>
