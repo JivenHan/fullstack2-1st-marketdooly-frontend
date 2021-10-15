@@ -19,9 +19,9 @@ class Review extends Component {
   };
 
   clickUpdateBtn = () => {
-    const { id, userId, clickReviewHandler } = this.props;
+    const { id, productId, userId, clickReviewHandler } = this.props;
     const { newTitle, newText } = this.state;
-    const url = 'http://localhost:8000/products/reviews';
+    const url = `http://localhost:8000/products/${productId}/reviews`;
     fetch(url, {
       method: 'PATCH',
       credentials: 'include',
@@ -52,8 +52,8 @@ class Review extends Component {
   };
 
   clickDeleteBtn = () => {
-    const { id, userId } = this.props;
-    const url = 'http://localhost:8000/products/reviews';
+    const { id, productId, userId } = this.props;
+    const url = `http://localhost:8000/products/${productId}/reviews`;
     fetch(url, {
       method: 'DELETE',
       credentials: 'include',
