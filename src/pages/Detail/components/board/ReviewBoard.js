@@ -1,25 +1,64 @@
 import React, { Component } from 'react';
 import Review from './Review';
-import './ReviewBoard.scss';
+import './Board.scss';
 
-class reviewBoard extends Component {
-  constructor() {
-    super();
+class ReviewBoard extends Component {
+  constructor(props) {
+    super(props);
     this.state = {
+      productId: props.productId,
       reviewCommentModal: false,
+      totalReviewCount: 0,
+      pageNumArray: [],
       reviewData: [],
+      newReviewTitle: '',
+      newReviewText: '',
     };
   }
 
+  inputHandler = e => {
+    const { name, value } = e.target;
+    this.setState({
+      [name]: value,
+    });
+  };
+
   componentDidMount() {
-    fetch('http://localhost:3000/reviewMock.json')
+    const { productId } = this.state;
+    const url = `http://localhost:8000/products/reviews/count?productId=${productId}`;
+    fetch(url, {
+      credentials: 'include',
+    })
+      .then(res => res.json())
+      .then(data => {
+        const pageNum = parseInt(data.totalCount / 10 + 1);
+        this.setState(
+          {
+            totalReviewCount: data.totalCount,
+            pageNumArray: new Array(pageNum).fill(0),
+          },
+          this.getReviesByPageId(0)
+        );
+      })
+      .catch(console.log);
+  }
+
+  getReviesByPageId = idx => {
+    const { productId } = this.state;
+    const offset = idx * 10;
+    const limit = 10;
+    const url = `http://localhost:8000/products/reviews/?productId=${productId}&offset=${offset}&limit=${limit}`;
+    fetch(url, {
+      credentials: 'include',
+    })
       .then(res => res.json())
       .then(data => {
         this.setState({
-          reviewData: data.REVIEW_DATA,
+          reviewData: data || [],
         });
-      });
-  }
+      })
+      .catch(console.log);
+  };
 
   isValidInputReviewPopup = () => {
     const { reviewCommentModal } = this.state;
@@ -48,10 +87,40 @@ class reviewBoard extends Component {
     this.setState({ reviewData: newArr });
   };
 
+  addReview = () => {
+    const { productId, newReviewTitle, newReviewText } = this.state;
+    const url = 'http://localhost:8000/products/reviews';
+    fetch(url, {
+      method: 'POST',
+      credentials: 'include',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        productId,
+        title: newReviewTitle,
+        text: newReviewText,
+      }),
+    })
+      .then(res => res.json())
+      .then(data => {
+        if (data.status === 'success') {
+          alert('후가 작성이 완료되었습니다');
+          this.closeCommentModal();
+          this.getReviesByPageId(0);
+        } else {
+          alert('후기를 작성하는 과정에서 오류가 발생하였습니다');
+        }
+      })
+      .catch(console.log);
+  };
+
   render() {
-    const { reviewCommentModal, reviewData } = this.state;
+    const { inputHandler, getReviesByPageId, addReview, closeCommentModal } =
+      this;
+    const { reviewRef } = this.props;
+    const { reviewCommentModal, pageNumArray, reviewData } = this.state;
+
     return (
-      <div className='Board'>
+      <div className='Board' ref={reviewRef}>
         <div className='boardAlign'>
           <div className='board'>
             <div className='titleAlign'>
@@ -109,28 +178,33 @@ class reviewBoard extends Component {
             </div>
             <div className='commentAlign commentPageButn'>
               <span className='firstPageButn commentAlign'>〈〈</span>
-              <span className='commentStyle commentAlign'>〈</span>
-              <span className='commentStyle commentAlign'>1</span>
-              <span className='commentStyle commentAlign'>2</span>
-              <span className='commentStyle commentAlign'>〉</span>
-              <span className='commentStyle commentAlign'>〉〉</span>
+              <span className='comment commentAlign'>〈</span>
+              {pageNumArray.map((el, idx) => {
+                return (
+                  <span
+                    className='comment commentAlign'
+                    onClick={() => getReviesByPageId(idx)}
+                  >
+                    {idx + 1}
+                  </span>
+                );
+              })}
+              <span className='comment commentAlign'>〉</span>
+              <span className='comment commentAlign'>〉〉</span>
             </div>
-            <div className={reviewCommentModal ? '' : 'contentHide'}>
+            {reviewCommentModal && (
               <div className='modalAlign'>
                 <div className='modalPopUp'>
                   <div className='modalTitle'>상품 후기작성</div>
-                  <div className='modalProductNav'>
-                    <span className='modalProductImg' img='/'>
-                      (상품 사진)
-                    </span>
-                    (카테고리, 상품명)
-                  </div>
+                  {/* <div className='modalProductNav'></div> */}
                   <div className='commentTitle'>
                     <span>제목</span>
                     <textarea
                       className='commentTitleInput'
                       type='text'
+                      name='newReviewTitle'
                       placeholder='작성하실 후기의 제목을 입력해주세요'
+                      onChange={inputHandler}
                     />
                   </div>
                   <div className='commentContent'>
@@ -138,21 +212,22 @@ class reviewBoard extends Component {
                     <textarea
                       className='commentContentInput'
                       type='text'
+                      name='newReviewText'
                       placeholder='제품의 상세후기를 작성 해주세요'
+                      onChange={inputHandler}
                     />
                   </div>
                   <div className='modalButnAlign'>
-                    <button className='modalButn'>작성완료</button>
-                    <button
-                      className='modalButn'
-                      onClick={this.closeCommentModal}
-                    >
+                    <button className='modalButn' onClick={addReview}>
+                      작성완료
+                    </button>
+                    <button className='modalButn' onClick={closeCommentModal}>
                       닫기
                     </button>
                   </div>
                 </div>
               </div>
-            </div>
+            )}
           </div>
         </div>
       </div>
@@ -160,4 +235,4 @@ class reviewBoard extends Component {
   }
 }
 
-export default reviewBoard;
+export default ReviewBoard;
