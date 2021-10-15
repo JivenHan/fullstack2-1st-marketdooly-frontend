@@ -87,9 +87,7 @@ export default class Detail extends Component {
   };
 
   componentDidMount() {
-    fetch('http://localhost:8000/products', {
-      method: 'GET',
-    })
+    fetch(`http://localhost:8000/products/${this.props.match.params.id}`)
       .then(res => {
         if (!res.ok) {
           const msg = res.json();

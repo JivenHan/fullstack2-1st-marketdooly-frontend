@@ -20,7 +20,13 @@ export default class Item extends Component {
           onClick={this.props.checkingItems.bind(this, productId)}
         ></span>
         <picture className='itemThumb'>
-          <Link to='/'>
+          <Link
+            to='/'
+            onClick={event => {
+              event.preventDefault();
+              this.props.goToDetailPage(productId);
+            }}
+          >
             <img src={thumbnail_image} alt={name} />
           </Link>
         </picture>

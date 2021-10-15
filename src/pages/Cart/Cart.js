@@ -36,6 +36,10 @@ export default class Cart extends Component {
     }
   };
 
+  goToDetailPage = id => {
+    this.props.history.push(`/detail/${id}`);
+  };
+
   componentDidMount() {
     window.addEventListener('scroll', this.autoScrolling);
     fetch('http://localhost:8000/cart', {
@@ -328,6 +332,7 @@ export default class Cart extends Component {
                     deleteOneItem={this.deleteOneItem}
                     decreaseQuantity={this.decreaseQuantity}
                     increaseQuantity={this.increaseQuantity}
+                    goToDetailPage={this.goToDetailPage}
                   />
                 ) : null}
                 {this.state.cartData.filter(
@@ -343,6 +348,7 @@ export default class Cart extends Component {
                     deleteOneItem={this.deleteOneItem}
                     decreaseQuantity={this.decreaseQuantity}
                     increaseQuantity={this.increaseQuantity}
+                    goToDetailPage={this.goToDetailPage}
                   />
                 ) : null}
                 {this.state.cartData.filter(
@@ -361,6 +367,7 @@ export default class Cart extends Component {
                     deleteOneItem={this.deleteOneItem}
                     decreaseQuantity={this.decreaseQuantity}
                     increaseQuantity={this.increaseQuantity}
+                    goToDetailPage={this.goToDetailPage}
                   />
                 ) : null}
                 {!this.state.cartData.length ? (

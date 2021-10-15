@@ -16,11 +16,28 @@ export default class TopNav extends Component {
       isLnbUserCsVisible: false,
       isCategoriesVisible: false,
       isSubCategoriesVisible: false,
+      cartItemNumber: 0,
+      isUserLoggedIn: false,
     };
   }
 
   componentDidMount() {
-    fetch('data/categoryIconData.json')
+    fetch('http://localhost:8000/users/session', {
+      credentials: 'include',
+    })
+      .then(res => {
+        if (!res.ok) throw new Error('not loggedIn');
+        return res.json();
+      })
+      .then(data =>
+        this.setState({
+          cartItemNumber: data.result.length,
+          isUserLoggedIn: true,
+        })
+      )
+      .catch(console.error);
+
+    fetch('data/categoryData.json')
       .then(res => res.json())
       .then(res => {
         this.setState({
@@ -28,7 +45,8 @@ export default class TopNav extends Component {
         });
       })
       .catch(err => console.log(err));
-    fetch('http://localhost:8000/main/category')
+
+    fetch('http://localhost:8000/main/allcategory')
       .then(res => res.json())
       .then(res => {
         this.setState({
@@ -39,7 +57,7 @@ export default class TopNav extends Component {
       .then(() => {
         let redundantCategoriesArray = [];
         this.state.categoryData.map(x => {
-          redundantCategoriesArray.push(x.categoryName);
+          return redundantCategoriesArray.push(x.categoryName);
         });
         let categoriesArray = redundantCategoriesArray.filter((el, idx) => {
           return redundantCategoriesArray.indexOf(el) === idx;
@@ -77,6 +95,7 @@ export default class TopNav extends Component {
       document.cookie = name + '=; expires=Thu, 01 Jan 1999 00:00:10 GMT;';
     };
     deleteCookie('jwt');
+    window.location.reload();
     this.props.history.push('/');
   };
 
@@ -144,11 +163,13 @@ export default class TopNav extends Component {
             />
           </div>
           <div className='headerLogoWrapper'>
-            <img
-              className='headerLogo'
-              alt='kurlylogo'
-              src='https://i.imgur.com/eY0hAoz.png'
-            />
+            <Link to='/'>
+              <img
+                className='headerLogo'
+                alt='kurlylogo'
+                src='https://i.imgur.com/WJ4Df0D.png'
+              />
+            </Link>
           </div>
           <ul className='headerUserContainer'>
             <li className='headerUserItem1Wrapper'>
@@ -157,9 +178,19 @@ export default class TopNav extends Component {
               </Link>
             </li>
             <li className='headerUserItem2Wrapper'>
-              <Link className='headerUserItem2' to='/login'>
-                로그인
-              </Link>
+              {this.state.isUserLoggedIn ? (
+                <div
+                  className='headerUserItem2'
+                  onClick={this.logout}
+                  style={{ cursor: 'pointer' }}
+                >
+                  로그아웃
+                </div>
+              ) : (
+                <Link className='headerUserItem2' to='/login'>
+                  로그인
+                </Link>
+              )}
             </li>
             <li
               className='headerUserItem3Wrapper'
@@ -227,9 +258,9 @@ export default class TopNav extends Component {
                     );
                   })}
                 {this.state.categoriesArray !== [] &&
-                  this.state.categoriesArray.map(categoryDatum => {
+                  this.state.categoriesArray.map((categoryDatum, i) => {
                     return (
-                      <div className='parentCategoryNameLinkWrapper'>
+                      <div key={i} className='parentCategoryNameLinkWrapper'>
                         <Link className='parentCategoryNameLink' to='/'>
                           <h3 className='parentCategoryName'>
                             {categoryDatum}
@@ -276,26 +307,28 @@ export default class TopNav extends Component {
                   //subCategoriesForCategory 하나 = subCategoryBg 하나
                   //subCategoryBg 맵돌리기 //hidden은 container에
                   this.state.entireSubCategoriesArray.map(
-                    subCategoriesForCategory => {
+                    (subCategoriesForCategory, i) => {
                       // <각 subCategory html>
                       return (
-                        <div className='subCategoriesForCategory'>
+                        <div key={i} className='subCategoriesForCategory'>
                           <div>
-                            {subCategoriesForCategory.map(eachSubCategory => {
-                              return (
-                                <div className='subCategoryBgCover'>
-                                  <div></div>
-                                  <Link
-                                    className='subCategoryNameLinkCover'
-                                    to='/'
-                                  >
-                                    <h3 className='subCategoryNameCover'>
-                                      {eachSubCategory}
-                                    </h3>
-                                  </Link>
-                                </div>
-                              );
-                            })}
+                            {subCategoriesForCategory.map(
+                              (eachSubCategory, j) => {
+                                return (
+                                  <div key={j} className='subCategoryBgCover'>
+                                    <div></div>
+                                    <Link
+                                      className='subCategoryNameLinkCover'
+                                      to='/'
+                                    >
+                                      <h3 className='subCategoryNameCover'>
+                                        {eachSubCategory}
+                                      </h3>
+                                    </Link>
+                                  </div>
+                                );
+                              }
+                            )}
                           </div>
                         </div>
                       );
@@ -322,6 +355,11 @@ export default class TopNav extends Component {
             </button>
             <Link className='gnbGoToCart' to='/cart'>
               <CartIconSvg strokeColor={'#333'} />
+              {this.state.cartItemNumber ? (
+                <span className='cartItemNumber'>
+                  {this.state.cartItemNumber}
+                </span>
+              ) : null}
             </Link>
           </div>
         </div>

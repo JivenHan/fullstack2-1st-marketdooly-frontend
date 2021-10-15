@@ -107,7 +107,10 @@ export default class Section extends Component {
           </h3>
         </div>
         {this.props.categories && this.displayCategories()}
-        <Carousel data={this.state.data} />
+        <Carousel
+          data={this.state.data}
+          goToDetailPage={this.props.goToDetailPage}
+        />
         {this.props.categories && (
           <div className='viewAllCategory'>
             <button>

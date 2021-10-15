@@ -20,6 +20,7 @@ export default class Slide extends Component {
 
   render() {
     const {
+      id,
       product_image,
       name,
       sales_price,
@@ -42,13 +43,27 @@ export default class Slide extends Component {
                 <strong>{special_features}</strong>
               </span>
             )}
-            <Link to='/'>
+            <Link
+              to='/'
+              onClick={event => {
+                event.preventDefault();
+                this.props.goToDetailPage(id);
+              }}
+            >
               <img src={product_image} alt={name} />
             </Link>
           </dt>
           <dd className='productInfo'>
             <h4 className='name'>
-              <Link to='/'>{name}</Link>
+              <Link
+                to='/'
+                onClick={event => {
+                  event.preventDefault();
+                  this.props.goToDetailPage(id);
+                }}
+              >
+                {name}
+              </Link>
             </h4>
             <span className='price'>
               {discount_rate ? (
