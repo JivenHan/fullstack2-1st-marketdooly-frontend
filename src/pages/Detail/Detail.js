@@ -9,7 +9,7 @@ import BottomLayer from './components/BottomLayer';
 import './Detail.scss';
 
 export default class Detail extends Component {
-  constructor() {
+  constructor(props) {
     super();
     this.observerRef = React.createRef();
     this.descRef = React.createRef();
@@ -17,7 +17,7 @@ export default class Detail extends Component {
     this.reviewRef = React.createRef();
     this.inquiryRef = React.createRef();
     this.state = {
-      productId: '1',
+      productId: props.history.location.pathname.replace('/detail/', ''),
       productDetail: {},
       detailDesc: {},
       checkPoint: {},
@@ -100,7 +100,6 @@ export default class Detail extends Component {
       .then(data => {
         this.setState({
           productDetail: data[0] || {},
-          productId: data[0].id,
         });
       })
       .catch(console.log);

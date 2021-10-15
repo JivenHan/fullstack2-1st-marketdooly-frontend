@@ -25,7 +25,7 @@ class ReviewBoard extends Component {
 
   componentDidMount() {
     const { productId } = this.state;
-    const url = `http://localhost:8000/products/reviews/count?productId=${productId}`;
+    const url = `http://localhost:8000/products/${productId}/reviews/count?productId=${productId}`;
     fetch(url, {
       credentials: 'include',
     })
@@ -47,7 +47,7 @@ class ReviewBoard extends Component {
     const { productId } = this.state;
     const offset = idx * 10;
     const limit = 10;
-    const url = `http://localhost:8000/products/reviews/?productId=${productId}&offset=${offset}&limit=${limit}`;
+    const url = `http://localhost:8000/products/${productId}/reviews/?productId=${productId}&offset=${offset}&limit=${limit}`;
     fetch(url, {
       credentials: 'include',
     })
@@ -89,7 +89,7 @@ class ReviewBoard extends Component {
 
   addReview = () => {
     const { productId, newReviewTitle, newReviewText } = this.state;
-    const url = 'http://localhost:8000/products/reviews';
+    const url = `http://localhost:8000/products/${productId}/reviews`;
     fetch(url, {
       method: 'POST',
       credentials: 'include',
