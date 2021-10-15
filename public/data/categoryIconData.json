@@ -1,0 +1,78 @@
+[
+  {
+    "id": 1,
+    "iconUrl": "https://img-cf.kurly.com/shop/data/category/icon_veggies_active_pc@2x.1586324570.png"
+  },
+  {
+    "id": 2,
+    "iconUrl": "https://img-cf.kurly.com/shop/data/category/icon_fruit_active_pc@2x.1568684150.png"
+  },
+  {
+    "id": 3,
+    "iconUrl": "https://img-cf.kurly.com/shop/data/category/icon_seafood_inactive_pc@2x.1568684352.png"
+  },
+  {
+    "id": 4,
+    "iconUrl": "https://img-cf.kurly.com/shop/data/category/icon_meat_active_pc@2x.1568684452.png"
+  },
+  {
+    "id": 5,
+    "iconUrl": "https://img-cf.kurly.com/shop/data/category/icon_side_active_pc@2x.1572243579.png"
+  },
+  {
+    "id": 6,
+    "iconUrl": "https://img-cf.kurly.com/shop/data/category/icon_convenient_active_pc@2x.1572243543.png"
+  },
+  {
+    "id": 7,
+    "iconUrl": "https://img-cf.kurly.com/shop/data/category/icon_sauce_active_pc@2x.1572243594.png"
+  },
+  {
+    "id": 8,
+    "iconUrl": "https://img-cf.kurly.com/shop/data/category/icon_snacks_active_pc@2x.1572243616.png"
+  },
+  {
+    "id": 9,
+    "iconUrl": "https://img-cf.kurly.com/shop/data/category/icon_cookie_active_pc.1610074008.png"
+  },
+  {
+    "id": 10,
+    "iconUrl": "https://img-cf.kurly.com/shop/data/category/icon_deli_active_pc@2x.1568687352.png"
+  },
+  {
+    "id": 11,
+    "iconUrl": "https://img-cf.kurly.com/shop/data/category/icon_health_active_pc@2x.1574645923.png"
+  },
+  {
+    "id": 12,
+    "iconUrl": "https://img-cf.kurly.com/shop/data/category/icon_living_active_pc@2x.1588814090.png"
+  },
+  {
+    "id": 13,
+    "iconUrl": "https://img-cf.kurly.com/shop/data/category/icon_beauty_active_pc.1618488987.png"
+  },
+  {
+    "id": 14,
+    "iconUrl": "https://img-cf.kurly.com/shop/data/category/icon_beauty_active_pc.1618488987.png"
+  },
+  {
+    "id": 15,
+    "iconUrl": "https://img-cf.kurly.com/shop/data/category/icon_kitchen_active_pc@2x.1574646458.png"
+  },
+  {
+    "id": 16,
+    "iconUrl": "https://img-cf.kurly.com/shop/data/category/icon_electronic__active_pc@2x.1574417978.png"
+  },
+  {
+    "id": 17,
+    "iconUrl": "https://img-cf.kurly.com/shop/data/category/icon_kids_active_pc@2x.1568687537.png"
+  },
+  {
+    "id": 18,
+    "iconUrl": "https://img-cf.kurly.com/shop/data/category/icon_pet_active_pc@2x.1587442294.png"
+  },
+  {
+    "id": 19,
+    "iconUrl": "https://res.kurly.com/pc/service/common/1908/ico_recommend_on_v2.png"
+  }
+]
