@@ -17,7 +17,7 @@ export default class Detail extends Component {
     this.reviewRef = React.createRef();
     this.inquiryRef = React.createRef();
     this.state = {
-      productId: '7',
+      productId: '1',
       productDetail: {},
       detailDesc: {},
       checkPoint: {},
@@ -89,9 +89,7 @@ export default class Detail extends Component {
   };
 
   componentDidMount() {
-    fetch('http://localhost:8000/products', {
-      method: 'GET',
-    })
+    fetch('http://localhost:8000/products')
       .then(res => {
         if (!res.ok) {
           const msg = res.json();
@@ -102,11 +100,10 @@ export default class Detail extends Component {
       .then(data => {
         this.setState({
           productDetail: data[0] || {},
+          productId: data[0].id,
         });
       })
-      .catch(err => {
-        console.log(err);
-      });
+      .catch(console.log);
 
     const observer = new IntersectionObserver(([{ isIntersecting }]) => {
       if (!isIntersecting) {
@@ -133,6 +130,7 @@ export default class Detail extends Component {
   render() {
     const { productId, productDetail, quantity, isBottomLayerUp, scrollBtns } =
       this.state;
+
     const totalPrice = quantity * productDetail.sales_price;
     const totalEarnPoint = quantity * productDetail.earn_points;
 
