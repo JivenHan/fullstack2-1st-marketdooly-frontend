@@ -48,9 +48,12 @@ export default class Item extends Component {
           <div className='salesPrice'>
             {new Intl.NumberFormat('ko-KR').format(sales_price * quantity)}원
           </div>
-          <div className='originalPrice'>
-            {new Intl.NumberFormat('ko-KR').format(original_price * quantity)}원
-          </div>
+          {!(sales_price === original_price) ? (
+            <div className='originalPrice'>
+              {new Intl.NumberFormat('ko-KR').format(original_price * quantity)}
+              원
+            </div>
+          ) : null}
         </div>
         <div
           className='deleteItem'

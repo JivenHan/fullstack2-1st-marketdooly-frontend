@@ -20,14 +20,12 @@ export default class Slide extends Component {
 
   render() {
     const {
-      linkTo,
-      imgUrl,
+      product_image,
       name,
-      price,
-      discount,
-      discountRate,
-      cost,
-      specialFeature,
+      sales_price,
+      discount_rate,
+      original_price,
+      special_features,
     } = this.props.data;
     return (
       <li className='Slide'>
@@ -39,26 +37,30 @@ export default class Slide extends Component {
             onMouseEnter={this.toggleBouncingImg}
             onMouseLeave={this.toggleBouncingImg}
           >
-            {specialFeature && (
+            {special_features && (
               <span className='specialFeatureTag'>
-                <strong>{specialFeature}</strong>
+                <strong>{special_features}</strong>
               </span>
             )}
-            <Link to={linkTo}>
-              <img src={imgUrl} alt={name} />
+            <Link to='/'>
+              <img src={product_image} alt={name} />
             </Link>
           </dt>
           <dd className='productInfo'>
             <h4 className='name'>
-              <Link to={linkTo}>{name}</Link>
+              <Link to='/'>{name}</Link>
             </h4>
             <span className='price'>
-              {discount && (
-                <span className='discount'>{discountRate + '%'}</span>
-              )}
-              {price + '원'}
+              {discount_rate ? (
+                <span className='discount'>{discount_rate + '%'}</span>
+              ) : null}
+              {new Intl.NumberFormat('ko-KR').format(sales_price) + '원'}
             </span>
-            {discount && <span className='cost'>{cost + '원'}</span>}
+            {discount_rate ? (
+              <span className='cost'>
+                {new Intl.NumberFormat('ko-KR').format(original_price) + '원'}
+              </span>
+            ) : null}
           </dd>
         </dl>
       </li>
