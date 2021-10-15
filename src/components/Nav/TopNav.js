@@ -117,13 +117,6 @@ export default class TopNav extends Component {
   };
 
   render() {
-    console.log('this.state.categoryData>>>>>>>>>>>>>>>>>>>>>>');
-    console.log(this.state.categoryData);
-    console.log('this.state.categoriesArray>>>>>>>>>>>>>>>>>>>>>>');
-    console.log(this.state.categoriesArray);
-    console.log('this.state.entireSubCategoriesArray>>>>>>>>>>>>>>>>>>>>>>');
-    console.log(this.state.entireSubCategoriesArray);
-
     return (
       <div className='TopNav'>
         {!this.state.isTopAdBannerClosed && (
@@ -286,12 +279,12 @@ export default class TopNav extends Component {
                     subCategoriesForCategory => {
                       // <각 subCategory html>
                       return (
-                        <div>
-                          <div className='subCategoriesForCategory'>
+                        <div className='subCategoriesForCategory'>
+                          <div>
                             {subCategoriesForCategory.map(eachSubCategory => {
                               return (
-                                <div>
-                                  <div className='subCategoryBgCover'></div>
+                                <div className='subCategoryBgCover'>
+                                  <div></div>
                                   <Link
                                     className='subCategoryNameLinkCover'
                                     to='/'
