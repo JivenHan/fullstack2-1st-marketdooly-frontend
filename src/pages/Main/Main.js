@@ -10,70 +10,81 @@ export default class Main extends Component {
     super();
     this.state = {
       data: null,
+      banners: [],
     };
   }
+
+  componentDidMount() {
+    fetch('http://localhost:8000/main/banner/bar')
+      .then(res => {
+        if (!res.ok) throw new Error('배너 데이터가 존재하지 않습니다.');
+        return res.json();
+      })
+      .then(banners =>
+        this.setState({
+          banners: banners.map(ele => ele.image),
+        })
+      )
+      .catch(err =>
+        this.setState({
+          banners: [],
+          errors: err,
+        })
+      );
+  }
+
+  goToDetailPage = id => {
+    this.props.history.push(`/detail/${id}`);
+  };
 
   render() {
     return (
       <main>
         <MainBanner />
         <Section
-          dataLink={'data/MDsPick/category1MDList.json'}
-          title='이 상품 어때요?'
-          sectionName='이 상품 어때요?'
+          goToDetailPage={this.goToDetailPage}
+          endPoint={'main/event/most_popular'}
         />
         <SpecialPrice
-          dataLink='data/specialPrice.json'
-          title='특가/혜택 >'
+          endPoint='main/event/special_price'
           sectionName='specialOffer'
         />
         <Section
-          dataLink={'data/MDsPick/category1MDList.json'}
-          title='이 상품 어때요?'
-          sectionName='이 상품 어때요?'
+          goToDetailPage={this.goToDetailPage}
+          endPoint={'main/event/lowest_price'}
         />
         <Banner
           url='/'
-          imgUrl='https://img-cf.kurly.com/shop/data/main/5/pc_img_1633488525.jpg'
-          bannerName='간편식 20% 할인'
+          imgUrl={this.state.banners[0]}
+          bannerName='수퍼 플렉스 위크'
         />
         <Section
+          goToDetailPage={this.goToDetailPage}
           categories={true}
-          dataLink={'data/MDsPick/category1MDList.json'}
-          title='MD의 추천'
-          sectionName='MD의 추천'
+          endPoint={'main/event/last_call'}
         />
         <Banner
           url='/'
-          imgUrl='https://img-cf.kurly.com/shop/data/main/5/pc_img_1632901578.jpg'
+          imgUrl={this.state.banners[1]}
           bannerName='무제한 적립금 이벤트'
         />
         <Section
-          dataLink={'data/MDsPick/category1MDList.json'}
-          title='지금 가장 핫한 상품 >'
-          sectionName='지금 가장 핫한 상품 >'
+          goToDetailPage={this.goToDetailPage}
+          endPoint={'main/event/kitchen'}
         />
         <Section
-          dataLink={'data/MDsPick/category1MDList.json'}
-          title='똑똑한 요리 비법, 주방가전 특가 >'
+          goToDetailPage={this.goToDetailPage}
+          endPoint={'main/event/most_popular'}
           sectionName='specialOffer'
         />
         <Section
-          dataLink={'data/MDsPick/category1MDList.json'}
-          title='마감세일 >'
-          sectionName='마감세일 >'
+          goToDetailPage={this.goToDetailPage}
+          endPoint={'main/event/large_capacity'}
         />
-        <Section
-          dataLink={'data/MDsPick/category1MDList.json'}
-          title='365일 최저가 도전 >'
-          titDesc='최저가 도전, 365일 언제나 알뜰하게'
-          sectionName='specialOffer'
-        />
-        <Section
-          dataLink={'data/MDsPick/category1MDList.json'}
-          title='대용량 상품 >'
-          titDesc='팬트리 가득 든든하게, 부담 없는 대용량 묶음 상품'
-          sectionName='대용량 상품 >'
+        <Banner
+          url='/'
+          imgUrl={this.state.banners[2]}
+          bannerName='샛별택배 배송안내'
         />
       </main>
     );

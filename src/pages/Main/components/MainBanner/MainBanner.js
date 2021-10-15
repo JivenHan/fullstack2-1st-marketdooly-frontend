@@ -31,7 +31,7 @@ export default class MainBanner extends Component {
   }
 
   requestData = () => {
-    fetch('/data/MainBannerData.json')
+    fetch('http://localhost:8000/main/banner/main')
       .then(res => res.json())
       .then(data =>
         this.setState({
@@ -101,8 +101,8 @@ export default class MainBanner extends Component {
 
   renderSlides = datas => {
     return datas.map(ele => {
-      const { id, imgUrl } = ele;
-      return <Slide key={id} id={id} imgUrl={imgUrl}></Slide>;
+      const { id, image, link } = ele;
+      return <Slide key={id} id={id} image={image} link={link}></Slide>;
     });
   };
 

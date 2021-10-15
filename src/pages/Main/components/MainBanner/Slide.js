@@ -8,7 +8,7 @@ export default class Slide extends Component {
       <li className={`slide slide${this.props.id}`}>
         <Link
           to='/'
-          style={{ backgroundImage: `url(${this.props.imgUrl})` }}
+          style={{ backgroundImage: `url(${this.props.image})` }}
         ></Link>
       </li>
     );

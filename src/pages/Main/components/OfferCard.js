@@ -18,7 +18,7 @@ export default class OfferCard extends Component {
   };
 
   render() {
-    const { header, imgUrl, description } = this.props.data;
+    const { name, product_image, description } = this.props.data;
     return (
       <li className='card'>
         <dl>
@@ -28,12 +28,12 @@ export default class OfferCard extends Component {
             onMouseLeave={this.toggleBouncingImg}
           >
             <Link to='/'>
-              <img src={imgUrl} alt={header} />
+              <img src={product_image} alt={name} />
             </Link>
           </dt>
           <dd>
             <h3 className='header'>
-              <Link to='/'>{header}</Link>
+              <Link to='/'>{name}</Link>
             </h3>
             <p className='desc'>{description}</p>
           </dd>

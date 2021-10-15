@@ -9,6 +9,7 @@ export default class specialPrice extends Component {
     this.state = {
       data: [],
       isHoverOnImg: false,
+      API: `http://localhost:8000`,
     };
   }
 
@@ -17,22 +18,24 @@ export default class specialPrice extends Component {
   }
 
   requestData = () => {
-    fetch(`http://localhost:3000/${this.props.dataLink}`)
+    fetch(`${this.state.API}/${this.props.endPoint}`)
       .then(res => res.json())
-      .then(data =>
+      .then(datas =>
         this.setState({
-          data,
+          data: datas.slice(3),
         })
       );
   };
 
   render() {
     return (
-      <section className={`Section ${this.props.sectionName}`}>
+      <section className={`Section specialOffer`}>
         <div className='titGoods'>
           <h3 className='tit'>
             <span className='titTitle'>
-              <Link to='/'>{this.props.title}</Link>
+              <Link to='/'>
+                {this.state.data.length ? this.state.data[0].header : null}
+              </Link>
             </span>
           </h3>
         </div>

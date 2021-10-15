@@ -59,7 +59,13 @@ export default class Carousel extends Component {
             }}
           >
             {this.props.data.map(ele => {
-              return <Slide key={ele.id} data={ele} />;
+              return (
+                <Slide
+                  key={ele.id}
+                  data={ele}
+                  goToDetailPage={this.props.goToDetailPage}
+                />
+              );
             })}
           </ul>
         </div>

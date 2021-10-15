@@ -17,7 +17,7 @@
       p {
         margin: 0 auto;
         color: white;
-        font-size: 0.7rem;
+        font-size: 14px;
         font-weight: normal;
         letter-spacing: -0.03rem;
         span {
@@ -46,7 +46,11 @@
     .headerDeliveryWrapper {
       margin-top: 0.5rem;
       img {
-        height: 1.2rem;
+        height: 22px;
+      }
+
+      .headerDeliveryImg {
+        height: 25px;
       }
     }
 
@@ -58,8 +62,8 @@
       .headerLogo {
         position: relative;
         top: 10px;
-        margin: 0.5rem 2rem;
-        height: 4rem;
+        margin: 0.8rem 2rem;
+        height: 79px;
       }
     }
 
@@ -68,7 +72,7 @@
       flex-wrap: wrap;
       height: 1rem;
       li {
-        font-size: 0.6rem;
+        font-size: 12px;
         margin: 0.6rem 0.35rem;
         padding-right: 0.7rem;
         border-right: 1px solid #cccccc;
@@ -149,7 +153,7 @@
       .dropDownCategories {
         display: block;
         position: absolute;
-        top: 48px;
+        top: 47px;
         border: 1px solid #f7f7f7;
         z-index: 400;
         transition: all 0.3s;
@@ -280,7 +284,7 @@
         padding: 0.8rem;
         border: 0;
         border-radius: 1rem;
-        padding-right: 5rem;
+        padding-right: 6rem;
         height: 2rem;
 
         font-size: 0.6rem;
@@ -292,6 +296,7 @@
       }
       .gnbSearchInput::placeholder {
         color: #cbcbcb;
+        font-size: 12px;
       }
 
       .gnbSetLocationButton {
@@ -302,9 +307,26 @@
       }
 
       .gnbGoToCart {
+        position: relative;
         margin-left: 0.6rem;
         img {
           height: 1.35rem;
+        }
+
+        .cartItemNumber {
+          display: inline-block;
+          position: absolute;
+          top: -5px;
+          left: 17px;
+          height: 25px;
+          width: 25px;
+          color: #ffffff;
+          background-color: $themeColorPrimary;
+          border: 2px solid #ffffff;
+          border-radius: 100px;
+          line-height: 20px;
+          font-size: 12px;
+          text-align: center;
         }
       }
     }

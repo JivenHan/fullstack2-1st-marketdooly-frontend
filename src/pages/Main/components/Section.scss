@@ -1,3 +1,5 @@
+@import '../../../styles/variables';
+
 .Section {
   .titGoods {
     padding: 79px 0 35px 0;
@@ -56,13 +58,13 @@
           font-weight: 400;
 
           &:hover {
-            color: #5f0080;
-            background-color: #f7f3f8;
+            color: $themeColorPrimary;
+            background-color: #f3f8f4;
           }
 
           &.selected {
             color: #ffffff;
-            background-color: #5f0080;
+            background-color: $themeColorPrimary;
           }
         }
       }

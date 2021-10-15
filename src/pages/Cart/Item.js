@@ -20,7 +20,13 @@ export default class Item extends Component {
           onClick={this.props.checkingItems.bind(this, productId)}
         ></span>
         <picture className='itemThumb'>
-          <Link to='/'>
+          <Link
+            to='/'
+            onClick={event => {
+              event.preventDefault();
+              this.props.goToDetailPage(productId);
+            }}
+          >
             <img src={thumbnail_image} alt={name} />
           </Link>
         </picture>
@@ -48,9 +54,12 @@ export default class Item extends Component {
           <div className='salesPrice'>
             {new Intl.NumberFormat('ko-KR').format(sales_price * quantity)}원
           </div>
-          <div className='originalPrice'>
-            {new Intl.NumberFormat('ko-KR').format(original_price * quantity)}원
-          </div>
+          {!(sales_price === original_price) ? (
+            <div className='originalPrice'>
+              {new Intl.NumberFormat('ko-KR').format(original_price * quantity)}
+              원
+            </div>
+          ) : null}
         </div>
         <div
           className='deleteItem'
