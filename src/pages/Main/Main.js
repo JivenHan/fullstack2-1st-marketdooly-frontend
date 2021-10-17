@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import { Component } from 'react';
 import MainBanner from './components/MainBanner/MainBanner';
 import Section from './components/Section';
 import SpecialPrice from './components/SpecialPrice';
