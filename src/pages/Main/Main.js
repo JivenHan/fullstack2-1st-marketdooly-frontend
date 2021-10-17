@@ -4,6 +4,7 @@ import Section from './components/Section';
 import SpecialPrice from './components/SpecialPrice';
 import Banner from './Banner';
 import ScrollToTop from '../../components/ScrollToTop/ScrollToTop';
+import QuickNav from '../../components/QuickNav/QuickNav';
 import './Main.scss';
 
 export default class Main extends Component {
@@ -42,52 +43,56 @@ export default class Main extends Component {
     return (
       <main>
         <MainBanner />
-        <Section
-          goToDetailPage={this.goToDetailPage}
-          endPoint={'main/event/most_popular'}
-        />
-        <SpecialPrice
-          endPoint='main/event/special_price'
-          sectionName='specialOffer'
-        />
-        <Section
-          goToDetailPage={this.goToDetailPage}
-          endPoint={'main/event/lowest_price'}
-        />
-        <Banner
-          url='/'
-          imgUrl={this.state.banners[0]}
-          bannerName='수퍼 플렉스 위크'
-        />
-        <Section
-          goToDetailPage={this.goToDetailPage}
-          categories={true}
-          endPoint={'main/event/last_call'}
-        />
-        <Banner
-          url='/'
-          imgUrl={this.state.banners[1]}
-          bannerName='무제한 적립금 이벤트'
-        />
-        <Section
-          goToDetailPage={this.goToDetailPage}
-          endPoint={'main/event/kitchen'}
-        />
-        <Section
-          goToDetailPage={this.goToDetailPage}
-          endPoint={'main/event/most_popular'}
-          sectionName='specialOffer'
-        />
-        <Section
-          goToDetailPage={this.goToDetailPage}
-          endPoint={'main/event/large_capacity'}
-        />
-        <Banner
-          url='/'
-          imgUrl={this.state.banners[2]}
-          bannerName='샛별택배 배송안내'
-        />
+        <div className='mainContainer' ref={this.mainArea}>
+          <Section
+            goToDetailPage={this.goToDetailPage}
+            endPoint={'main/event/most_popular'}
+            quickNavInitHeight={this.quickNavInitHeight}
+          />
+          <SpecialPrice
+            endPoint='main/event/special_price'
+            sectionName='specialOffer'
+          />
+          <Section
+            goToDetailPage={this.goToDetailPage}
+            endPoint={'main/event/lowest_price'}
+          />
+          <Banner
+            url='/'
+            imgUrl={this.state.banners[0]}
+            bannerName='수퍼 플렉스 위크'
+          />
+          <Section
+            goToDetailPage={this.goToDetailPage}
+            categories={true}
+            endPoint={'main/event/last_call'}
+          />
+          <Banner
+            url='/'
+            imgUrl={this.state.banners[1]}
+            bannerName='무제한 적립금 이벤트'
+          />
+          <Section
+            goToDetailPage={this.goToDetailPage}
+            endPoint={'main/event/kitchen'}
+          />
+          <Section
+            goToDetailPage={this.goToDetailPage}
+            endPoint={'main/event/most_popular'}
+            sectionName='specialOffer'
+          />
+          <Section
+            goToDetailPage={this.goToDetailPage}
+            endPoint={'main/event/large_capacity'}
+          />
+          <Banner
+            url='/'
+            imgUrl={this.state.banners[2]}
+            bannerName='샛별택배 배송안내'
+          />
+        </div>
         <ScrollToTop />
+        <QuickNav />
       </main>
     );
   }
