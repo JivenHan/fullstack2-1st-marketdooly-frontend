@@ -79,7 +79,6 @@ export default class ItemField extends Component {
                 decreaseQuantity={this.props.decreaseQuantity}
                 increaseQuantity={this.props.increaseQuantity}
                 original_price={original_price}
-                goToDetailPage={this.props.goToDetailPage}
               />
             );
           })}
