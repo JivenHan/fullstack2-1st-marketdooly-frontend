@@ -3,6 +3,7 @@ import MainBanner from './components/MainBanner/MainBanner';
 import Section from './components/Section';
 import SpecialPrice from './components/SpecialPrice';
 import Banner from './Banner';
+import ScrollToTop from '../../components/ScrollToTop/ScrollToTop';
 import './Main.scss';
 
 export default class Main extends Component {
@@ -86,6 +87,7 @@ export default class Main extends Component {
           imgUrl={this.state.banners[2]}
           bannerName='샛별택배 배송안내'
         />
+        <ScrollToTop />
       </main>
     );
   }
