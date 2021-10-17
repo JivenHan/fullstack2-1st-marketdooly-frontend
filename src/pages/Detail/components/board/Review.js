@@ -33,16 +33,15 @@ class Review extends Component {
         text: newText,
       }),
     })
-      .then(res => res.json())
-      .then(data => {
-        if (data.status === 'success') {
+      .then(res => {
+        if (res.status === 200) {
           alert('댓글 수정이 완료되었습니다');
           clickReviewHandler(id);
           this.setState({
             title: newTitle,
             text: newText,
           });
-        } else if (data.status === 'fail') {
+        } else if (res.status === 401) {
           alert('본인 댓글만 수정할 수 있습니다 !');
         } else {
           alert('댓글 수정 과정에서 오류가 발생하였습니다');
@@ -63,11 +62,10 @@ class Review extends Component {
         userId,
       }),
     })
-      .then(res => res.json())
-      .then(data => {
-        if (data.status === 'success') {
+      .then(res => {
+        if (res.status === 200) {
           alert('댓글 삭제가 완료되었습니다');
-        } else if (data.status === 'fail') {
+        } else if (res.status === 401) {
           alert('본인 댓글만 삭제할 수 있습니다 !');
         } else {
           alert('댓글 삭제 과정에서 오류가 발생하였습니다');
