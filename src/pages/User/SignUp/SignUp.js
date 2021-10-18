@@ -3,8 +3,9 @@ import AlertPopup from './components/AlertPopup';
 import UsagePolicy from './components/UsagePolicy';
 import PersonalInfoPolicy1 from './components/PersonalInfoPolicy1';
 import PersonalInfoPolicy2 from './components/PersonalInfoPolicy2';
-import StringUtil from '../../utils/StringUtil';
+import StringUtil from '../../../utils/StringUtil';
 import './SignUp.scss';
+import UserInfoInput from '../components/UserInfoInput';
 
 export default class SignUp extends Component {
   requiredInputMap = {
@@ -369,13 +370,7 @@ export default class SignUp extends Component {
                     아이디<span className='asterisk'>*</span>
                   </th>
                   <td>
-                    <input
-                      type='text'
-                      name='account'
-                      maxLength='15'
-                      placeholder='6자 이상의 영문 혹은 영문과 숫자를 조합'
-                      onChange={inputHandler}
-                    />
+                    <UserInfoInput input='account' onChange={inputHandler} />
                     <button
                       type='button'
                       className='btnAccountDup'
@@ -390,13 +385,7 @@ export default class SignUp extends Component {
                     비밀번호<span className='asterisk'>*</span>
                   </th>
                   <td>
-                    <input
-                      type='password'
-                      name='password'
-                      maxLength='15'
-                      placeholder='비밀번호를 입력해주세요'
-                      onChange={inputHandler}
-                    />
+                    <UserInfoInput input='password' onChange={inputHandler} />
                   </td>
                 </tr>
                 <tr>
@@ -404,11 +393,8 @@ export default class SignUp extends Component {
                     비밀번호 재입력<span className='asterisk'>*</span>
                   </th>
                   <td>
-                    <input
-                      type='password'
-                      name='passwordConfirm'
-                      maxLength='15'
-                      placeholder='비밀번호를 한번 더 입력해주세요'
+                    <UserInfoInput
+                      input='passwordConfirm'
                       onChange={inputHandler}
                     />
                   </td>
@@ -418,13 +404,7 @@ export default class SignUp extends Component {
                     이름<span className='asterisk'>*</span>
                   </th>
                   <td>
-                    <input
-                      type='text'
-                      name='name'
-                      maxLength='15'
-                      placeholder='이름을 입력해주세요'
-                      onChange={inputHandler}
-                    />
+                    <UserInfoInput input='name' onChange={inputHandler} />
                   </td>
                 </tr>
                 <tr>
@@ -432,9 +412,9 @@ export default class SignUp extends Component {
                     이메일<span className='asterisk'>*</span>
                   </th>
                   <td>
-                    <input
-                      name='email'
-                      placeholder='예: marketdooly@wecode.com'
+                    <UserInfoInput
+                      input='email'
+                      placeholder='markeydooly@wecode.com'
                       onChange={inputHandler}
                     />
                     <button

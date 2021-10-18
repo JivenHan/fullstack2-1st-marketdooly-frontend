@@ -1,8 +1,9 @@
 import { Component } from 'react';
 import { Link } from 'react-router-dom';
 import AlertPopup from '../SignUp/components/AlertPopup';
-import StringUtil from '../../utils/StringUtil';
+import StringUtil from '../../../utils/StringUtil';
 import './Login.scss';
+import UserInfoInput from '../components/UserInfoInput';
 
 export default class Login extends Component {
   requiredInputMap = {
@@ -20,7 +21,7 @@ export default class Login extends Component {
     };
   }
 
-  handleInput = e => {
+  inputHandler = e => {
     const { name, value } = e.target;
     this.setState({
       [name]: value,
@@ -106,7 +107,7 @@ export default class Login extends Component {
   };
 
   render() {
-    const { handleInput, clickPopupConfirmBtn, login } = this;
+    const { inputHandler, clickPopupConfirmBtn, login } = this;
     const { account, password, alertPopupMessage, isAlertPopupOpened } =
       this.state;
 
@@ -119,20 +120,8 @@ export default class Login extends Component {
         <div className='loginContainer'>
           <h3>로그인</h3>
           <form>
-            <input
-              type='text'
-              name='account'
-              placeholder='아이디를 입력해주세요'
-              onChange={handleInput}
-              required
-            />
-            <input
-              type='password'
-              name='password'
-              placeholder='비밀번호를 입력해주세요'
-              onChange={handleInput}
-              required
-            />
+            <UserInfoInput input='account' onChange={inputHandler} />
+            <UserInfoInput input='password' onChange={inputHandler} />
           </form>
           <div className='aaa'>
             <div className='securityLogin'>

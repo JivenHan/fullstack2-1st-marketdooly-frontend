@@ -1,12 +1,12 @@
 import { Component } from 'react';
 import AlertPopup from '../SignUp/components/AlertPopup';
-import StringUtil from '../../utils/StringUtil';
-import './FindPw.scss';
+import StringUtil from '../../../utils/StringUtil';
+import './FindAccount.scss';
+import UserInfoInput from '../components/UserInfoInput';
 
-export default class FindPw extends Component {
+export default class FindAccount extends Component {
   requiredInputMap = {
     name: '이름',
-    account: '아이디',
     email: '이메일',
   };
 
@@ -14,16 +14,15 @@ export default class FindPw extends Component {
     super(props);
     this.state = {
       name: '',
-      account: '',
       email: '',
       alertPopupMessage: '',
       isAlertPopupOpened: false,
       responseStatus: '',
-      tempPassword: '',
+      account: '',
     };
   }
 
-  handleInput = e => {
+  inputHandler = e => {
     const { name, value } = e.target;
     this.setState({
       [name]: value,
@@ -32,7 +31,7 @@ export default class FindPw extends Component {
 
   checkInputValidation = key => {
     const { requiredInputMap } = this;
-    const { account, email } = this.state;
+    const { email } = this.state;
 
     let alertPopupMessage = '';
     let isAlertPopupOpened = false;
@@ -45,10 +44,6 @@ export default class FindPw extends Component {
       } else {
         let regExp = '';
         switch (key) {
-          case 'account':
-            regExp = /^[a-z0-9]*[a-z]+[a-z0-9]*$/g;
-            isAlertPopupOpened = account.length < 6 || !regExp.test(account);
-            break;
           case 'email':
             regExp = /^[a-z0-9]+@[a-z0-9]+.[a-z0-9]+$/gi;
             isAlertPopupOpened = !regExp.test(email);
@@ -68,8 +63,8 @@ export default class FindPw extends Component {
     this.setState({ isAlertPopupOpened: false });
   };
 
-  findPw = () => {
-    const keyList = ['name', 'account', 'email'];
+  findAccount = () => {
+    const keyList = ['name', 'email'];
 
     let isInputValid = true;
     for (const key of keyList) {
@@ -80,7 +75,7 @@ export default class FindPw extends Component {
     }
 
     if (isInputValid) {
-      const url = 'http://localhost:8000/users/pw';
+      const url = 'http://localhost:8000/users/account';
       fetch(url, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -90,67 +85,45 @@ export default class FindPw extends Component {
         .then(res => {
           this.setState({
             responseStatus: res.status,
-            tempPassword: res.tempPW,
+            account: res.message[0].account,
           });
         });
     }
   };
 
   render() {
-    const { handleInput, clickPopupConfirmBtn, findPw } = this;
+    const { inputHandler, clickPopupConfirmBtn, findAccount } = this;
     const {
       name,
-      account,
       email,
       alertPopupMessage,
       isAlertPopupOpened,
       responseStatus,
-      tempPassword,
+      account,
     } = this.state;
 
     const isValidName = name.length > 0; // 상세 로직은 추후에 반영
-    const isValidAccount = account.length > 0; // 상세 로직은 추후에 반영
     const isValidEmail = email.length > 0; // 상세 로직은 추후에 반영
-    const isValidInput = isValidName && isValidAccount && isValidEmail;
+    const isValidInput = isValidName && isValidEmail;
 
     return (
-      <div className='FindPw'>
-        <div className='findPwContainer'>
-          <h3>비밀번호 찾기</h3>
+      <div className='FindAccount'>
+        <div className='findAccountContainer'>
+          <h3>아이디 찾기</h3>
           {responseStatus === '' && (
             <div className='beforeFind'>
               <form>
                 <label>이름</label>
-                <input
-                  type='text'
-                  name='name'
-                  placeholder='고객님의 이름을 입력해주세요'
-                  onChange={handleInput}
-                  required
-                />
-                <label>아이디</label>
-                <input
-                  type='text'
-                  name='account'
-                  placeholder='가입 시 등록하신 아이디를 입력해주세요'
-                  onChange={handleInput}
-                  required
-                />
+                <UserInfoInput input='name' onChange={inputHandler} />
                 <label>이메일</label>
-                <input
-                  type='email'
-                  name='email'
-                  placeholder='가입 시 등록하신 이메일 주소를 입력해주세요'
-                  onChange={handleInput}
-                  required
-                />
+                <UserInfoInput input='email' onChange={inputHandler} />
               </form>
               <button
                 type='button'
-                className={isValidInput ? 'btnFind valid' : 'btnFind invalid'}
-                onClick={findPw}
+                className={isValidInput ? 'btnLogin valid' : 'btnLogin invalid'}
+                onClick={findAccount}
               >
-                찾기
+                확인
               </button>
             </div>
           )}
@@ -166,7 +139,7 @@ export default class FindPw extends Component {
                 type='button'
                 onClick={() => this.setState({ responseStatus: '' })}
               >
-                비밀번호 다시 찾기
+                아이디 다시 찾기
               </button>
             </div>
           )}
@@ -174,9 +147,9 @@ export default class FindPw extends Component {
             <div className='afterFind'>
               <img src='/image/findaccount.png' alt='' />
               <p>
-                임시 비밀번호는
+                고객님의 아이디는
                 <br />
-                {tempPassword} 입니다.
+                {account} 입니다.
               </p>
               <button
                 type='button'
