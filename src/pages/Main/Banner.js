@@ -4,10 +4,11 @@ import './Banner.scss';
 
 export default class Banner extends Component {
   render() {
+    const { url, imgUrl, bannerName } = this.props;
     return (
       <div className='barBanner'>
-        <Link to='/'>
-          <img src={this.props.imgUrl} alt={this.props.bannerName} />
+        <Link to={`${url}`}>
+          <img src={imgUrl} alt={bannerName} />
         </Link>
       </div>
     );

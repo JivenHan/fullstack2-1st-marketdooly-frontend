@@ -88,10 +88,14 @@
           transition: all 0.2s;
 
           .item {
-            margin: 5px 0;
+            margin-bottom: 5px;
             height: 77px;
             width: 60px;
             overflow: hidden;
+
+            &:last-child {
+              margin-bottom: 0;
+            }
 
             a {
               display: block;

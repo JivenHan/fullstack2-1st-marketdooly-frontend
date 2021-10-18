@@ -7,6 +7,7 @@ export default class QuickNav extends Component {
     super();
     this.itemList = React.createRef();
     this.state = {
+      containerHeight: 0,
       defaultPosition: 722,
       initPosition: 600,
       init: false,
@@ -15,6 +16,7 @@ export default class QuickNav extends Component {
       minimumViewportWidth: 1280,
       listScroll: 0,
       recentlyViewedItems: [],
+      currentRecentScroll: 0,
     };
   }
 
@@ -34,23 +36,36 @@ export default class QuickNav extends Component {
     const items = JSON.parse(localStorage.getItem('recentlyViewed'));
     this.setState({
       recentlyViewedItems: items,
+      containerHeight:
+        this.state.recentlyViewedItems.length &&
+        Number.parseInt(getComputedStyle(this.itemList.current).height),
     });
+  };
+
+  calcSlidingRange = () => {
+    const { recentlyViewedItems, listScroll } = this.state;
+    if (listScroll === recentlyViewedItems.length - 2) {
+      return 82 * listScroll - 50;
+    } else {
+      return 82 * listScroll;
+    }
   };
 
   itemListScrolling = e => {
     const { listScroll, recentlyViewedItems } = this.state;
-    if (e.target.className === 'up') {
-      this.setState({
-        listScroll: listScroll <= 0 ? 0 : listScroll - 1,
-      });
-    } else {
-      this.setState({
-        listScroll:
-          listScroll < recentlyViewedItems.length - 2
-            ? listScroll + 1
-            : listScroll,
-      });
-    }
+    const option = {
+      up: listScroll <= 0 ? 0 : listScroll - 1,
+      down:
+        listScroll < recentlyViewedItems.length - 2
+          ? listScroll + 1
+          : listScroll,
+    };
+    this.setState(
+      {
+        listScroll: option[e.target.className],
+      },
+      this.calcSlidingRange
+    );
   };
 
   detectViewportWidth = () => {
@@ -73,8 +88,7 @@ export default class QuickNav extends Component {
   };
 
   render() {
-    const { visibility, currentScroll, listScroll, recentlyViewedItems } =
-      this.state;
+    const { visibility, currentScroll, recentlyViewedItems } = this.state;
     return (
       <aside
         className={`QuickNav ${visibility ? '' : 'hidden'}`}
@@ -111,7 +125,8 @@ export default class QuickNav extends Component {
                 <h3 className='itemListHeader'>최근 본 상품</h3>
                 <div className='itemList'>
                   <ul
-                    style={{ top: `-${listScroll * 82}px` }}
+                    id='items'
+                    style={{ top: `-${this.calcSlidingRange()}px` }}
                     ref={this.itemList}
                   >
                     {recentlyViewedItems.map(ele => {
