@@ -42,31 +42,23 @@ export default class MainBanner extends Component {
   };
 
   updateViewSize = () => {
-    const sliderWidth =
-      document.body.clientWidth > 1050 ? document.body.clientWidth : 1050;
     this.setState({
-      sliderWidth,
+      sliderWidth:
+        document.body.clientWidth > 1050 ? document.body.clientWidth : 1050,
     });
   };
 
   toggleCtrlVisibility = event => {
-    const value = event.type === 'mouseenter';
     this.setState({
-      visibleCtrl: value,
-      isPaused: value,
+      visibleCtrl: event.type === 'mouseenter',
+      isPaused: event.type === 'mouseenter',
     });
   };
 
   moveSlider = direction => {
-    if (direction === 'next') {
-      this.setState({
-        currentSlide: this.state.currentSlide + 1,
-      });
-    } else if (direction === 'prev') {
-      this.setState({
-        currentSlide: this.state.currentSlide - 1,
-      });
-    }
+    this.setState({
+      currentSlide: this.state.currentSlide + (direction === 'next' ? 1 : -1),
+    });
   };
 
   nextSlider = () => {
