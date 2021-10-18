@@ -35,16 +35,16 @@ class Review extends Component {
     })
       .then(res => {
         if (res.status === 200) {
-          alert('댓글 수정이 완료되었습니다');
+          alert('후기 수정이 완료되었습니다');
           clickReviewHandler(id);
           this.setState({
             title: newTitle,
             text: newText,
           });
         } else if (res.status === 401) {
-          alert('본인 댓글만 수정할 수 있습니다 !');
+          alert('본인 후기만 수정할 수 있습니다 !');
         } else {
-          alert('댓글 수정 과정에서 오류가 발생하였습니다');
+          alert('후기 수정 과정에서 오류가 발생하였습니다');
         }
       })
       .catch(console.log);
@@ -64,11 +64,11 @@ class Review extends Component {
     })
       .then(res => {
         if (res.status === 200) {
-          alert('댓글 삭제가 완료되었습니다');
+          alert('후기 삭제가 완료되었습니다');
         } else if (res.status === 401) {
-          alert('본인 댓글만 삭제할 수 있습니다 !');
+          alert('본인 후기만 삭제할 수 있습니다 !');
         } else {
-          alert('댓글 삭제 과정에서 오류가 발생하였습니다');
+          alert('후기 삭제 과정에서 오류가 발생하였습니다');
         }
       })
       .catch(console.log);

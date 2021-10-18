@@ -105,6 +105,8 @@ class ReviewBoard extends Component {
           alert('후기 작성이 완료되었습니다');
           this.closeCommentModal();
           this.getReviesByPageId(0);
+        } else if (res.status === 401) {
+          alert('후기 작성 권한이 없습니다');
         } else {
           alert('후기 작성 과정에서 오류가 발생하였습니다');
         }
