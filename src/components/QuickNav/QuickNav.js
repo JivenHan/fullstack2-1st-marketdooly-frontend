@@ -97,10 +97,7 @@ export default class QuickNav extends Component {
         <div className='wrapper'>
           <div className='deliveryNoticeBanner'>
             <Link to='/'>
-              <img
-                src='https://res.kurly.com/pc/service/main/1904/bnr_quick_20190403.png'
-                alt='배송안내'
-              />
+              <img src='https://i.imgur.com/uL64vNC.jpg' alt='배송안내' />
             </Link>
           </div>
           <ul className='subMenus'>
