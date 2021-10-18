@@ -100,14 +100,15 @@ class ReviewBoard extends Component {
         text: newReviewText,
       }),
     })
-      .then(res => res.json())
-      .then(data => {
-        if (data.status === 'success') {
-          alert('후가 작성이 완료되었습니다');
+      .then(res => {
+        if (res.status === 201) {
+          alert('후기 작성이 완료되었습니다');
           this.closeCommentModal();
           this.getReviesByPageId(0);
+        } else if (res.status === 401) {
+          alert('후기 작성 권한이 없습니다');
         } else {
-          alert('후기를 작성하는 과정에서 오류가 발생하였습니다');
+          alert('후기 작성 과정에서 오류가 발생하였습니다');
         }
       })
       .catch(console.log);
@@ -162,6 +163,7 @@ class ReviewBoard extends Component {
               {reviewData.map(data => {
                 return (
                   <Review
+                    key={data.id}
                     {...data}
                     clickReviewHandler={this.clickReviewHandler}
                   />
@@ -182,6 +184,7 @@ class ReviewBoard extends Component {
               {pageNumArray.map((el, idx) => {
                 return (
                   <span
+                    key={idx}
                     className='comment commentAlign'
                     onClick={() => getReviesByPageId(idx)}
                   >

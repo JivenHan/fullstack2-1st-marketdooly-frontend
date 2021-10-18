@@ -5,11 +5,11 @@ export default class AlertPopup extends Component {
   render() {
     return (
       <div className='AlertPopup'>
-        <main>
+        <div className='messageWrapper'>
           <header>알림메시지</header>
           <section className='message'>{this.props.alertMessage}</section>
-        </main>
-        <footer>
+        </div>
+        <div className='buttonWrapper'>
           <button
             type='button'
             className='btnConfirm'
@@ -17,7 +17,7 @@ export default class AlertPopup extends Component {
           >
             확인
           </button>
-        </footer>
+        </div>
       </div>
     );
   }
