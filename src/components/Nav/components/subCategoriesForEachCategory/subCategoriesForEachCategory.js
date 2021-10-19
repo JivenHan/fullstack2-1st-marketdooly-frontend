@@ -14,38 +14,22 @@ export default class subCategoriesForEachCategory extends Component {
   }
 
   render() {
-    const { i, name, eachCategoryData } = this.props;
+    const { hoverCategoryData } = this.props;
+    const { list, i } = hoverCategoryData;
     return (
       <li key={i} className='parentCategoryNameWrapper'>
-        <Link to={name} className='parentCategoryNameLink'>
-          {eachCategoryData.categoryName}
-        </Link>
         <ul className='subCategoriesContainer'>
-          {/* {eachCategoryData.list &&
-            eachCategoryData.list.map(
-              (eachSubCategoryData, i) => {
-                // console.log('>>>>>>>eachSubCategoryData@@');
-                // console.log(eachSubCategoryData);
-                const name =
-                  '/list/' +
-                  eachCategoryData.id +
-                  '/' +
-                  eachSubCategoryData.id;
-                return (
-                  <li
-                    key={i}
-                    className='subCategoryNameLinkWrapper'
-                  >
-                    <Link
-                      to={name}
-                      className='subCategoryNameLink'
-                    >
-                      {eachSubCategoryData.subCategoryName}
-                    </Link>
-                  </li>
-                );
-              }
-            )} */}
+          {list &&
+            list.map((eachSubCategoryData, idx) => {
+              const name = '/list/' + i + '/' + idx;
+              return (
+                <li key={idx} className='subCategoryNameLinkWrapper'>
+                  <Link to={name} className='subCategoryNameLink'>
+                    {eachSubCategoryData.subCategoryName}
+                  </Link>
+                </li>
+              );
+            })}
         </ul>
       </li>
     );

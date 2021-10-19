@@ -158,22 +158,15 @@
         z-index: 400;
         transition: all 0.3s;
 
-        // &.hidden {
-        //   display: none;
-        // }
+        &.hidden {
+          display: none;
+        }
 
         .parentCategoriesContainer {
           position: absolute;
-          // top: 400px;
           width: 204px;
           height: 741px;
-          // .parentCategoriesWrapper {
-          // background-color: black;
-          // width: 204px;
-          // height: 741px;
-          // z-index: 200;
           background-color: #ffffff;
-          // 아 이 아래 왜 안보이냐???
 
           .parentCategoryBg {
             position: relative;
@@ -188,6 +181,20 @@
 
             &:hover {
               background-color: #f7f7f7;
+            }
+
+            .parentCategoryName {
+              height: 39px;
+
+              position: relative;
+              color: #4c4c4c;
+
+              font-size: 14px;
+              text-decoration: none;
+
+              &:hover {
+                color: $themeColorPrimary;
+              }
             }
           }
         }

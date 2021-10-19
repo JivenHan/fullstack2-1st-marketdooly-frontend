@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import CartIconSvg from './components/CartIconSvg';
 import LocationIconSvg from './components/LocationIconSvg';
-// import subCategoriesForEachCategory from './components/subCategoriesForEachCategory';
+import SubCategoriesForEachCategory from './components/subCategoriesForEachCategory/subCategoriesForEachCategory';
 import './TopNav.scss';
 
 export default class TopNav extends Component {
@@ -17,6 +17,7 @@ export default class TopNav extends Component {
       isSubCategoriesVisible: false,
       cartItemNumber: 0,
       isUserLoggedIn: false,
+      hoverCategoryData: {},
     };
   }
 
@@ -48,8 +49,6 @@ export default class TopNav extends Component {
     fetch('http://localhost:8000/main/allcategory')
       .then(res => res.json())
       .then(res => {
-        console.log('>>>>>>>>>>>>>>>>>>>category에서 무얼 받니');
-        console.log(res);
         this.setState({
           categoryData: res,
         });
@@ -207,40 +206,36 @@ export default class TopNav extends Component {
               src='/menuHamburgerIcon.png'
             />
             <p>전체 카테고리</p>
-            {/* 골칫거리 카테고리 드랍다운 시작 */}
             <div
               className={`dropDownCategories ${
                 !this.state.isCategoriesVisible ? 'hidden' : ''
               }`}
             >
               <ul className='parentCategoriesContainer'>
-                {this.state.categoryIconData !== [] &&
+                {this.state.categoryIconData.length !== 0 &&
                   this.state.categoryIconData.map((categoryIconData, i) => {
                     return (
                       <li
                         key={i}
                         className='parentCategoryBg'
+                        onMouseEnter={() => {
+                          this.setState({
+                            hoverCategoryData: this.state.categoryData[i],
+                          });
+                        }}
                         style={{
                           backgroundImage: `url(${categoryIconData.iconUrl})`,
                         }}
-                      ></li>
+                      >
+                        <h3 className='parentCategoryName'>
+                          {categoryIconData.parentCategories}
+                        </h3>
+                      </li>
                     );
                   })}
-                {this.state.categoryData !== [] &&
-                  this.state.categoryData.map((eachCategoryData, i) => {
-                    console.log('>>>>eachCategoryData');
-                    console.log(eachCategoryData);
-                    const name = '/list/' + eachCategoryData.id;
-                    return (
-                      <div>
-                        <subCategoriesForEachCategory
-                          i={i}
-                          name={name}
-                          eachCategoryData={eachCategoryData}
-                        />
-                      </div>
-                    );
-                  })}
+                <SubCategoriesForEachCategory
+                  hoverCategoryData={this.state.hoverCategoryData}
+                />
               </ul>
             </div>
           </div>
