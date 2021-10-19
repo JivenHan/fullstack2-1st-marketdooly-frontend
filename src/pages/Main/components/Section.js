@@ -10,6 +10,7 @@ export default class Section extends Component {
       data: [],
       categoryData: [],
       selectedCategory: 1,
+      API: 'http://localhost:8000',
     };
   }
 
@@ -23,7 +24,7 @@ export default class Section extends Component {
   };
 
   getDisplayData = () => {
-    fetch(`http://localhost:3000/${this.props.dataLink}`)
+    fetch(`${this.state.API}/${this.props.endPoint}`)
       .then(res => res.json())
       .then(data =>
         this.setState({
@@ -33,19 +34,19 @@ export default class Section extends Component {
   };
 
   getCategories = () => {
-    fetch(`http://localhost:3000/data/categoryCarouselData.json`)
+    fetch(`${this.state.API}/main/category`)
       .then(res => res.json())
       .then(categoryData =>
         this.setState({
-          categoryData,
+          categoryData: categoryData.filter(
+            ele => ele.categoryName !== '컬리의 추천'
+          ),
         })
       );
   };
 
   reRenderingMDPick = () => {
-    fetch(
-      `http://localhost:3000/data/MDsPick/category${this.state.selectedCategory}MDList.json`
-    )
+    fetch(`${this.state.API}/main/event/mdspick/${this.state.selectedCategory}`)
       .then(res => res.json())
       .then(data => {
         this.setState({
@@ -90,17 +91,26 @@ export default class Section extends Component {
 
   render() {
     return (
-      <section className={`Section ${this.props.sectionName}`}>
+      <section
+        className={`Section ${
+          this.state.data.length ? this.state.data[0].group : ''
+        }`}
+      >
         <div className='titGoods'>
           <h3 className='tit'>
-            <span className='titTitle'>{this.props.title}</span>
-            {this.props.titDesc && (
-              <span className='titDesc'>{this.props.titDesc}</span>
-            )}
+            <span className='titTitle'>
+              {this.state.data.length ? this.state.data[0].header : null}
+            </span>
+            {this.state.data.length ? (
+              <span className='titDesc'>{this.state.data[0].description}</span>
+            ) : null}
           </h3>
         </div>
         {this.props.categories && this.displayCategories()}
-        <Carousel data={this.state.data} />
+        <Carousel
+          data={this.state.data}
+          goToDetailPage={this.props.goToDetailPage}
+        />
         {this.props.categories && (
           <div className='viewAllCategory'>
             <button>

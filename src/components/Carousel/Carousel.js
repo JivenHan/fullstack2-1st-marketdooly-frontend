@@ -29,22 +29,16 @@ export default class Carousel extends Component {
 
   calcSlidingRange = () => {
     const { currentPage, maxPage, lastSlidingCorrection } = this.state;
-    if (currentPage === maxPage) {
-      return 1068 * (currentPage - 1) - lastSlidingCorrection;
-    } else {
-      return 1068 * (currentPage - 1);
-    }
+    return (
+      1068 * (currentPage - 1) -
+      (currentPage === maxPage && lastSlidingCorrection)
+    );
   };
 
-  prevSlide = () => {
+  moveSlide = event => {
     this.setState({
-      currentPage: this.state.currentPage - 1,
-    });
-  };
-
-  nextSlide = () => {
-    this.setState({
-      currentPage: this.state.currentPage + 1,
+      currentPage:
+        this.state.currentPage + (event.target.className === 'prev' ? -1 : 1),
     });
   };
 
@@ -59,16 +53,22 @@ export default class Carousel extends Component {
             }}
           >
             {this.props.data.map(ele => {
-              return <Slide key={ele.id} data={ele} />;
+              return (
+                <Slide
+                  key={ele.id}
+                  data={ele}
+                  goToDetailPage={this.props.goToDetailPage}
+                />
+              );
             })}
           </ul>
         </div>
         <div className='sliderCtrl'>
           {currentPage !== 1 && (
-            <button className='prev' onClick={this.prevSlide}></button>
+            <button className='prev' onClick={this.moveSlide}></button>
           )}
           {currentPage < maxPage && (
-            <button className='next' onClick={this.nextSlide}></button>
+            <button className='next' onClick={this.moveSlide}></button>
           )}
         </div>
       </article>

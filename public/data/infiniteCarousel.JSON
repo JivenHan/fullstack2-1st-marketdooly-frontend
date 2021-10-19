@@ -1,0 +1,47 @@
+[
+  {
+    "id": 1,
+    "group": "main",
+    "header": null,
+    "description": null,
+    "image": "https://i.imgur.com/XSWwG5L.jpg",
+    "link": "/",
+    "type": "slider"
+  },
+  {
+    "id": 2,
+    "group": "main",
+    "header": null,
+    "description": null,
+    "image": "https://i.imgur.com/5QWd9co.jpg",
+    "link": "/",
+    "type": "slider"
+  },
+  {
+    "id": 3,
+    "group": "main",
+    "header": null,
+    "description": null,
+    "image": "https://i.imgur.com/2GUXbah.jpg",
+    "link": "/",
+    "type": "slider"
+  },
+  {
+    "id": 4,
+    "group": "main",
+    "header": null,
+    "description": null,
+    "image": "https://i.imgur.com/zeLx9kT.jpg",
+    "link": "/",
+    "type": "slider"
+  },
+  {
+    "id": 5,
+    "group": "main",
+    "header": null,
+    "description": null,
+    "image": "https://i.imgur.com/M1NS32k.jpg",
+    "link": "/",
+    "type": "slider"
+  }
+]

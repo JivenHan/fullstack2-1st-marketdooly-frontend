@@ -6,6 +6,7 @@ export default class Item extends Component {
   render() {
     const {
       productId,
+      checkedItems,
       name,
       sales_price,
       original_price,
@@ -16,11 +17,11 @@ export default class Item extends Component {
       <li className='Item'>
         <input className='checkControl' type='checkbox' />
         <span
-          className={`checkSign ${this.props.checkedItems ? 'checked' : ''}`}
+          className={`checkSign ${checkedItems ? 'checked' : ''}`}
           onClick={this.props.checkingItems.bind(this, productId)}
         ></span>
         <picture className='itemThumb'>
-          <Link to='/'>
+          <Link to={`/detail/${checkedItems?.product_id}`}>
             <img src={thumbnail_image} alt={name} />
           </Link>
         </picture>
@@ -48,9 +49,12 @@ export default class Item extends Component {
           <div className='salesPrice'>
             {new Intl.NumberFormat('ko-KR').format(sales_price * quantity)}원
           </div>
-          <div className='originalPrice'>
-            {new Intl.NumberFormat('ko-KR').format(original_price * quantity)}원
-          </div>
+          {!(sales_price === original_price) ? (
+            <div className='originalPrice'>
+              {new Intl.NumberFormat('ko-KR').format(original_price * quantity)}
+              원
+            </div>
+          ) : null}
         </div>
         <div
           className='deleteItem'
