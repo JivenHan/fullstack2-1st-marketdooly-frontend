@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import CartIconSvg from './components/CartIconSvg';
 import LocationIconSvg from './components/LocationIconSvg';
+// import subCategoriesForEachCategory from './components/subCategoriesForEachCategory';
 import './TopNav.scss';
 
 export default class TopNav extends Component {
@@ -10,8 +11,6 @@ export default class TopNav extends Component {
     this.state = {
       categoryIconData: [],
       categoryData: [],
-      // categoriesArray: [],
-      // entireSubCategoriesArray: [],
       isTopAdBannerClosed: false,
       isLnbUserCsVisible: false,
       isCategoriesVisible: false,
@@ -22,7 +21,6 @@ export default class TopNav extends Component {
   }
 
   componentDidMount() {
-    //세션에서 카트 아이템 번호 빼오기
     fetch('http://localhost:8000/users/session', {
       credentials: 'include',
     })
@@ -210,20 +208,12 @@ export default class TopNav extends Component {
             />
             <p>전체 카테고리</p>
             {/* 골칫거리 카테고리 드랍다운 시작 */}
-            {/* 부모 wrapper의 nth-child마다, 호버하면 섭메뉴나오게 */}
-            {/* 부모 wrapper의 nth-child마다, 호버하면 state의 hoveredCategoryId에 값 올라가게 */}
-            {/* this.state.hoveredCategoryId == 1 일때만 */}
             <div
               className={`dropDownCategories ${
                 !this.state.isCategoriesVisible ? 'hidden' : ''
               }`}
             >
               <ul className='parentCategoriesContainer'>
-                {/* <div
-                className='parentCategoriesWrapper'
-                // onMouseOver={this.showSubCategories}
-                // onMouseOut={this.hideSubCategories}
-              > */}
                 {this.state.categoryIconData !== [] &&
                   this.state.categoryIconData.map((categoryIconData, i) => {
                     return (
@@ -242,41 +232,15 @@ export default class TopNav extends Component {
                     console.log(eachCategoryData);
                     const name = '/list/' + eachCategoryData.id;
                     return (
-                      <li key={i} className='parentCategoryNameWrapper'>
-                        <Link to={name} className='parentCategoryNameLink'>
-                          {eachCategoryData.categoryName}
-                        </Link>
-                        <ul className='subCategoriesContainer'>
-                          {eachCategoryData.list &&
-                            eachCategoryData.list.map(
-                              (eachSubCategoryData, i) => {
-                                // console.log('>>>>>>>eachSubCategoryData@@');
-                                // console.log(eachSubCategoryData);
-                                const name =
-                                  '/list/' +
-                                  eachCategoryData.id +
-                                  '/' +
-                                  eachSubCategoryData.id;
-                                return (
-                                  <li
-                                    key={i}
-                                    className='subCategoryNameLinkWrapper'
-                                  >
-                                    <Link
-                                      to={name}
-                                      className='subCategoryNameLink'
-                                    >
-                                      {eachSubCategoryData.subCategoryName}
-                                    </Link>
-                                  </li>
-                                );
-                              }
-                            )}
-                        </ul>
-                      </li>
+                      <div>
+                        <subCategoriesForEachCategory
+                          i={i}
+                          name={name}
+                          eachCategoryData={eachCategoryData}
+                        />
+                      </div>
                     );
                   })}
-                {/* </div> */}
               </ul>
             </div>
           </div>

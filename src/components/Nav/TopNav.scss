@@ -158,9 +158,9 @@
         z-index: 400;
         transition: all 0.3s;
 
-        &.hidden {
-          display: none;
-        }
+        // &.hidden {
+        //   display: none;
+        // }
 
         .parentCategoriesContainer {
           position: absolute;
@@ -190,54 +190,6 @@
               background-color: #f7f7f7;
             }
           }
-          .parentCategoryNameWrapper {
-            position: relative;
-            // top: 300px;
-            .parentCategoryNameLink {
-              padding-top: 13px;
-              padding-left: 50px;
-              height: 39px;
-
-              position: relative;
-              // top: -741px;
-              color: #4c4c4c;
-
-              font-size: 14px;
-              text-decoration: none;
-
-              &:hover {
-                color: #5f0080;
-              }
-            }
-            .subCategoriesContainer {
-              position: relative;
-              left: 204px;
-              // top: -741px;
-              height: 741px;
-              background-color: cornflowerblue;
-              z-index: -1;
-
-              .subCategoryNameLinkWrapper {
-                padding-left: 50px;
-                height: 741px;
-                width: 204px;
-                line-height: 39px;
-
-                .subCategoryNameLink {
-                  color: #4c4c4c;
-                  font-size: 14px;
-                  text-decoration: none;
-                }
-              }
-            }
-          }
-          // &:hover {
-          //   background-color: #f7f7f7;
-          //   // background-color: cadetblue;
-
-          //   color: #5f0080;
-          // }
-          // }
         }
       }
     }
