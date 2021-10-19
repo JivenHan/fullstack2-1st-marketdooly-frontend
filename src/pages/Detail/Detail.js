@@ -89,6 +89,8 @@ export default class Detail extends Component {
   };
 
   componentDidMount() {
+    window.scrollTo(0, 0);
+
     fetch(`http://localhost:8000/products/${this.props.match.params.id}`)
       .then(res => {
         if (!res.ok) {
@@ -105,11 +107,9 @@ export default class Detail extends Component {
       .catch(console.log);
 
     const observer = new IntersectionObserver(([{ isIntersecting }]) => {
-      if (!isIntersecting) {
-        this.setState({ isBottomLayerUp: true });
-      } else {
-        this.setState({ isBottomLayerUp: false });
-      }
+      !isIntersecting
+        ? this.setState({ isBottomLayerUp: true })
+        : this.setState({ isBottomLayerUp: false });
     });
     observer.observe(this.observerRef.current);
   }
