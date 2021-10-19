@@ -100,6 +100,7 @@ export default class Detail extends Component {
         return res.json();
       })
       .then(data => {
+        this.saveViewedItemToLocalStorage(data);
         this.setState({
           productDetail: data[0] || {},
         });
@@ -113,6 +114,19 @@ export default class Detail extends Component {
     });
     observer.observe(this.observerRef.current);
   }
+
+  saveViewedItemToLocalStorage = data => {
+    const { id, product_image } = data[0];
+    const newItem = { id, product_image };
+    if (localStorage.getItem('recentlyViewed') === null) {
+      localStorage.setItem('recentlyViewed', JSON.stringify([newItem]));
+    } else {
+      const storaged = JSON.parse(localStorage.getItem('recentlyViewed'));
+      if (storaged.some(ele => ele.id === id)) return;
+      const newArr = [...storaged, newItem];
+      localStorage.setItem('recentlyViewed', JSON.stringify(newArr));
+    }
+  };
 
   addToCart = () => {
     fetch('http://localhost:8000/cart', {

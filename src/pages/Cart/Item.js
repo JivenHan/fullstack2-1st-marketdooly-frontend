@@ -6,6 +6,7 @@ export default class Item extends Component {
   render() {
     const {
       productId,
+      checkedItems,
       name,
       sales_price,
       original_price,
@@ -16,17 +17,11 @@ export default class Item extends Component {
       <li className='Item'>
         <input className='checkControl' type='checkbox' />
         <span
-          className={`checkSign ${this.props.checkedItems ? 'checked' : ''}`}
+          className={`checkSign ${checkedItems ? 'checked' : ''}`}
           onClick={this.props.checkingItems.bind(this, productId)}
         ></span>
         <picture className='itemThumb'>
-          <Link
-            to='/'
-            onClick={event => {
-              event.preventDefault();
-              this.props.goToDetailPage(productId);
-            }}
-          >
+          <Link to={`/detail/${checkedItems?.product_id}`}>
             <img src={thumbnail_image} alt={name} />
           </Link>
         </picture>
