@@ -17,7 +17,7 @@
       p {
         margin: 0 auto;
         color: white;
-        font-size: 0.7rem;
+        font-size: 14px;
         font-weight: normal;
         letter-spacing: -0.03rem;
         span {
@@ -46,7 +46,11 @@
     .headerDeliveryWrapper {
       margin-top: 0.5rem;
       img {
-        height: 1.2rem;
+        height: 22px;
+      }
+
+      .headerDeliveryImg {
+        height: 25px;
       }
     }
 
@@ -58,8 +62,8 @@
       .headerLogo {
         position: relative;
         top: 10px;
-        margin: 0.5rem 2rem;
-        height: 4rem;
+        margin: 0.8rem 2rem;
+        height: 79px;
       }
     }
 
@@ -68,7 +72,7 @@
       flex-wrap: wrap;
       height: 1rem;
       li {
-        font-size: 0.6rem;
+        font-size: 12px;
         margin: 0.6rem 0.35rem;
         padding-right: 0.7rem;
         border-right: 1px solid #cccccc;
@@ -149,7 +153,7 @@
       .dropDownCategories {
         display: block;
         position: absolute;
-        top: 48px;
+        top: 47px;
         border: 1px solid #f7f7f7;
         z-index: 400;
         transition: all 0.3s;
@@ -160,7 +164,19 @@
 
         .parentCategoriesContainer {
           position: absolute;
+          // top: 400px;
+          width: 204px;
+          height: 741px;
+          // .parentCategoriesWrapper {
+          // background-color: black;
+          // width: 204px;
+          // height: 741px;
+          // z-index: 200;
+          background-color: #ffffff;
+          // 아 이 아래 왜 안보이냐???
+
           .parentCategoryBg {
+            position: relative;
             padding-left: 50px;
             height: 39px;
             width: 204px;
@@ -174,92 +190,54 @@
               background-color: #f7f7f7;
             }
           }
-          .parentCategoryNameLinkWrapper {
-            padding-top: 13px;
-            padding-left: 50px;
-            height: 39px;
-
+          .parentCategoryNameWrapper {
+            position: relative;
+            // top: 300px;
             .parentCategoryNameLink {
+              padding-top: 13px;
+              padding-left: 50px;
+              height: 39px;
+
               position: relative;
-              top: -741px;
+              // top: -741px;
               color: #4c4c4c;
+
               font-size: 14px;
               text-decoration: none;
-            }
-            .parentCategoryNameLink:hover {
-              color: #5f0080;
-            }
-          }
-        }
 
-        .subCategoriesContainer {
-          position: absolute;
-          .subCategoryBg {
-            z-index: -1;
-            position: relative;
-            left: 204px;
-            padding-left: 50px;
-            height: 741px;
-            width: 204px;
-            line-height: 39px;
-            background-color: #f7f7f7;
-          }
-          // .subCategoryNameLinkWrapper {
-          //   padding-top: 13px;
-          //   padding-left: 50px;
-          //   height: 39px;
-          .subCategoriesForCategory {
-            position: relative;
-            top: -741px;
-            .subCategoryBgCover {
-              z-index: 0;
+              &:hover {
+                color: #5f0080;
+              }
+            }
+            .subCategoriesContainer {
               position: relative;
               left: 204px;
-              padding-left: 25px;
-              height: 39px;
-              width: 204px;
-              line-height: 39px;
-              background-color: #f7f7f7;
-              .subCategoryNameLinkCover {
-                z-index: 1;
-                position: relative;
-                // top: -39px;
-                // left: 204px;
-                // margin-left: 204px;
-                color: #4c4c4c;
-                font-size: 14px;
-                text-decoration: none;
-                &:nth-child(3) {
-                  z-index: 2;
-                  position: relative;
-                  // top: -39px;
-                  // left: 204px;
-                  color: red;
+              // top: -741px;
+              height: 741px;
+              background-color: cornflowerblue;
+              z-index: -1;
+
+              .subCategoryNameLinkWrapper {
+                padding-left: 50px;
+                height: 741px;
+                width: 204px;
+                line-height: 39px;
+
+                .subCategoryNameLink {
+                  color: #4c4c4c;
                   font-size: 14px;
                   text-decoration: none;
-                }
-                .subCategoryNameCover:hover {
-                  color: #5f0080;
                 }
               }
             }
           }
-          .subCategoriesForCategory:nth-child(4) {
-            // display: none;
-            position: relative;
-            top: -39px;
-            background-color: green;
-          }
-          .subCategoriesForCategory:nth-child(2) {
-            // display: none;
-            position: relative;
-            top: -39px;
-            background-color: purple;
-          }
+          // &:hover {
+          //   background-color: #f7f7f7;
+          //   // background-color: cadetblue;
+
+          //   color: #5f0080;
           // }
-          &.hidden {
-            display: none;
-          }
+          // }
         }
       }
     }
@@ -280,7 +258,7 @@
         padding: 0.8rem;
         border: 0;
         border-radius: 1rem;
-        padding-right: 5rem;
+        padding-right: 6rem;
         height: 2rem;
 
         font-size: 0.6rem;
@@ -292,6 +270,7 @@
       }
       .gnbSearchInput::placeholder {
         color: #cbcbcb;
+        font-size: 12px;
       }
 
       .gnbSetLocationButton {
@@ -302,9 +281,26 @@
       }
 
       .gnbGoToCart {
+        position: relative;
         margin-left: 0.6rem;
         img {
           height: 1.35rem;
+        }
+
+        .cartItemNumber {
+          display: inline-block;
+          position: absolute;
+          top: -5px;
+          left: 17px;
+          height: 25px;
+          width: 25px;
+          color: #ffffff;
+          background-color: $themeColorPrimary;
+          border: 2px solid #ffffff;
+          border-radius: 100px;
+          line-height: 20px;
+          font-size: 12px;
+          text-align: center;
         }
       }
     }

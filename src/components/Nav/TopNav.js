@@ -10,17 +10,35 @@ export default class TopNav extends Component {
     this.state = {
       categoryIconData: [],
       categoryData: [],
-      categoriesArray: [],
-      entireSubCategoriesArray: [],
+      // categoriesArray: [],
+      // entireSubCategoriesArray: [],
       isTopAdBannerClosed: false,
       isLnbUserCsVisible: false,
       isCategoriesVisible: false,
       isSubCategoriesVisible: false,
+      cartItemNumber: 0,
+      isUserLoggedIn: false,
     };
   }
 
   componentDidMount() {
-    fetch('data/categoryIconData.json')
+    //세션에서 카트 아이템 번호 빼오기
+    fetch('http://localhost:8000/users/session', {
+      credentials: 'include',
+    })
+      .then(res => {
+        if (!res.ok) throw new Error('not loggedIn');
+        return res.json();
+      })
+      .then(data =>
+        this.setState({
+          cartItemNumber: data.result.length,
+          isUserLoggedIn: true,
+        })
+      )
+      .catch(console.error);
+
+    fetch('data/categoryData.json')
       .then(res => res.json())
       .then(res => {
         this.setState({
@@ -28,46 +46,14 @@ export default class TopNav extends Component {
         });
       })
       .catch(err => console.log(err));
-    fetch('http://localhost:8000/main/category')
+
+    fetch('http://localhost:8000/main/allcategory')
       .then(res => res.json())
       .then(res => {
+        console.log('>>>>>>>>>>>>>>>>>>>category에서 무얼 받니');
+        console.log(res);
         this.setState({
           categoryData: res,
-          categoriesArray: [res[0].categoryName],
-        });
-      })
-      .then(() => {
-        let redundantCategoriesArray = [];
-        this.state.categoryData.map(x => {
-          redundantCategoriesArray.push(x.categoryName);
-        });
-        let categoriesArray = redundantCategoriesArray.filter((el, idx) => {
-          return redundantCategoriesArray.indexOf(el) === idx;
-        });
-        this.setState({
-          categoriesArray: categoriesArray,
-        });
-      })
-      .then(() => {
-        //subCategories 분리
-        let entireSubCategoriesArray = [[], [], [], [], [], []];
-        this.state.categoryData.forEach(el => {
-          if (el.categoryName === '채소') {
-            entireSubCategoriesArray[0].push(el.subCategoryName);
-          } else if (el.categoryName === '과일·견과·쌀') {
-            entireSubCategoriesArray[1].push(el.subCategoryName);
-          } else if (el.categoryName === '수산·해산·건어물') {
-            entireSubCategoriesArray[2].push(el.subCategoryName);
-          } else if (el.categoryName === '정육·계란') {
-            entireSubCategoriesArray[3].push(el.subCategoryName);
-          } else if (el.categoryName === '국·반찬·메인요리') {
-            entireSubCategoriesArray[4].push(el.subCategoryName);
-          } else if (el.categoryName === '샐러드·간편식') {
-            entireSubCategoriesArray[5].push(el.subCategoryName);
-          }
-        });
-        this.setState({
-          entireSubCategoriesArray: entireSubCategoriesArray,
         });
       });
   }
@@ -77,6 +63,7 @@ export default class TopNav extends Component {
       document.cookie = name + '=; expires=Thu, 01 Jan 1999 00:00:10 GMT;';
     };
     deleteCookie('jwt');
+    window.location.reload();
     this.props.history.push('/');
   };
 
@@ -116,6 +103,10 @@ export default class TopNav extends Component {
     });
   };
 
+  moveToCategory = link => {
+    window.location.replace(`/category/${link}`);
+  };
+
   render() {
     return (
       <div className='TopNav'>
@@ -144,11 +135,13 @@ export default class TopNav extends Component {
             />
           </div>
           <div className='headerLogoWrapper'>
-            <img
-              className='headerLogo'
-              alt='kurlylogo'
-              src='https://i.imgur.com/eY0hAoz.png'
-            />
+            <Link to='/'>
+              <img
+                className='headerLogo'
+                alt='kurlylogo'
+                src='https://i.imgur.com/WJ4Df0D.png'
+              />
+            </Link>
           </div>
           <ul className='headerUserContainer'>
             <li className='headerUserItem1Wrapper'>
@@ -157,9 +150,19 @@ export default class TopNav extends Component {
               </Link>
             </li>
             <li className='headerUserItem2Wrapper'>
-              <Link className='headerUserItem2' to='/login'>
-                로그인
-              </Link>
+              {this.state.isUserLoggedIn ? (
+                <div
+                  className='headerUserItem2'
+                  onClick={this.logout}
+                  style={{ cursor: 'pointer' }}
+                >
+                  로그아웃
+                </div>
+              ) : (
+                <Link className='headerUserItem2' to='/login'>
+                  로그인
+                </Link>
+              )}
             </li>
             <li
               className='headerUserItem3Wrapper'
@@ -206,101 +209,74 @@ export default class TopNav extends Component {
               src='/menuHamburgerIcon.png'
             />
             <p>전체 카테고리</p>
+            {/* 골칫거리 카테고리 드랍다운 시작 */}
+            {/* 부모 wrapper의 nth-child마다, 호버하면 섭메뉴나오게 */}
+            {/* 부모 wrapper의 nth-child마다, 호버하면 state의 hoveredCategoryId에 값 올라가게 */}
+            {/* this.state.hoveredCategoryId == 1 일때만 */}
             <div
               className={`dropDownCategories ${
                 !this.state.isCategoriesVisible ? 'hidden' : ''
               }`}
             >
               <ul className='parentCategoriesContainer'>
+                {/* <div
+                className='parentCategoriesWrapper'
+                // onMouseOver={this.showSubCategories}
+                // onMouseOut={this.hideSubCategories}
+              > */}
                 {this.state.categoryIconData !== [] &&
                   this.state.categoryIconData.map((categoryIconData, i) => {
                     return (
                       <li
                         key={i}
                         className='parentCategoryBg'
-                        onMouseOver={this.showSubCategories}
-                        onMouseOut={this.hideSubCategories}
                         style={{
                           backgroundImage: `url(${categoryIconData.iconUrl})`,
                         }}
                       ></li>
                     );
                   })}
-                {this.state.categoriesArray !== [] &&
-                  this.state.categoriesArray.map(categoryDatum => {
+                {this.state.categoryData !== [] &&
+                  this.state.categoryData.map((eachCategoryData, i) => {
+                    console.log('>>>>eachCategoryData');
+                    console.log(eachCategoryData);
+                    const name = '/list/' + eachCategoryData.id;
                     return (
-                      <div className='parentCategoryNameLinkWrapper'>
-                        <Link className='parentCategoryNameLink' to='/'>
-                          <h3 className='parentCategoryName'>
-                            {categoryDatum}
-                          </h3>
+                      <li key={i} className='parentCategoryNameWrapper'>
+                        <Link to={name} className='parentCategoryNameLink'>
+                          {eachCategoryData.categoryName}
                         </Link>
-                      </div>
-                    );
-                  })}
-              </ul>
-              {/* 밑바탕 자식카테고리 - hover 인식하는 곳*/}
-              <ul
-                className={
-                  this.state.isSubCategoriesVisible
-                    ? 'subCategoriesContainer'
-                    : 'subCategoriesContainer hidden'
-                }
-              >
-                {/* 밑바탕 자식카테고리 - 뒷배경 */}
-                <div className='subCategoryBg'></div>
-                {/* 덮는 부모카테고리 */}
-                {this.state.categoriesArray !== [] &&
-                  this.state.categoriesArray.map((categoryDatum, i) => {
-                    // <각 Category html>
-                    return (
-                      <div>
-                        <li
-                          key={i}
-                          className='parentCategoryBgCover'
-                          onMouseOver={this.showSubCategories}
-                          onMouseOut={this.hideSubCategories}
-                        ></li>
-                        <div className='parentCategoryNameLinkWrapperCover'>
-                          <Link className='parentCategoryNameLinkCover' to='/'>
-                            <h3 className='parentCategoryNameCover'>
-                              {this.state.te}
-                            </h3>
-                          </Link>
-                        </div>
-                      </div>
-                    );
-                  })}
-                {/* 덮는 자식카테고리 */}
-                {this.state.entireSubCategoriesArray !== [] &&
-                  //subCategoriesForCategory 하나 = subCategoryBg 하나
-                  //subCategoryBg 맵돌리기 //hidden은 container에
-                  this.state.entireSubCategoriesArray.map(
-                    subCategoriesForCategory => {
-                      // <각 subCategory html>
-                      return (
-                        <div className='subCategoriesForCategory'>
-                          <div>
-                            {subCategoriesForCategory.map(eachSubCategory => {
-                              return (
-                                <div className='subCategoryBgCover'>
-                                  <div></div>
-                                  <Link
-                                    className='subCategoryNameLinkCover'
-                                    to='/'
+                        <ul className='subCategoriesContainer'>
+                          {eachCategoryData.list &&
+                            eachCategoryData.list.map(
+                              (eachSubCategoryData, i) => {
+                                // console.log('>>>>>>>eachSubCategoryData@@');
+                                // console.log(eachSubCategoryData);
+                                const name =
+                                  '/list/' +
+                                  eachCategoryData.id +
+                                  '/' +
+                                  eachSubCategoryData.id;
+                                return (
+                                  <li
+                                    key={i}
+                                    className='subCategoryNameLinkWrapper'
                                   >
-                                    <h3 className='subCategoryNameCover'>
-                                      {eachSubCategory}
-                                    </h3>
-                                  </Link>
-                                </div>
-                              );
-                            })}
-                          </div>
-                        </div>
-                      );
-                    }
-                  )}
+                                    <Link
+                                      to={name}
+                                      className='subCategoryNameLink'
+                                    >
+                                      {eachSubCategoryData.subCategoryName}
+                                    </Link>
+                                  </li>
+                                );
+                              }
+                            )}
+                        </ul>
+                      </li>
+                    );
+                  })}
+                {/* </div> */}
               </ul>
             </div>
           </div>
@@ -322,6 +298,11 @@ export default class TopNav extends Component {
             </button>
             <Link className='gnbGoToCart' to='/cart'>
               <CartIconSvg strokeColor={'#333'} />
+              {this.state.cartItemNumber ? (
+                <span className='cartItemNumber'>
+                  {this.state.cartItemNumber}
+                </span>
+              ) : null}
             </Link>
           </div>
         </div>
