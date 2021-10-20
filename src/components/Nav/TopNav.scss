@@ -136,6 +136,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    cursor: pointer;
 
     .categoriesMenuContainer {
       display: flex;
@@ -164,7 +165,12 @@
 
         .parentCategoriesContainer {
           position: absolute;
+          width: 204px;
+          height: 741px;
+          background-color: #ffffff;
+
           .parentCategoryBg {
+            position: relative;
             padding-left: 50px;
             height: 39px;
             width: 204px;
@@ -173,96 +179,27 @@
             background-position: 14px 8px;
             background-size: 24px 24px;
             background-repeat: no-repeat;
+            filter: grayscale(100%);
 
             &:hover {
               background-color: #f7f7f7;
+              filter: hue-rotate(180deg);
             }
-          }
-          .parentCategoryNameLinkWrapper {
-            padding-top: 13px;
-            padding-left: 50px;
-            height: 39px;
 
-            .parentCategoryNameLink {
+            .parentCategoryName {
+              height: 39px;
+
               position: relative;
-              top: -741px;
               color: #4c4c4c;
+
               font-size: 14px;
               text-decoration: none;
-            }
-            .parentCategoryNameLink:hover {
-              color: #5f0080;
-            }
-          }
-        }
 
-        .subCategoriesContainer {
-          position: absolute;
-          .subCategoryBg {
-            z-index: -1;
-            position: relative;
-            left: 204px;
-            padding-left: 50px;
-            height: 741px;
-            width: 204px;
-            line-height: 39px;
-            background-color: #f7f7f7;
-          }
-          // .subCategoryNameLinkWrapper {
-          //   padding-top: 13px;
-          //   padding-left: 50px;
-          //   height: 39px;
-          .subCategoriesForCategory {
-            position: relative;
-            top: -741px;
-            .subCategoryBgCover {
-              z-index: 0;
-              position: relative;
-              left: 204px;
-              padding-left: 25px;
-              height: 39px;
-              width: 204px;
-              line-height: 39px;
-              background-color: #f7f7f7;
-              .subCategoryNameLinkCover {
-                z-index: 1;
-                position: relative;
-                // top: -39px;
-                // left: 204px;
-                // margin-left: 204px;
-                color: #4c4c4c;
-                font-size: 14px;
-                text-decoration: none;
-                &:nth-child(3) {
-                  z-index: 2;
-                  position: relative;
-                  // top: -39px;
-                  // left: 204px;
-                  color: red;
-                  font-size: 14px;
-                  text-decoration: none;
-                }
-                .subCategoryNameCover:hover {
-                  color: #5f0080;
-                }
+              &:hover {
+                color: $themeColorPrimary;
+                filter: hue-rotate(180deg);
               }
             }
-          }
-          .subCategoriesForCategory:nth-child(4) {
-            // display: none;
-            position: relative;
-            top: -39px;
-            background-color: green;
-          }
-          .subCategoriesForCategory:nth-child(2) {
-            // display: none;
-            position: relative;
-            top: -39px;
-            background-color: purple;
-          }
-          // }
-          &.hidden {
-            display: none;
           }
         }
       }
@@ -292,7 +229,7 @@
         background-image: url(searchIcon.jpeg);
         background-size: 1.8rem;
         background-repeat: no-repeat;
-        background-position: 12rem center;
+        background-position: 11.1rem center;
       }
       .gnbSearchInput::placeholder {
         color: #cbcbcb;

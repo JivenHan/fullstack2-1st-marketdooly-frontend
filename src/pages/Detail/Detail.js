@@ -89,6 +89,8 @@ export default class Detail extends Component {
   };
 
   componentDidMount() {
+    window.scrollTo(0, 0);
+
     fetch(`http://localhost:8000/products/${this.props.match.params.id}`)
       .then(res => {
         if (!res.ok) {
@@ -98,6 +100,7 @@ export default class Detail extends Component {
         return res.json();
       })
       .then(data => {
+        this.saveViewedItemToLocalStorage(data);
         this.setState({
           productDetail: data[0] || {},
         });
@@ -105,14 +108,25 @@ export default class Detail extends Component {
       .catch(console.log);
 
     const observer = new IntersectionObserver(([{ isIntersecting }]) => {
-      if (!isIntersecting) {
-        this.setState({ isBottomLayerUp: true });
-      } else {
-        this.setState({ isBottomLayerUp: false });
-      }
+      !isIntersecting
+        ? this.setState({ isBottomLayerUp: true })
+        : this.setState({ isBottomLayerUp: false });
     });
     observer.observe(this.observerRef.current);
   }
+
+  saveViewedItemToLocalStorage = data => {
+    const { id, product_image } = data[0];
+    const newItem = { id, product_image };
+    if (localStorage.getItem('recentlyViewed') === null) {
+      localStorage.setItem('recentlyViewed', JSON.stringify([newItem]));
+    } else {
+      const storaged = JSON.parse(localStorage.getItem('recentlyViewed'));
+      if (storaged.some(ele => ele.id === id)) return;
+      const newArr = [...storaged, newItem];
+      localStorage.setItem('recentlyViewed', JSON.stringify(newArr));
+    }
+  };
 
   addToCart = () => {
     fetch('http://localhost:8000/cart', {

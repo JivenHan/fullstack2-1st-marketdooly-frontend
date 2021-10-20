@@ -8,13 +8,15 @@ export default class MainBanner extends Component {
     this.state = {
       data: [],
       autoSlide: true,
-      autoSlideTiming: 4,
-      currentSlide: 0,
+      autoSlideTiming: 3.5,
+      currentSlide: 1,
       isPaused: false,
       slideCount: 0,
       sliderWidth: 1050,
       visibleCtrl: false,
     };
+    this.slidingAnimation = true;
+    this.transitionTiming = 500;
   }
 
   componentDidMount() {
@@ -31,42 +33,44 @@ export default class MainBanner extends Component {
   }
 
   requestData = () => {
-    fetch('http://localhost:8000/main/banner/main')
+    fetch('/data/infiniteCarousel.JSON') // 테스트 중 원본은 => http://localhost:8000/main/banner/main
       .then(res => res.json())
       .then(data =>
         this.setState({
           data,
-          slideCount: data.length,
+          slideCount: data.length + 2,
         })
       );
   };
 
   updateViewSize = () => {
-    const sliderWidth =
-      document.body.clientWidth > 1050 ? document.body.clientWidth : 1050;
     this.setState({
-      sliderWidth,
+      sliderWidth:
+        document.body.clientWidth > 1050 ? document.body.clientWidth : 1050,
     });
   };
 
   toggleCtrlVisibility = event => {
-    const value = event.type === 'mouseenter';
     this.setState({
-      visibleCtrl: value,
-      isPaused: value,
+      visibleCtrl: event.type === 'mouseenter',
+      isPaused: event.type === 'mouseenter',
     });
   };
 
   moveSlider = direction => {
-    if (direction === 'next') {
-      this.setState({
-        currentSlide: this.state.currentSlide + 1,
+    this.setState({
+      currentSlide: this.state.currentSlide + (direction === 'next' ? 1 : -1),
+    });
+  };
+
+  infiniteLoop = nextSlide => {
+    setTimeout(async () => {
+      this.slidingAnimation = false;
+      await this.setState({
+        currentSlide: nextSlide,
       });
-    } else if (direction === 'prev') {
-      this.setState({
-        currentSlide: this.state.currentSlide - 1,
-      });
-    }
+      this.slidingAnimation = true;
+    }, this.transitionTiming);
   };
 
   nextSlider = () => {
@@ -74,28 +78,19 @@ export default class MainBanner extends Component {
     if (currentSlide < slideCount - 1) {
       this.moveSlider('next');
     }
-    if (currentSlide >= slideCount - 1) {
-      this.setState(
-        {
-          currentSlide: 0,
-        },
-        () => this.nextSlider
-      );
+    if (currentSlide === slideCount - 2) {
+      this.infiniteLoop(1);
     }
   };
 
   prevSlider = () => {
-    const { currentSlide, slideCount } = this.state;
-    if (currentSlide > 0) {
+    const { currentSlide } = this.state;
+    if (currentSlide > 1) {
       this.moveSlider('prev');
     }
-    if (currentSlide <= 0) {
-      this.setState(
-        {
-          currentSlide: slideCount,
-        },
-        () => this.moveSlider('prev')
-      );
+    if (currentSlide <= 1) {
+      this.moveSlider();
+      this.infiniteLoop(5);
     }
   };
 
@@ -107,6 +102,7 @@ export default class MainBanner extends Component {
   };
 
   render() {
+    const { data, slideCount, currentSlide, visibleCtrl } = this.state;
     return (
       <div
         className='mainBannerWrapper'
@@ -116,19 +112,27 @@ export default class MainBanner extends Component {
         <div className='mainBanner'>
           <ul
             style={{
-              width: `${this.state.slideCount * 100}%`,
+              width: `${slideCount * 100}%`,
               transform: `translateX(-${
-                document.body.clientWidth * this.state.currentSlide
+                document.body.clientWidth * currentSlide
               }px)`,
-              transition: `transform 0.5s ease-in-out`,
+              transition: this.slidingAnimation
+                ? `transform ${this.transitionTiming}ms ease-in-out`
+                : 'none',
             }}
           >
-            {this.renderSlides(this.state.data)}
+            <Slide id={data.length} image={data[data.length - 1]?.image}>
+              LAST SLIDER
+            </Slide>
+            {this.renderSlides(data)}
+            <Slide id={1} image={data[0]?.image}>
+              LAST SLIDER
+            </Slide>
           </ul>
         </div>
         <div
           className='mainBannerCtrl'
-          style={{ opacity: `${this.state.visibleCtrl ? 1 : 0}` }}
+          style={{ opacity: `${visibleCtrl ? 1 : 0}` }}
         >
           <button onClick={this.prevSlider}>prev</button>
           <button onClick={this.nextSlider}>next</button>

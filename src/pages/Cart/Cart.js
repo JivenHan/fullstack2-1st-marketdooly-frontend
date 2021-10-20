@@ -1,6 +1,7 @@
 import { Component } from 'react';
 import ItemField from './ItemField';
 import CartResult from './CartResult';
+import AlertModal from '../../components/Modal/AlertModal';
 import './Cart.scss';
 
 export default class Cart extends Component {
@@ -15,6 +16,7 @@ export default class Cart extends Component {
       selectAll: true,
       userAddress: '',
       topCoords: 60,
+      modalVisibility: false,
     };
     this.window = null;
   }
@@ -34,10 +36,6 @@ export default class Cart extends Component {
         topCoords: coords.height - 714,
       });
     }
-  };
-
-  goToDetailPage = id => {
-    this.props.history.push(`/detail/${id}`);
   };
 
   componentDidMount() {
@@ -179,6 +177,10 @@ export default class Cart extends Component {
   };
 
   deleteSelectedItems = async () => {
+    if (!this.state.checkedItems.length) {
+      this.setState({ modalVisibility: true });
+      return;
+    }
     const deleteConsent = window.confirm('선택한 상품을 삭제하시겠습니까?');
     if (!deleteConsent) return;
     const selected = [...this.state.checkedItems].map(ele => ele.id);
@@ -286,6 +288,13 @@ export default class Cart extends Component {
     this.manipulateQuantities(currentTarget, -1);
   };
 
+  closeModal = e => {
+    e.preventDefault();
+    this.setState({
+      modalVisibility: false,
+    });
+  };
+
   render() {
     return (
       <section className='Cart'>
@@ -332,7 +341,6 @@ export default class Cart extends Component {
                     deleteOneItem={this.deleteOneItem}
                     decreaseQuantity={this.decreaseQuantity}
                     increaseQuantity={this.increaseQuantity}
-                    goToDetailPage={this.goToDetailPage}
                   />
                 ) : null}
                 {this.state.cartData.filter(
@@ -348,7 +356,6 @@ export default class Cart extends Component {
                     deleteOneItem={this.deleteOneItem}
                     decreaseQuantity={this.decreaseQuantity}
                     increaseQuantity={this.increaseQuantity}
-                    goToDetailPage={this.goToDetailPage}
                   />
                 ) : null}
                 {this.state.cartData.filter(
@@ -367,7 +374,6 @@ export default class Cart extends Component {
                     deleteOneItem={this.deleteOneItem}
                     decreaseQuantity={this.decreaseQuantity}
                     increaseQuantity={this.increaseQuantity}
-                    goToDetailPage={this.goToDetailPage}
                   />
                 ) : null}
                 {!this.state.cartData.length ? (
@@ -410,6 +416,13 @@ export default class Cart extends Component {
             </form>
           </div>
         </div>
+        <AlertModal
+          headerTxt='알림메세지'
+          message='삭제할 상품을 선택해주세요.'
+          confirmMsg='확인'
+          visibility={this.state.modalVisibility}
+          closeModal={this.closeModal}
+        />
       </section>
     );
   }
