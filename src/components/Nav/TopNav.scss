@@ -136,6 +136,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    cursor: pointer;
 
     .categoriesMenuContainer {
       display: flex;
@@ -178,9 +179,11 @@
             background-position: 14px 8px;
             background-size: 24px 24px;
             background-repeat: no-repeat;
+            filter: grayscale(100%);
 
             &:hover {
               background-color: #f7f7f7;
+              filter: hue-rotate(180deg);
             }
 
             .parentCategoryName {
@@ -194,6 +197,7 @@
 
               &:hover {
                 color: $themeColorPrimary;
+                filter: hue-rotate(180deg);
               }
             }
           }
@@ -225,7 +229,7 @@
         background-image: url(searchIcon.jpeg);
         background-size: 1.8rem;
         background-repeat: no-repeat;
-        background-position: 12rem center;
+        background-position: 11.1rem center;
       }
       .gnbSearchInput::placeholder {
         color: #cbcbcb;
