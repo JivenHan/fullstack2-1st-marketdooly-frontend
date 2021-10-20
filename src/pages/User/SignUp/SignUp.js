@@ -270,6 +270,10 @@ export default class SignUp extends Component {
     this.setState({ [name]: true });
   };
 
+  goToLogin = () => {
+    this.props.history.push('/login');
+  };
+
   closeModal = () => {
     this.setState({
       isUsagePolicyOpened: false,
@@ -277,10 +281,6 @@ export default class SignUp extends Component {
       isPIOptionalPolicyOpened: false,
       modalVisibility: false,
     });
-  };
-
-  goToLogin = () => {
-    this.props.history.push('/login');
   };
 
   signUp = () => {
@@ -361,8 +361,8 @@ export default class SignUp extends Component {
       clickGenderRadio,
       clickPolicyCheckbox,
       openPolicyPopup,
-      closeModal,
       goToLogin,
+      closeModal,
       signUp,
     } = this;
 

@@ -70,12 +70,12 @@ export default class FindPw extends Component {
     this.setState({ responseStatus: '' });
   };
 
-  closeModal = () => {
-    this.setState({ modalVisibility: false });
-  };
-
   goToLogin = () => {
     this.props.history.push('/login');
+  };
+
+  closeModal = () => {
+    this.setState({ modalVisibility: false });
   };
 
   findPw = () => {
@@ -107,7 +107,7 @@ export default class FindPw extends Component {
   };
 
   render() {
-    const { inputHandler, clickConfirmBtn, closeModal, goToLogin, findPw } =
+    const { inputHandler, clickConfirmBtn, goToLogin, closeModal, findPw } =
       this;
     const {
       name,
