@@ -5,7 +5,8 @@ import PolicyCheckbox from '../components/PolicyCheckbox';
 import UsagePolicy from './components/UsagePolicy';
 import PersonalInfoPolicy1 from './components/PersonalInfoPolicy1';
 import PersonalInfoPolicy2 from './components/PersonalInfoPolicy2';
-import AlertPopup from './components/AlertPopup';
+import AlertModal from '../../../components/Modal/AlertModal';
+import DimBackground from '../../../components/Modal/DimBackground';
 import StringUtil from '../../../utils/StringUtil';
 import './SignUp.scss';
 
@@ -66,8 +67,8 @@ export default class SignUp extends Component {
       isUsagePolicyOpened: false,
       isPIRequiredPolicyOpened: false,
       isPIOptionalPolicyOpened: false,
-      alertPopupMessage: '',
-      isAlertPopupOpened: false,
+      modalMessage: '',
+      modalVisibility: false,
       // 회원가입 결과
       signUpResult: false,
     };
@@ -92,13 +93,13 @@ export default class SignUp extends Component {
         .then(res => {
           if (res.status === 'fail') {
             this.setState({
-              alertPopupMessage: `이미 사용 중인 아이디 입니다.`,
-              isAlertPopupOpened: true,
+              modalMessage: `이미 사용 중인 아이디 입니다.`,
+              modalVisibility: true,
             });
           } else if (res.status === 'success') {
             this.setState({
-              alertPopupMessage: `사용 가능한 아이디 입니다.`,
-              isAlertPopupOpened: true,
+              modalMessage: `사용 가능한 아이디 입니다.`,
+              modalVisibility: true,
             });
           }
         });
@@ -117,13 +118,13 @@ export default class SignUp extends Component {
         .then(res => {
           if (res.status === 'fail') {
             this.setState({
-              alertPopupMessage: `이미 사용 중인 이메일 입니다.`,
-              isAlertPopupOpened: true,
+              modalMessage: `이미 사용 중인 이메일 입니다.`,
+              modalVisibility: true,
             });
           } else if (res.status === 'success') {
             this.setState({
-              alertPopupMessage: `사용 가능한 이메일 입니다.`,
-              isAlertPopupOpened: true,
+              modalMessage: `사용 가능한 이메일 입니다.`,
+              modalVisibility: true,
             });
           }
         });
@@ -132,8 +133,8 @@ export default class SignUp extends Component {
 
   cellPhoneAuth = () => {
     this.setState({
-      alertPopupMessage: '휴대폰 인증 API 호출',
-      isAlertPopupOpened: true,
+      modalMessage: '휴대폰 인증 API 호출',
+      modalVisibility: true,
     });
   };
 
@@ -155,39 +156,39 @@ export default class SignUp extends Component {
       dd,
     } = this.state;
 
-    let alertPopupMessage = '';
-    let isAlertPopupOpened = false;
+    let modalMessage = '';
+    let modalVisibility = false;
 
     // 필수 입력 유효성 검증
     if (Object.keys(requiredInputMap).includes(key)) {
       if (StringUtil.isNull(this.state[key])) {
-        alertPopupMessage = `${requiredInputMap[key]}을(를) 입력해주세요`;
-        isAlertPopupOpened = true;
+        modalMessage = `${requiredInputMap[key]}을(를) 입력해주세요`;
+        modalVisibility = true;
       } else {
         let regExp = '';
         switch (key) {
           case 'account':
             regExp = /^[a-z0-9]*[a-z]+[a-z0-9]*$/g;
-            isAlertPopupOpened = account.length < 6 || !regExp.test(account);
+            modalVisibility = account.length < 6 || !regExp.test(account);
             break;
           case 'password':
-            isAlertPopupOpened = password.length < 10;
+            modalVisibility = password.length < 10;
             break;
           case 'passwordConfirm':
-            isAlertPopupOpened = password !== passwordConfirm;
+            modalVisibility = password !== passwordConfirm;
             break;
           case 'email':
             regExp = /^[a-z0-9]+@[a-z0-9]+.[a-z0-9]+$/gi;
-            isAlertPopupOpened = !regExp.test(email);
+            modalVisibility = !regExp.test(email);
             break;
           case 'cellPhone':
             regExp = /^0[0-9]{9,10}$/g;
-            isAlertPopupOpened = !regExp.test(cellPhone);
+            modalVisibility = !regExp.test(cellPhone);
             break;
           default:
             break;
         }
-        alertPopupMessage = `${requiredInputMap[key]} 형식을 확인해주세요`;
+        modalMessage = `${requiredInputMap[key]} 형식을 확인해주세요`;
       }
     }
 
@@ -210,8 +211,8 @@ export default class SignUp extends Component {
           dd > 31 ||
           yyyy + mm + dd < new Date().get
         ) {
-          alertPopupMessage = '생년월일 형식을 확인해주세요';
-          isAlertPopupOpened = true;
+          modalMessage = '생년월일 형식을 확인해주세요';
+          modalVisibility = true;
         }
       }
     }
@@ -219,14 +220,14 @@ export default class SignUp extends Component {
     // 필수 동의 체크박스
     if (Object.keys(this.requiredCheckboxMap).includes(key)) {
       if (this.state.checkboxes[key] === false) {
-        alertPopupMessage = `${this.requiredCheckboxMap[key]}을(를) 확인해주세요`;
-        isAlertPopupOpened = true;
+        modalMessage = `${this.requiredCheckboxMap[key]}을(를) 확인해주세요`;
+        modalVisibility = true;
       }
     }
 
-    this.setState({ alertPopupMessage, isAlertPopupOpened });
+    this.setState({ modalMessage, modalVisibility });
 
-    return !isAlertPopupOpened;
+    return !modalVisibility;
   };
 
   clickGenderRadio = e => {
@@ -268,12 +269,12 @@ export default class SignUp extends Component {
     this.setState({ [name]: true });
   };
 
-  clickPopupConfirmBtn = () => {
+  closeModal = () => {
     this.setState({
       isUsagePolicyOpened: false,
       isPIRequiredPolicyOpened: false,
       isPIOptionalPolicyOpened: false,
-      isAlertPopupOpened: false,
+      modalVisibility: false,
     });
   };
 
@@ -336,8 +337,8 @@ export default class SignUp extends Component {
               } else {
                 this.setState({
                   signUpResult: false,
-                  alertPopupMessage: `회원가입 과정에서 오류가 발생하였습니다`,
-                  isAlertPopupOpened: true,
+                  modalMessage: `회원가입 과정에서 오류가 발생하였습니다`,
+                  modalVisibility: true,
                 });
               }
             });
@@ -355,7 +356,7 @@ export default class SignUp extends Component {
       clickGenderRadio,
       clickPolicyCheckbox,
       openPolicyPopup,
-      clickPopupConfirmBtn,
+      closeModal,
       signUp,
     } = this;
 
@@ -367,8 +368,8 @@ export default class SignUp extends Component {
       isUsagePolicyOpened,
       isPIRequiredPolicyOpened,
       isPIOptionalPolicyOpened,
-      alertPopupMessage,
-      isAlertPopupOpened,
+      modalMessage,
+      modalVisibility,
       signUpResult,
     } = this.state;
 
@@ -565,25 +566,22 @@ export default class SignUp extends Component {
             </button>
           </div>
         )}
-        <div className='popupContainer'>
-          {(isPolicyOpened || isAlertPopupOpened) && (
-            <div className='dim'></div>
-          )}
-          {isUsagePolicyOpened && (
-            <UsagePolicy clickConfirmBtn={clickPopupConfirmBtn} />
-          )}
+        <div className='modalContainer'>
+          {isPolicyOpened && <DimBackground />}
+          {isUsagePolicyOpened && <UsagePolicy clickConfirmBtn={closeModal} />}
           {isPIRequiredPolicyOpened && (
-            <PersonalInfoPolicy1 clickConfirmBtn={clickPopupConfirmBtn} />
+            <PersonalInfoPolicy1 clickConfirmBtn={closeModal} />
           )}
           {isPIOptionalPolicyOpened && (
-            <PersonalInfoPolicy2 clickConfirmBtn={clickPopupConfirmBtn} />
+            <PersonalInfoPolicy2 clickConfirmBtn={closeModal} />
           )}
-          {isAlertPopupOpened && (
-            <AlertPopup
-              alertMessage={alertPopupMessage}
-              clickConfirmBtn={clickPopupConfirmBtn}
-            />
-          )}
+          <AlertModal
+            visibility={modalVisibility}
+            headerTxt='알림메시지'
+            message={modalMessage}
+            confirmMsg='확인'
+            closeModal={closeModal}
+          />
         </div>
       </div>
     );

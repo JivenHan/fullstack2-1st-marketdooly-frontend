@@ -1,7 +1,7 @@
 import { Component } from 'react';
 import { Link } from 'react-router-dom';
 import TextInput from '../components/TextInput';
-import AlertPopup from '../SignUp/components/AlertPopup';
+import AlertModal from '../../../components/Modal/AlertModal';
 import StringUtil from '../../../utils/StringUtil';
 import './Login.scss';
 
@@ -16,8 +16,8 @@ export default class Login extends Component {
     this.state = {
       account: '',
       password: '',
-      alertPopupMessage: '',
-      isAlertPopupOpened: false,
+      modalMessage: '',
+      modalVisibility: false,
     };
   }
 
@@ -32,37 +32,37 @@ export default class Login extends Component {
     const { requiredInputMap } = this;
     const { account, password } = this.state;
 
-    let alertPopupMessage = '';
-    let isAlertPopupOpened = false;
+    let modalMessage = '';
+    let modalVisibility = false;
 
     // 필수 입력 유효성 검증
     if (Object.keys(requiredInputMap).includes(key)) {
       if (StringUtil.isNull(this.state[key])) {
-        alertPopupMessage = `${requiredInputMap[key]}을(를) 입력해주세요`;
-        isAlertPopupOpened = true;
+        modalMessage = `${requiredInputMap[key]}을(를) 입력해주세요`;
+        modalVisibility = true;
       } else {
         let regExp = '';
         switch (key) {
           case 'account':
             regExp = /^[a-z0-9]*[a-z]+[a-z0-9]*$/g;
-            isAlertPopupOpened = account.length < 6 || !regExp.test(account);
+            modalVisibility = account.length < 6 || !regExp.test(account);
             break;
           case 'password':
-            isAlertPopupOpened = password.length < 10;
+            modalVisibility = password.length < 10;
             break;
           default:
             break;
         }
-        alertPopupMessage = `${requiredInputMap[key]} 형식을 확인해주세요`;
+        modalMessage = `${requiredInputMap[key]} 형식을 확인해주세요`;
       }
     }
 
-    this.setState({ alertPopupMessage, isAlertPopupOpened });
-    return !isAlertPopupOpened;
+    this.setState({ modalMessage, modalVisibility });
+    return !modalVisibility;
   };
 
-  clickPopupConfirmBtn = () => {
-    this.setState({ isAlertPopupOpened: false });
+  closeModal = () => {
+    this.setState({ modalVisibility: false });
   };
 
   login = () => {
@@ -98,8 +98,8 @@ export default class Login extends Component {
             this.props.history.push('/');
           } else {
             this.setState({
-              alertPopupMessage: '회원 정보가 일치하지 않습니다',
-              isAlertPopupOpened: true,
+              modalMessage: '회원 정보가 일치하지 않습니다',
+              modalVisibility: true,
             });
           }
         });
@@ -107,9 +107,8 @@ export default class Login extends Component {
   };
 
   render() {
-    const { inputHandler, clickPopupConfirmBtn, login } = this;
-    const { account, password, alertPopupMessage, isAlertPopupOpened } =
-      this.state;
+    const { inputHandler, closeModal, login } = this;
+    const { account, password, modalMessage, modalVisibility } = this.state;
 
     const isValidAccount = account.length > 0; // 상세 로직은 추후에 반영
     const isValidPw = password.length > 0; // 상세 로직은 추후에 반영
@@ -149,14 +148,14 @@ export default class Login extends Component {
             회원가입
           </button>
         </div>
-        <div className='popupContainer'>
-          {isAlertPopupOpened && <div className='dim'></div>}
-          {isAlertPopupOpened && (
-            <AlertPopup
-              alertMessage={alertPopupMessage}
-              clickConfirmBtn={clickPopupConfirmBtn}
-            />
-          )}
+        <div className='modalContainer'>
+          <AlertModal
+            visibility={modalVisibility}
+            headerTxt='알림메시지'
+            message={modalMessage}
+            confirmMsg='확인'
+            closeModal={closeModal}
+          />
         </div>
       </div>
     );
