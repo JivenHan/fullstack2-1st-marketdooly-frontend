@@ -61,7 +61,8 @@ export default class PolicyCheckbox extends Component {
     return (
       <div className={`PolicyCheckbox ${name}`}>
         <label>
-          <inputname
+          <input
+            name={name}
             type='checkbox'
             name={name ? name : null}
             onChange={handler.clickPolicyCheckbox}

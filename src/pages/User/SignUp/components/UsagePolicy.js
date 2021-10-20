@@ -82,7 +82,7 @@ export default class UsagePolicy extends Component {
             법률, 공정거래위원회가 정하는 전자상거래 등에서의 소비자 보호지침 및
             관계법령 또는 상관례에 따릅니다.
           </section>
-          <button type='button' onClick={this.props.clickConfirmBtn}>
+          <button type='button' onClick={this.props.onClick}>
             확인
           </button>
         </div>

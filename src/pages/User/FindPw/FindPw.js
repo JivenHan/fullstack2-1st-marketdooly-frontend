@@ -1,5 +1,6 @@
 import { Component } from 'react';
 import TextInput from '../components/TextInput';
+import ResultPage from '../components/ResultPage';
 import AlertModal from '../../../components/Modal/AlertModal';
 import StringUtil from '../../../utils/StringUtil';
 import './FindPw.scss';
@@ -65,8 +66,16 @@ export default class FindPw extends Component {
     return !modalVisibility;
   };
 
+  clickConfirmBtn = () => {
+    this.setState({ responseStatus: '' });
+  };
+
   closeModal = () => {
     this.setState({ modalVisibility: false });
+  };
+
+  goToLogin = () => {
+    this.props.history.push('/login');
   };
 
   findPw = () => {
@@ -98,7 +107,8 @@ export default class FindPw extends Component {
   };
 
   render() {
-    const { inputHandler, closeModal, findPw } = this;
+    const { inputHandler, clickConfirmBtn, closeModal, goToLogin, findPw } =
+      this;
     const {
       name,
       account,
@@ -138,36 +148,18 @@ export default class FindPw extends Component {
             </div>
           )}
           {responseStatus === 'fail' && (
-            <div className='afterFind'>
-              <img src='/image/findaccount.png' alt='' />
-              <p>
-                고객님께서 입력하신 정보가
-                <br />
-                정확한지 확인 후 다시 시도해주세요
-              </p>
-              <button
-                type='button'
-                onClick={() => this.setState({ responseStatus: '' })}
-              >
-                비밀번호 다시 찾기
-              </button>
-            </div>
+            <ResultPage
+              mainText={`고객님께서 입력하신 정보가<br>정확한지 확인 후 다시 시도해주세요`}
+              btnText={`비밀번호 다시 찾기`}
+              onClick={clickConfirmBtn}
+            />
           )}
           {responseStatus === 'success' && (
-            <div className='afterFind'>
-              <img src='/image/findaccount.png' alt='' />
-              <p>
-                임시 비밀번호는
-                <br />
-                {tempPassword} 입니다.
-              </p>
-              <button
-                type='button'
-                onClick={() => this.props.history.push('/login')}
-              >
-                로그인 하기
-              </button>
-            </div>
+            <ResultPage
+              mainText={`임시 비밀번호는<br>${tempPassword} 입니다.`}
+              btnText={`로그인 하기`}
+              onClick={goToLogin}
+            />
           )}
         </div>
         <div className='modalContainer'>
