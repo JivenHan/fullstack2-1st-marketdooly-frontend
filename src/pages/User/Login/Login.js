@@ -1,9 +1,9 @@
 import { Component } from 'react';
 import { Link } from 'react-router-dom';
+import TextInput from '../components/TextInput';
 import AlertPopup from '../SignUp/components/AlertPopup';
 import StringUtil from '../../../utils/StringUtil';
 import './Login.scss';
-import TextInput from '../components/TextInput';
 
 export default class Login extends Component {
   requiredInputMap = {

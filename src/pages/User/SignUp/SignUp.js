@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
-import AlertPopup from './components/AlertPopup';
+import TableRow from '../components/TableRow';
+import TextInput from '../components/TextInput';
+import PolicyCheckbox from '../components/PolicyCheckbox';
 import UsagePolicy from './components/UsagePolicy';
 import PersonalInfoPolicy1 from './components/PersonalInfoPolicy1';
 import PersonalInfoPolicy2 from './components/PersonalInfoPolicy2';
+import AlertPopup from './components/AlertPopup';
 import StringUtil from '../../../utils/StringUtil';
 import './SignUp.scss';
-import TextInput from '../components/TextInput';
-import PolicyCheckbox from '../components/PolicyCheckbox';
-import TableRow from '../components/TableRow';
 
 export default class SignUp extends Component {
   requiredInputMap = {

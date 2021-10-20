@@ -1,8 +1,8 @@
 import { Component } from 'react';
+import TextInput from '../components/TextInput';
 import AlertPopup from '../SignUp/components/AlertPopup';
 import StringUtil from '../../../utils/StringUtil';
 import './FindPw.scss';
-import TextInput from '../components/TextInput';
 
 export default class FindPw extends Component {
   requiredInputMap = {
