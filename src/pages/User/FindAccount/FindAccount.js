@@ -1,6 +1,7 @@
 import { Component } from 'react';
-import AlertPopup from '../SignUp/components/AlertPopup';
-import StringUtil from '../../utils/StringUtil';
+import TextInput from '../components/TextInput';
+import AlertModal from '../../../components/Modal/AlertModal';
+import StringUtil from '../../../utils/StringUtil';
 import './FindAccount.scss';
 
 export default class FindAccount extends Component {
@@ -14,14 +15,14 @@ export default class FindAccount extends Component {
     this.state = {
       name: '',
       email: '',
-      alertPopupMessage: '',
-      isAlertPopupOpened: false,
+      modalMessage: '',
+      modalVisibility: false,
       responseStatus: '',
       account: '',
     };
   }
 
-  handleInput = e => {
+  inputHandler = e => {
     const { name, value } = e.target;
     this.setState({
       [name]: value,
@@ -32,34 +33,34 @@ export default class FindAccount extends Component {
     const { requiredInputMap } = this;
     const { email } = this.state;
 
-    let alertPopupMessage = '';
-    let isAlertPopupOpened = false;
+    let modalMessage = '';
+    let modalVisibility = false;
 
     // 필수 입력 유효성 검증
     if (Object.keys(requiredInputMap).includes(key)) {
       if (StringUtil.isNull(this.state[key])) {
-        alertPopupMessage = `${requiredInputMap[key]}을(를) 입력해주세요`;
-        isAlertPopupOpened = true;
+        modalMessage = `${requiredInputMap[key]}을(를) 입력해주세요`;
+        modalVisibility = true;
       } else {
         let regExp = '';
         switch (key) {
           case 'email':
             regExp = /^[a-z0-9]+@[a-z0-9]+.[a-z0-9]+$/gi;
-            isAlertPopupOpened = !regExp.test(email);
+            modalVisibility = !regExp.test(email);
             break;
           default:
             break;
         }
-        alertPopupMessage = `${requiredInputMap[key]} 형식을 확인해주세요`;
+        modalMessage = `${requiredInputMap[key]} 형식을 확인해주세요`;
       }
     }
 
-    this.setState({ alertPopupMessage, isAlertPopupOpened });
-    return !isAlertPopupOpened;
+    this.setState({ modalMessage, modalVisibility });
+    return !modalVisibility;
   };
 
-  clickPopupConfirmBtn = () => {
-    this.setState({ isAlertPopupOpened: false });
+  closeModal = () => {
+    this.setState({ modalVisibility: false });
   };
 
   findAccount = () => {
@@ -91,12 +92,12 @@ export default class FindAccount extends Component {
   };
 
   render() {
-    const { handleInput, clickPopupConfirmBtn, findAccount } = this;
+    const { inputHandler, closeModal, findAccount } = this;
     const {
       name,
       email,
-      alertPopupMessage,
-      isAlertPopupOpened,
+      modalMessage,
+      modalVisibility,
       responseStatus,
       account,
     } = this.state;
@@ -113,21 +114,9 @@ export default class FindAccount extends Component {
             <div className='beforeFind'>
               <form>
                 <label>이름</label>
-                <input
-                  type='text'
-                  name='name'
-                  placeholder='고객님의 이름을 입력해주세요'
-                  onChange={handleInput}
-                  required
-                />
+                <TextInput input='name' onChange={inputHandler} />
                 <label>이메일</label>
-                <input
-                  type='text'
-                  name='email'
-                  placeholder='가입 시 등록하신 이메일 주소를 입력해주세요'
-                  onChange={handleInput}
-                  required
-                />
+                <TextInput input='email' onChange={inputHandler} />
               </form>
               <button
                 type='button'
@@ -171,14 +160,14 @@ export default class FindAccount extends Component {
             </div>
           )}
         </div>
-        <div className='popupContainer'>
-          {isAlertPopupOpened && <div className='dim'></div>}
-          {isAlertPopupOpened && (
-            <AlertPopup
-              alertMessage={alertPopupMessage}
-              clickConfirmBtn={clickPopupConfirmBtn}
-            />
-          )}
+        <div className='modalContainer'>
+          <AlertModal
+            visibility={modalVisibility}
+            headerTxt='알림메시지'
+            message={modalMessage}
+            confirmMsg='확인'
+            closeModal={closeModal}
+          />
         </div>
       </div>
     );

@@ -1,0 +1,50 @@
+@import '../../../styles/variables';
+
+.PolicyCheckbox {
+  font-size: 14px;
+
+  &.agreeAll {
+    font-size: 18px;
+    font-weight: 500;
+  }
+
+  input[type='checkbox'] {
+    position: absolute;
+    opacity: 0;
+  }
+
+  .icoUnchecked,
+  .icoChecked {
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+    margin: 0 10px 0 0;
+    vertical-align: -8px;
+  }
+
+  .icoUnchecked {
+    background: url(https://res.kurly.com/pc/service/common/2006/ico_checkbox.svg)
+      no-repeat;
+  }
+
+  .icoChecked {
+    background: url(https://res.kurly.com/pc/service/common/2006/ico_checkbox_checked.svg)
+      no-repeat;
+  }
+
+  .required,
+  .optional {
+    margin-left: 5px;
+    color: #999;
+  }
+
+  .btnPolicy {
+    float: right;
+    border: none;
+    font-size: 14px;
+    color: $themeColorPrimary;
+    line-height: 23px;
+    background-color: #fff;
+    cursor: pointer;
+  }
+}

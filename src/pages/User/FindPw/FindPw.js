@@ -1,6 +1,7 @@
 import { Component } from 'react';
-import AlertPopup from '../SignUp/components/AlertPopup';
-import StringUtil from '../../utils/StringUtil';
+import TextInput from '../components/TextInput';
+import AlertModal from '../../../components/Modal/AlertModal';
+import StringUtil from '../../../utils/StringUtil';
 import './FindPw.scss';
 
 export default class FindPw extends Component {
@@ -16,14 +17,14 @@ export default class FindPw extends Component {
       name: '',
       account: '',
       email: '',
-      alertPopupMessage: '',
-      isAlertPopupOpened: false,
+      modalMessage: '',
+      modalVisibility: false,
       responseStatus: '',
       tempPassword: '',
     };
   }
 
-  handleInput = e => {
+  inputHandler = e => {
     const { name, value } = e.target;
     this.setState({
       [name]: value,
@@ -34,38 +35,38 @@ export default class FindPw extends Component {
     const { requiredInputMap } = this;
     const { account, email } = this.state;
 
-    let alertPopupMessage = '';
-    let isAlertPopupOpened = false;
+    let modalMessage = '';
+    let modalVisibility = false;
 
     // 필수 입력 유효성 검증
     if (Object.keys(requiredInputMap).includes(key)) {
       if (StringUtil.isNull(this.state[key])) {
-        alertPopupMessage = `${requiredInputMap[key]}을(를) 입력해주세요`;
-        isAlertPopupOpened = true;
+        modalMessage = `${requiredInputMap[key]}을(를) 입력해주세요`;
+        modalVisibility = true;
       } else {
         let regExp = '';
         switch (key) {
           case 'account':
             regExp = /^[a-z0-9]*[a-z]+[a-z0-9]*$/g;
-            isAlertPopupOpened = account.length < 6 || !regExp.test(account);
+            modalVisibility = account.length < 6 || !regExp.test(account);
             break;
           case 'email':
             regExp = /^[a-z0-9]+@[a-z0-9]+.[a-z0-9]+$/gi;
-            isAlertPopupOpened = !regExp.test(email);
+            modalVisibility = !regExp.test(email);
             break;
           default:
             break;
         }
-        alertPopupMessage = `${requiredInputMap[key]} 형식을 확인해주세요`;
+        modalMessage = `${requiredInputMap[key]} 형식을 확인해주세요`;
       }
     }
 
-    this.setState({ alertPopupMessage, isAlertPopupOpened });
-    return !isAlertPopupOpened;
+    this.setState({ modalMessage, modalVisibility });
+    return !modalVisibility;
   };
 
-  clickPopupConfirmBtn = () => {
-    this.setState({ isAlertPopupOpened: false });
+  closeModal = () => {
+    this.setState({ modalVisibility: false });
   };
 
   findPw = () => {
@@ -97,13 +98,13 @@ export default class FindPw extends Component {
   };
 
   render() {
-    const { handleInput, clickPopupConfirmBtn, findPw } = this;
+    const { inputHandler, closeModal, findPw } = this;
     const {
       name,
       account,
       email,
-      alertPopupMessage,
-      isAlertPopupOpened,
+      modalMessage,
+      modalVisibility,
       responseStatus,
       tempPassword,
     } = this.state;
@@ -121,29 +122,11 @@ export default class FindPw extends Component {
             <div className='beforeFind'>
               <form>
                 <label>이름</label>
-                <input
-                  type='text'
-                  name='name'
-                  placeholder='고객님의 이름을 입력해주세요'
-                  onChange={handleInput}
-                  required
-                />
+                <TextInput input='name' onChange={inputHandler} />
                 <label>아이디</label>
-                <input
-                  type='text'
-                  name='account'
-                  placeholder='가입 시 등록하신 아이디를 입력해주세요'
-                  onChange={handleInput}
-                  required
-                />
+                <TextInput input='account' onChange={inputHandler} />
                 <label>이메일</label>
-                <input
-                  type='email'
-                  name='email'
-                  placeholder='가입 시 등록하신 이메일 주소를 입력해주세요'
-                  onChange={handleInput}
-                  required
-                />
+                <TextInput input='email' onChange={inputHandler} />
               </form>
               <button
                 type='button'
@@ -187,14 +170,14 @@ export default class FindPw extends Component {
             </div>
           )}
         </div>
-        <div className='popupContainer'>
-          {isAlertPopupOpened && <div className='dim'></div>}
-          {isAlertPopupOpened && (
-            <AlertPopup
-              alertMessage={alertPopupMessage}
-              clickConfirmBtn={clickPopupConfirmBtn}
-            />
-          )}
+        <div className='modalContainer'>
+          <AlertModal
+            visibility={modalVisibility}
+            headerTxt='알림메시지'
+            message={modalMessage}
+            confirmMsg='확인'
+            closeModal={closeModal}
+          />
         </div>
       </div>
     );
