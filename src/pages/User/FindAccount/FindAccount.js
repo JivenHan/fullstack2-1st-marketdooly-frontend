@@ -1,5 +1,6 @@
 import { Component } from 'react';
 import TextInput from '../components/TextInput';
+import ResultPage from '../components/ResultPage';
 import AlertModal from '../../../components/Modal/AlertModal';
 import StringUtil from '../../../utils/StringUtil';
 import './FindAccount.scss';
@@ -59,6 +60,10 @@ export default class FindAccount extends Component {
     return !modalVisibility;
   };
 
+  clickConfirmBtn = () => {
+    this.setState({ responseStatus: '' });
+  };
+
   closeModal = () => {
     this.setState({ modalVisibility: false });
   };
@@ -92,7 +97,7 @@ export default class FindAccount extends Component {
   };
 
   render() {
-    const { inputHandler, closeModal, findAccount } = this;
+    const { inputHandler, clickConfirmBtn, closeModal, findAccount } = this;
     const {
       name,
       email,
@@ -128,36 +133,18 @@ export default class FindAccount extends Component {
             </div>
           )}
           {responseStatus === 'fail' && (
-            <div className='afterFind'>
-              <img src='/image/findaccount.png' alt='' />
-              <p>
-                고객님께서 입력하신 정보가
-                <br />
-                정확한지 확인 후 다시 시도해주세요
-              </p>
-              <button
-                type='button'
-                onClick={() => this.setState({ responseStatus: '' })}
-              >
-                아이디 다시 찾기
-              </button>
-            </div>
+            <ResultPage
+              mainText={`고객님께서 입력하신 정보가<br>정확한지 확인 후 다시 시도해주세요`}
+              btnText={`아이디 다시 찾기`}
+              onClick={clickConfirmBtn}
+            />
           )}
           {responseStatus === 'success' && (
-            <div className='afterFind'>
-              <img src='/image/findaccount.png' alt='' />
-              <p>
-                고객님의 아이디는
-                <br />
-                {account} 입니다.
-              </p>
-              <button
-                type='button'
-                onClick={() => this.props.history.push('/login')}
-              >
-                로그인 하기
-              </button>
-            </div>
+            <ResultPage
+              mainText={`고객님의 아이디는<br>${account} 입니다.`}
+              btnText={`로그인 하기`}
+              onClick={clickConfirmBtn}
+            />
           )}
         </div>
         <div className='modalContainer'>

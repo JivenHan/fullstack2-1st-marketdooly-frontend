@@ -1,0 +1,27 @@
+@import '../../../styles/variables';
+
+.ResultPage {
+  width: 100%;
+  text-align: center;
+
+  img {
+    margin-bottom: 5px;
+  }
+
+  p {
+    font-size: 20px;
+    font-weight: 500;
+    line-height: 30px;
+  }
+
+  button {
+    width: 280px;
+    height: 54px;
+    margin-top: 20px;
+    border: none;
+    border-radius: 3px;
+    color: #fff;
+    background-color: $themeColorPrimary;
+    font-size: 16px;
+  }
+}

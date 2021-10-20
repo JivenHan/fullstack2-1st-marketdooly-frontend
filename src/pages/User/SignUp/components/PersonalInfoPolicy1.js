@@ -9,7 +9,7 @@ export default class PersonalInfoPolicy1 extends Component {
           <p className='mainTitle'>
             개인정보 수집·이용 동의 <span>&nbsp;(필수)</span>
           </p>
-          <button type='button' onClick={this.props.clickConfirmBtn}>
+          <button type='button' onClick={this.props.onClick}>
             확인
           </button>
         </div>

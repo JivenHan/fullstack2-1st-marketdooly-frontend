@@ -1,10 +1,11 @@
-import React, { Component } from 'react';
-import TableRow from '../components/TableRow';
-import TextInput from '../components/TextInput';
-import PolicyCheckbox from '../components/PolicyCheckbox';
+import { Component } from 'react';
 import UsagePolicy from './components/UsagePolicy';
 import PersonalInfoPolicy1 from './components/PersonalInfoPolicy1';
 import PersonalInfoPolicy2 from './components/PersonalInfoPolicy2';
+import TableRow from '../components/TableRow';
+import TextInput from '../components/TextInput';
+import PolicyCheckbox from '../components/PolicyCheckbox';
+import ResultPage from '../components/ResultPage';
 import AlertModal from '../../../components/Modal/AlertModal';
 import DimBackground from '../../../components/Modal/DimBackground';
 import StringUtil from '../../../utils/StringUtil';
@@ -269,6 +270,10 @@ export default class SignUp extends Component {
     this.setState({ [name]: true });
   };
 
+  goToLogin = () => {
+    this.props.history.push('/login');
+  };
+
   closeModal = () => {
     this.setState({
       isUsagePolicyOpened: false,
@@ -356,6 +361,7 @@ export default class SignUp extends Component {
       clickGenderRadio,
       clickPolicyCheckbox,
       openPolicyPopup,
+      goToLogin,
       closeModal,
       signUp,
     } = this;
@@ -400,7 +406,7 @@ export default class SignUp extends Component {
                     <p>&#183; 아이디 중복확인</p>
                   </td>
                 </tr>
-                <TableRow input='password' />
+                <TableRow input='password' onChange={inputHandler} />
                 <tr>
                   <th></th>
                   <td>
@@ -551,29 +557,20 @@ export default class SignUp extends Component {
           </div>
         )}
         {signUpResult && (
-          <div className='afterFind'>
-            <img src='/image/findaccount.png' alt='' />
-            <p>
-              회원가입이 완료되었습니다 !
-              <br />
-              회원님의 아이디는 {account} 입니다.
-            </p>
-            <button
-              type='button'
-              onClick={() => this.props.history.push('/login')}
-            >
-              로그인 하기
-            </button>
-          </div>
+          <ResultPage
+            mainText={`회원가입이 완료되었습니다 !<br>회원님의 아이디는 ${account} 입니다.`}
+            btnText={`로그인 하기`}
+            onClick={goToLogin}
+          />
         )}
         <div className='modalContainer'>
           {isPolicyOpened && <DimBackground />}
-          {isUsagePolicyOpened && <UsagePolicy clickConfirmBtn={closeModal} />}
+          {isUsagePolicyOpened && <UsagePolicy onClick={closeModal} />}
           {isPIRequiredPolicyOpened && (
-            <PersonalInfoPolicy1 clickConfirmBtn={closeModal} />
+            <PersonalInfoPolicy1 onClick={closeModal} />
           )}
           {isPIOptionalPolicyOpened && (
-            <PersonalInfoPolicy2 clickConfirmBtn={closeModal} />
+            <PersonalInfoPolicy2 onClick={closeModal} />
           )}
           <AlertModal
             visibility={modalVisibility}
