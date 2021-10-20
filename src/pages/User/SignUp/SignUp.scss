@@ -40,42 +40,43 @@
       tr {
         &:nth-child(1) {
           th {
-            padding-top: 30px;
+            padding-top: 33px;
           }
           td {
-            padding-top: 20px;
+            padding-top: 15px;
           }
         }
-      }
 
-      th {
-        width: 159px;
-        padding: 20px 0 0 20px;
-        font-size: 14px;
-        font-weight: 700;
-        color: #333;
-        line-height: 20px;
-        text-align: left;
-      }
-
-      td {
-        padding: 10px 0;
-        font-size: 14px;
-        text-align: left;
-        vertical-align: top;
-
-        > input {
-          width: 332px;
-          height: 44px;
-          padding: 0 14px;
-          border: 1px solid #ccc;
+        th {
+          width: 159px;
+          padding: 23px 0 0 20px;
           font-size: 14px;
+          font-weight: 700;
           color: #333;
           line-height: 20px;
-          border-radius: 3px;
-          background: #fff;
-          outline: none;
+          text-align: left;
+        }
+
+        td {
+          padding: 5px 0;
+          margin-top: 5px;
+          font-size: 14px;
+          text-align: left;
           vertical-align: top;
+
+          > input {
+            width: 332px;
+            height: 44px;
+            padding: 0 14px;
+            border: 1px solid #ccc;
+            font-size: 14px;
+            color: #333;
+            line-height: 20px;
+            border-radius: 3px;
+            background: #fff;
+            outline: none;
+            vertical-align: top;
+          }
         }
       }
 
@@ -146,70 +147,12 @@
           padding-top: 28px;
         }
 
-        td {
-          div {
-            margin-top: 18px;
+        .PolicyCheckbox {
+          margin-top: 18px;
 
-            &.age {
-              margin-bottom: 20px;
-            }
-
-            label {
-              font-size: 14px;
-
-              &.agreeAll {
-                font-size: 18px;
-                font-weight: 500;
-              }
-
-              input[type='checkbox'] {
-                position: absolute;
-                opacity: 0;
-              }
-
-              .icoUnchecked,
-              .icoChecked {
-                display: inline-block;
-                width: 24px;
-                height: 24px;
-                margin: 0 10px 0 0;
-                vertical-align: -8px;
-              }
-
-              .icoUnchecked {
-                background: url(https://res.kurly.com/pc/service/common/2006/ico_checkbox.svg)
-                  no-repeat;
-              }
-
-              .icoChecked {
-                background: url(https://res.kurly.com/pc/service/common/2006/ico_checkbox_checked.svg)
-                  no-repeat;
-              }
-            }
-          }
-        }
-
-        .required,
-        .optional {
-          margin-left: 5px;
-          color: #999;
-        }
-
-        .btnPolicy {
-          float: right;
-          border: none;
-          font-size: 14px;
-          color: $themeColorPrimary;
-          line-height: 23px;
-          background-color: #fff;
-          cursor: pointer;
-        }
-
-        .smsEmail {
-          padding-left: 34px;
-
-          .email {
-            margin-left: 80px;
+          &.isAgreeAllChecked {
+            font-size: 18px;
+            font-weight: 500;
           }
         }
 
@@ -220,17 +163,35 @@
           line-height: 20px;
         }
 
-        .noti2 {
-          margin: 10px 0 0 68px;
-          padding-left: 20px;
-          font-size: 13px;
-          color: $themeColorPrimary;
-          line-height: 20px;
-          background: url(https://res.kurly.com/pc/service/common/2006/ico_sub_dot.svg)
-            no-repeat;
-          span {
-            color: #999;
+        .marketing {
+          margin-top: 15px;
+
+          .isSmsChecked {
+            display: inline;
+            padding-left: 35px;
           }
+
+          .isEmailChecked {
+            display: inline;
+            padding-left: 85px;
+          }
+
+          .noti2 {
+            margin: 10px 0 0 68px;
+            padding-left: 20px;
+            font-size: 13px;
+            color: $themeColorPrimary;
+            line-height: 20px;
+            background: url(https://res.kurly.com/pc/service/common/2006/ico_sub_dot.svg)
+              no-repeat;
+            span {
+              color: #999;
+            }
+          }
+        }
+
+        .isOlderThanFourteenChecked {
+          margin-bottom: 20px;
         }
       }
     } // table

@@ -2,7 +2,7 @@ import { Component } from 'react';
 import AlertPopup from '../SignUp/components/AlertPopup';
 import StringUtil from '../../../utils/StringUtil';
 import './FindPw.scss';
-import UserInfoInput from '../components/UserInfoInput';
+import TextInput from '../components/TextInput';
 
 export default class FindPw extends Component {
   requiredInputMap = {
@@ -122,11 +122,11 @@ export default class FindPw extends Component {
             <div className='beforeFind'>
               <form>
                 <label>이름</label>
-                <UserInfoInput input='name' onChange={inputHandler} />
+                <TextInput input='name' onChange={inputHandler} />
                 <label>아이디</label>
-                <UserInfoInput input='account' onChange={inputHandler} />
+                <TextInput input='account' onChange={inputHandler} />
                 <label>이메일</label>
-                <UserInfoInput input='email' onChange={inputHandler} />
+                <TextInput input='email' onChange={inputHandler} />
               </form>
               <button
                 type='button'

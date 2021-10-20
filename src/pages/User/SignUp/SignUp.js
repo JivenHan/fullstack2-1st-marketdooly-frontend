@@ -5,7 +5,9 @@ import PersonalInfoPolicy1 from './components/PersonalInfoPolicy1';
 import PersonalInfoPolicy2 from './components/PersonalInfoPolicy2';
 import StringUtil from '../../../utils/StringUtil';
 import './SignUp.scss';
-import UserInfoInput from '../components/UserInfoInput';
+import TextInput from '../components/TextInput';
+import PolicyCheckbox from '../components/PolicyCheckbox';
+import TableRow from '../components/TableRow';
 
 export default class SignUp extends Component {
   requiredInputMap = {
@@ -14,7 +16,7 @@ export default class SignUp extends Component {
     passwordConfirm: '비밀번호 재입력',
     name: '이름',
     email: '이메일',
-    phoneNumber: '휴대폰 번호',
+    cellPhone: '휴대폰 번호',
     address: '주소',
   };
 
@@ -33,19 +35,23 @@ export default class SignUp extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      // 필수 입력
       account: '',
       password: '',
       passwordConfirm: '',
       name: '',
       email: '',
-      phoneNumber: '',
+      cellPhone: '',
       address: '',
+      // 선택 입력
       gender: '',
       yyyy: '',
       mm: '',
       dd: '',
-      isAccountDupChecked: false,
-      isEmailDupChecked: false,
+      // 중복 체크
+      isAccountDup: true,
+      isEmailDup: true,
+      // 약관 동의
       isAgreeAllChecked: false,
       checkboxes: {
         isUsagePolicyChecked: false,
@@ -56,11 +62,13 @@ export default class SignUp extends Component {
         isEmailChecked: false,
         isOlderThanFourteenChecked: false,
       },
+      // 팝업 상태 관리
       isUsagePolicyOpened: false,
-      isPIPolicy1Opened: false,
-      isPIPolicy2Opened: false,
+      isPIRequiredPolicyOpened: false,
+      isPIOptionalPolicyOpened: false,
       alertPopupMessage: '',
       isAlertPopupOpened: false,
+      // 회원가입 결과
       signUpResult: false,
     };
   }
@@ -122,6 +130,13 @@ export default class SignUp extends Component {
     }
   };
 
+  cellPhoneAuth = () => {
+    this.setState({
+      alertPopupMessage: '휴대폰 인증 API 호출',
+      isAlertPopupOpened: true,
+    });
+  };
+
   /**
    * 각 입력 값의 유효성을 검증
    * @param {string} key state의 key
@@ -134,7 +149,7 @@ export default class SignUp extends Component {
       password,
       passwordConfirm,
       email,
-      phoneNumber,
+      cellPhone,
       yyyy,
       mm,
       dd,
@@ -165,9 +180,9 @@ export default class SignUp extends Component {
             regExp = /^[a-z0-9]+@[a-z0-9]+.[a-z0-9]+$/gi;
             isAlertPopupOpened = !regExp.test(email);
             break;
-          case 'phoneNumber':
+          case 'cellPhone':
             regExp = /^0[0-9]{9,10}$/g;
-            isAlertPopupOpened = !regExp.test(phoneNumber);
+            isAlertPopupOpened = !regExp.test(cellPhone);
             break;
           default:
             break;
@@ -223,7 +238,6 @@ export default class SignUp extends Component {
     const { checkboxes } = this.state;
 
     const newObj = {};
-
     for (const [key, value] of Object.entries(checkboxes)) {
       if (name === key) {
         newObj[key] = !value;
@@ -250,11 +264,15 @@ export default class SignUp extends Component {
     });
   };
 
+  openPolicyPopup = name => {
+    this.setState({ [name]: true });
+  };
+
   clickPopupConfirmBtn = () => {
     this.setState({
       isUsagePolicyOpened: false,
-      isPIPolicy1Opened: false,
-      isPIPolicy2Opened: false,
+      isPIRequiredPolicyOpened: false,
+      isPIOptionalPolicyOpened: false,
       isAlertPopupOpened: false,
     });
   };
@@ -266,7 +284,7 @@ export default class SignUp extends Component {
       'passwordConfirm',
       'name',
       'email',
-      'phoneNumber',
+      'cellPhone',
       'address',
       'yyyy',
       'mm',
@@ -285,7 +303,7 @@ export default class SignUp extends Component {
     }
 
     if (isInputValid) {
-      const { phoneNumber, yyyy, mm, dd } = this.state;
+      const { cellPhone, yyyy, mm, dd } = this.state;
       const {
         isPIRequiredPolicyChecked,
         isPIOptionalPolicyChecked,
@@ -295,7 +313,7 @@ export default class SignUp extends Component {
 
       this.setState(
         {
-          phone_number: phoneNumber,
+          phone_number: cellPhone,
           birthday: yyyy + mm + dd,
           mandatory_policy_agreed:
             isPIRequiredPolicyChecked && isOlderThanFourteenChecked,
@@ -333,8 +351,10 @@ export default class SignUp extends Component {
       inputHandler,
       checkAccountDup,
       checkEmailDup,
+      cellPhoneAuth,
       clickGenderRadio,
       clickPolicyCheckbox,
+      openPolicyPopup,
       clickPopupConfirmBtn,
       signUp,
     } = this;
@@ -345,15 +365,17 @@ export default class SignUp extends Component {
       isAgreeAllChecked,
       checkboxes,
       isUsagePolicyOpened,
-      isPIPolicy1Opened,
-      isPIPolicy2Opened,
+      isPIRequiredPolicyOpened,
+      isPIOptionalPolicyOpened,
       alertPopupMessage,
       isAlertPopupOpened,
       signUpResult,
     } = this.state;
 
     const isPolicyOpened =
-      isUsagePolicyOpened || isPIPolicy1Opened || isPIPolicy2Opened;
+      isUsagePolicyOpened ||
+      isPIRequiredPolicyOpened ||
+      isPIOptionalPolicyOpened;
 
     return (
       <div className='SignUp'>
@@ -363,95 +385,62 @@ export default class SignUp extends Component {
             <p className='asterisk'>
               <span className='asterisk'>*</span>필수입력사항
             </p>
-            <table>
+            <table className='userInfo'>
               <tbody>
+                <TableRow
+                  input='account'
+                  onChange={inputHandler}
+                  onClick={checkAccountDup}
+                />
                 <tr>
-                  <th>
-                    아이디<span className='asterisk'>*</span>
-                  </th>
+                  <th></th>
                   <td>
-                    <UserInfoInput input='account' onChange={inputHandler} />
-                    <button
-                      type='button'
-                      className='btnAccountDup'
-                      onClick={checkAccountDup}
-                    >
-                      중복확인
-                    </button>
+                    <p>&#183; 6자 이상의 영문 혹은 영문과 숫자를 조합</p>
+                    <p>&#183; 아이디 중복확인</p>
                   </td>
                 </tr>
+                <TableRow input='password' />
                 <tr>
-                  <th>
-                    비밀번호<span className='asterisk'>*</span>
-                  </th>
+                  <th></th>
                   <td>
-                    <UserInfoInput input='password' onChange={inputHandler} />
+                    <p>&#183; 6자 이상의 영문 혹은 영문과 숫자를 조합</p>
+                    <p>&#183; 아이디 중복확인</p>
                   </td>
                 </tr>
+                <TableRow input='passwordConfirm' onChange={inputHandler} />
                 <tr>
-                  <th>
-                    비밀번호 재입력<span className='asterisk'>*</span>
-                  </th>
+                  <th></th>
                   <td>
-                    <UserInfoInput
-                      input='passwordConfirm'
-                      onChange={inputHandler}
-                    />
+                    <p>&#183; 6자 이상의 영문 혹은 영문과 숫자를 조합</p>
+                    <p>&#183; 아이디 중복확인</p>
                   </td>
                 </tr>
+                <TableRow input='name' onChange={inputHandler} />
+                <TableRow
+                  input='email'
+                  onChange={inputHandler}
+                  onClick={checkEmailDup}
+                />
                 <tr>
-                  <th>
-                    이름<span className='asterisk'>*</span>
-                  </th>
+                  <th></th>
                   <td>
-                    <UserInfoInput input='name' onChange={inputHandler} />
+                    <p>&#183; 6자 이상의 영문 혹은 영문과 숫자를 조합</p>
+                    <p>&#183; 아이디 중복확인</p>
                   </td>
                 </tr>
+                <TableRow
+                  input='cellPhone'
+                  onChange={inputHandler}
+                  onClick={cellPhoneAuth}
+                />
                 <tr>
-                  <th>
-                    이메일<span className='asterisk'>*</span>
-                  </th>
+                  <th></th>
                   <td>
-                    <UserInfoInput
-                      input='email'
-                      placeholder='markeydooly@wecode.com'
-                      onChange={inputHandler}
-                    />
-                    <button
-                      type='button'
-                      className='btnEmailDup'
-                      onClick={checkEmailDup}
-                    >
-                      중복확인
-                    </button>
+                    <p>&#183; 6자 이상의 영문 혹은 영문과 숫자를 조합</p>
+                    <p>&#183; 아이디 중복확인</p>
                   </td>
                 </tr>
-                <tr>
-                  <th>
-                    휴대폰<span className='asterisk'>*</span>
-                  </th>
-                  <td>
-                    <input
-                      type='text'
-                      name='phoneNumber'
-                      maxLength='12'
-                      placeholder='숫자만 입력해주세요'
-                      onChange={inputHandler}
-                    />
-                  </td>
-                </tr>
-                <tr>
-                  <th>
-                    주소<span className='asterisk'>*</span>
-                  </th>
-                  <td>
-                    <input
-                      name='address'
-                      placeholder='주소를 입력해주세요'
-                      onChange={inputHandler}
-                    />
-                  </td>
-                </tr>
+                <TableRow input='address' onChange={inputHandler} />
                 <tr>
                   <th>성별</th>
                   <td className='gender'>
@@ -488,26 +477,11 @@ export default class SignUp extends Component {
                   <th>생년월일</th>
                   <td>
                     <div className='yyyymmdd'>
-                      <input
-                        name='yyyy'
-                        maxLength='4'
-                        placeholder='YYYY'
-                        onChange={inputHandler}
-                      />
+                      <TextInput input='yyyy' onChange={inputHandler} />
                       <span>/</span>
-                      <input
-                        name='mm'
-                        maxLength='2'
-                        placeholder='MM'
-                        onChange={inputHandler}
-                      />
+                      <TextInput input='mm' onChange={inputHandler} />
                       <span>/</span>
-                      <input
-                        name='dd'
-                        maxLength='2'
-                        placeholder='DD'
-                        onChange={inputHandler}
-                      />
+                      <TextInput input='dd' onChange={inputHandler} />
                     </div>
                   </td>
                 </tr>
@@ -516,190 +490,56 @@ export default class SignUp extends Component {
                     이용약관동의<span className='asterisk'>*</span>
                   </th>
                   <td>
-                    <div>
-                      <label className='agreeAll'>
-                        <input
-                          type='checkbox'
-                          name='isAgreeAllChecked'
-                          checked={isAgreeAllChecked}
-                          onChange={clickPolicyCheckbox}
-                        />
-                        <span
-                          className={
-                            isAgreeAllChecked ? 'icoChecked' : 'icoUnchecked'
-                          }
-                        ></span>
-                        전체 동의합니다.
-                      </label>
-                      <p className='noti1'>
-                        선택항목에 동의하지 않은 경우도 회원가입 및 일반적인
-                        서비스를 이용할 수 있습니다.
+                    <PolicyCheckbox
+                      input='all'
+                      state={isAgreeAllChecked}
+                      handler={{ clickPolicyCheckbox, openPolicyPopup }}
+                    />
+                    <p className='noti1'>
+                      선택항목에 동의하지 않은 경우도 회원가입 및 일반적인
+                      서비스를 이용할 수 있습니다.
+                    </p>
+                    <PolicyCheckbox
+                      input='usage'
+                      state={checkboxes.isUsagePolicyChecked}
+                      handler={{ clickPolicyCheckbox, openPolicyPopup }}
+                    />
+                    <PolicyCheckbox
+                      input='piRequired'
+                      state={checkboxes.isPIRequiredPolicyChecked}
+                      handler={{ clickPolicyCheckbox, openPolicyPopup }}
+                    />
+                    <PolicyCheckbox
+                      input='piOptional'
+                      state={checkboxes.isPIOptionalPolicyChecked}
+                      handler={{ clickPolicyCheckbox, openPolicyPopup }}
+                    />
+                    <PolicyCheckbox
+                      input='marketing'
+                      state={checkboxes.isMarketingChecked}
+                      handler={{ clickPolicyCheckbox, openPolicyPopup }}
+                    />
+                    <div className='marketing'>
+                      <PolicyCheckbox
+                        input='sms'
+                        state={checkboxes.isSmsChecked}
+                        handler={{ clickPolicyCheckbox, openPolicyPopup }}
+                      />
+                      <PolicyCheckbox
+                        input='email'
+                        state={checkboxes.isEmailChecked}
+                        handler={{ clickPolicyCheckbox, openPolicyPopup }}
+                      />
+                      <p className='noti2'>
+                        동의 시 한 달간 [5% 적립] + [무제한 무료배송]
+                        <span>&nbsp;&nbsp;(첫 주문 후 적용)</span>
                       </p>
                     </div>
-                    <div>
-                      <label>
-                        <input
-                          type='checkbox'
-                          name='isUsagePolicyChecked'
-                          checked={checkboxes.isUsagePolicyChecked}
-                          onChange={clickPolicyCheckbox}
-                        />
-                        <span
-                          className={
-                            checkboxes.isUsagePolicyChecked
-                              ? 'icoChecked'
-                              : 'icoUnchecked'
-                          }
-                        ></span>
-                        이용약관 동의
-                        <span className='required'>(필수)</span>
-                        <button
-                          type='button'
-                          className='btnPolicy'
-                          onClick={() =>
-                            this.setState({ isUsagePolicyOpened: true })
-                          }
-                        >
-                          약관보기 &gt;
-                        </button>
-                      </label>
-                    </div>
-                    <div>
-                      <label>
-                        <input
-                          type='checkbox'
-                          name='isPIRequiredPolicyChecked'
-                          checked={checkboxes.isPIRequiredPolicyChecked}
-                          onChange={clickPolicyCheckbox}
-                        />
-                        <span
-                          className={
-                            checkboxes.isPIRequiredPolicyChecked
-                              ? 'icoChecked'
-                              : 'icoUnchecked'
-                          }
-                        ></span>
-                        개인정보 수집·이용 동의
-                        <span className='required'>(필수)</span>
-                        <button
-                          type='button'
-                          className='btnPolicy'
-                          onClick={() =>
-                            this.setState({ isPIPolicy1Opened: true })
-                          }
-                        >
-                          약관보기 &gt;
-                        </button>
-                      </label>
-                    </div>
-                    <div>
-                      <label>
-                        <input
-                          type='checkbox'
-                          name='isPIOptionalPolicyChecked'
-                          checked={checkboxes.isPIOptionalPolicyChecked}
-                          onChange={clickPolicyCheckbox}
-                        />
-                        <span
-                          className={
-                            checkboxes.isPIOptionalPolicyChecked
-                              ? 'icoChecked'
-                              : 'icoUnchecked'
-                          }
-                        ></span>
-                        개인정보 수집·이용 동의
-                        <span className='optional'>(선택)</span>
-                        <button
-                          type='button'
-                          className='btnPolicy'
-                          onClick={() =>
-                            this.setState({ isPIPolicy2Opened: true })
-                          }
-                        >
-                          약관보기 &gt;
-                        </button>
-                      </label>
-                    </div>
-                    <div>
-                      <label>
-                        <input
-                          type='checkbox'
-                          name='isMarketingChecked'
-                          checked={checkboxes.isMarketingChecked}
-                          onChange={clickPolicyCheckbox}
-                        />
-                        <span
-                          className={
-                            checkboxes.isMarketingChecked
-                              ? 'icoChecked'
-                              : 'icoUnchecked'
-                          }
-                        ></span>
-                        무료배송, 할인쿠폰 등 혜택/정보 수신 동의
-                        <span className='optional'>(선택)</span>
-                      </label>
-                    </div>
-                    <div className='smsEmail'>
-                      <span className='sms'>
-                        <label>
-                          <input
-                            type='checkbox'
-                            name='isSmsChecked'
-                            checked={checkboxes.isSmsChecked}
-                            onChange={clickPolicyCheckbox}
-                          />
-                          <span
-                            className={
-                              checkboxes.isSmsChecked
-                                ? 'icoChecked'
-                                : 'icoUnchecked'
-                            }
-                          ></span>
-                          SMS
-                        </label>
-                      </span>
-                      <span className='email'>
-                        <label>
-                          <input
-                            type='checkbox'
-                            name='isEmailChecked'
-                            checked={checkboxes.isEmailChecked}
-                            onChange={clickPolicyCheckbox}
-                          />
-                          <span
-                            className={
-                              checkboxes.isEmailChecked
-                                ? 'icoChecked'
-                                : 'icoUnchecked'
-                            }
-                          ></span>
-                          이메일
-                        </label>
-                      </span>
-                    </div>
-                    <p className='noti2'>
-                      동의 시 한 달간 [5% 적립] + [무제한 무료배송]
-                      <span>&nbsp;&nbsp;(첫 주문 후 적용)</span>
-                    </p>
-                    <div className='age'>
-                      <label>
-                        <input
-                          type='checkbox'
-                          name='isOlderThanFourteenChecked'
-                          checked={checkboxes.isOlderThanFourteenChecked}
-                          onChange={clickPolicyCheckbox}
-                        />
-                        <span
-                          className={
-                            checkboxes.isOlderThanFourteenChecked
-                              ? 'icoChecked'
-                              : 'icoUnchecked'
-                          }
-                        ></span>
-                        본인은 만 14세 이상입니다.
-                        <span className='required'>(필수)</span>
-                      </label>
-                    </div>
+                    <PolicyCheckbox
+                      input='fourteen'
+                      state={checkboxes.isOlderThanFourteenChecked}
+                      handler={{ clickPolicyCheckbox, openPolicyPopup }}
+                    />
                   </td>
                 </tr>
               </tbody>
@@ -732,10 +572,10 @@ export default class SignUp extends Component {
           {isUsagePolicyOpened && (
             <UsagePolicy clickConfirmBtn={clickPopupConfirmBtn} />
           )}
-          {isPIPolicy1Opened && (
+          {isPIRequiredPolicyOpened && (
             <PersonalInfoPolicy1 clickConfirmBtn={clickPopupConfirmBtn} />
           )}
-          {isPIPolicy2Opened && (
+          {isPIOptionalPolicyOpened && (
             <PersonalInfoPolicy2 clickConfirmBtn={clickPopupConfirmBtn} />
           )}
           {isAlertPopupOpened && (

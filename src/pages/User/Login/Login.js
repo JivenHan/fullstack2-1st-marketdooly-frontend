@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import AlertPopup from '../SignUp/components/AlertPopup';
 import StringUtil from '../../../utils/StringUtil';
 import './Login.scss';
-import UserInfoInput from '../components/UserInfoInput';
+import TextInput from '../components/TextInput';
 
 export default class Login extends Component {
   requiredInputMap = {
@@ -120,8 +120,8 @@ export default class Login extends Component {
         <div className='loginContainer'>
           <h3>로그인</h3>
           <form>
-            <UserInfoInput input='account' onChange={inputHandler} />
-            <UserInfoInput input='password' onChange={inputHandler} />
+            <TextInput input='account' onChange={inputHandler} />
+            <TextInput input='password' onChange={inputHandler} />
           </form>
           <div className='aaa'>
             <div className='securityLogin'>
