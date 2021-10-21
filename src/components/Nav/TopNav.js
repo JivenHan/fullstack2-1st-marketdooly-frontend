@@ -18,10 +18,24 @@ export default class TopNav extends Component {
       cartItemNumber: 0,
       isUserLoggedIn: false,
       hoverCategoryData: {},
+      userName: '',
     };
   }
 
+  componentDidUpdate(prevProps) {
+    if (this.props.location.pathname !== prevProps.location.pathname) {
+      this.getSessionStraoge();
+    }
+  }
+
+  getSessionStraoge = () => {
+    const token = sessionStorage.getItem('token');
+    this.setState({ isUserLoggedIn: token });
+  };
+
   componentDidMount() {
+    this.getSessionStraoge();
+    this.props.authentication();
     fetch('http://localhost:8000/users/session', {
       credentials: 'include',
     })
@@ -32,7 +46,6 @@ export default class TopNav extends Component {
       .then(data =>
         this.setState({
           cartItemNumber: data.result.length,
-          isUserLoggedIn: true,
         })
       )
       .catch(console.error);
@@ -60,6 +73,8 @@ export default class TopNav extends Component {
       document.cookie = name + '=; expires=Thu, 01 Jan 1999 00:00:10 GMT;';
     };
     deleteCookie('jwt');
+    sessionStorage.clear();
+    this.props.authentication();
     window.location.reload();
     this.props.history.push('/');
   };
@@ -142,9 +157,15 @@ export default class TopNav extends Component {
           </div>
           <ul className='headerUserContainer'>
             <li className='headerUserItem1Wrapper'>
-              <Link className='headerUserItem1' to='/signup'>
-                회원가입
-              </Link>
+              {this.state.isUserLoggedIn ? (
+                <span className='loggedUserName' to='/'>
+                  {`${sessionStorage.getItem('name')} 님 환영합니다`}
+                </span>
+              ) : (
+                <Link className='headerUserItem1' to='/signup'>
+                  회원가입
+                </Link>
+              )}
             </li>
             <li className='headerUserItem2Wrapper'>
               {this.state.isUserLoggedIn ? (
@@ -257,8 +278,12 @@ export default class TopNav extends Component {
             </button>
             <Link className='gnbGoToCart' to='/cart'>
               <CartIconSvg strokeColor={'#333'} />
-              {this.state.cartItemNumber ? (
-                <span className='cartItemNumber'>
+              {this.state.isUserLoggedIn ? (
+                <span
+                  className={`cartItemNumber ${
+                    this.state.cartItemNumber ? '' : 'hidden'
+                  }`}
+                >
                   {this.state.cartItemNumber}
                 </span>
               ) : null}

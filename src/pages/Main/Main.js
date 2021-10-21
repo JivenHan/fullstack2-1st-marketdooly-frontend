@@ -77,7 +77,7 @@ export default class Main extends Component {
         <Section
           goToDetailPage={this.goToDetailPage}
           endPoint={'main/event/most_popular'}
-          sectionName='specialOffer'
+          sectionStyle='grayBG'
         />
         <Section
           goToDetailPage={this.goToDetailPage}
