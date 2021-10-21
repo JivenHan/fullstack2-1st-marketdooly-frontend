@@ -163,13 +163,13 @@
           display: none;
         }
 
-        .parentCategoriesContainer {
+        .categoriesContainer {
           position: absolute;
           width: 204px;
           height: 741px;
           background-color: #ffffff;
 
-          .parentCategoryBg {
+          .parentCategoryWrapper {
             position: relative;
             padding-left: 50px;
             height: 39px;
@@ -200,6 +200,14 @@
                 filter: hue-rotate(180deg);
               }
             }
+          }
+          .subCategoriesContainer {
+            position: absolute;
+            left: 204px;
+            top: 0px;
+            height: 741px;
+            width: 204px;
+            background-color: #f7f7f7;
           }
         }
       }

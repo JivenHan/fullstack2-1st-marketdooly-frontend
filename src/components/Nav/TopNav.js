@@ -205,23 +205,30 @@ export default class TopNav extends Component {
               alt='menuHamburgerIcon'
               src='/menuHamburgerIcon.png'
             />
-            <p>전체 카테고리</p>
+            <p
+              onMouseEnter={() => {
+                this.hideSubCategories();
+              }}
+            >
+              전체 카테고리
+            </p>
             <div
               className={`dropDownCategories ${
                 !this.state.isCategoriesVisible ? 'hidden' : ''
               }`}
             >
-              <ul className='parentCategoriesContainer'>
+              <ul className='categoriesContainer'>
                 {this.state.categoryIconData.length !== 0 &&
                   this.state.categoryIconData.map((categoryIconData, i) => {
                     return (
                       <li
                         key={i}
-                        className='parentCategoryBg'
+                        className='parentCategoryWrapper'
                         onMouseEnter={() => {
                           this.setState({
                             hoverCategoryData: this.state.categoryData[i],
                           });
+                          this.showSubCategories();
                         }}
                         style={{
                           backgroundImage: `url(${categoryIconData.iconUrl})`,
@@ -233,9 +240,13 @@ export default class TopNav extends Component {
                       </li>
                     );
                   })}
-                <SubCategoriesForEachCategory
-                  hoverCategoryData={this.state.hoverCategoryData}
-                />
+                {this.state.isSubCategoriesVisible && (
+                  <ul className='subCategoriesContainer'>
+                    <SubCategoriesForEachCategory
+                      hoverCategoryData={this.state.hoverCategoryData}
+                    />
+                  </ul>
+                )}
               </ul>
             </div>
           </div>

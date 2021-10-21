@@ -1,26 +1,17 @@
 @import '../../../../styles/variables';
 
-.subCategoriesContainer {
-  position: absolute;
-  left: 204px;
-  top: 0px;
-  height: 741px;
-  width: 204px;
-  background-color: #f7f7f7;
+.subCategoryNameLinkWrapper {
+  padding-left: 20px;
+  height: 39px;
+  line-height: 39px;
 
-  .subCategoryNameLinkWrapper {
-    padding-left: 20px;
-    height: 39px;
-    line-height: 39px;
-
-    .subCategoryNameLink {
-      color: #4c4c4c;
-      font-size: 14px;
-      text-decoration: none;
-      &:hover {
-        color: $themeColorPrimary;
-        text-decoration: underline;
-      }
+  .subCategoryNameLink {
+    color: #4c4c4c;
+    font-size: 14px;
+    text-decoration: none;
+    &:hover {
+      color: $themeColorPrimary;
+      text-decoration: underline;
     }
   }
 }
