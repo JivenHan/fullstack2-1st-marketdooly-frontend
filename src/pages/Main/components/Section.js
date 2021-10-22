@@ -10,9 +10,16 @@ export default class Section extends Component {
       data: [],
       categoryData: [],
       selectedCategory: 1,
-      API: 'http://localhost:8000',
+      API: 'http://52.79.253.85:8000',
     };
   }
+
+  /*
+  DB 덤프 파일을 AWS DB에서 복원하면 내 DB가 올라감
+  .env API주소 환경변수화 하는 이유는 유지보수를 위해서 + 
+  development -> production
+  JEST
+  */
 
   componentDidMount = () => {
     if (this.props.categories) {
