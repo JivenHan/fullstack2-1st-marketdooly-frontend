@@ -90,12 +90,9 @@ export default class Section extends Component {
   };
 
   render() {
+    const { sectionStyle } = this.props;
     return (
-      <section
-        className={`Section ${
-          this.state.data.length ? this.state.data[0].group : ''
-        }`}
-      >
+      <section className={`Section` + ` ${sectionStyle ? sectionStyle : ''}`}>
         <div className='titGoods'>
           <h3 className='tit'>
             <span className='titTitle'>

@@ -12,14 +12,39 @@ import FindPw from './pages/User/FindPw/FindPw';
 import SignUp from './pages/User/SignUp/SignUp';
 
 class Routes extends React.Component {
+  constructor() {
+    super();
+    this.state = { isAuthenticated: false, userInfo: {} };
+  }
+
+  authentication = userInfo => {
+    const isAuthenticated = window.sessionStorage.hasOwnProperty('token');
+    this.setState({ isAuthenticated, userInfo });
+  };
+
   render() {
     return (
       <Router>
         <ScrollToTop>
-          <TopNav />
+          <Route
+            render={props => (
+              <TopNav
+                {...props}
+                isAuthenticated={this.state.isAuthenticated}
+                userName={this.state.userInfo?.name}
+                authentication={this.authentication}
+              />
+            )}
+          />
           <Switch>
             <Route exact path='/' component={Main} />
-            <Route exact path='/login' component={Login} />
+            <Route
+              exact
+              path='/login'
+              render={props => (
+                <Login {...props} authentication={this.authentication} />
+              )}
+            />
             <Route exact path='/signup' component={SignUp} />
             <Route exact path='/detail/:id' component={Detail} />
             <Route exact path='/cart' component={Cart}></Route>

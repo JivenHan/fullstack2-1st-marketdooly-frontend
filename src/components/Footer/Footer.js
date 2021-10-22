@@ -16,7 +16,7 @@ export default class Footer extends Component {
                     <dt>
                       <div className='csLink'>
                         <Link to='/'>
-                          <span className='callCenter'>1644-1107</span>
+                          <span className='callCenter'>1234-5678</span>
                         </Link>
                       </div>
                     </dt>
@@ -79,10 +79,10 @@ export default class Footer extends Component {
             <div className='companyInfo'>
               <ul className='companyLinks'>
                 <li>
-                  <Link to='/'>컬리소개</Link>
+                  <Link to='/'>둘리소개</Link>
                 </li>
                 <li>
-                  <Link to='/'>컬리소개영상</Link>
+                  <Link to='/'>둘리소개영상</Link>
                 </li>
                 <li>
                   <Link to='/'>인재채용</Link>
@@ -99,37 +99,31 @@ export default class Footer extends Component {
               </ul>
               <div className='companyCredits'>
                 <p>
-                  법인명 (상호) : 주식회사 컬리 <span className='bar'>I</span>{' '}
-                  사업자등록번호 : 261-81-23567{' '}
+                  법인명 (상호) : 주식회사 둘리 <span className='bar'>I</span>{' '}
+                  사업자등록번호 : 617-33-28406{' '}
                   <a href='https://hometax.go.kr'>사업자정보 확인</a>
                   <br />
-                  통신판매업 : 제 2018-서울강남-01646호{' '}
-                  <span className='bar'>I</span> 개인정보보호책임자 : 이원준
+                  통신판매업 : 제 2016-부산수영-02932호{' '}
+                  <span className='bar'>I</span> 개인정보보호책임자 : 이코딩
                   <br />
-                  주소 : 서울특별시 강남구 테헤란로 133, 18층(역삼동){' '}
-                  <span className='bar'>I</span> 대표이사 : 김슬아
+                  주소 : 서울특별시 종로구 종로타워, 33층(종각역){' '}
+                  <span className='bar'>I</span> 대표이사 : 이코딩
                   <br />
                   입점문의 : <Link to='/'>입점문의하기</Link>{' '}
                   <span className='bar'>I</span> 제휴문의 :{' '}
-                  <a href='mailto:business@kurlycorp.com'>
-                    business@kurlycorp.com
-                  </a>
+                  <a href='mailto:business@dooly.com'>business@dooly.com</a>
                   <br />
                   채용문의 :{' '}
-                  <a href='mailto:recruit@kurlycorp.com'>
-                    recruit@kurlycorp.com
-                  </a>
+                  <a href='mailto:recruit@dooly.com'>recruit@dooly.com</a>
                   <br />
-                  팩스:070 - 7500 - 6098 <span className='bar'>I</span> 이메일 :{' '}
-                  <a href='mailto:help@kurlycorp.com'>help@kurlycorp.com</a>
+                  팩스 : 070 - 2299 - 1234 <span className='bar'>I</span> 이메일
+                  : <a href='mailto:help@dooly.com'>help@dooly.com</a>
                   <br />
                   대량주문 문의 :{' '}
-                  <a href='mailto:kurlygift@kurlycorp.com'>
-                    kurlygift@kurlycorp.com
-                  </a>
+                  <a href='mailto:kurlygift@dooly.com'>kurlygift@dooly.com</a>
                 </p>
               </div>
-              <p className='copyright'>© KURLY CORP. ALL RIGHTS RESERVED</p>
+              <p className='copyright'>© DOOLY CORP. ALL RIGHTS RESERVED</p>
               <ul className='snsLinks'>
                 <li>
                   <a href='/'>

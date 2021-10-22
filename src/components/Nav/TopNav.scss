@@ -76,11 +76,16 @@
         margin: 0.6rem 0.35rem;
         padding-right: 0.7rem;
         border-right: 1px solid #cccccc;
+
+        .loggedUserName {
+          font-weight: 500;
+        }
+
         a {
           text-decoration: none;
           color: #333333;
         }
-        .headerUserItem1 {
+        .header {
           color: $themeColorPrimary;
         }
       }

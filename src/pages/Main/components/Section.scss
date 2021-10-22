@@ -1,6 +1,10 @@
 @import '../../../styles/variables';
 
 .Section {
+  &.grayBG {
+    background-color: #f7f7f7;
+  }
+
   .titGoods {
     padding: 79px 0 35px 0;
     text-align: center;

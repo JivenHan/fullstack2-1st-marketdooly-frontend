@@ -95,6 +95,11 @@ export default class Login extends Component {
         })
         .then(res => {
           if (res.token) {
+            sessionStorage.setItem('token', res.token);
+            console.log(res);
+            sessionStorage.setItem('name', res.data[0].name);
+            const { id, name } = res.data[0];
+            this.props.authentication({ id, name });
             this.props.history.push('/');
           } else {
             this.setState({
