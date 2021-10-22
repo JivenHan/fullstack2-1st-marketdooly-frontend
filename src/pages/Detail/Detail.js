@@ -6,6 +6,7 @@ import Label from './components/Label';
 import ReviewBoard from './components/board/ReviewBoard';
 import CustomerCenter from './components/CustomerCenter';
 import BottomLayer from './components/BottomLayer';
+import { API_ENDPOINT } from '../../api';
 import './Detail.scss';
 
 export default class Detail extends Component {
@@ -91,7 +92,7 @@ export default class Detail extends Component {
   componentDidMount() {
     window.scrollTo(0, 0);
 
-    fetch(`http://localhost:8000/products/${this.props.match.params.id}`)
+    fetch(`${API_ENDPOINT}/products/${this.props.match.params.id}`)
       .then(res => {
         if (!res.ok) {
           const msg = res.json();
@@ -129,7 +130,7 @@ export default class Detail extends Component {
   };
 
   addToCart = () => {
-    fetch('http://localhost:8000/cart', {
+    fetch(`${API_ENDPOINT}/cart`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({

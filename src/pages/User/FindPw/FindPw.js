@@ -3,6 +3,7 @@ import TextInput from '../components/TextInput';
 import ResultPage from '../components/ResultPage';
 import AlertModal from '../../../components/Modal/AlertModal';
 import StringUtil from '../../../utils/StringUtil';
+import { API_ENDPOINT } from '../../../api';
 import './FindPw.scss';
 
 export default class FindPw extends Component {
@@ -90,7 +91,7 @@ export default class FindPw extends Component {
     }
 
     if (isInputValid) {
-      const url = 'http://localhost:8000/users/pw';
+      const url = `${API_ENDPOINT}/users/pw`;
       fetch(url, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },

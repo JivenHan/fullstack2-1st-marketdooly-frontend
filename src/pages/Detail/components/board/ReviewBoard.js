@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Review from './Review';
+import { API_ENDPOINT } from '../../../../api';
 import './Board.scss';
 
 class ReviewBoard extends Component {
@@ -25,7 +26,7 @@ class ReviewBoard extends Component {
 
   componentDidMount() {
     const { productId } = this.state;
-    const url = `http://localhost:8000/products/${productId}/reviews/count?productId=${productId}`;
+    const url = `${API_ENDPOINT}/products/${productId}/reviews/count?productId=${productId}`;
     fetch(url, {
       credentials: 'include',
     })
@@ -47,7 +48,7 @@ class ReviewBoard extends Component {
     const { productId } = this.state;
     const offset = idx * 10;
     const limit = 10;
-    const url = `http://localhost:8000/products/${productId}/reviews/?productId=${productId}&offset=${offset}&limit=${limit}`;
+    const url = `${API_ENDPOINT}/products/${productId}/reviews/?productId=${productId}&offset=${offset}&limit=${limit}`;
     fetch(url, {
       credentials: 'include',
     })
@@ -89,7 +90,7 @@ class ReviewBoard extends Component {
 
   addReview = () => {
     const { productId, newReviewTitle, newReviewText } = this.state;
-    const url = `http://localhost:8000/products/${productId}/reviews`;
+    const url = `${API_ENDPOINT}/products/${productId}/reviews`;
     fetch(url, {
       method: 'POST',
       credentials: 'include',

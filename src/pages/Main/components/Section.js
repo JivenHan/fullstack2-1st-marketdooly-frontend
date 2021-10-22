@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import Carousel from '../../../components/Carousel/Carousel';
+import { API_ENDPOINT } from '../../../api';
 import './Section.scss';
 
 export default class Section extends Component {
@@ -10,7 +11,7 @@ export default class Section extends Component {
       data: [],
       categoryData: [],
       selectedCategory: 1,
-      API: 'http://localhost:8000',
+      API: API_ENDPOINT,
     };
   }
 

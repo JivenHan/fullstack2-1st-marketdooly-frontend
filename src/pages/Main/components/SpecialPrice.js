@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import OfferCard from './OfferCard';
+import { API_ENDPOINT } from '../../../api';
 import './SpecialPrice.scss';
 
 export default class specialPrice extends Component {
@@ -9,7 +10,7 @@ export default class specialPrice extends Component {
     this.state = {
       data: [],
       isHoverOnImg: false,
-      API: `http://localhost:8000`,
+      API: `${API_ENDPOINT}`,
     };
   }
 

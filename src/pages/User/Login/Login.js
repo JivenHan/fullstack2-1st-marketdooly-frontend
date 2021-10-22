@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import TextInput from '../components/TextInput';
 import AlertModal from '../../../components/Modal/AlertModal';
 import StringUtil from '../../../utils/StringUtil';
+import { API_ENDPOINT } from '../../../api';
 import './Login.scss';
 
 export default class Login extends Component {
@@ -77,7 +78,7 @@ export default class Login extends Component {
     }
 
     if (isInputValid) {
-      const url = 'http://localhost:8000/users/login';
+      const url = `${API_ENDPOINT}/users/login`;
       fetch(url, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },

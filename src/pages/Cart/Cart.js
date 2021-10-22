@@ -2,6 +2,7 @@ import { Component } from 'react';
 import ItemField from './ItemField';
 import CartResult from './CartResult';
 import AlertModal from '../../components/Modal/AlertModal';
+import { API_ENDPOINT } from '../../api';
 import './Cart.scss';
 
 export default class Cart extends Component {
@@ -40,7 +41,7 @@ export default class Cart extends Component {
 
   componentDidMount() {
     window.addEventListener('scroll', this.autoScrolling);
-    fetch('http://localhost:8000/cart', {
+    fetch(`${API_ENDPOINT}/cart`, {
       credentials: 'include',
     })
       .then(async res => {
@@ -80,7 +81,7 @@ export default class Cart extends Component {
   requestOrderItems = event => {
     event.preventDefault();
     const [cart_id] = [...this.state.checkedItems].map(ele => ele.id);
-    fetch('http://localhost:8000/order', {
+    fetch(`${API_ENDPOINT}/order`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
@@ -220,7 +221,7 @@ export default class Cart extends Component {
   };
 
   requestDeleteItem = cart_id => {
-    fetch('http://localhost:8000/cart', {
+    fetch(`${API_ENDPOINT}/cart`, {
       method: 'DELETE',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
@@ -230,7 +231,7 @@ export default class Cart extends Component {
   };
 
   requestDeleteItems = deleteList => {
-    fetch('http://localhost:8000/cart/several', {
+    fetch(`${API_ENDPOINT}/cart/several`, {
       method: 'DELETE',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
@@ -264,7 +265,7 @@ export default class Cart extends Component {
   };
 
   requestChangingQuantity = (id, finalQuantity) => {
-    fetch('http://localhost:8000/cart', {
+    fetch(`${API_ENDPOINT}/cart`, {
       method: 'PATCH',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
