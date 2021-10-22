@@ -10,7 +10,7 @@ export default class Section extends Component {
       data: [],
       categoryData: [],
       selectedCategory: 1,
-      API: 'http://52.79.253.85:8000',
+      API: 'http://52.79.253.85:8001',
     };
   }
 
