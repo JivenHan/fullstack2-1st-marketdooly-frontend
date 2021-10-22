@@ -9,6 +9,7 @@ import ResultPage from '../components/ResultPage';
 import AlertModal from '../../../components/Modal/AlertModal';
 import DimBackground from '../../../components/Modal/DimBackground';
 import StringUtil from '../../../utils/StringUtil';
+import { API_ENDPOINT } from '../../../api';
 import './SignUp.scss';
 
 export default class SignUp extends Component {
@@ -84,7 +85,7 @@ export default class SignUp extends Component {
 
   checkAccountDup = () => {
     if (this.checkInputValidation('account')) {
-      const url = 'http://localhost:8000/users/duplicate/account';
+      const url = `${API_ENDPOINT}/users/duplicate/account`;
       fetch(url, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -109,7 +110,7 @@ export default class SignUp extends Component {
 
   checkEmailDup = () => {
     if (this.checkInputValidation('email')) {
-      const url = 'http://localhost:8000/users/duplicate/email';
+      const url = `${API_ENDPOINT}/users/duplicate/email`;
       fetch(url, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -327,7 +328,7 @@ export default class SignUp extends Component {
           marketing_policy_agreed: isMarketingChecked,
         },
         () => {
-          const url = 'http://localhost:8000/users/signup';
+          const url = `${API_ENDPOINT}/users/signup`;
           fetch(url, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },

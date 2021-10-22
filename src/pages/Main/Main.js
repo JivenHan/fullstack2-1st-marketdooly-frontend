@@ -5,6 +5,7 @@ import SpecialPrice from './components/SpecialPrice';
 import Banner from './Banner';
 import ScrollToTop from '../../components/ScrollToTop/ScrollToTop';
 import QuickNav from '../../components/QuickNav/QuickNav';
+import { API_ENDPOINT } from '../../api';
 import './Main.scss';
 
 export default class Main extends Component {
@@ -17,7 +18,7 @@ export default class Main extends Component {
   }
 
   componentDidMount() {
-    fetch('http://localhost:8000/main/banner/bar')
+    fetch(`${API_ENDPOINT}/main/banner/bar`)
       .then(res => {
         if (!res.ok) throw new Error('배너 데이터가 존재하지 않습니다.');
         return res.json();

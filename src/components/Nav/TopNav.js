@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import CartIconSvg from './components/CartIconSvg';
 import LocationIconSvg from './components/LocationIconSvg';
 import SubCategoriesForEachCategory from './components/subCategoriesForEachCategory/subCategoriesForEachCategory';
+import { API_ENDPOINT } from '../../api';
 import './TopNav.scss';
 
 export default class TopNav extends Component {
@@ -22,7 +23,7 @@ export default class TopNav extends Component {
   }
 
   componentDidMount() {
-    fetch('http://localhost:8000/users/session', {
+    fetch(`${API_ENDPOINT}/users/session`, {
       credentials: 'include',
     })
       .then(res => {
@@ -46,7 +47,7 @@ export default class TopNav extends Component {
       })
       .catch(err => console.log(err));
 
-    fetch('http://localhost:8000/main/allcategory')
+    fetch(`${API_ENDPOINT}/main/allcategory`)
       .then(res => res.json())
       .then(res => {
         this.setState({
