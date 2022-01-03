@@ -1,22 +1,26 @@
-# 마켓 둘리에 오신 것을 환영합니다. 👆🏻호잇!👆🏻
+# Market Dooly 소개
+- 소셜커머스 'Market Curly'을 모티브로 한 프로젝트입니다.
 
-## Market Dooly
+## 🗓 기간
+2021.10.1 ~ 2021.10.15 (15일)
 
-호이가 계속되면 둘리가 된다!
+## ✍ 기술
+Frontend: React, React-router, Sass
+Backend: Node.js, Express, MySQL, Prisma, JWT, Bcrypt
 
----
+## ✔ 담당 업무
+- 한지훈: 제품 상세 페이지(frontend), 장바구니(backend)
 
-### 멤버 👤
+## 🎥 구현 화면
+![MarketCurly](https://user-images.githubusercontent.com/87740944/147937219-a5f7733c-89b3-4945-b16b-0152d07b27d8.png)
 
-- [김윤진 🐲](https://github.com/jin0oon)
-- [김진성 🐽](https://github.com/jsung1103)
-- [이원국 🐳](https://github.com/wonkooklee)
-- [한승완 🐴](https://github.com/han0gu)
-- [한지훈 🐰](https://github.com/JivenHan)
+![detail2](https://user-images.githubusercontent.com/87740944/147937301-074002c1-cf65-4dfe-a346-18c4c77ca915.gif)
 
----
+![detail3](https://user-images.githubusercontent.com/87740944/147937360-4f217c2a-a063-4936-ac54-a27eb3ec541c.gif)
 
-### 깃 저장소 링크 🔗
-
-- [마켓둘리 FE](https://github.com/wecode-bootcamp-korea/fullstack2-1st-marketdooly-frontend)
-- [마켓둘리 BE](https://github.com/wecode-bootcamp-korea/fullstack2-1st-marketdooly-backend)
+## 📑 기능 상세
+<제품 상세 페이지>
+- 상품 수량 조절 -> 상품 가격 및 적립금 변경
+- 장바구니 담기 API
+- IntersectionObserver로 상단 장바구니 버튼이 화면에서 벗어날 시 하단에 장바구니 담기 모달창 팝업
+- 4개의 스크롤 이동 버튼
