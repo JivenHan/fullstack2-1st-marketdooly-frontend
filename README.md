@@ -24,3 +24,7 @@ Backend: Node.js, Express, MySQL, Prisma, JWT, Bcrypt
 - 장바구니 담기 API
 - IntersectionObserver로 상단 장바구니 버튼이 화면에서 벗어날 시 하단에 장바구니 담기 모달창 팝업
 - 4개의 스크롤 이동 버튼
+
+<장바구니>
+- JWT를 middleware에서 bcrypt로 디코딩, 사용자 id를 참조하여 장바구니 데이터 전송
+- 상품 수량 변동 및 삭제 API
